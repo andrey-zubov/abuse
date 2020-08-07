@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test page</title>
+</head>
+<body>
+Это тестовая страница без стилей
+
+<div id="content">
+    {% block content %}
+    {% for content in feincms_page.content.main %}
+        {{ content.render }}
+    {% endfor %}
+    {% endblock %}
+</div>
+
+<div id="sidebar">
+    {% block sidebar %}
+    {% for content in feincms_page.content.sidebar %}
+        {{ content.render }}
+    {% endfor %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

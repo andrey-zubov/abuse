@@ -1,0 +1,5 @@
+**/__pycache__
+**/migrations
+**/.gitignore
+db.sqlite3
+.idea
