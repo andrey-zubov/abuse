@@ -1,0 +1,12 @@
+[class^="icon"] {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50%;
+}
+
+.icon-un {
+  background-image: url($images + "/logo-un.png");
+  width: 69px;
+  height: 58px;
+}

@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: $gray;
+  z-index: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: "GothamPro", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: unset;
+  display: inline-block;
+}
+
+$lg: 992px;
+$md: 768px;
+$sm: 568px;
