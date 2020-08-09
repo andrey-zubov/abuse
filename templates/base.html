@@ -6,8 +6,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
     />
-    <link rel="stylesheet" href="../dist/styles/index.min.css" />
-    <script type="module" src="../dist/js/index.js"></script>
+    <link rel="stylesheet" href="/static/dist/styles/index.min.css" />
+    <script type="module" src="/static/dist/js/index.js"></script>
 
     <title>Test page</title>
   </head>
@@ -90,7 +90,9 @@
         <button class="header__button" type="button"><span></span></button>
       </div>
     </header>
-    <main class="main"></main>
+    <main class="main">
+      {%block page%}{%endblock%}
+    </main>
     <footer class="footer">
       <div class="container footer__container">
         <a class="footer__phone" href="tel:+375173110000">+ 375 17 311 00 00</a>
