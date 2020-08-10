@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'feincms.module.page',
     'feincms.module.medialibrary',
     'cms',
+    'compressor',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,8 +79,6 @@ TEMPLATES = [
         },
     },
 ]
-
-
 
 WSGI_APPLICATION = 'abuse.wsgi.application'
 
@@ -139,10 +138,17 @@ LANGUAGES = [
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+STATICFILES_FINDERS = ['compressor.finders.CompressorFinder',
+]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')

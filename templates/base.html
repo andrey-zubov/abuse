@@ -6,11 +6,19 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0"
     />
-    <link rel="stylesheet" href="/static/dist/styles/index.min.css" />
-    <script type="module" src="/static/dist/js/index.js"></script>
+
+    {% load compress %}
+
+    {% compress css %}
+        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">
+    {% endcompress %}
+
+    <script src="/static/scripts/vendor/jquery-3.5.1.min.js"></script>
+    <script type="module" src="/static/scripts/index.js"></script>
 
     <title>Test page</title>
   </head>
+
   <body>
     <header class="header">
       <div class="container">
