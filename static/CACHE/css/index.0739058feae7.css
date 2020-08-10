@@ -1,0 +1,275 @@
+/* line 1, static/styles/config/_general.scss */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+/* line 7, static/styles/config/_general.scss */
+body {
+  color: #666666;
+  z-index: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: "GothamPro", sans-serif; }
+
+/* line 15, static/styles/config/_general.scss */
+ul {
+  list-style-type: none; }
+
+/* line 19, static/styles/config/_general.scss */
+a {
+  color: inherit;
+  text-decoration: unset;
+  display: inline-block; }
+
+/* line 1, static/styles/config/_container.scss */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 15px;
+  margin: 0 auto; }
+
+/* line 1, static/styles/atoms/_typography.scss */
+.link {
+  font-size: 14px;
+  line-height: 18px;
+  color: #999999;
+  transition: color 0.3s ease-out; }
+  /* line 7, static/styles/atoms/_typography.scss */
+  .link:hover {
+    color: #5bb3d8; }
+  /* line 11, static/styles/atoms/_typography.scss */
+  .link--blue {
+    color: #5bb3d8; }
+    /* line 14, static/styles/atoms/_typography.scss */
+    .link--blue:hover {
+      color: #ffffff; }
+
+/* line 1, static/styles/atoms/_icon.scss */
+[class^="icon"] {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 50%; }
+
+/* line 8, static/styles/atoms/_icon.scss */
+.icon-un {
+  background-image: url("/static/images/logo-un.png?b848fb3447d4");
+  width: 69px;
+  height: 58px; }
+
+/* line 1, static/styles/molecules/_main-menu.scss */
+.main-menu {
+  width: 100%;
+  max-width: 910px;
+  margin: 0 auto; }
+  /* line 6, static/styles/molecules/_main-menu.scss */
+  .main-menu__links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 23px 0; }
+    /* line 15, static/styles/molecules/_main-menu.scss */
+    .main-menu__links li .link {
+      padding: 0 10px;
+      position: relative; }
+      /* line 19, static/styles/molecules/_main-menu.scss */
+      .main-menu__links li .link::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        bottom: 2px;
+        width: 1px;
+        background-color: #999999;
+        right: 0px; }
+    /* line 32, static/styles/molecules/_main-menu.scss */
+    .main-menu__links li:last-child .link::after {
+      content: none; }
+  /* line 40, static/styles/molecules/_main-menu.scss */
+  .main-menu__navigation {
+    border-radius: 12px;
+    box-shadow: 0 0px 43px #cccccc;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(227px, 1fr));
+    overflow: hidden; }
+    /* line 47, static/styles/molecules/_main-menu.scss */
+    .main-menu__navigation .link {
+      height: 100%;
+      width: 100%;
+      transition: 0.5s;
+      background-color: #f7f7f7;
+      padding: 20px 35px;
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 700;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      /* line 61, static/styles/molecules/_main-menu.scss */
+      .main-menu__navigation .link:hover {
+        background-color: #5bb3d8; }
+      /* line 65, static/styles/molecules/_main-menu.scss */
+      .main-menu__navigation .link:not(:last-child) {
+        border-right: 1px solid #e4e4e4; }
+
+@media (max-width: 992px) {
+  /* line 73, static/styles/molecules/_main-menu.scss */
+  .main-menu {
+    width: 100%;
+    max-width: 910px;
+    margin: 0 auto; }
+    /* line 78, static/styles/molecules/_main-menu.scss */
+    .main-menu__links:not(.footer__menu__links) {
+      flex-direction: column;
+      padding: 0; }
+      /* line 83, static/styles/molecules/_main-menu.scss */
+      .main-menu__links:not(.footer__menu__links) li .link {
+        padding: 10px 35px; }
+        /* line 86, static/styles/molecules/_main-menu.scss */
+        .main-menu__links:not(.footer__menu__links) li .link::after {
+          content: none; }
+    /* line 93, static/styles/molecules/_main-menu.scss */
+    .main-menu__navigation {
+      border-radius: 0;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column; }
+      /* line 99, static/styles/molecules/_main-menu.scss */
+      .main-menu__navigation .link {
+        padding: 10px 35px; }
+        /* line 102, static/styles/molecules/_main-menu.scss */
+        .main-menu__navigation .link:not(:last-child) {
+          border: none; } }
+
+/* line 1, static/styles/organisms/_header.scss */
+.header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0; }
+  /* line 7, static/styles/organisms/_header.scss */
+  .header__button {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 32px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 0;
+    height: 24px; }
+    /* line 20, static/styles/organisms/_header.scss */
+    .header__button span:before, .header__button span:after {
+      position: absolute;
+      left: 0;
+      content: "";
+      display: block; }
+    /* line 29, static/styles/organisms/_header.scss */
+    .header__button span,
+    .header__button span:before,
+    .header__button span:after {
+      width: 100%;
+      height: 2px;
+      background-color: #5bb3d8;
+      transition: all 0.6s; }
+    /* line 38, static/styles/organisms/_header.scss */
+    .header__button span {
+      position: relative; }
+      /* line 41, static/styles/organisms/_header.scss */
+      .header__button span::after {
+        top: 10px; }
+      /* line 45, static/styles/organisms/_header.scss */
+      .header__button span::before {
+        top: -10px; }
+    /* line 51, static/styles/organisms/_header.scss */
+    .header__button--active span {
+      background-color: transparent; }
+      /* line 54, static/styles/organisms/_header.scss */
+      .header__button--active span::after {
+        top: 0;
+        transform: rotate(-45deg); }
+      /* line 59, static/styles/organisms/_header.scss */
+      .header__button--active span::before {
+        top: 0;
+        transform: rotate(45deg); }
+
+@media (max-width: 992px) {
+  /* line 69, static/styles/organisms/_header.scss */
+  .header {
+    padding: 30px 15px; }
+    /* line 72, static/styles/organisms/_header.scss */
+    .header__button {
+      display: flex;
+      z-index: 2; }
+    /* line 77, static/styles/organisms/_header.scss */
+    .header__content {
+      align-items: center;
+      padding: 60px 0;
+      display: flex;
+      justify-content: center;
+      z-index: 1;
+      background-color: #f7f7f7;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 100vh;
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+      overflow: auto; }
+      /* line 93, static/styles/organisms/_header.scss */
+      .header__content--visible {
+        transform: translateX(0); }
+      /* line 97, static/styles/organisms/_header.scss */
+      .header__content__nav {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center; } }
+
+/* line 1, static/styles/organisms/_main.scss */
+.main {
+  min-height: 100vh;
+  background-image: url("/static/images/main-bg.jpg?b848fb3447d4");
+  background-size: cover;
+  width: 100%;
+  background-position: center; }
+
+/* line 1, static/styles/organisms/_footer.scss */
+.footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  left: 0; }
+  /* line 7, static/styles/organisms/_footer.scss */
+  .footer__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+  /* line 14, static/styles/organisms/_footer.scss */
+  .footer__phone {
+    font-size: 36px;
+    line-height: 63px;
+    transition: opacity 0.5s;
+    color: #5bb3d8; }
+    /* line 20, static/styles/organisms/_footer.scss */
+    .footer__phone:hover {
+      opacity: 0.7; }
+  /* line 26, static/styles/organisms/_footer.scss */
+  .footer__menu .main-menu__links {
+    padding: 13px 0; }
+  /* line 31, static/styles/organisms/_footer.scss */
+  .footer__logo {
+    width: 69px;
+    height: 58px; }
+
+@media (max-width: 992px) {
+  /* line 39, static/styles/organisms/_footer.scss */
+  .footer__phone {
+    font-size: 20px;
+    line-height: 40px;
+    font-weight: 700; } }
