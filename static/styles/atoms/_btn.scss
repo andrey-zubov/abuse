@@ -1,0 +1,18 @@
+.btn {
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  color: $white;
+  border-radius: 8px;
+  background: $medium-blue;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 10px 30px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
