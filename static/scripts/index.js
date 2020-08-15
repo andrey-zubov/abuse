@@ -1,3 +1,6 @@
+import "./vendor/jquery.js";
+import "./vendor/jquery.sticky.js";
+
 import MobileMenu from "./shared/mobile-menu.js";
 import StickyHeader from "./shared/sticky-header.js";
 import StickySideMenu from "./shared/sticky-side-menu.js";
