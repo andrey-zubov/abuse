@@ -10,9 +10,11 @@
 @import "atoms/icon";
 @import "atoms/btn";
 @import "atoms/link";
+@import "atoms/aspect-ratio";
 
 @import "molecules/main-menu";
 @import "molecules/participant";
+@import "molecules/information-block";
 
 @import "organisms/header";
 @import "organisms/main";
@@ -20,3 +22,4 @@
 @import "organisms/article";
 @import "organisms/side-menu";
 @import "organisms/participants";
+@import "organisms/information-side";

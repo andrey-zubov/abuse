@@ -1,0 +1,15 @@
+.information-block {
+  &__title {
+    text-transform: uppercase;
+  }
+
+  &__text {
+  }
+
+  &__image {
+    margin-top: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    padding-bottom: 75%;
+  }
+}
