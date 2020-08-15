@@ -3,7 +3,16 @@ export default class StickyHeader {
     this.init();
   }
 
+  stick() {
+    const isDesktop = window.innerWidth > 992;
+    if (isDesktop) {
+      $(".header__content").sticky({ topSpacing: 0, zIndex: 1 });
+    } else {
+      $(".header__content").unstick();
+    }
+  }
+
   init() {
-    $(".header__content").sticky({ topSpacing: 0, zIndex: 1 });
+    window.addEventListener("resize", this.stick, false);
   }
 }

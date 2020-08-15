@@ -3,7 +3,8 @@ export default class StickySideMenu {
     this.init();
   }
 
-  init() {
+  stick() {
+    const isDesktop = window.innerWidth > 992;
     const headerHeight = document
       .querySelector(".header")
       .getBoundingClientRect().height;
@@ -12,10 +13,17 @@ export default class StickySideMenu {
       .getComputedStyle(main, null)
       .getPropertyValue("margin-top")
       .replace("px", "");
-    console.log(mainMarginTop);
 
     const sideMenuTopSPacing = headerHeight + +mainMarginTop;
 
-    $(".side-menu__content").sticky({ topSpacing: sideMenuTopSPacing });
+    if (isDesktop) {
+      $(".side-menu__content").sticky({ topSpacing: sideMenuTopSPacing });
+    } else {
+      $(".side-menu__content").unstick();
+    }
+  }
+
+  init() {
+    window.addEventListener("resize", this.stick, false);
   }
 }
