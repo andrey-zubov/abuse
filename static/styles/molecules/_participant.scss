@@ -1,0 +1,41 @@
+.participant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 3px 43px $silver;
+  overflow: hidden;
+  padding: 5px;
+  transition: all 0.5s ease-out;
+
+  &:hover {
+    box-shadow: 0 3px 13px $silver;
+  }
+
+  &__title {
+    margin-top: 10px;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  &__img-wrapper {
+    width: 150px;
+    height: 80px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -3,3 +3,5 @@
 **/.gitignore
 db.sqlite3
 .idea
+.prettierrc
+**/static/CACHE

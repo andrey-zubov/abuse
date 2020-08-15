@@ -1,0 +1,16 @@
+.participants {
+  margin: 30px 0 100px;
+
+  &__content {
+    margin: 15px 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+}

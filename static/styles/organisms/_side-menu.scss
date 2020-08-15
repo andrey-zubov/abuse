@@ -1,0 +1,47 @@
+.side-menu {
+  &__content {
+    border: 1px solid rgba($gray, 0.4);
+    border-radius: 12px;
+    padding: 30px 25px 30px;
+    background-color: rgba($white-smoke, 0.6);
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &--main {
+      .link {
+        font-size: 12px;
+        line-height: 16px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+    }
+
+    .link {
+      margin-bottom: 5px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      p {
+        display: inline;
+        border-bottom: 1px solid transparent;
+        transition: all 0.3s;
+      }
+
+      &:hover {
+        p {
+          border-color: inherit;
+        }
+      }
+    }
+  }
+}

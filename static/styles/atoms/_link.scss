@@ -1,0 +1,34 @@
+.link {
+  font-size: 14px;
+  line-height: 18px;
+  color: $medium-gray;
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    color: $blue;
+  }
+
+  &--blue {
+    color: $blue;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &--medium-blue {
+    color: $medium-blue;
+
+    &:hover {
+      color: $medium-blue;
+    }
+  }
+
+  &--green {
+    color: $green;
+
+    &:hover {
+      color: $green;
+    }
+  }
+}

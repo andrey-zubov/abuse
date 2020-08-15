@@ -1,10 +1,20 @@
 import MobileMenu from "./shared/mobile-menu.js";
+import StickyHeader from "./shared/sticky-header.js";
+import StickySideMenu from "./shared/sticky-side-menu.js";
 
 $(document).ready(async () => {
   window.refs = {
     mobileMenu: {
       init: () => new MobileMenu(),
       selectors: [".header"],
+    },
+    stickyHeader: {
+      init: () => new StickyHeader(),
+      selectors: [".header"],
+    },
+    stickySideMenu: {
+      init: () => new StickySideMenu(),
+      selectors: [".side-menu"],
     },
   };
 

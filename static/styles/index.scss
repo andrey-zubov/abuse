@@ -1,3 +1,5 @@
+@import "bootstrap/bootstrap-grid";
+
 @import "config/colors";
 @import "config/fonts";
 @import "config/general";
@@ -7,10 +9,14 @@
 @import "atoms/typography";
 @import "atoms/icon";
 @import "atoms/btn";
+@import "atoms/link";
 
 @import "molecules/main-menu";
+@import "molecules/participant";
 
 @import "organisms/header";
 @import "organisms/main";
 @import "organisms/footer";
 @import "organisms/article";
+@import "organisms/side-menu";
+@import "organisms/participants";
