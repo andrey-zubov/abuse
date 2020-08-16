@@ -13,7 +13,7 @@ Page.register_extensions(
 
 Page.register_templates({
     'title': _('Standard template'),
-    'path': 'test_page.html',
+    'path': 'main_article.html',
     'regions': (
         ('main', _('Main content area')),
         ('sidebar', _('Sidebar'), 'inherited'),
