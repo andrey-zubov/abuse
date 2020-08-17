@@ -1,6 +1,7 @@
 export default class StickySideMenu {
   constructor() {
-    this.init();
+    this.stick();
+    this.bindActions();
   }
 
   stick() {
@@ -23,7 +24,7 @@ export default class StickySideMenu {
     }
   }
 
-  init() {
+  bindActions() {
     window.addEventListener("resize", this.stick, false);
   }
 }

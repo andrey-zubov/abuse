@@ -1,6 +1,7 @@
 export default class StickyHeader {
   constructor() {
-    this.init();
+    this.stick();
+    this.bindActions();
   }
 
   stick() {
@@ -12,7 +13,7 @@ export default class StickyHeader {
     }
   }
 
-  init() {
+  bindActions() {
     window.addEventListener("resize", this.stick, false);
   }
 }
