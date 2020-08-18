@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WTF</title>
+</head>
+<body>
+Это WTF
+<br>
+{% for i in blocks %}
+    {{ i.title }}
+<br>
+    {{ i.text }}
+
+
+    <img src="{{ i.get_img }}" alt=""></img>
+<br><br>
+{% endfor %}
+</body>
+</html>

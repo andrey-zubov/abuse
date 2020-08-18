@@ -111,3 +111,19 @@ class Link(models.Model):
         verbose_name='Назание ссылки',
         max_length=256
     )
+
+
+class Block(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Название блока")
+    slug = models.SlugField(verbose_name="Слаг")
+    name_button = models.CharField(max_length=100, verbose_name="Название кнопки")
+    text = models.TextField(verbose_name="Текст")
+    picture = MediaFileForeignKey(MediaFile,
+                                  on_delete=models.SET_NULL,
+                                  null=True,
+                                  verbose_name="Картинка")
+    # categories = models.ManyToManyField(Category, verbose_name="Раздел-категория-тег")
+    pages = models.ManyToManyField(Page, verbose_name="Статьи")
+
+    def get_img(self):
+        return join(settings.MEDIA_URL, str(self.picture.file))
