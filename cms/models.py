@@ -99,6 +99,8 @@ class where_find_help(models.Model):
         null=True,
         blank=True
     )
+    def get_img(self):
+        return join(settings.MEDIA_URL, str(self.picture.file))
 
 
 class Link(models.Model):
