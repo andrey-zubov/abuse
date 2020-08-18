@@ -70,3 +70,42 @@ class Column(models.Model):
         return join(settings.MEDIA_URL, str(self.picture.file))
 
 Page.create_content_type(Column)
+
+class where_find_help(models.Model):
+    title = models.CharField(
+        verbose_name='Название',
+        max_length=256,
+    )
+    picture = MediaFileForeignKey(
+        MediaFile,
+        on_delete=models.SET_NULL,
+        verbose_name='Картинка',
+        null=True,
+        blank=True,
+    )
+    pic_text = models.CharField(
+        verbose_name='Подпись катринки',
+        max_length=256,
+        null=True,
+        blank=True
+    )
+    text = models.TextField(
+        verbose_name='основной текст',
+    )
+    href = models.ForeignKey(
+        'Link',
+        verbose_name='Ссылка',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+
+class Link(models.Model):
+    link = models.URLField(
+        verbose_name='ссылка'
+    )
+    title = models.CharField(
+        verbose_name='Назание ссылки',
+        max_length=256
+    )
