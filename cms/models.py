@@ -71,7 +71,7 @@ class Column(models.Model):
 
 Page.create_content_type(Column)
 
-class where_find_help(models.Model):
+class WhereFindHelp(models.Model):
     title = models.CharField(
         verbose_name='Название',
         max_length=256,
