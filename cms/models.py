@@ -114,16 +114,26 @@ class Link(models.Model):
 
 
 class Block(models.Model):
+    is_active = models.BooleanField(default=True)
     title = models.CharField(max_length=100, verbose_name="Название блока")
     slug = models.SlugField(verbose_name="Слаг")
-    name_button = models.CharField(max_length=100, verbose_name="Название кнопки")
-    text = models.TextField(verbose_name="Текст")
+    name_button = models.CharField(
+        max_length=100,
+        verbose_name="Название кнопки",
+        null=True,
+        blank=True
+    )
+    text = models.TextField(verbose_name="Текст блока")
     picture = MediaFileForeignKey(MediaFile,
                                   on_delete=models.SET_NULL,
                                   null=True,
+                                  blank=True,
                                   verbose_name="Картинка")
     # categories = models.ManyToManyField(Category, verbose_name="Раздел-категория-тег")
     pages = models.ManyToManyField(Page, verbose_name="Статьи")
 
     def get_img(self):
-        return join(settings.MEDIA_URL, str(self.picture.file))
+        if self.picture:
+            return join(settings.MEDIA_URL, str(self.picture.file))
+        else:
+            return None

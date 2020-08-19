@@ -9,7 +9,7 @@ def test(request):
 
 
 def wtf(request):
-    pages = Page.objects.all()
+    pages = Page.objects.filter(id=2)
     blocks = Block.objects.all()
     return render(request, template_name='wtf_temp.html', context={'test': pages,
                                                                    'blocks': blocks})
