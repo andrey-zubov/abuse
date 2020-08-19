@@ -81,6 +81,7 @@ class WhereFindHelp(models.Model):
         verbose_name = 'Где найти помощь'
         verbose_name_plural = 'Где найти помошь'
 
+    category = models.ManyToManyField('Main_Cat')
     is_active = models.BooleanField(default=True)
     title = models.CharField(
         verbose_name='Название',
@@ -160,3 +161,17 @@ class Block(models.Model):
             return None
         else:
             return join(settings.MEDIA_URL, str(self.picture.file))
+
+
+class Main_Cat(models.Model):
+    class Meta:
+        verbose_name = 'Главные категории'
+        verbose_name_plural = 'Главные категории'
+
+    title = models.CharField(
+        verbose_name='Название',
+        max_length=50
+    )
+
+    def __str__(self):
+        return self.title
