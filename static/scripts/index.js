@@ -4,6 +4,7 @@ import "./vendor/jquery.sticky.js";
 import MobileMenu from "./shared/mobile-menu.js";
 import StickyHeader from "./shared/sticky-header.js";
 import StickySideMenu from "./shared/sticky-side-menu.js";
+import ArticleAccordeon from "./shared/article-accordeon.js";
 
 $(document).ready(async () => {
   window.refs = {
@@ -18,6 +19,10 @@ $(document).ready(async () => {
     stickySideMenu: {
       init: () => new StickySideMenu(),
       selectors: [".side-menu"],
+    },
+    articleAccordeon: {
+      init: () => new ArticleAccordeon(),
+      selectors: [".article-accordeon"],
     },
   };
 

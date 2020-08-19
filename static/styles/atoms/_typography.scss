@@ -9,9 +9,20 @@ span {
   font-family: "GothamPro", sans-serif;
 }
 
+p {
+  line-height: 21px;
+}
+
 .headline-1 {
   font-size: 21px;
   line-height: 27px;
+  color: $gray;
+  font-weight: 700;
+}
+
+.headline-3 {
+  font-size: 14px;
+  line-height: 21px;
   color: $gray;
   font-weight: 700;
 }
