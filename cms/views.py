@@ -6,7 +6,7 @@ from .models import WhereFindHelp, Page, Block
 def main_page(request):
     return render(request, template_name='main_page.html')
 
-def test(request):
+def find_help(request):
     articles = WhereFindHelp.objects.filter(is_active=True)
     return render(request, template_name='org.html', context={'articles':articles})
 

@@ -1,8 +1,16 @@
 {%extends 'base.html' %}
-{% block content %}
 
+{% block side_links %}
+  {% for article in articles %}
+    <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
+  {% endfor %}
+{% endblock %}
+
+{% block content %}
 {% for article in articles %}
+
 <div class="article">
+  <a name="{{ article.id }}"></a>
   <h1 class="article__title headline-1">{{ article.title }}</h1>
   <div class="article__image-wrapper aspect-ratio">
       <img src="{{ article.get_img }}" alt=""></img>
@@ -24,8 +32,6 @@
 <!--    </div>-->
 </div>
 
-
 {% endfor %}
-
 {% endblock %}
 

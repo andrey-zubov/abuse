@@ -1,9 +1,9 @@
 from django.urls import path, include
-from .views import test, wtf, main_page
+from .views import find_help, wtf, main_page
 
 urlpatterns = [
     path('', main_page),
-    path('org/', test),
+    path('org/', find_help),
 
     path('wtf/', wtf)
 ]
