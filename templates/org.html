@@ -2,7 +2,7 @@
 {% block content %}
 
 {% for article in articles %}
-<div class="article">-->
+<div class="article">
   <h1 class="article__title headline-1">{{ article.title }}</h1>
   <div class="article__image-wrapper aspect-ratio">
       <img src="{{ article.get_img }}" alt=""></img>
@@ -10,15 +10,18 @@
   <div class="article__description">
     <p>{{ article.text|safe }}</p>
   </div>
-  <ul class="article__list"><li>Обменять использованные шприцы и иглы на новые</li><li>Получить презервативы, спиртовые салфетки, дезинфицирующие средства</li><li>Проконсультироваться по медицинским и психологическим вопросам</li><li>Пройти экспресс-тестирование на ВИЧ и вирусные гепатиты В и С</li><li>Получить информацию о дополнительных услугах и контакты других сервисов и служб, помогающих ПИН</li></ul>
+    <ul class="article__list">
+      {{ article.points|safe }}
+    </ul>
+
   <div class="article__buttons article__buttons--center">
     <a href="#" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
     <a href="#" class="btn"><span>Правовая информация</span></a>
   </div>
-    <div class="article__buttons">
-      <a href="#" class="btn"><span>Найти ближайшую организацию</span></a>
-      <a href="#" class="btn"><span>Правовая информация</span></a>
-    </div>
+<!--    <div class="article__buttons">-->
+<!--      <a href="#" class="btn"><span>Найти ближайшую организацию</span></a>-->
+<!--      <a href="#" class="btn"><span>Правовая информация</span></a>-->
+<!--    </div>-->
 </div>
 
 

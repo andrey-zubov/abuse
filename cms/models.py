@@ -21,7 +21,7 @@ Page.register_extensions(
 
 Page.register_templates({
     'title': _('Standard template'),
-    'path': 'base_0.html',
+    'path': 'widgets/base_widget.html',
     'regions': (
         ('main', _('Main content area')),
         ('sidebar', _('Sidebar'), 'inherited'),
@@ -36,6 +36,10 @@ Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
 
 
 class Column(models.Model):
+    class Meta:
+        verbose_name = 'Одноколоночный'
+        abstract = True
+
     title = models.CharField(
         verbose_name='Название виджета',
         max_length=256,
@@ -54,24 +58,30 @@ class Column(models.Model):
         verbose_name='основной текст',
     )
 
-    class Meta:
-        verbose_name = 'Одноколоночный'
-        abstract = True
+
 
     def render(self):
         return render_to_string(
-            'main_article.html',
+            'singlecolumn_article.html',
             context={
                 'widget': self,
                 'text': mark_safe(self.text)
             })
 
     def get_img(self):
-        return join(settings.MEDIA_URL, str(self.picture.file))
+        if not self.picture:
+            return None
+        else:
+            return join(settings.MEDIA_URL, str(self.picture.file))
 
 Page.create_content_type(Column)
 
 class WhereFindHelp(models.Model):
+    class Meta:
+        verbose_name = 'Где найти помощь'
+        verbose_name_plural = 'Где найти помошь'
+
+    is_active = models.BooleanField(default=True)
     title = models.CharField(
         verbose_name='Название',
         max_length=256,
@@ -92,6 +102,12 @@ class WhereFindHelp(models.Model):
     text = models.TextField(
         verbose_name='основной текст',
     )
+    points = models.TextField(
+        verbose_name='Пункты/список',
+        blank=True,
+        null=True,
+        help_text='<li> текст пункта </li>'
+    )
     href = models.ForeignKey(
         'Link',
         verbose_name='Ссылка',
@@ -99,8 +115,15 @@ class WhereFindHelp(models.Model):
         null=True,
         blank=True
     )
+
     def get_img(self):
-        return join(settings.MEDIA_URL, str(self.picture.file))
+        if not self.picture:
+            return None
+        else:
+            return join(settings.MEDIA_URL, str(self.picture.file))
+
+    def __str__(self):
+        return self.title
 
 
 class Link(models.Model):
@@ -133,7 +156,7 @@ class Block(models.Model):
     pages = models.ManyToManyField(Page, verbose_name="Статьи")
 
     def get_img(self):
-        if self.picture:
-            return join(settings.MEDIA_URL, str(self.picture.file))
-        else:
+        if not self.picture:
             return None
+        else:
+            return join(settings.MEDIA_URL, str(self.picture.file))
