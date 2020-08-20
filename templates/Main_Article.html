@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+
 {% for article in articles %}
 
 <div class="article">
@@ -24,6 +25,9 @@
     </ul>
 
   <div class="article__buttons article__buttons--center">
+    {% for link in article.link.all %}
+      <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
+    {% endfor %}
     <a href="#" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
     <a href="#" class="btn"><span>Правовая информация</span></a>
   </div>
