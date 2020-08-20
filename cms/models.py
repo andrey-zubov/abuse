@@ -76,10 +76,10 @@ class Column(models.Model):
 
 Page.create_content_type(Column)
 
-class WhereFindHelp(models.Model):
+class Articles(models.Model):
     class Meta:
-        verbose_name = 'Где найти помощь'
-        verbose_name_plural = 'Где найти помошь'
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
 
     category = models.ManyToManyField('Main_Cat')
     is_active = models.BooleanField(default=True)
@@ -171,6 +171,11 @@ class Main_Cat(models.Model):
     title = models.CharField(
         verbose_name='Название',
         max_length=50
+    )
+    slug = models.SlugField(
+        verbose_name='слаг',
+        null=True,
+        blank=True
     )
 
     def __str__(self):

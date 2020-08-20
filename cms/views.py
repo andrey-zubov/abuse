@@ -1,24 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import WhereFindHelp, Page, Block
+from .models import Articles, Page, Block, Main_Cat
 
 
 def main_page(request):
-    return render(request, template_name='main_page.html')
+    cats = Main_Cat.objects.all()
+    return render(request, template_name='main_page.html', context={'cats':cats})
 
 
-def find_help(request):
-    articles = WhereFindHelp.objects.filter(is_active=True)
+def articles_by_cat(request, slug):
+    category_number = Main_Cat.objects.get(slug=slug).id
+
+    articles = Articles.objects.filter(category__id=category_number)
     return render(request, template_name='org.html', context={'articles':articles})
 
-
-def co_dependent(request):
-    return HttpResponse('codep')
-
-
-def wtf(request):
-    pages = Page.objects.filter(id=2)
-    blocks = Block.objects.all()
-    return render(request, template_name='wtf_temp.html', context={'test': pages,
-                                                                   'blocks': blocks})

@@ -6,5 +6,8 @@
 </head>
 <body>
 Это первая страница сайта
+{% for cat in cats %}
+    <a href="{% url 'slug_url' slug=cat.slug %}">{{ cat.title }}</a>
+{% endfor %}
 </body>
 </html>
