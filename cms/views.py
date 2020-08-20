@@ -23,7 +23,7 @@ def articles_by_cat(request, slug):
     articles = Articles.objects.filter(category__id=category_number)
     return render(
         request,
-        template_name='org.html',
+        template_name='Main_Article.html',
         context={'articles': articles,
                  'orgs': orgs,
                  })
