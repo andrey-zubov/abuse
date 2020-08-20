@@ -109,12 +109,13 @@ class Articles(models.Model):
         null=True,
         help_text='<li> текст пункта </li>'
     )
-    href = models.ForeignKey(
+    link = models.ManyToManyField(
         'Link',
-        verbose_name='Ссылка',
-        on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        verbose_name='Ссылка',
+        help_text='Можно добавить ардесс-ссылку на внешний источник или'
+                  ' на статью.'
     )
 
     def get_img(self):
@@ -179,14 +180,14 @@ class Main_Cat(models.Model):
         choices=header_choices,
         max_length=256
     )
-    title = models.CharField(
-        verbose_name='Название',
-        max_length=50
-    )
     slug = models.SlugField(
         verbose_name='слаг',
         null=True,
         blank=True
+    )
+    title = models.CharField(
+        verbose_name='Название',
+        max_length=50
     )
 
     def __str__(self):
