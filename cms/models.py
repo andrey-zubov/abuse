@@ -168,6 +168,17 @@ class Main_Cat(models.Model):
         verbose_name = 'Главные категории'
         verbose_name_plural = 'Главные категории'
 
+    header_choices = [
+        ('up', 'Верхний header'),
+        ('down', 'Нижний header')
+    ]
+
+    is_active = models.BooleanField(default=True)
+    header_menu = models.CharField(
+        verbose_name='Местоположение',
+        choices=header_choices,
+        max_length=256
+    )
     title = models.CharField(
         verbose_name='Название',
         max_length=50
@@ -180,3 +191,10 @@ class Main_Cat(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Organizations(models.Model):
+    title = models.CharField(
+        verbose_name='Название организации',
+        max_length=256
+    )

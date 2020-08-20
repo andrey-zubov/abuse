@@ -6,8 +6,12 @@
 </head>
 <body>
 Это первая страница сайта
-{% for cat in cats %}
-    <a href="{% url 'slug_url' slug=cat.slug %}">{{ cat.title }}</a>
+{% for up_cat in up_cats %}
+    <a href="{% url 'slug_url' slug=up_cat.slug %}">{{ up_cat.title }}</a>
+{% endfor %}
+<br>
+{% for down_cat in down_cats %}
+    <a href="{% url 'slug_url' slug=down_cat.slug %}">{{ down_cat.title }}</a>
 {% endfor %}
 </body>
 </html>

@@ -4,6 +4,7 @@
   {% for article in articles %}
     <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
   {% endfor %}
+    <a class="link link--green" href="#"><p>Организации</p></a>
 {% endblock %}
 
 {% block content %}
@@ -33,5 +34,12 @@
 </div>
 
 {% endfor %}
+{% endblock %}
+
+{% block organizations %}
+
+  {% for org in orgs %}
+    {{ org }}
+  {% endfor %}
 {% endblock %}
 
