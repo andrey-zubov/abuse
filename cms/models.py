@@ -111,8 +111,6 @@ class Articles(models.Model):
     )
     link = models.ManyToManyField(
         'Link',
-        null=True,
-        blank=True,
         verbose_name='Ссылка',
         help_text='Можно добавить ардесс-ссылку на внешний источник или'
                   ' на статью.'
@@ -138,7 +136,7 @@ class Link(models.Model):
     )
 
 
-class Block(models.Model):
+class Block(models.Model):  # Todo REFACTOR
     is_active = models.BooleanField(default=True)
     title = models.CharField(max_length=100, verbose_name="Название блока")
     slug = models.SlugField(verbose_name="Слаг")
@@ -199,3 +197,123 @@ class Organizations(models.Model):
         verbose_name='Название организации',
         max_length=256
     )
+    working_hours = models.CharField(
+        verbose_name='Время работы',
+        max_length=50,
+        null=True,
+        blank=True
+    )
+    city = models.ForeignKey(
+        'City',
+        verbose_name='Город',
+        on_delete=models.DO_NOTHING
+    )
+    adress = models.CharField(
+        verbose_name='адресс',
+        max_length=256,
+        null=True,
+        blank=True
+    )
+    desctiption = models.TextField(
+        verbose_name="описание",
+        null=True,
+        blank=True
+    )
+    tel1 = models.CharField(
+        verbose_name='Телефон',
+        null=True,
+        blank=True,
+        max_length=16
+    )
+    tel2 = models.CharField(
+        verbose_name='Телефон',
+        null=True,
+        blank=True,
+        max_length=16
+    )
+    tel3 = models.CharField(
+        verbose_name='Телефон',
+        null=True,
+        blank=True,
+        max_length=16
+    )
+    website = models.URLField(
+        verbose_name='Сайт',
+        null=True,
+        blank=True
+    )
+    email = models.EmailField(
+        verbose_name='электронная почта',
+        null=True,
+        blank=True
+    )
+    def __str__(self):
+        return self.title
+
+
+class City(models.Model):
+    title = models.CharField(
+        max_length=50,
+        verbose_name='Город'
+    )
+    def __str__(self):
+        return self.title
+
+
+class OrganizationServices(models.Model):
+    organization = models.ForeignKey(
+        Organizations,
+        on_delete=models.DO_NOTHING
+    )
+    org_type = models.ForeignKey(
+        'ServicesType',
+        on_delete=models.DO_NOTHING,
+    )
+    stuff = models.ForeignKey(
+        'ServicesStuff',
+        on_delete=models.DO_NOTHING,
+    )
+    conf = models.ForeignKey(
+        'ServicesConf',
+        on_delete=models.DO_NOTHING,
+    )
+    payment = models.ForeignKey(
+        'ServicesPayment',
+        on_delete=models.DO_NOTHING,
+    )
+
+
+class ServicesType(models.Model):
+    title = models.CharField(
+        max_length=50,
+        unique=True
+    )
+    def __str__(self):
+        return self.title
+
+
+class ServicesStuff(models.Model):
+    title = models.CharField(
+        max_length=50,
+        unique=True
+    )
+    def __str__(self):
+        return self.title
+
+
+class ServicesConf(models.Model):
+    title = models.CharField(
+        max_length=50,
+        unique=True
+    )
+    def __str__(self):
+        return self.title
+
+
+class ServicesPayment(models.Model):
+    title = models.CharField(
+        max_length=50,
+        unique=True
+    )
+    def __str__(self):
+        return self.title
