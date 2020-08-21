@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Articles, Page, Block, Main_Cat, Organizations
+from .models import Articles, Page, Block, Main_Cat, Organizations, City, ServicesType
 
 
 def main_page(request):
@@ -19,6 +19,8 @@ def main_page(request):
 def articles_by_cat(request, slug):
     category_number = Main_Cat.objects.get(slug=slug).id
     orgs = Organizations.objects.all()
+    all_cityes = City.objects.all()
+    all_types = ServicesType.objects.all()
 
     articles = Articles.objects.filter(category__id=category_number)
     return render(

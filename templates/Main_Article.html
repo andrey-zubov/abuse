@@ -46,10 +46,14 @@
     <select>
       <option>{{ org.title }}</option>
     </select>
-    {% for sub in org.my_services %}
-      {{ sub.stuff }}
+    {% for serv in org.get_services %}
+      {{ serv.org_type.title }}
+      {{ serv.stuff.title }}
+      {{ serv.conf.title }}
+      {{ serv.payment.title }}
+      <br>
     {% endfor %}
-    <br>
+    <hr>
 
   {% endfor %}
 {% endblock %}
