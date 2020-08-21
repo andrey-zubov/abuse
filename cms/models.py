@@ -252,6 +252,7 @@ class Organizations(models.Model):
     def __str__(self):
         return self.title
 
+    @property
     def my_services(self):
         self.org_services.all()
 
