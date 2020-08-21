@@ -249,12 +249,13 @@ class Organizations(models.Model):
         null=True,
         blank=True
     )
-    def __str__(self):
-        return self.title
 
     @property
-    def my_services(self):
-        self.org_services.all()
+    def get_services(self):
+        return self.organizationservices_set.all()
+
+    def __str__(self):
+        return self.title
 
 
 class City(models.Model):
@@ -270,7 +271,7 @@ class OrganizationServices(models.Model):
     organization = models.ForeignKey(
         Organizations,
         on_delete=models.CASCADE,
-        related_name='org_services',
+      #  related_name='org_services',
     )
     org_type = models.ForeignKey(
         'ServicesType',
