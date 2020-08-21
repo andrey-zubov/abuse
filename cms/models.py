@@ -271,7 +271,6 @@ class OrganizationServices(models.Model):
     organization = models.ForeignKey(
         Organizations,
         on_delete=models.CASCADE,
-      #  related_name='org_services',
     )
     org_type = models.ForeignKey(
         'ServicesType',

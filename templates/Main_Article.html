@@ -1,4 +1,5 @@
 {%extends 'base.html' %}
+{% load static %}
 
 {% block side_links %}
   {% for article in articles %}
@@ -7,10 +8,9 @@
     <a class="link link--green" href="#"><p>Организации</p></a>
 {% endblock %}
 
+
 {% block content %}
-
 {% for article in articles %}
-
 <div class="article">
   <a name="{{ article.id }}"></a>
   <h1 class="article__title headline-1">{{ article.title }}</h1>
@@ -36,33 +36,34 @@
 <!--      <a href="#" class="btn"><span>Правовая информация</span></a>-->
 <!--    </div>-->
 </div>
-
 {% endfor %}
 {% endblock %}
+
 
 {% block organizations %}
   <p><p>Мы собрали организации, которые готовы тебе помочь. Их список будет постоянно расширяться, чтобы ты всегда мог получить ближайшую к тебе помощь.</p><p>
   <em>(Организациям, оказывающим услуги лицам в проблеме наркотиков! Если вы не нашли свою организацию - отправьте заявку на ее добавление.
     <a href="http://pomogut.by/to-partners/">Добавить организацию </a>)</em></p></p>
 
-
-  <select>
-    {% for city in all_cites %}
-        <option>{{ city }}</option>
-    {% endfor %}
-  </select>
-  <select>
-    {% for type in all_types %}
-      <option>{{ type }}</option>
-    {% endfor %}
-  </select>
-
+  <form method="get">
+    <input hidden name="is_org_finder" value="1">
+    <select name="choosed_city">
+      {% for city in all_cites %}
+          <option value="{{ city.id }}">{{ city.title }}</option>
+      {% endfor %}
+    </select>
+    <select name="choosed_type">
+      {% for type in all_types %}
+        <option value="{{ type.id }}">{{ type.title }}</option>
+      {% endfor %}
+    </select>
+    <BUTTON>OJ</BUTTON>
+  </form>
 
 <br><br><br>ОРГИ
   {% for org in orgs %}
-    <select>
-      <option>{{ org.title }}</option>
-    </select>
+    Организация {{ org.title }}
+    деятельность
     {% for serv in org.get_services %}
       {{ serv.org_type.title }}
       {{ serv.stuff.title }}
@@ -73,5 +74,12 @@
     <hr>
 
   {% endfor %}
+  <script src="{% static '/js/jquery-3.5.1.min.js' %}"></script>
+  <script>
+    $('document').ready(function () {
+      console.log('hetst');
+    })
+  </script>
+
 {% endblock %}
 

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.db.models import Q
 
 from .models import Articles, Page, Block, Main_Cat, Organizations, City, ServicesType
 
@@ -16,11 +17,22 @@ def main_page(request):
                  })
 
 
-def articles_by_cat(request, slug):
+def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
+    print(request.GET)
+
+    if not request.GET.__contains__('is_org_finder'):
+        orgs = Organizations.objects.all()
+    else:
+        city_id = int(request.GET['choosed_city'])
+        type_id = int(request.GET['choosed_type'])
+        orgs = Organizations.objects.filter(
+            Q(city__id=city_id) & Q(organizationservices__org_type=type_id)
+        )
+
+
     category_number = Main_Cat.objects.get(slug=slug).id
-    orgs = Organizations.objects.all()
-    all_cites = City.objects.all()
-    all_types = ServicesType.objects.all()
+    all_cites = City.objects.filter()
+    all_types = ServicesType.objects.filter()
 
     articles = Articles.objects.filter(category__id=category_number)
     return render(
