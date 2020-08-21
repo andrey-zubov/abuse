@@ -19,7 +19,7 @@ def main_page(request):
 def articles_by_cat(request, slug):
     category_number = Main_Cat.objects.get(slug=slug).id
     orgs = Organizations.objects.all()
-    all_cityes = City.objects.all()
+    all_cites = City.objects.all()
     all_types = ServicesType.objects.all()
 
     articles = Articles.objects.filter(category__id=category_number)
@@ -28,5 +28,7 @@ def articles_by_cat(request, slug):
         template_name='Main_Article.html',
         context={'articles': articles,
                  'orgs': orgs,
+                 'all_cites': all_cites,
+                 'all_types': all_types,
                  })
 

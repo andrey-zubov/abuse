@@ -41,7 +41,24 @@
 {% endblock %}
 
 {% block organizations %}
-  орги
+  <p><p>Мы собрали организации, которые готовы тебе помочь. Их список будет постоянно расширяться, чтобы ты всегда мог получить ближайшую к тебе помощь.</p><p>
+  <em>(Организациям, оказывающим услуги лицам в проблеме наркотиков! Если вы не нашли свою организацию - отправьте заявку на ее добавление.
+    <a href="http://pomogut.by/to-partners/">Добавить организацию </a>)</em></p></p>
+
+
+  <select>
+    {% for city in all_cites %}
+        <option>{{ city }}</option>
+    {% endfor %}
+  </select>
+  <select>
+    {% for type in all_types %}
+      <option>{{ type }}</option>
+    {% endfor %}
+  </select>
+
+
+<br><br><br>ОРГИ
   {% for org in orgs %}
     <select>
       <option>{{ org.title }}</option>
