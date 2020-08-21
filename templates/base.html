@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,9 +10,9 @@
 
     {% load compress %}
 
-    {% compress css %}
-        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">
-    {% endcompress %}
+<!--    {% compress css %}-->
+<!--        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">-->
+<!--    {% endcompress %}-->
 
     <script type="module" src="/static/scripts/index.js"></script>
 
@@ -109,33 +110,23 @@
                       <a class="link link--medium-blue" href="http://pomogut.by/filling-page"><p>Срыв</p></a>
                     </div>
                     <div class="side-menu__links">
-                      <a class="link link--green" href="#codependent"><p>Ваш ребенок в проблеме</p></a>
-										  <a class="link link--green" href="#narc_ill"><p>Ваш ребенок ведет себя странно</p></a>
-                      <a class="link link--green" href="#harm-reduction"><p>Устали от наркотиков</p></a>
+                      {% block side_links %}
+
+                      {% endblock %}
                     </div>
                 </div>
               </div>
           </div>
-          <div class="col-lg-6">
-              <div class="article">
-                <h1 class="article__title headline-1">Я - созависимый</h1>
-                <div class="article__image-wrapper aspect-ratio">
-                    <img src="https://via.placeholder.com/1140x764" alt=""></img>          
-                </div>
-                <div class="article__description">
-                  <p> получить помощь и поддержку самим близким, <a href="/advice/">научится правильно себя вести</a> и начать выздоравливать самим от созависимости. </p>
-                  <p></p>
-                </div>
-                <ul class="article__list"><li>Обменять использованные шприцы и иглы на новые</li><li>Получить презервативы, спиртовые салфетки, дезинфицирующие средства</li><li>Проконсультироваться по медицинским и психологическим вопросам</li><li>Пройти экспресс-тестирование на ВИЧ и вирусные гепатиты В и С</li><li>Получить информацию о дополнительных услугах и контакты других сервисов и служб, помогающих ПИН</li></ul>
-                <div class="article__buttons article__buttons--center">
-                  <a href="#" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
-                  <a href="#" class="btn"><span>Правовая информация</span></a>
-                </div>
-                  <div class="article__buttons">
-                    <a href="#" class="btn"><span>Найти ближайшую организацию</span></a>
-                    <a href="#" class="btn"><span>Правовая информация</span></a>
-                  </div>
-              </div>
+          {% block content %}
+          {% endblock %}
+
+
+          {% block organizations %}
+          {% endblock %}
+
+
+
+
               <div class="participants">
                 <h2 class="participants__title headline-1">Участники проекта</h2>
                 <div class="participants__content">
@@ -212,5 +203,7 @@
         ></a>
       </div>
     </footer>
+    <script src="{% static '/js/jquery-3.5.1.min.js' %}"></script>
+
   </body>
 </html>
