@@ -41,9 +41,15 @@
 {% endblock %}
 
 {% block organizations %}
-
+  орги
   {% for org in orgs %}
-    {{ org }}
+    <select>
+      <option>{{ org.title }}</option>
+    </select>
+    {{org.services }}
+
+    <br>
+
   {% endfor %}
 {% endblock %}
 

@@ -111,6 +111,8 @@ class Articles(models.Model):
     )
     link = models.ManyToManyField(
         'Link',
+        null=True,
+        blank=True,
         verbose_name='Ссылка',
         help_text='Можно добавить ардесс-ссылку на внешний источник или'
                   ' на статью.'
@@ -250,6 +252,9 @@ class Organizations(models.Model):
     def __str__(self):
         return self.title
 
+    def my_services(self):
+        self.org_services.all()
+
 
 class City(models.Model):
     title = models.CharField(
@@ -263,7 +268,8 @@ class City(models.Model):
 class OrganizationServices(models.Model):
     organization = models.ForeignKey(
         Organizations,
-        on_delete=models.DO_NOTHING
+        on_delete=models.CASCADE,
+        related_name='org_services',
     )
     org_type = models.ForeignKey(
         'ServicesType',
