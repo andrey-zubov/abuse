@@ -20,6 +20,7 @@ class ServicesAdmin(admin.StackedInline):
 
 class OrganizationAdmin(admin.ModelAdmin):
     inlines = [ServicesAdmin,]
+    prepopulated_fields = {'slug': ('title',), }
 
 
 admin.site.register(Articles)

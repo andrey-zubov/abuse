@@ -199,6 +199,10 @@ class Organizations(models.Model):
         verbose_name='Название организации',
         max_length=256
     )
+    slug = models.SlugField(
+        verbose_name='Слаг',
+        unique=True
+    )
     working_hours = models.CharField(
         verbose_name='Время работы',
         max_length=50,

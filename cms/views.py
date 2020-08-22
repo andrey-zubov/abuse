@@ -18,8 +18,6 @@ def main_page(request):
 
 
 def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
-    print(request.GET)
-
     if not request.GET.__contains__('is_org_finder'):
         orgs = Organizations.objects.all()
     else:
@@ -44,3 +42,12 @@ def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
                  'all_types': all_types,
                  })
 
+
+def org_info(request, slug):
+    org = Organizations.objects.get(slug=slug)
+
+    return render(
+        request,
+        template_name='organizations.html',
+        context={'org': org}
+    )

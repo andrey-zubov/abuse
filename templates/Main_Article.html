@@ -15,7 +15,10 @@
   <a name="{{ article.id }}"></a>
   <h1 class="article__title headline-1">{{ article.title }}</h1>
   <div class="article__image-wrapper aspect-ratio">
+    {% if article.get_img %}
       <img src="{{ article.get_img }}" alt=""></img>
+    {% endif %}
+
   </div>
   <div class="article__description">
     <p>{{ article.text|safe }}</p>
@@ -62,7 +65,7 @@
 
 <br><br><br>ОРГИ
   {% for org in orgs %}
-    Организация {{ org.title }}
+    Организация <a href="{% url 'org_info' slug=org.slug %}" >{{ org.title }}</a>
     деятельность
     {% for serv in org.get_services %}
       {{ serv.org_type.title }}

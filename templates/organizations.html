@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Это орги<br>
+{{ org.title }}<br>
+{{ org.adress }}<br>
+
+{% for serv in org.get_services %}
+    {{ serv.org_type.title }}
+    {{ serv.stuff.title }}
+    {{ serv.conf.title }}
+    {{ serv.payment.title }}
+    <br>
+{% endfor %}
+
+{{ org.description }}<br>
+{{ org.tel1 }}
+{{ org.tel2 }}
+{{ org.tel3 }}
+</body>
+</html>
