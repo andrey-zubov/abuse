@@ -6,49 +6,31 @@ export default class ArticleCalendar{
     }
 
     showCity(e){
-        const activeCity = e.params.originalSelect2Event.data.id;
-
-        console.log(e.params.originalSelect2Event.data.id)
+        const activeCity = e.params.originalSelect2Event.data?.id;
 
         document.querySelector('.article-calendar .activities').dataset.activeCity = activeCity;
 
-        const allActivities = document.querySelectorAll('.activities .vacancy');
+        const allActivities = $('.activities .vacancy').slideUp();
 
         const activeData = document.querySelector('.article-calendar .activities[data-active-day]');
-
-        Array.from(allActivities).forEach(item =>{
-            item.style.display = "none"
-        })
 
         let activities = null;
 
         const empty = document.querySelector('.activities .vacancy--empty')
 
+        const emptyState = '<div class="vacancy--empty"><p class="headline-3">НА ВЫБРАННУЮ ДАТУ НЕТ МЕРОПРИЯТИЙ</p></div>'
+
         if(activeData){
             const calendarValue = document.querySelector('.calendar').value;
-
-            activities =  document.querySelectorAll(`.activities .vacancy[data-city="${activeCity}"][data-active-day="${calendarValue}"]`);
-
-                        Array.from(activities).forEach(item =>{
-                            item.style.display = "block"
-                        })
-        }else{
-            
-            activities =  document.querySelectorAll(`.activities .vacancy[data-city="${activeCity}"]`);
-
-            Array.from(activities).forEach(item =>{
-                item.style.display = "block"
-            })
+            activities =  $(`.activities .vacancy[data-city="${activeCity}"][data-active-day="${calendarValue}"]`).slideDown();
+        }else{   
+            activities = $(`.activities .vacancy[data-city="${activeCity}"]`).slideDown();
         }
 
         if(activities.length === 0){
-            if(!empty){
-                const emptyState = '<div class="vacancy--empty"><p class="headline-3">НА ВЫБРАННУЮ ДАТУ НЕТ МЕРОПРИЯТИЙ</p></div>'
-            
-                document.querySelector('.activities').insertAdjacentHTML('afterbegin', emptyState)
-            }
+            if(!empty) document.querySelector('.activities').insertAdjacentHTML('afterbegin', emptyState)
         }else{
-            empty.remove();
+            empty?.remove();
         }
     }
 
@@ -72,47 +54,31 @@ export default class ArticleCalendar{
 
                     document.querySelector('.article-calendar .activities').dataset.activeDay = calendarValue;
 
-                    const allActivities = document.querySelectorAll('.activities .vacancy');
+                    const allActivities = $('.activities .vacancy').slideUp();
 
                     const activeCity = document.querySelector('.article-calendar .activities[data-active-city]');
-
-                    Array.from(allActivities).forEach(item =>{
-                        item.style.display = "none"
-                    })
 
                     const empty = document.querySelector('.activities .vacancy--empty')
 
                     let activities = null;
 
+                    const emptyState = '<div class="vacancy--empty"><p class="headline-3">НА ВЫБРАННУЮ ДАТУ НЕТ МЕРОПРИЯТИЙ</p></div>'
+
                     if(activeCity){
                         const city = activeCity.getAttribute('data-active-city');
-
-                        activities =  document.querySelectorAll(`.activities .vacancy[data-city="${city}"][data-active-day="${calendarValue}"]`);
-
-                        Array.from(activities).forEach(item =>{
-                            item.style.display = "block"
-                        })
-
-                    }else{
-                        
-
-                        activities =  document.querySelectorAll(`.activities .vacancy[data-active-day="${calendarValue}"]`);
-
-                        Array.from(activities).forEach(item =>{
-                            item.style.display = "block"
-                        })
-                    }
-
-                    
-
-                    if(activities.length === 0){
-                        if(!empty){
-                            const emptyState = '<div class="vacancy--empty"><p class="headline-3">НА ВЫБРАННУЮ ДАТУ НЕТ МЕРОПРИЯТИЙ</p></div>'
-                        
-                            document.querySelector('.activities').insertAdjacentHTML('afterbegin', emptyState)
+                        if(!calendarValue){
+                            activities =  $(`.activities .vacancy[data-city="${city}"]`).slideDown();
+                        }else{
+                            activities =  $(`.activities .vacancy[data-city="${city}"][data-active-day="${calendarValue}"]`).slideDown();
                         }
                     }else{
-                        empty.remove();
+                        activities =  $(`.activities .vacancy[data-active-day="${calendarValue}"]`).slideDown();
+                    }
+
+                    if(activities.length === 0){
+                        if(!empty) document.querySelector('.activities').insertAdjacentHTML('afterbegin', emptyState)
+                    }else{
+                        empty?.remove();
                     }
 
                 }
