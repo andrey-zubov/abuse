@@ -20,8 +20,6 @@
   }
 
   &__description {
-    margin-top: 20px;
-
     a {
       border-bottom: 1px solid $gray;
       transition: all 0.5s;
@@ -34,7 +32,7 @@
     }
 
     p {
-      margin-bottom: 20px;
+      margin: 20px 0;
 
       &:last-child {
         margin-bottom: 0;
@@ -59,7 +57,7 @@
     }
   }
 
-  &__list {
+  ul {
     margin-left: 20px;
     margin-top: 20px;
 
