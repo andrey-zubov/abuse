@@ -1,10 +1,12 @@
 import "./vendor/jquery.js";
 import "./vendor/jquery.sticky.js";
+import "./vendor/select2.js";
 
 import MobileMenu from "./shared/mobile-menu.js";
 import StickyHeader from "./shared/sticky-header.js";
 import StickySideMenu from "./shared/sticky-side-menu.js";
 import ArticleAccordeon from "./shared/article-accordeon.js";
+import ArticleSelect from "./shared/article-select.js";
 
 $(document).ready(async () => {
   window.refs = {
@@ -23,6 +25,10 @@ $(document).ready(async () => {
     articleAccordeon: {
       init: () => new ArticleAccordeon(),
       selectors: [".article-accordeon"],
+    },
+    articleSelect: {
+      init: () => new ArticleSelect(),
+      selectors: [".article__select"],
     },
   };
 

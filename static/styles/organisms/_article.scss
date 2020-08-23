@@ -55,9 +55,13 @@
     &--center {
       justify-content: center;
     }
+
+    &--left {
+      justify-content: flex-start;
+    }
   }
 
-  ul {
+  &__list {
     margin-left: 20px;
     margin-top: 20px;
 
@@ -75,5 +79,9 @@
         border-radius: 50%;
       }
     }
+  }
+
+  &__select {
+    margin: 40px 0 30px;
   }
 }

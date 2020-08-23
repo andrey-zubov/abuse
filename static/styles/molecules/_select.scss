@@ -1,0 +1,25 @@
+.select2 {
+  $self: &;
+
+  &-container {
+    z-index: 0;
+
+    &--default {
+      #{$self}-results__option--highlighted {
+        &#{$self}-results__option--selectable {
+          background-color: $blue;
+        }
+      }
+    }
+  }
+
+  &-results {
+    &__option {
+      transition: all 0.5s ease-out;
+    }
+  }
+
+  &-selection--single {
+    outline: none;
+  }
+}
