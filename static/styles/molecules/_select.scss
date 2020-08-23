@@ -3,6 +3,7 @@
 
   &-container {
     z-index: 0;
+    width: 190px !important;
 
     &--default {
       #{$self}-results__option--highlighted {

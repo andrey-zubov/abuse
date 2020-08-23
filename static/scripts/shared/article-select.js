@@ -17,7 +17,6 @@ export default class SrticleSelect{
     init(){
         $('.select').select2({
             closeOnSelect: true,
-            width: '190px',
             placeholder: 'Выберите город',
         });
 

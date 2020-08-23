@@ -28,8 +28,9 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
-      transform: rotate(0deg) translateY(-50%);
+      transform: rotate(-180deg) translateY(-50%);
       transition: transform 0.5s;
+      transform-origin: center top;
     }
   }
 
@@ -38,7 +39,7 @@
 
     #{$self}__title {
       &:after {
-        transform: translateY(-50%) rotate(-180deg);
+        transform: translateY(-50%);
       }
     }
 
@@ -47,6 +48,7 @@
   }
 
   &__links {
+    display: none;
     padding-left: 15px;
   }
 
@@ -89,6 +91,7 @@
     }
 
     &__content {
+      display: none;
       overflow: hidden;
 
       p {
