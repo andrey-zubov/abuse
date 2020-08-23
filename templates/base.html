@@ -474,25 +474,47 @@
                 <li><p>Обменять использованные шприцы и иглы на новые</p></li>
               </ul>
               <div class="article__select">
-                <select class="article__select">
+                <input
+                  type="text"
+                  class="calendar"
+                  placeholder="Выберите дату"
+                />
+                <select class="select__activity">
                   <option></option>
                   <option class="select__option" value="Minsk">Минск</option>
-                  <option class="select__option" value="Krasnoe"
-                    >Краснополье</option
-                  >
-                  <option class="select__option" value="Gomel">Гомель</option>
-                </select>
-                <select class="select">
-                  <option></option>
-                  <option class="select__option" value="Minsk">Минск</option>
-                  <option class="select__option" value="Krasnoe"
-                    >Краснополье</option
-                  >
                   <option class="select__option" value="Gomel">Гомель</option>
                 </select>
               </div>
-              <div class="vacancies">
-                <div class="vacancy" data-city="Minsk">
+              <div class="activities">
+                <div
+                  class="vacancy"
+                  data-city="Minsk"
+                  data-active-day="01-09-2020"
+                >
+                  <p class="vacancy__title headline-3">
+                    УПРАВЛЕНИЕ ПО ТРУДУ ЗАНЯТОСТИ И СОЦИАЛЬНОЙ ЗАЩИТЕ
+                    КРАСНОПОЛЬСКОГО РАЙИСПОЛКОМА
+                  </p>
+                  <div class="vacancy__info">
+                    <div class="vacancy__info__item">
+                      <p><strong>Адрес:</strong></p>
+                      <p>
+                        213561 Могилевская область, г.Минск, ул.Ленинская, 2
+                      </p>
+                    </div>
+                    <div class="vacancy__info__item vacancy__info__item--phone">
+                      <p><strong>Контактный телефон:</strong></p>
+                      <a href="tel:+375 29 123 45 67" title="Позвонить"
+                        ><p>+375 29 123 45 67</p></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="vacancy"
+                  data-city="Gomel"
+                  data-active-day="02-09-2020"
+                >
                   <p class="vacancy__title headline-3">
                     УПРАВЛЕНИЕ ПО ТРУДУ ЗАНЯТОСТИ И СОЦИАЛЬНОЙ ЗАЩИТЕ
                     КРАСНОПОЛЬСКОГО РАЙИСПОЛКОМА

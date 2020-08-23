@@ -1,4 +1,4 @@
-export default class SrticleSelect{
+export default class ArticleSelect{
     constructor(){
         this.init();
 
