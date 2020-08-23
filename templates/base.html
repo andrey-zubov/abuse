@@ -8,11 +8,18 @@
       content="width=device-width, initial-scale=1.0, user-scalable=0"
     />
 
-    {% load compress %}
+    <!-- {% load compress %}-->
 
-<!--    {% compress css %}-->
-<!--        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">-->
-<!--    {% endcompress %}-->
+    <!-- {% compress css %}-->
+    <!--        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">-->
+    <!--    {% endcompress %}-->
+
+    <link
+      type="text/css"
+      href="../static/styles/index.min.css"
+      rel="stylesheet"
+      media="screen"
+    />
 
     <script type="module" src="/static/scripts/index.js"></script>
 
@@ -102,80 +109,495 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-3">
-              <div class="side-menu">
-                <div class="side-menu__content">
-                    <div class="side-menu__links side-menu__links--main">
-                      <a class="link link--medium-blue" href="#help"><p>Первая помощь</p></a>
-                      <a class="link link--medium-blue" href="http://pomogut.by/hiv-hepatitis/"><p>Вич и гепатит</p></a>
-                      <a class="link link--medium-blue" href="http://pomogut.by/filling-page"><p>Срыв</p></a>
-                    </div>
-                    <div class="side-menu__links">
-                      {% block side_links %}
-
-                      {% endblock %}
-                    </div>
+            <div class="side-menu">
+              <div class="side-menu__content">
+                <div class="side-menu__links side-menu__links--main">
+                  <a class="link link--medium-blue" href="#help"
+                    ><p>Первая помощь</p></a
+                  >
+                  <a
+                    class="link link--medium-blue"
+                    href="http://pomogut.by/hiv-hepatitis/"
+                    ><p>Вич и гепатит</p></a
+                  >
+                  <a
+                    class="link link--medium-blue"
+                    href="http://pomogut.by/filling-page"
+                    ><p>Срыв</p></a
+                  >
+                </div>
+                <div class="side-menu__links">
+                  {% block side_links %} {% endblock %}
                 </div>
               </div>
+            </div>
           </div>
-          {% block content %}
-          {% endblock %}
-
-
-          {% block organizations %}
-          {% endblock %}
-
-
-
-
-              <div class="participants">
-                <h2 class="participants__title headline-1">Участники проекта</h2>
-                <div class="participants__content">
-                  <div class="participant">
-                      <div class="participant__img-wrapper">
-                        <img class="participant__img" src="https://via.placeholder.com/1140x764" alt=""></img>
-                      </div>
-                      <p class="participant__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vestibulum maximus convallis</p>
-                      <a  class="participant__link" href="#" title="participant-title"></a>
-                  </div>
-                  <div class="participant">
-                    <div class="participant__img-wrapper">
-                      <img class="participant__img" src="https://via.placeholder.com/1140x764" alt=""></img>
+          {% block content %} {% endblock %} {% block organizations %} {%
+          endblock %}
+          <div class="col-lg-6">
+            <div class="article">
+              <h1 class="article__title headline-1">Я - созависимый</h1>
+              <div class="article__image-wrapper aspect-ratio">
+                <img src="https://via.placeholder.com/1140x764" alt="" />
+              </div>
+              <div class="article__description">
+                <p>
+                  получить помощь и поддержку самим близким,
+                  <a href="/advice/">научится правильно себя вести</a> и начать
+                  выздоравливать самим от созависимости.
+                </p>
+              </div>
+              <ul class="article__list">
+                <li><p>Обменять использованные шприцы и иглы на новые</p></li>
+              </ul>
+              <div class="article__buttons article__buttons--center">
+                <a href="#" class="btn" target="_blank"
+                  ><span>Найти ближайшую организацию</span></a
+                >
+                <a href="#" class="btn"><span>Правовая информация</span></a>
+              </div>
+              <div class="article__buttons">
+                <a href="#" class="btn"
+                  ><span>Найти ближайшую организацию</span></a
+                >
+                <a href="#" class="btn"><span>Правовая информация</span></a>
+              </div>
+            </div>
+            <div class="article article-accordeon">
+              <h1 class="article__title headline-1">ПРАВОВАЯ ИНФОРМАЦИЯ</h1>
+              <div class="article__description">
+                <p>
+                  Наркопотребитель в первую очередь человек. И как у любого
+                  человека у него есть свои права, данные ему при рождении.
+                  Однако надо помнить, что незаконный оборот наркотиков попадает
+                  под правовое поле Республики Беларусь и является уголовно
+                  наказуемым. Правовая информация на нашем сайте поможет тебе
+                  комфортно и полноценно жить нашем обществе
+                </p>
+              </div>
+              <div class="article-accordeon__content">
+                <ul>
+                  <li class="accordeon-item">
+                    <p class="accordeon-item__title headline-3">
+                      АДМИНИСТРАТИВНЫЙ КОДЕКС РЕСПУБЛИКИ БЕЛАРУСЬ
+                    </p>
+                    <ul class="accordeon-item__links">
+                      <li class="accordeon-item__link">
+                        <p class="accordeon-item__link__title">
+                          Статья 17.3. Распитие алкогольных, слабоалкогольных
+                          напитков или пива, потребление наркотических средств
+                          или психотропных веществ, их аналогов в общественном
+                          месте либо появление в общественном месте или на
+                          работе в состоянии опьянения
+                        </p>
+                        <div class="accordeon-item__link__content">
+                          <p>
+                            1. Распитие алкогольных, слабоалкогольных напитков
+                            или пива на улице, стадионе, в сквере, парке,
+                            общественном транспорте или в других общественных
+                            местах, кроме мест, предназначенных для употребления
+                            алкогольных, слабоалкогольных напитков или пива,
+                            либо появление в общественном месте в пьяном виде,
+                            оскорбляющем человеческое достоинство и
+                            нравственность, либо потребление в общественном
+                            месте наркотических средств или психотропных веществ
+                            без назначения врача, либо потребление в
+                            общественном месте аналогов наркотических средств
+                            или психотропных веществ – влекут наложение штрафа в
+                            размере до восьми базовых величин.
+                          </p>
+                          <p>
+                            2. Нахождение на рабочем месте в рабочее время в
+                            состоянии алкогольного, наркотического или
+                            токсикоманического опьянения – влечет наложение
+                            штрафа в размере от одной до десяти базовых величин.
+                          </p>
+                          <p>
+                            3. Действия, предусмотренные частями 1 и 2 настоящей
+                            статьи, совершенные повторно в течение одного года
+                            после наложения административного взыскания за такие
+                            же нарушения, – влекут наложение штрафа в размере от
+                            двух до пятнадцати базовых величин или
+                            административный арест.
+                          </p>
+                        </div>
+                      </li>
+                      <li class="accordeon-item__link">
+                        <p class="accordeon-item__link__title">
+                          Статья 17.3. Распитие алкогольных, слабоалкогольных
+                          напитков или пива, потребление наркотических средств
+                          или психотропных веществ, их аналогов в общественном
+                          месте либо появление в общественном месте или на
+                          работе в состоянии опьянения
+                        </p>
+                        <div class="accordeon-item__link__content">
+                          <p>
+                            Распитие алкогольных, слабоалкогольных напитков или
+                            пива на улице, стадионе, в сквере, парке,
+                            общественном транспорте или в других общественных
+                            местах, кроме мест, предназначенных для употребления
+                            алкогольных, слабоалкогольных напитков или пива,
+                            либо появление в общественном месте в пьяном виде,
+                            оскорбляющем человеческое достоинство и
+                            нравственность, либо потребление в общественном
+                            месте наркотических средств или психотропных веществ
+                            без назначения врача, либо потребление в
+                            общественном месте аналогов наркотических средств
+                            или психотропных веществ – влекут наложение штрафа в
+                            размере до восьми базовых величин.
+                          </p>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="accordeon-item">
+                    <p class="accordeon-item__title headline-3">
+                      АДМИНИСТРАТИВНЫЙ КОДЕКС РЕСПУБЛИКИ БЕЛАРУСЬ
+                    </p>
+                    <ul class="accordeon-item__links">
+                      <li class="accordeon-item__link">
+                        <p class="accordeon-item__link__title">
+                          Статья 17.3. Распитие алкогольных, слабоалкогольных
+                          напитков или пива, потребление наркотических средств
+                          или психотропных веществ, их аналогов в общественном
+                          месте либо появление в общественном месте или на
+                          работе в состоянии опьянения
+                        </p>
+                        <div class="accordeon-item__link__content">
+                          <p>
+                            1. Распитие алкогольных, слабоалкогольных напитков
+                            или пива на улице, стадионе, в сквере, парке,
+                            общественном транспорте или в других общественных
+                            местах, кроме мест, предназначенных для употребления
+                            алкогольных, слабоалкогольных напитков или пива,
+                            либо появление в общественном месте в пьяном виде,
+                            оскорбляющем человеческое достоинство и
+                            нравственность, либо потребление в общественном
+                            месте наркотических средств или психотропных веществ
+                            без назначения врача, либо потребление в
+                            общественном месте аналогов наркотических средств
+                            или психотропных веществ – влекут наложение штрафа в
+                            размере до восьми базовых величин.
+                          </p>
+                          <p>
+                            2. Нахождение на рабочем месте в рабочее время в
+                            состоянии алкогольного, наркотического или
+                            токсикоманического опьянения – влечет наложение
+                            штрафа в размере от одной до десяти базовых величин.
+                          </p>
+                          <p>
+                            3. Действия, предусмотренные частями 1 и 2 настоящей
+                            статьи, совершенные повторно в течение одного года
+                            после наложения административного взыскания за такие
+                            же нарушения, – влекут наложение штрафа в размере от
+                            двух до пятнадцати базовых величин или
+                            административный арест.
+                          </p>
+                        </div>
+                      </li>
+                      <li class="accordeon-item__link">
+                        <p class="accordeon-item__link__title">
+                          Статья 17.3. Распитие алкогольных, слабоалкогольных
+                          напитков или пива, потребление наркотических средств
+                          или психотропных веществ, их аналогов в общественном
+                          месте либо появление в общественном месте или на
+                          работе в состоянии опьянения
+                        </p>
+                        <div class="accordeon-item__link__content">
+                          <p>
+                            Распитие алкогольных, слабоалкогольных напитков или
+                            пива на улице, стадионе, в сквере, парке,
+                            общественном транспорте или в других общественных
+                            местах, кроме мест, предназначенных для употребления
+                            алкогольных, слабоалкогольных напитков или пива,
+                            либо появление в общественном месте в пьяном виде,
+                            оскорбляющем человеческое достоинство и
+                            нравственность, либо потребление в общественном
+                            месте наркотических средств или психотропных веществ
+                            без назначения врача, либо потребление в
+                            общественном месте аналогов наркотических средств
+                            или психотропных веществ – влекут наложение штрафа в
+                            размере до восьми базовых величин.
+                          </p>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="article__buttons">
+                <a href="#" class="btn"
+                  ><span>Найти ближайшую организацию</span></a
+                >
+                <a href="#" class="btn"><span>Правовая информация</span></a>
+              </div>
+            </div>
+            <div class="article article-health">
+              <h1 class="article__title headline-1">ЗДОРОВЬЕ</h1>
+              <ul class="article-health__content">
+                <li class="health-item">
+                  <p class="health-item__title headline-3">
+                    ТРАМАДОЛ, МОРФИН, КОДЕИН, ГЕРОИН, МЕТАДОН – ПРИРОДНЫЕ
+                    НАРКОТИКИ, ПОЛУЧЕННЫЕ ИЗ МАКА/ХИМИЧЕСКИЕ СОЕДИНЕНИЯ:
+                  </p>
+                  <p class="health-item__description">
+                    поражение печеночных клеток; риск инфицирования ВИЧ и
+                    инфарктов; заметное снижение интеллекта.
+                  </p>
+                </li>
+                <li class="health-item">
+                  <p class="health-item__title headline-3">
+                    ТРАМАДОЛ, МОРФИН, КОДЕИН, ГЕРОИН, МЕТАДОН – ПРИРОДНЫЕ
+                    НАРКОТИКИ, ПОЛУЧЕННЫЕ ИЗ МАКА/ХИМИЧЕСКИЕ СОЕДИНЕНИЯ:
+                  </p>
+                  <p class="health-item__description">
+                    поражение печеночных клеток; риск инфицирования ВИЧ и
+                    инфарктов; заметное снижение интеллекта.
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div class="article article-select">
+              <h1 class="article__title headline-1">ТРУДОУСТРОЙСТВО</h1>
+              <div class="article__description">
+                <p>
+                  По вопросам содействия в трудоустройстве вы можете обратиться
+                  в орган государственной службы занятости по месту регистрации
+                  или жительства. Здесь вам окажут следующие услуги:
+                </p>
+              </div>
+              <ul class="article__list">
+                <li><p>Обменять использованные шприцы и иглы на новые</p></li>
+              </ul>
+              <div class="article__select">
+                <select class="article__select-item">
+                  <option></option>
+                  <option class="select__option" value="Minsk">Минск</option>
+                  <option class="select__option" value="Krasnoe"
+                    >Краснополье</option
+                  >
+                  <option class="select__option" value="Gomel">Гомель</option>
+                </select>
+              </div>
+              <div class="vacancies">
+                <div class="vacancy" data-city="Minsk">
+                  <p class="vacancy__title headline-3">
+                    УПРАВЛЕНИЕ ПО ТРУДУ ЗАНЯТОСТИ И СОЦИАЛЬНОЙ ЗАЩИТЕ
+                    КРАСНОПОЛЬСКОГО РАЙИСПОЛКОМА
+                  </p>
+                  <div class="vacancy__info">
+                    <div class="vacancy__info__item">
+                      <p><strong>Адрес:</strong></p>
+                      <p>
+                        213561 Могилевская область, г.Минск, ул.Ленинская, 2
+                      </p>
                     </div>
-                    <p class="participant__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vestibulum maximus convallis</p>
-                    <a  class="participant__link" href="#" title="participant-title"></a>
+                    <div class="vacancy__info__item vacancy__info__item--phone">
+                      <p><strong>Контактный телефон:</strong></p>
+                      <a href="tel:+375 29 123 45 67" title="Позвонить"
+                        ><p>+375 29 123 45 67</p></a
+                      >
+                    </div>
+                  </div>
                 </div>
+
+                <div class="vacancy" data-city="Krasnoe">
+                  <p class="vacancy__title headline-3">
+                    УПРАВЛЕНИЕ ПО ТРУДУ ЗАНЯТОСТИ И СОЦИАЛЬНОЙ ЗАЩИТЕ
+                    КРАСНОПОЛЬСКОГО РАЙИСПОЛКОМА
+                  </p>
+                  <div class="vacancy__info">
+                    <div class="vacancy__info__item">
+                      <p><strong>Адрес:</strong></p>
+                      <p>
+                        213561 Могилевская область, г.п.Краснополье,
+                        ул.Ленинская, 2
+                      </p>
+                    </div>
+                    <div class="vacancy__info__item vacancy__info__item--phone">
+                      <p><strong>Контактный телефон:</strong></p>
+                      <a href="tel:+375 29 123 45 67" title="Позвонить"
+                        ><p>+375 29 123 45 67</p></a
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vacancy" data-city="Gomel">
+                  <p class="vacancy__title headline-3">
+                    УПРАВЛЕНИЕ ПО ТРУДУ ЗАНЯТОСТИ И СОЦИАЛЬНОЙ ЗАЩИТЕ
+                    КРАСНОПОЛЬСКОГО РАЙИСПОЛКОМА
+                  </p>
+                  <div class="vacancy__info">
+                    <div class="vacancy__info__item">
+                      <p><strong>Адрес:</strong></p>
+                      <p>
+                        213561 Могилевская область, г.Гомель, ул.Ленинская, 2
+                      </p>
+                    </div>
+                    <div class="vacancy__info__item vacancy__info__item--phone">
+                      <p><strong>Контактный телефон:</strong></p>
+                      <a href="tel:+375 29 123 45 67" title="Позвонить"
+                        ><p>+375 29 123 45 67</p></a
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="vacancy--empty">
+                  <p class="headline-3">
+                    НА СЕГОДНЯ НЕТ АКТУАЛЬНЫХ ПРЕДЛОЖЕНИЙ ОТ КЛУБОВ
+                  </p>
+                </div>
+              </div>
+              <div class="article__buttons article__buttons--left">
+                <a href="#" class="btn" target="_blank"
+                  ><span>Найти ближайшую организацию</span></a
+                >
+              </div>
+            </div>
+            <div class="article article-calendar">
+              <h1 class="article__title headline-1">ТРУДОУСТРОЙСТВО</h1>
+              <div class="article__description">
+                <p>
+                  По вопросам содействия в трудоустройстве вы можете обратиться
+                  в орган государственной службы занятости по месту регистрации
+                  или жительства. Здесь вам окажут следующие услуги:
+                </p>
+              </div>
+              <ul class="article__list">
+                <li><p>Обменять использованные шприцы и иглы на новые</p></li>
+              </ul>
+              <div class="article__select article-calendar__inputs">
+                <div class="article-calendar__input">
+                  <p>Дата проведения</p>
+                  <div class="article-calendar__input__content">
+                    <input
+                      type="text"
+                      class="calendar"
+                      placeholder="Выберите дату"
+                    />
+                    <i class="icon-calendar"></i>
+                  </div>
+                </div>
+                <div class="article-calendar__input">
+                  <p>Место проведения</p>
+                  <div class="article-calendar__input__content">
+                    <select class="select__activity">
+                      <option></option>
+                      <option class="select__option" value="Minsk"
+                        >Минск</option
+                      >
+                      <option class="select__option" value="Gomel"
+                        >Гомель</option
+                      >
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="activities">
+                <div
+                  class="vacancy"
+                  data-city="Minsk"
+                  data-active-day="01-09-2020"
+                >
+                  <p class="vacancy__title headline-3">
+                    УПРАВЛЕНИЕ ПО ТРУДУ ЗАНЯТОСТИ И СОЦИАЛЬНОЙ ЗАЩИТЕ
+                    КРАСНОПОЛЬСКОГО РАЙИСПОЛКОМА
+                  </p>
+                  <div class="vacancy__info">
+                    <div class="vacancy__info__item">
+                      <p><strong>Адрес:</strong></p>
+                      <p>
+                        213561 Могилевская область, г.Минск, ул.Ленинская, 2
+                      </p>
+                    </div>
+                    <div class="vacancy__info__item vacancy__info__item--phone">
+                      <p><strong>Контактный телефон:</strong></p>
+                      <a href="tel:+375 29 123 45 67" title="Позвонить"
+                        ><p>+375 29 123 45 67</p></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="vacancy"
+                  data-city="Gomel"
+                  data-active-day="02-09-2020"
+                >
+                  <p class="vacancy__title headline-3">
+                    УПРАВЛЕНИЕ ПО ТРУДУ ЗАНЯТОСТИ И СОЦИАЛЬНОЙ ЗАЩИТЕ
+                    КРАСНОПОЛЬСКОГО РАЙИСПОЛКОМА
+                  </p>
+                  <div class="vacancy__info">
+                    <div class="vacancy__info__item">
+                      <p><strong>Адрес:</strong></p>
+                      <p>
+                        213561 Могилевская область, г.Минск, ул.Ленинская, 2
+                      </p>
+                    </div>
+                    <div class="vacancy__info__item vacancy__info__item--phone">
+                      <p><strong>Контактный телефон:</strong></p>
+                      <a href="tel:+375 29 123 45 67" title="Позвонить"
+                        ><p>+375 29 123 45 67</p></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="article__buttons article__buttons--left">
+                <a href="#" class="btn" target="_blank"
+                  ><span>Найти ближайшую организацию</span></a
+                >
+              </div>
+            </div>
+            <div class="participants">
+              <h2 class="participants__title headline-1">Участники проекта</h2>
+              <div class="participants__content">
                 <div class="participant">
                   <div class="participant__img-wrapper">
-                    <img class="participant__img" src="https://via.placeholder.com/1140x764" alt=""></img>
+                    <img
+                      class="participant__img"
+                      src="https://via.placeholder.com/1140x764"
+                      alt=""
+                    />
                   </div>
-                  <p class="participant__title">dipiscing elit. In vestibulum maximus convallis</p>
-                  <a  class="participant__link" href="#" title="participant-title"></a>
-              </div>
-              <div class="participant">
-                <div class="participant__img-wrapper">
-                  <img class="participant__img" src="https://via.placeholder.com/1140x764" alt=""></img>
+                  <p class="participant__title">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+                    vestibulum maximus convallis
+                  </p>
+                  <a
+                    class="participant__link"
+                    href="#"
+                    title="participant-title"
+                  ></a>
                 </div>
-                <p class="participant__title">Lorem ipsum dolor sit amet, consectetu</p>
-                <a  class="participant__link" href="#" title="participant-title"></a>
+              </div>
             </div>
-
-                </div>
-              </div>
           </div>
           <div class="col-lg-3">
-              <div class="information-side">
-                  <div class="information-block">
-                    <h1 class="information-block__title headline-1">Анкеты</h1>
-                    <div class="information-block__text">
-                      <p><strong>ОРГАНИЗОВАНЫ ОЧНЫЕ КОНСУЛЬТАЦИИ</strong></p>
-                      <p>Начиная с марта 2019 года можно получить непосредственную консультацию специалистов РОО «Матери против наркотиков», РЦ «Феникс», МФ «Центр здоровой молодежи» по адресу <strong>г.Минск, ул.Чеботарева, 6а </strong>по предварительной записи.</p>
-                      <p>Запись на консультацию производится по телефону <strong>+375 17 311 00 00</strong></p>
-                    </div>
-                    <div class="information-block__image aspect-ratio">
-                      <img  src="https://via.placeholder.com/1140x764"></img>
-                    </div>
+            <div class="information-side">
+              <div class="information-block">
+                <h1 class="information-block__title headline-1">Анкеты</h1>
+                <div class="information-block__text">
+                  <p><strong>ОРГАНИЗОВАНЫ ОЧНЫЕ КОНСУЛЬТАЦИИ</strong></p>
+                  <p>
+                    Начиная с марта 2019 года можно получить непосредственную
+                    консультацию специалистов РОО «Матери против наркотиков», РЦ
+                    «Феникс», МФ «Центр здоровой молодежи» по адресу
+                    <strong>г.Минск, ул.Чеботарева, 6а </strong>по
+                    предварительной записи.
+                  </p>
+                  <p>
+                    Запись на консультацию производится по телефону
+                    <strong>+375 17 311 00 00</strong>
+                  </p>
                 </div>
-              </div>  
+                <div class="information-block__image aspect-ratio">
+                  <img src="https://via.placeholder.com/1140x764" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -186,15 +608,19 @@
         <nav class="main-menu footer__menu">
           <ul class="main-menu__links footer__menu__links">
             <li>
-              <a class="link" href="https://abuse.pomogut.by/about/"
-                ><span>О проекте</span></a
-              >
+              <p>
+                <a class="link" href="https://abuse.pomogut.by/about/"
+                  ><span>О проекте</span></a
+                >
+              </p>
             </li>
 
             <li>
-              <a class="link" href="https://abuse.pomogut.by/to-partners/"
-                ><span>Стать партнером</span></a
-              >
+              <p>
+                <a class="link" href="https://abuse.pomogut.by/to-partners/"
+                  ><span>Стать партнером</span></a
+                >
+              </p>
             </li>
           </ul>
         </nav>
@@ -203,8 +629,5 @@
         ></a>
       </div>
     </footer>
-    <script src="{% static '/js/jquery-3.5.1.min.js' %}"></script>
-
-
   </body>
 </html>

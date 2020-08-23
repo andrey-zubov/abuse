@@ -4,6 +4,9 @@
   }
 
   &__text {
+    p:first-child {
+      color: $blue;
+    }
   }
 
   &__image {

@@ -1,0 +1,77 @@
+.select2 {
+  $self: &;
+
+  &-container {
+    z-index: 0;
+    width: 190px !important;
+
+    &--default {
+      #{$self}-results__option--highlighted {
+        &#{$self}-results__option--selectable {
+          background-color: $blue;
+        }
+      }
+
+      #{$self}-selection--single {
+        #{$self}-selection__arrow {
+          &:after {
+            position: absolute;
+            top: 50%;
+            right: 15%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            content: "";
+            width: 10px;
+            height: 7px;
+            transition: transform 0.5s ease-out;
+            background-image: url($icons + "/black-arrow.svg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+
+          b {
+            display: none;
+          }
+        }
+      }
+
+      &#{$self}-container--open {
+        #{$self}-selection--single {
+          #{$self}-selection__arrow {
+            &:after {
+              transform: translate(-50%, -50%) rotate(180deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-results {
+    &__option {
+      transition: all 0.5s ease-out;
+    }
+  }
+
+  &-selection--single {
+    outline: none;
+  }
+
+  &-selection &-selection--single {
+    height: 100%;
+  }
+
+  &-container--default &-selection--single {
+    height: 100%;
+
+    & #{$self}-selection__rendered {
+      line-height: 36px;
+      padding-right: 30px;
+    }
+
+    #{$self}-selection__arrow {
+      width: 30px;
+      height: 36px;
+    }
+  }
+}

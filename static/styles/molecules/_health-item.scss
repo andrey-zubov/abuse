@@ -1,0 +1,14 @@
+.health-item {
+  margin: 50px 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__description {
+  }
+}
