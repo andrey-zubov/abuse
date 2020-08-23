@@ -11,16 +11,18 @@ export default class SrticleSelect{
             item.style.display = "none";
         })
 
-        document.querySelector(`[data-city="${activeCity}"]`).style.display = "block";
+        Array.from(document.querySelectorAll(`[data-city="${activeCity}"]`)).forEach(item=>{
+            item.style.display = "block";
+        })
     }
 
     init(){
-        $('.select').select2({
+        $('.article__select-item').select2({
             closeOnSelect: true,
             placeholder: 'Выберите город',
         });
 
-        $('.select').on('select2:close', (e) =>{
+        $('.article__select-item').on('select2:close', (e) =>{
             this.showCity(e);
           });
     }

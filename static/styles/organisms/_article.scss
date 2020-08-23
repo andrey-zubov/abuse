@@ -83,5 +83,16 @@
 
   &__select {
     margin: 40px 0 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .select2 {
+      margin-right: 30px;
+
+      &:last-child() {
+        margin-right: 0;
+      }
+    }
   }
 }

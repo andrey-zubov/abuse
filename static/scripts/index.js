@@ -28,7 +28,7 @@ $(document).ready(async () => {
     },
     articleSelect: {
       init: () => new ArticleSelect(),
-      selectors: [".article__select"],
+      selectors: [".article-select"],
     },
   };
 
