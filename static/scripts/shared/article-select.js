@@ -7,13 +7,9 @@ export default class ArticleSelect{
     showCity(e){
         const activeCity = e.params.originalSelect2Event.data.id;
 
-        Array.from(document.querySelectorAll('.vacancy')).forEach(item=>{
-            item.style.display = "none";
-        })
+        $('.vacancy').slideUp();
 
-        Array.from(document.querySelectorAll(`[data-city="${activeCity}"]`)).forEach(item=>{
-            item.style.display = "block";
-        })
+        $(`[data-city="${activeCity}"]`).slideDown();
     }
 
     init(){

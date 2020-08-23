@@ -473,17 +473,32 @@
               <ul class="article__list">
                 <li><p>Обменять использованные шприцы и иглы на новые</p></li>
               </ul>
-              <div class="article__select">
-                <input
-                  type="text"
-                  class="calendar"
-                  placeholder="Выберите дату"
-                />
-                <select class="select__activity">
-                  <option></option>
-                  <option class="select__option" value="Minsk">Минск</option>
-                  <option class="select__option" value="Gomel">Гомель</option>
-                </select>
+              <div class="article__select article-calendar__inputs">
+                <div class="article-calendar__input">
+                  <p>Дата проведения</p>
+                  <div class="article-calendar__input__content">
+                    <input
+                      type="text"
+                      class="calendar"
+                      placeholder="Выберите дату"
+                    />
+                    <i class="icon-calendar"></i>
+                  </div>
+                </div>
+                <div class="article-calendar__input">
+                  <p>Место проведения</p>
+                  <div class="article-calendar__input__content">
+                    <select class="select__activity">
+                      <option></option>
+                      <option class="select__option" value="Minsk"
+                        >Минск</option
+                      >
+                      <option class="select__option" value="Gomel"
+                        >Гомель</option
+                      >
+                    </select>
+                  </div>
+                </div>
               </div>
               <div class="activities">
                 <div

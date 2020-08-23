@@ -22,7 +22,11 @@ export default class ArticleCalendar{
 
         if(activeData){
             const calendarValue = document.querySelector('.calendar').value;
-            activities =  $(`.activities .vacancy[data-city="${activeCity}"][data-active-day="${calendarValue}"]`).slideDown();
+            if(!calendarValue ){
+                activities =  $(`.activities .vacancy[data-city="${activeCity}"]`).slideDown();
+            }else{
+                activities =  $(`.activities .vacancy[data-city="${activeCity}"][data-active-day="${calendarValue}"]`).slideDown();
+            }
         }else{   
             activities = $(`.activities .vacancy[data-city="${activeCity}"]`).slideDown();
         }
@@ -72,10 +76,13 @@ export default class ArticleCalendar{
                             activities =  $(`.activities .vacancy[data-city="${city}"][data-active-day="${calendarValue}"]`).slideDown();
                         }
                     }else{
+                        if(!calendarValue){
+                            $('.activities .vacancy').slideDown();
+                        }else{
                         activities =  $(`.activities .vacancy[data-active-day="${calendarValue}"]`).slideDown();
+                        }   
                     }
-
-                    if(activities.length === 0){
+                    if(activities?.length === 0){
                         if(!empty) document.querySelector('.activities').insertAdjacentHTML('afterbegin', emptyState)
                     }else{
                         empty?.remove();
@@ -86,8 +93,6 @@ export default class ArticleCalendar{
         }
 
 
-       $('.calendar').datepicker(options).trigger('hide', ()=>{
-           console.log("asdas");
-       });
+       $('.calendar').datepicker(options);
     }
 }
