@@ -57,3 +57,7 @@ def org_info(request, slug):
         template_name='organizations.html',
         context={'org': org}
     )
+
+
+def news_view(request):
+    return HttpResponse(444)
