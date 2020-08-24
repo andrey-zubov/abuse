@@ -5,7 +5,48 @@
   {% for article in articles %}
     <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
   {% endfor %}
-    <a class="link link--green" href="#"><p>Организации</p></a>
+    <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
+{% endblock %}
+
+{% block header_links %}
+
+<header class="header">
+      <div class="container">
+        <div class="header__content">
+          <div class="header__content__nav">
+            <nav class="main-menu">
+              <ul class="main-menu__links">
+                {% for category in up_cats %}
+                <li>
+                  <a class="link" href="/abuse/{{ category.slug }}"
+                    ><span>{{ category.title }}</span></a
+                  >
+                </li>
+                {% endfor %}
+              </ul>
+            </nav>
+
+            <nav class="main-menu">
+              <ul class="main-menu__navigation">
+                {% for category in down_cats %}
+                <li>
+                  <a
+                    class="link link--blue"
+                    href="/abuse/{{ category.slug }}"
+                    ><span>{{ category.title }}</span></a
+                  >
+                </li>
+
+                {% endfor %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <button class="header__button" type="button"><span></span></button>
+      </div>
+    </header>
+
+
 {% endblock %}
 
 
@@ -26,10 +67,10 @@
     <ul class="article__list">
       {{ article.points|safe }}
     </ul>
-
   <div class="article__buttons article__buttons--center">
     {% for link in article.link.all %}
       <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
+      <br>
     {% endfor %}
     <a href="#" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
     <a href="#" class="btn"><span>Правовая информация</span></a>
@@ -44,6 +85,7 @@
 
 
 {% block organizations %}
+  <a name="local_orgs"></a>
   <p><p>Мы собрали организации, которые готовы тебе помочь. Их список будет постоянно расширяться, чтобы ты всегда мог получить ближайшую к тебе помощь.</p><p>
   <em>(Организациям, оказывающим услуги лицам в проблеме наркотиков! Если вы не нашли свою организацию - отправьте заявку на ее добавление.
     <a href="http://pomogut.by/to-partners/">Добавить организацию </a>)</em></p></p>

@@ -18,8 +18,9 @@ class ServicesAdmin(admin.StackedInline):
     model = OrganizationServices
     extra = 1
 
+
 class OrganizationAdmin(admin.ModelAdmin):
-    inlines = [ServicesAdmin,]
+    inlines = [ServicesAdmin]
     prepopulated_fields = {'slug': ('title',), }
 
 

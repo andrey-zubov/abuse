@@ -31,6 +31,9 @@ def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
     category_number = Main_Cat.objects.get(slug=slug).id
     all_cites = City.objects.filter()
     all_types = ServicesType.objects.filter()
+    all_cats = Main_Cat.objects.filter(is_active=True)
+    down_cats = all_cats.filter(header_menu='down')
+    up_cats = all_cats.filter(header_menu='up')
 
     articles = Articles.objects.filter(category__id=category_number)
     return render(
@@ -40,6 +43,9 @@ def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
                  'orgs': orgs,
                  'all_cites': all_cites,
                  'all_types': all_types,
+                 'all_cats': all_cats,
+                 'down_cats': down_cats,
+                 'up_cats': up_cats,
                  })
 
 

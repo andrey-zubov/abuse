@@ -35,7 +35,7 @@ Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
 ))
 
 
-class Column(models.Model):
+class Column(models.Model):  # page format
     class Meta:
         verbose_name = 'Одноколоночный'
         abstract = True
@@ -58,8 +58,6 @@ class Column(models.Model):
         verbose_name='основной текст',
     )
 
-
-
     def render(self):
         return render_to_string(
             'singlecolumn_article.html',
@@ -74,7 +72,9 @@ class Column(models.Model):
         else:
             return join(settings.MEDIA_URL, str(self.picture.file))
 
+
 Page.create_content_type(Column)
+
 
 class Articles(models.Model):
     class Meta:
