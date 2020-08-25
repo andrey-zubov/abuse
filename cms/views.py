@@ -2,7 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
 
-from .models import Articles, Page, Block, Main_Cat, Organizations, City, ServicesType
+from .models import (
+    Articles,
+    Page,
+    Block,
+    Main_Cat,
+    Organizations,
+    City,
+    ServicesType,
+    PageType
+)
 
 
 def main_page(request):
@@ -60,7 +69,8 @@ def org_info(request, slug):
 
 
 def news_view(request):
-    news = Page.objects.filter()
+    news_type = PageType.objects.get(type='Новость')
+    news = Page.objects.filter(type=news_type)
 
     return render(
         request,
