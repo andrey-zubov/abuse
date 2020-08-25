@@ -33,13 +33,3 @@
     height: 58px;
   }
 }
-
-@media (max-width: $lg) {
-  .footer {
-    &__phone {
-      font-size: 20px;
-      line-height: 40px;
-      font-weight: 700;
-    }
-  }
-}

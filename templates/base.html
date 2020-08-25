@@ -2,100 +2,88 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=0"
-    />
-    <link rel="stylesheet" href="../dist/styles/index.min.css" />
-    <script type="module" src="../dist/js/index.js"></script>
-
     <title>Test page</title>
+
+    <link rel="stylesheet" href="../dist/styles/index.min.css" />
   </head>
   <body>
     <header class="header">
       <div class="container">
-        <div class="header__content">
-          <div class="header__content__nav">
-            <nav class="main-menu">
-              <ul class="main-menu__links">
-                <li>
-                  <a class="link" href="#help"
-                    ><span>Первая медицинская помощь</span></a
-                  >
-                </li>
+        <nav class="main-menu">
+          <ul class="main-menu__links">
+            <li>
+              <a class="link" href="#help"
+                ><span>Первая медицинская помощь</span></a
+              >
+            </li>
 
-                <li>
-                  <a class="link" href="https://abuse.pomogut.by/relapse"
-                    ><span>Срыв</span></a
-                  >
-                </li>
+            <li>
+              <a class="link" href="https://abuse.pomogut.by/relapse"
+                ><span>Срыв</span></a
+              >
+            </li>
 
-                <li>
-                  <a class="link" href="https://abuse.pomogut.by/hiv-hepatitis"
-                    ><span>ВИЧ и гепатит</span></a
-                  >
-                </li>
+            <li>
+              <a class="link" href="https://abuse.pomogut.by/hiv-hepatitis"
+                ><span>ВИЧ и гепатит</span></a
+              >
+            </li>
 
-                <li>
-                  <a class="link" href="https://abuse.pomogut.by/legal-info"
-                    ><span> Правовая информация</span></a
-                  >
-                </li>
+            <li>
+              <a class="link" href="https://abuse.pomogut.by/legal-info"
+                ><span> Правовая информация</span></a
+              >
+            </li>
 
-                <li>
-                  <a class="link" href=" https://abuse.pomogut.by/news"
-                    ><span>Новости</span></a
-                  >
-                </li>
-              </ul>
-            </nav>
+            <li>
+              <a class="link" href=" https://abuse.pomogut.by/news"
+                ><span>Новости</span></a
+              >
+            </li>
+          </ul>
+        </nav>
 
-            <nav class="main-menu">
-              <ul class="main-menu__navigation">
-                <li>
-                  <a
-                    class="link link--blue"
-                    href="https://abuse.pomogut.by/org/"
-                    ><span>Где найти помощь</span></a
-                  >
-                </li>
+        <nav class="main-menu">
+          <ul class="main-menu__navigation">
+            <li>
+              <a class="link link--blue" href="https://abuse.pomogut.by/org/"
+                ><span>Где найти помощь</span></a
+              >
+            </li>
 
-                <li>
-                  <a
-                    class="link link--blue"
-                    href="https://abuse.pomogut.by/i-am-codependent/"
-                    ><span>Мой близкий в проблеме</span></a
-                  >
-                </li>
+            <li>
+              <a
+                class="link link--blue"
+                href="https://abuse.pomogut.by/i-am-codependent/"
+                ><span>Мой близкий в проблеме</span></a
+              >
+            </li>
 
-                <li>
-                  <a
-                    class="link link--blue"
-                    href="https://abuse.pomogut.by/depend/"
-                    ><span>Я употребляю</span></a
-                  >
-                </li>
+            <li>
+              <a class="link link--blue" href="https://abuse.pomogut.by/depend/"
+                ><span>Я употребляю</span></a
+              >
+            </li>
 
-                <li>
-                  <a
-                    class="link link--blue"
-                    href="https://abuse.pomogut.by/i-am-on-remission/"
-                    ><span>Я на ремиссии</span></a
-                  >
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <button class="header__button" type="button"><span></span></button>
+            <li>
+              <a
+                class="link link--blue"
+                href="https://abuse.pomogut.by/i-am-on-remission/"
+                ><span>Я на ремиссии</span></a
+              >
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
-    <main class="main"></main>
+    <main class="main">
+      {% block content %} {% endblock %}
+    </main>
     <footer class="footer">
       <div class="container footer__container">
         <a class="footer__phone" href="tel:+375173110000">+ 375 17 311 00 00</a>
         <nav class="main-menu footer__menu">
-          <ul class="main-menu__links footer__menu__links">
+          <ul class="main-menu__links">
             <li>
               <a class="link" href="https://abuse.pomogut.by/about/"
                 ><span>О проекте</span></a
