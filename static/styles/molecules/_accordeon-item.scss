@@ -15,6 +15,7 @@
     display: inline-flex;
     position: relative;
     letter-spacing: 0.015em;
+    max-width: 95%;
 
     &:after {
       content: "";
