@@ -16,3 +16,21 @@
   width: 15px;
   height: 15px;
 }
+
+.icon-phone {
+  background-image: url($icons + "/phone-icon.svg");
+  width: 15px;
+  height: 20px;
+}
+
+.icon-map-marker {
+  background-image: url($icons + "/map-marker.svg");
+  width: 15px;
+  height: 20px;
+}
+
+.icon-clock {
+  background-image: url($icons + "/clock.svg");
+  width: 15px;
+  height: 15px;
+}

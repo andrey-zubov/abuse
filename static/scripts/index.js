@@ -9,6 +9,7 @@ import StickySideMenu from "./shared/sticky-side-menu.js";
 import ArticleAccordeon from "./shared/article-accordeon.js";
 import ArticleSelect from "./shared/article-select.js";
 import ArticleCalendar from "./shared/article-calendar.js";
+import Organizations from "./shared/organizations.js";
 
 $(document).ready(async () => {
   window.refs = {
@@ -35,6 +36,10 @@ $(document).ready(async () => {
     articleCalendar: {
       init: () => new ArticleCalendar(),
       selectors: [".article-calendar"],
+    },
+    organizations: {
+      init: () => new Organizations(),
+      selectors: [".organizations"],
     },
   };
 
