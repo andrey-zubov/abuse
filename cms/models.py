@@ -10,6 +10,7 @@ from feincms.module.page.models import Page
 from feincms.contents import RichTextContent
 from feincms.module.medialibrary.contents import MediaFileContent
 from feincms.module.medialibrary.fields import MediaFileForeignKey, MediaFile
+from feincms.extensions import Extension
 
 from mptt import register
 from mptt.models import MPTTModel, TreeForeignKey
@@ -34,46 +35,46 @@ Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
     ('lightbox', _('lightbox')),
 ))
 
-
-class Column(models.Model):  # page format
-    class Meta:
-        verbose_name = 'Одноколоночный'
-        abstract = True
-
-    title = models.CharField(
-        verbose_name='Название виджета',
-        max_length=256,
-    )
-    picture = MediaFileForeignKey(
-        MediaFile,
-        on_delete=models.SET_NULL,
-        verbose_name='Картинка',
-        null=True,
-    )
-    pic_text = models.CharField(
-        verbose_name='Подпись катринки',
-        max_length=256
-    )
-    text = models.TextField(
-        verbose_name='основной текст',
-    )
-
-    def render(self):
-        return render_to_string(
-            'singlecolumn_article.html',
-            context={
-                'widget': self,
-                'text': mark_safe(self.text)
-            })
-
-    def get_img(self):
-        if not self.picture:
-            return None
-        else:
-            return join(settings.MEDIA_URL, str(self.picture.file))
-
-
-Page.create_content_type(Column)
+#
+# class Column(models.Model):  # page format
+#     class Meta:
+#         verbose_name = 'Одноколоночный'
+#         abstract = True
+#
+#     title = models.CharField(
+#         verbose_name='Название виджета',
+#         max_length=256,
+#     )
+#     picture = MediaFileForeignKey(
+#         MediaFile,
+#         on_delete=models.SET_NULL,
+#         verbose_name='Картинка',
+#         null=True,
+#     )
+#     pic_text = models.CharField(
+#         verbose_name='Подпись катринки',
+#         max_length=256
+#     )
+#     text = models.TextField(
+#         verbose_name='основной текст',
+#     )
+#
+#     def render(self):
+#         return render_to_string(
+#             'singlecolumn_article.html',
+#             context={
+#                 'widget': self,
+#                 'text': mark_safe(self.text)
+#             })
+#
+#     def get_img(self):
+#         if not self.picture:
+#             return None
+#         else:
+#             return join(settings.MEDIA_URL, str(self.picture.file))
+#
+#
+# Page.create_content_type(Column)
 
 
 class Articles(models.Model):
@@ -330,3 +331,13 @@ class ServicesPayment(models.Model):
         return self.title
 
 
+# class PageType(models.Model):
+#     type = models.CharField(
+#         verbose_name='тип модели',
+#         max_length=24,
+#     )
+#
+#
+# class TypeExtension(Extension):
+#     model =
+#

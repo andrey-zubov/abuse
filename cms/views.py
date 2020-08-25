@@ -60,4 +60,12 @@ def org_info(request, slug):
 
 
 def news_view(request):
-    return HttpResponse(444)
+    news = Page.objects.filter()
+
+    return render(
+        request,
+        template_name='news.html',
+        context={
+            'news': news,
+        }
+    )
