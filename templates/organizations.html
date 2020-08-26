@@ -1,25 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
-<body>
-Это орги<br>
-{{ org.title }}<br>
-{{ org.adress }}<br>
+  </head>
+  <body>
+    Это орги<br />
+    {{ org.title }}<br />
+    {{ org.adress }}<br />
 
-{% for serv in org.get_services %}
-    {{ serv.org_type.title }}
-    {{ serv.stuff.title }}
-    {{ serv.conf.title }}
-    {{ serv.payment.title }}
-    <br>
-{% endfor %}
+    {% for serv in org.get_services %} {{ serv.org_type.title }} {{
+    serv.stuff.title }} {{ serv.conf.title }} {{ serv.payment.title }}
+    <br />
+    {% endfor %} {{ org.description }}<br />
+    {{ org.tel1 }} {{ org.tel2 }} {{ org.tel3 }}
+    <section class="organizations">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="article article-map">
+              <h2 class="article__title headline-1">Участники проекта</h2>
+              <div class="article__description">
+                <p>
+                  Мы собрали организации, которые готовы тебе помочь. Их список
+                  будет постоянно расширяться, чтобы ты всегда мог получить
+                  ближайшую к тебе помощь.
+                </p>
+                <p>
+                  (Организациям, оказывающим услуги лицам в проблеме наркотиков!
+                  Если вы не нашли свою организацию -
+                  <a href="#">отправьте заявку на ее добавление.</a>
+                  )
+                </p>
+              </div>
+              <div class="article__select organizations__select">
+                <div class="organizations__select__item">
+                  <p>Выберите вид деятельности</p>
+                  <select class="organizations__select__specifications">
+                    <option></option>
+                    <option value="Askorbinka">Аскорбинка</option>
+                    <option value="Analgin">Анальгин</option>
+                  </select>
+                </div>
+                <div class="organizations__select__item">
+                  <p>Выберите город</p>
+                  <select class="organizations__select__cities">
+                    <option></option>
+                    <option value="Minsk">Минск</option>
+                    <option value="Gomel">Гомель</option>
+                  </select>
+                </div>
+              </div>
+              <div class="organizations__content">
+                <div
+                  class="organization-item"
+                  data-city="Minsk"
+                  data-spec="Analgin"
+                >
+                  <div class="organization-item__information">
+                    <p class="organization-item__title">
+                      ГУ «Республиканский научно-практический центр психического
+                      здоровья», отделение реабилитации
+                    </p>
+                    <div class="organization-item__adress">
+                      <div class="icon-wrapper">
+                        <i class="icon-map-marker"></i>
+                      </div>
+                      <p class="">г. Минск, Долгиновский тракт, 152</p>
+                    </div>
+                    <a class="organization-item__link" href="#"></a>
+                  </div>
 
-{{ org.description }}<br>
-{{ org.tel1 }}
-{{ org.tel2 }}
-{{ org.tel3 }}
-</body>
+                  <div class="organization-item__phone">
+                    <div class="icon-wrapper">
+                      <i class="icon-phone"></i>
+                    </div>
+
+                    <a class="link link--green" href="tel:+375172898833"
+                      ><p class="">
+                        +375172898833
+                      </p></a
+                    >
+                  </div>
+                </div>
+                <div
+                  class="organization-item"
+                  data-city="Gomel"
+                  data-spec="Askorbinka"
+                >
+                  <div class="organization-item__information">
+                    <p class="organization-item__title">
+                      ГУ «Республиканский научно-практический центр психического
+                      здоровья», отделение реабилитации
+                    </p>
+                    <div class="organization-item__adress">
+                      <div class="icon-wrapper">
+                        <i class="icon-map-marker"></i>
+                      </div>
+                      <p class="">г. Минск, Долгиновский тракт, 152</p>
+                    </div>
+                    <a class="organization-item__link" href="#"></a>
+                  </div>
+
+                  <div class="organization-item__phone">
+                    <div class="icon-wrapper">
+                      <i class="icon-phone"></i>
+                    </div>
+                    <a class="link link--green" href="tel:+375172898833"
+                      ><p class="">
+                        +375172898833
+                      </p></a
+                    >
+                  </div>
+                </div>
+                <div
+                  class="organization-item"
+                  data-city="Gomel"
+                  data-spec="Askorbinka, Analgin"
+                >
+                  <div class="organization-item__information">
+                    <p class="organization-item__title">
+                      ГУ «Республиканский научно-практический центр психического
+                      здоровья», отделение реабилитации
+                    </p>
+                    <div class="organization-item__adress">
+                      <div class="icon-wrapper">
+                        <i class="icon-map-marker"></i>
+                      </div>
+                      <p class="">г. Минск, Долгиновский тракт, 152</p>
+                    </div>
+                    <a class="organization-item__link" href="#"></a>
+                  </div>
+
+                  <div class="organization-item__phone">
+                    <div class="icon-wrapper">
+                      <i class="icon-phone"></i>
+                    </div>
+                    <div class="organization-item__phone__content">
+                      <a class="link link--green" href="tel:+375172898833"
+                        ><p class="">
+                          +375172898833
+                        </p></a
+                      >
+                      <a class="link link--green" href="tel:+375172898833"
+                        ><p class="">
+                          +375172898833
+                        </p></a
+                      >
+                      <a class="link link--green" href="tel:+375172898833"
+                        ><p class="">
+                          +375172898833
+                        </p></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="organizations__map"></div>
+    </section>
+  </body>
 </html>

@@ -1,0 +1,30 @@
+.organizations {
+  &__select {
+    display: flex;
+    flex-direction: column;
+
+    &__item {
+      display: grid;
+      grid-template-columns: 0.3fr 0.6fr;
+      grid-column-gap: 25px;
+      grid-row-gap: 22px;
+      align-items: center;
+
+      & > p {
+        font-weight: bold;
+      }
+
+      .select2-container {
+        width: 100% !important;
+      }
+    }
+  }
+
+  &__content {
+    // padding: 0 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+  }
+}

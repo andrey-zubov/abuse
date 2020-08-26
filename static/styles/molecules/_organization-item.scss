@@ -1,0 +1,72 @@
+.organization-item {
+  $self: &;
+  &__information {
+    position: relative;
+  }
+
+  &:hover {
+    #{$self}__title {
+      border-color: inherit;
+    }
+  }
+
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__title {
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: inline;
+    border-bottom: 1px solid transparent;
+    transition: border 0.5s ease-out;
+  }
+
+  &__adress,
+  &__phone,
+  &__time {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 10px 0;
+
+    .icon-wrapper {
+      width: 15px;
+      margin-right: 5%;
+      height: 20px;
+
+      display: flex;
+      align-items: center;
+    }
+
+    a,
+    p {
+      width: calc(100% - 15px - 5%);
+    }
+
+    a {
+      p {
+        display: inline;
+        width: 100%;
+        border-bottom: 1px solid transparent;
+        transition: border 0.5s ease-out;
+      }
+
+      &:hover {
+        p {
+          border-color: inherit;
+        }
+      }
+    }
+  }
+
+  &__phone {
+  }
+
+  &__adress {
+  }
+}
