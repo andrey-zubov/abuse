@@ -10,7 +10,8 @@ from .models import (
     Organizations,
     City,
     ServicesType,
-    PageType
+    PageType,
+    OrganizationServices
 )
 
 
@@ -79,3 +80,24 @@ def news_view(request):
             'news': news,
         }
     )
+
+
+from .forms import OrgForm
+from django.forms import inlineformset_factory
+def add_new_org(request):  # https://stackoverflow.com/questions/1113047/creating-a-model-and-related-models-with-inline-formsets
+    if request.method == 'POST':
+        print(request.POST)
+        return HttpResponse(1341)
+    else:
+        form = OrgForm()
+        OrgFomset = inlineformset_factory(Organizations, OrganizationServices, exclude=())
+        formset = OrgFomset()
+
+        return render(
+            request,
+            template_name='add_new_org.html',
+            context={
+          #      'form': form,
+                'formset': formset
+            }
+        )
