@@ -51,42 +51,45 @@
 
 {% block content %}
 
-
-{% for article in articles %}
-<div class="article">
+<div class="col-lg-6">
+  {% for article in articles %}
   <a name="{{ article.id }}"></a>
-  <h1 class="article__title headline-1">{{ article.title }}</h1>
-  {% if article.get_img %}
-    <div class="article__image-wrapper aspect-ratio">
-        <img src="{{ article.get_img }}" alt=""></img>
+  <div class="article">
+
+    <h1 class="article__title headline-1">{{ article.title }}</h1>
+    {% if article.get_img %}
+      <div class="article__image-wrapper aspect-ratio">
+          <img src="{{ article.get_img }}" alt=""></img>
+      </div>
+    {% endif %}
+    <div class="article__description">
+      <p>{{ article.text|safe }}</p>
     </div>
-  {% endif %}
-  <div class="article__description">
-    <p>{{ article.text|safe }}</p>
+      <ul class="article__list">
+        {{ article.points|safe }}
+      </ul>
+    <div class="article__buttons article__buttons--center">
+      {% for link in article.link.all %}
+        <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
+        <br>
+      {% endfor %}
+      <a href="#" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
+      <a href="#" class="btn"><span>Правовая информация</span></a>
+    </div>
+  <!--    <div class="article__buttons">-->
+  <!--      <a href="#" class="btn"><span>Найти ближайшую организацию</span></a>-->
+  <!--      <a href="#" class="btn"><span>Правовая информация</span></a>-->
+  <!--    </div>-->
   </div>
-    <ul class="article__list">
-      {{ article.points|safe }}
-    </ul>
-  <div class="article__buttons article__buttons--center">
-    {% for link in article.link.all %}
-      <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
-      <br>
-    {% endfor %}
-    <a href="#" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
-    <a href="#" class="btn"><span>Правовая информация</span></a>
-  </div>
-<!--    <div class="article__buttons">-->
-<!--      <a href="#" class="btn"><span>Найти ближайшую организацию</span></a>-->
-<!--      <a href="#" class="btn"><span>Правовая информация</span></a>-->
-<!--    </div>-->
-</div>
 {% endfor %}
+</div>
 {% endblock %}
 
 
 {% block organizations %}
-<a name="local_orgs"></a>
+
 <section class="organizations">
+  <a name="local_orgs"></a>
       <div class="container">
         <div class="row">
           <div class="col-lg-6 offset-lg-3">
