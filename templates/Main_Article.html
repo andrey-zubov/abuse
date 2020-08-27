@@ -48,9 +48,7 @@
 
 {% endblock %}
 
-
 {% block content %}
-
 <div class="col-lg-6">
   {% for article in articles %}
   <a name="{{ article.id }}"></a>
@@ -84,10 +82,7 @@
 {% endfor %}
 </div>
 {% endblock %}
-
-
 {% block organizations %}
-
 <section class="organizations">
   <a name="local_orgs"></a>
       <div class="container">
@@ -145,7 +140,7 @@
                       </div>
                       <p class="">{{org.adress}}</p>
                     </div>
-                    <a class="organization-item__link" href="#"></a>
+                    <a class="organization-item__link" href="/abuse/organization/{{org.slug}}"></a>
                   </div>
 
                   <div class="organization-item__phone">

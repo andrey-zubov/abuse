@@ -130,13 +130,33 @@ class Articles(models.Model):
 
 
 class Link(models.Model):
+    class Meta:
+        verbose_name = 'Ссылка'
+        verbose_name_plural = 'Ссылки'
+
+    info = models.CharField(
+        verbose_name='Описание',
+        null=True,
+        blank=True,
+        max_length=50
+    )
+
     link = models.URLField(
-        verbose_name='ссылка'
+        verbose_name='ссылка',
+        help_text='Для навигации',
     )
     title = models.CharField(
         verbose_name='Назание ссылки',
+        help_text='Будет отображаться на кнопке',
         max_length=256
     )
+
+
+    def __str__(self):
+        if self.info:
+            return self.info
+        else:
+            self.title
 
 
 class Block(models.Model):  # Todo REFACTOR
@@ -196,6 +216,10 @@ class Main_Cat(models.Model):
 
 
 class Organizations(models.Model):
+    class Meta:
+        verbose_name = 'Организация'
+        verbose_name_plural = 'Организации'
+
     title = models.CharField(
         verbose_name='Название организации',
         max_length=256
@@ -296,6 +320,10 @@ class OrganizationServices(models.Model):
 
 
 class ServicesType(models.Model):
+    class Meta:
+        verbose_name = 'Вид деятельности'
+        verbose_name_plural = 'Виды деятельности'
+
     title = models.CharField(
         max_length=50,
         unique=True
@@ -305,6 +333,10 @@ class ServicesType(models.Model):
 
 
 class ServicesStuff(models.Model):
+    class Meta:
+        verbose_name = 'Вещество'
+        verbose_name_plural = 'Вещества'
+
     title = models.CharField(
         max_length=50,
         unique=True
@@ -314,6 +346,10 @@ class ServicesStuff(models.Model):
 
 
 class ServicesConf(models.Model):
+    class Meta:
+        verbose_name = 'Конфиденциальнось'
+        verbose_name_plural = 'Конфиденциальнось'
+
     title = models.CharField(
         max_length=50,
         unique=True
@@ -323,6 +359,10 @@ class ServicesConf(models.Model):
 
 
 class ServicesPayment(models.Model):
+    class Meta:
+        verbose_name = 'Оплата услуг'
+        verbose_name_plural = 'Оплата услуг'
+
     title = models.CharField(
         max_length=50,
         unique=True
@@ -334,6 +374,8 @@ class ServicesPayment(models.Model):
 class PageType(models.Model):
     class Meta:
         db_table = 'pagetype'
+        verbose_name = 'Тип статьи'
+        verbose_name_plural = 'Типы статьей'
 
     type = models.CharField(
         verbose_name='тип модели',
