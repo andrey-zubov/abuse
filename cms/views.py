@@ -28,15 +28,12 @@ def main_page(request):
 
 
 def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
-    if not request.GET.__contains__('is_org_finder'):
-        orgs = Organizations.objects.all()
+    if Main_Cat.objects.get(slug=slug).org_widget:
+        orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+        org_widget_flag = True
     else:
-        city_id = int(request.GET['choosed_city'])
-        type_id = int(request.GET['choosed_type'])
-        orgs = Organizations.objects.filter(
-            Q(city__id=city_id) & Q(organizationservices__org_type=type_id)
-        )
-
+        orgs = None
+        org_widget_flag = False
 
     category_number = Main_Cat.objects.get(slug=slug).id
     all_cites = City.objects.filter()
@@ -51,6 +48,7 @@ def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
         template_name='Main_Article.html',
         context={'articles': articles,
                  'orgs': orgs,
+                 'org_widget_flag': org_widget_flag,
                  'all_cites': all_cites,
                  'all_types': all_types,
                  'all_cats': all_cats,
@@ -81,23 +79,33 @@ def news_view(request):
         }
     )
 
-
-from .forms import OrgForm
+# https://stackoverflow.com/questions/29758558/inlineformset-factory-create-new-objects-and-edit-objects-after-created
+from .forms import OrgForm, OrgServsForm
 from django.forms import inlineformset_factory
 def add_new_org(request):  # https://stackoverflow.com/questions/1113047/creating-a-model-and-related-models-with-inline-formsets
     if request.method == 'POST':
-        print(request.POST)
-        return HttpResponse(1341)
+        org_form = OrgForm(request.POST)
+        ServFormset = inlineformset_factory(Organizations, OrganizationServices, exclude=[])
+        # formset = ServFormset(request.POST)
+        if org_form.is_valid():
+            new_org = org_form.save(commit=False)
+            new_org.slug = request.POST['title']
+            formset = ServFormset(request.POST, instance=new_org)
+            if formset.is_valid():
+                new_org.save()
+                formset.save()
+                return HttpResponse('kkk')
+        else:
+            return HttpResponse(1341)
     else:
         form = OrgForm()
-        OrgFomset = inlineformset_factory(Organizations, OrganizationServices, exclude=())
+        OrgFomset = inlineformset_factory(Organizations, OrganizationServices, exclude=(), extra=5)
         formset = OrgFomset()
-
         return render(
             request,
             template_name='add_new_org.html',
             context={
-          #      'form': form,
-                'formset': formset
+                'form': form,
+                'formset': formset,
             }
         )

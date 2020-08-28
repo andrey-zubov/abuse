@@ -82,194 +82,196 @@
 {% endfor %}
 </div>
 {% endblock %}
+
 {% block organizations %}
-<section class="organizations">
-  <a name="local_orgs"></a>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 offset-lg-3">
-            <div class="article article-map">
-              <h2 class="article__title headline-1">Организации</h2>
-              <div class="article__description">
-                <p>
-                  Мы собрали организации, которые готовы тебе помочь. Их список
-                  будет постоянно расширяться, чтобы ты всегда мог получить
-                  ближайшую к тебе помощь.
-                </p>
-                <p>
-                  (Организациям, оказывающим услуги лицам в проблеме наркотиков!
-                  Если вы не нашли свою организацию -
-                  <a href="#">отправьте заявку на ее добавление.</a>
-                  )
-                </p>
-              </div>
-              <div class="article__select organizations__select">
-                <div class="organizations__select__item">
-                  <p>Выберите вид деятельности</p>
-                  <select class="organizations__select__specifications">
-                    <option></option>
-                    {% for type in all_types %}
-                      <option value="{{type.title}}">{{type.title}}</option>
-                    {% endfor %}
-                  </select>
+{% if org_widget_flag %}
+  <section class="organizations">
+    <a name="local_orgs"></a>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+              <div class="article article-map">
+                <h2 class="article__title headline-1">Организации</h2>
+                <div class="article__description">
+                  <p>
+                    Мы собрали организации, которые готовы тебе помочь. Их список
+                    будет постоянно расширяться, чтобы ты всегда мог получить
+                    ближайшую к тебе помощь.
+                  </p>
+                  <p>
+                    (Организациям, оказывающим услуги лицам в проблеме наркотиков!
+                    Если вы не нашли свою организацию -
+                    <a href="#">отправьте заявку на ее добавление.</a>
+                    )
+                  </p>
                 </div>
-                <div class="organizations__select__item">
-                  <p>Выберите город</p>
-                  <select class="organizations__select__cities">
-                    <option></option>
-                    {% for city in all_cites %}
-                      <option value="{{city.title}}">{{city.title}}</option>
-                    {% endfor %}
-                  </select>
+                <div class="article__select organizations__select">
+                  <div class="organizations__select__item">
+                    <p>Выберите вид деятельности</p>
+                    <select class="organizations__select__specifications">
+                      <option></option>
+                      {% for type in all_types %}
+                        <option value="{{type.title}}">{{type.title}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="organizations__select__item">
+                    <p>Выберите город</p>
+                    <select class="organizations__select__cities">
+                      <option></option>
+                      {% for city in all_cites %}
+                        <option value="{{city.title}}">{{city.title}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div class="organizations__content">
-                {% for org in orgs %}
-                  <div
-                  class="organization-item"
-                  data-city="{{org.city.title}}"
-                  data-spec="{% for type in org.get_services %}{{ type.org_type.title }}, {% endfor %}"
-                >
-                  <div class="organization-item__information">
-                    <p class="organization-item__title">
-                      {{org.title}}
-                    </p>
-                    <div class="organization-item__adress">
-                      <div class="icon-wrapper">
-                        <i class="icon-map-marker"></i>
+                <div class="organizations__content">
+                  {% for org in orgs %}
+                    <div
+                    class="organization-item"
+                    data-city="{{org.city.title}}"
+                    data-spec="{% for type in org.get_services %}{{ type.org_type.title }}, {% endfor %}"
+                  >
+                    <div class="organization-item__information">
+                      <p class="organization-item__title">
+                        {{org.title}}
+                      </p>
+                      <div class="organization-item__adress">
+                        <div class="icon-wrapper">
+                          <i class="icon-map-marker"></i>
+                        </div>
+                        <p class="">{{org.adress}}</p>
                       </div>
-                      <p class="">{{org.adress}}</p>
+                      <a class="organization-item__link" href="/abuse/organization/{{org.slug}}"></a>
                     </div>
-                    <a class="organization-item__link" href="/abuse/organization/{{org.slug}}"></a>
+
+                    <div class="organization-item__phone">
+                      <div class="icon-wrapper">
+                        <i class="icon-phone"></i>
+                      </div>
+                      <a class="link link--green" href="tel:+375172898833"
+                        ><p class="">
+                          {{org.tel1}}
+                        </p></a
+                      >
+                    </div>
                   </div>
 
-                  <div class="organization-item__phone">
-                    <div class="icon-wrapper">
-                      <i class="icon-phone"></i>
-                    </div>
-                    <a class="link link--green" href="tel:+375172898833"
-                      ><p class="">
-                        {{org.tel1}}
-                      </p></a
-                    >
-                  </div>
+
+                  {% endfor %}
+
+  <!--                <div-->
+  <!--                  class="organization-item"-->
+  <!--                  data-city="Minsk"-->
+  <!--                  data-spec="Analgin"-->
+  <!--                >-->
+  <!--                  <div class="organization-item__information">-->
+  <!--                    <p class="organization-item__title">-->
+  <!--                      ГУ «Республиканский научно-практический центр психического-->
+  <!--                      здоровья», отделение реабилитации-->
+  <!--                    </p>-->
+  <!--                    <div class="organization-item__adress">-->
+  <!--                      <div class="icon-wrapper">-->
+  <!--                        <i class="icon-map-marker"></i>-->
+  <!--                      </div>-->
+  <!--                      <p class="">г. Минск, Долгиновский тракт, 152</p>-->
+  <!--                    </div>-->
+  <!--                    <a class="organization-item__link" href="#"></a>-->
+  <!--                  </div>-->
+
+  <!--                  <div class="organization-item__phone">-->
+  <!--                    <div class="icon-wrapper">-->
+  <!--                      <i class="icon-phone"></i>-->
+  <!--                    </div>-->
+
+  <!--                    <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
+  <!--                      ><p class="">-->
+  <!--                        +375172898833-->
+  <!--                      </p></a-->
+  <!--                    >-->
+  <!--                  </div>-->
+  <!--                </div>-->
+  <!--                <div-->
+  <!--                  class="organization-item"-->
+  <!--                  data-city="Gomel"-->
+  <!--                  data-spec="Askorbinka"-->
+  <!--                >-->
+  <!--                  <div class="organization-item__information">-->
+  <!--                    <p class="organization-item__title">-->
+  <!--                      ГУ «Республиканский научно-практический центр психического-->
+  <!--                      здоровья», отделение реабилитации-->
+  <!--                    </p>-->
+  <!--                    <div class="organization-item__adress">-->
+  <!--                      <div class="icon-wrapper">-->
+  <!--                        <i class="icon-map-marker"></i>-->
+  <!--                      </div>-->
+  <!--                      <p class="">г. Минск, Долгиновский тракт, 152</p>-->
+  <!--                    </div>-->
+  <!--                    <a class="organization-item__link" href="#"></a>-->
+  <!--                  </div>-->
+
+  <!--                  <div class="organization-item__phone">-->
+  <!--                    <div class="icon-wrapper">-->
+  <!--                      <i class="icon-phone"></i>-->
+  <!--                    </div>-->
+  <!--                    <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
+  <!--                      ><p class="">-->
+  <!--                        +375172898833-->
+  <!--                      </p></a-->
+  <!--                    >-->
+  <!--                  </div>-->
+  <!--                </div>-->
+  <!--                <div-->
+  <!--                  class="organization-item"-->
+  <!--                  data-city="Gomel"-->
+  <!--                  data-spec="Askorbinka, Analgin"-->
+  <!--                >-->
+  <!--                  <div class="organization-item__information">-->
+  <!--                    <p class="organization-item__title">-->
+  <!--                      ГУ «Республиканский научно-практический центр психического-->
+  <!--                      здоровья», отделение реабилитации-->
+  <!--                    </p>-->
+  <!--                    <div class="organization-item__adress">-->
+  <!--                      <div class="icon-wrapper">-->
+  <!--                        <i class="icon-map-marker"></i>-->
+  <!--                      </div>-->
+  <!--                      <p class="">г. Минск, Долгиновский тракт, 152</p>-->
+  <!--                    </div>-->
+  <!--                    <a class="organization-item__link" href="#"></a>-->
+  <!--                  </div>-->
+
+  <!--                  <div class="organization-item__phone">-->
+  <!--                    <div class="icon-wrapper">-->
+  <!--                      <i class="icon-phone"></i>-->
+  <!--                    </div>-->
+  <!--                    <div class="organization-item__phone__content">-->
+  <!--                      <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
+  <!--                        ><p class="">-->
+  <!--                          +375172898833-->
+  <!--                        </p></a-->
+  <!--                      >-->
+  <!--                      <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
+  <!--                        ><p class="">-->
+  <!--                          +375172898833-->
+  <!--                        </p></a-->
+  <!--                      >-->
+  <!--                      <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
+  <!--                        ><p class="">-->
+  <!--                          +375172898833-->
+  <!--                        </p></a-->
+  <!--                      >-->
+  <!--                    </div>-->
+  <!--                  </div>-->
+  <!--                </div>-->
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-
-                {% endfor %}
-
-<!--                <div-->
-<!--                  class="organization-item"-->
-<!--                  data-city="Minsk"-->
-<!--                  data-spec="Analgin"-->
-<!--                >-->
-<!--                  <div class="organization-item__information">-->
-<!--                    <p class="organization-item__title">-->
-<!--                      ГУ «Республиканский научно-практический центр психического-->
-<!--                      здоровья», отделение реабилитации-->
-<!--                    </p>-->
-<!--                    <div class="organization-item__adress">-->
-<!--                      <div class="icon-wrapper">-->
-<!--                        <i class="icon-map-marker"></i>-->
-<!--                      </div>-->
-<!--                      <p class="">г. Минск, Долгиновский тракт, 152</p>-->
-<!--                    </div>-->
-<!--                    <a class="organization-item__link" href="#"></a>-->
-<!--                  </div>-->
-
-<!--                  <div class="organization-item__phone">-->
-<!--                    <div class="icon-wrapper">-->
-<!--                      <i class="icon-phone"></i>-->
-<!--                    </div>-->
-
-<!--                    <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
-<!--                      ><p class="">-->
-<!--                        +375172898833-->
-<!--                      </p></a-->
-<!--                    >-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div-->
-<!--                  class="organization-item"-->
-<!--                  data-city="Gomel"-->
-<!--                  data-spec="Askorbinka"-->
-<!--                >-->
-<!--                  <div class="organization-item__information">-->
-<!--                    <p class="organization-item__title">-->
-<!--                      ГУ «Республиканский научно-практический центр психического-->
-<!--                      здоровья», отделение реабилитации-->
-<!--                    </p>-->
-<!--                    <div class="organization-item__adress">-->
-<!--                      <div class="icon-wrapper">-->
-<!--                        <i class="icon-map-marker"></i>-->
-<!--                      </div>-->
-<!--                      <p class="">г. Минск, Долгиновский тракт, 152</p>-->
-<!--                    </div>-->
-<!--                    <a class="organization-item__link" href="#"></a>-->
-<!--                  </div>-->
-
-<!--                  <div class="organization-item__phone">-->
-<!--                    <div class="icon-wrapper">-->
-<!--                      <i class="icon-phone"></i>-->
-<!--                    </div>-->
-<!--                    <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
-<!--                      ><p class="">-->
-<!--                        +375172898833-->
-<!--                      </p></a-->
-<!--                    >-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                <div-->
-<!--                  class="organization-item"-->
-<!--                  data-city="Gomel"-->
-<!--                  data-spec="Askorbinka, Analgin"-->
-<!--                >-->
-<!--                  <div class="organization-item__information">-->
-<!--                    <p class="organization-item__title">-->
-<!--                      ГУ «Республиканский научно-практический центр психического-->
-<!--                      здоровья», отделение реабилитации-->
-<!--                    </p>-->
-<!--                    <div class="organization-item__adress">-->
-<!--                      <div class="icon-wrapper">-->
-<!--                        <i class="icon-map-marker"></i>-->
-<!--                      </div>-->
-<!--                      <p class="">г. Минск, Долгиновский тракт, 152</p>-->
-<!--                    </div>-->
-<!--                    <a class="organization-item__link" href="#"></a>-->
-<!--                  </div>-->
-
-<!--                  <div class="organization-item__phone">-->
-<!--                    <div class="icon-wrapper">-->
-<!--                      <i class="icon-phone"></i>-->
-<!--                    </div>-->
-<!--                    <div class="organization-item__phone__content">-->
-<!--                      <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
-<!--                        ><p class="">-->
-<!--                          +375172898833-->
-<!--                        </p></a-->
-<!--                      >-->
-<!--                      <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
-<!--                        ><p class="">-->
-<!--                          +375172898833-->
-<!--                        </p></a-->
-<!--                      >-->
-<!--                      <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
-<!--                        ><p class="">-->
-<!--                          +375172898833-->
-<!--                        </p></a-->
-<!--                      >-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-
-      <div class="organizations__map"></div>
-    </section>
-
+        <div class="organizations__map"></div>
+      </section>
+{% endif %}
 {% endblock %}
 
 

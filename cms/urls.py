@@ -5,7 +5,7 @@ urlpatterns = [
     path('abuse/', main_page),
     path('abuse/organization/<slug>', org_info, name='org_info'),
     path('abuse/news/', news_view),
-    path('abuse/add_organization', add_new_org),
+    path('abuse/to-partners/', add_new_org),
 
     path('abuse/<slug>/', articles_by_cat, name='main_articles'),
 

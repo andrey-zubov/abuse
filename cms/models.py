@@ -119,6 +119,7 @@ class Articles(models.Model):
                   ' на статью.'
     )
 
+
     def get_img(self):
         if not self.picture:
             return None
@@ -209,6 +210,9 @@ class Main_Cat(models.Model):
     title = models.CharField(
         verbose_name='Название',
         max_length=50
+    )
+    org_widget = models.BooleanField(
+        verbose_name='Отображать виджет организаций'
     )
 
     def __str__(self):
