@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
+from .forms import OrgForm
+from django.forms import inlineformset_factory
 
 from .models import (
     Articles,
@@ -79,10 +81,8 @@ def news_view(request):
         }
     )
 
-# https://stackoverflow.com/questions/29758558/inlineformset-factory-create-new-objects-and-edit-objects-after-created
-from .forms import OrgForm, OrgServsForm
-from django.forms import inlineformset_factory
-def add_new_org(request):  # https://stackoverflow.com/questions/1113047/creating-a-model-and-related-models-with-inline-formsets
+
+def add_new_org(request):
     if request.method == 'POST':
         org_form = OrgForm(request.POST)
         ServFormset = inlineformset_factory(Organizations, OrganizationServices, exclude=[])
