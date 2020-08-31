@@ -5,7 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-Это первая страница сайта
 {% for up_cat in up_cats %}
     <a href="{% url 'main_articles' slug=up_cat.slug %}">{{ up_cat.title }}</a>
 {% endfor %}
