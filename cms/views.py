@@ -33,6 +33,16 @@ def main_page(request):
 
 
 def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
+    print(request.GET)
+    if request.GET.__contains__('answer_for'):  # hold an answer in db
+        question = Question.objects.get(title=request.GET['answer_for'])
+        chosed_answer = request.GET[str(question)]
+        # hold_answer = Choice.objects.create(
+        #     question=question,
+        #     choice=chosed_answer
+        # )
+
+
     if Main_Cat.objects.get(slug=slug).org_widget:
         orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
         org_widget_flag = True
@@ -47,7 +57,6 @@ def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
     down_cats = all_cats.filter(header_menu='down')
     up_cats = all_cats.filter(header_menu='up')
     questions = Question.objects.all().prefetch_related('choice_set')
-    question_choices = Choice.objects.filter()
     articles = Articles.objects.filter(category__id=category_number)
     return render(
         request,
