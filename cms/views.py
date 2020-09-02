@@ -33,15 +33,15 @@ def main_page(request):
 
 
 def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
-    print(request.GET)
     if request.GET.__contains__('answer_for'):  # hold an answer in db
         question = Question.objects.get(title=request.GET['answer_for'])
-        chosed_answer = request.GET[str(question)]
-        # hold_answer = Choice.objects.create(
-        #     question=question,
-        #     choice=chosed_answer
-        # )
-
+        chosed_answer = Choice.objects.get(
+            Q(question=question) & Q(title=request.GET[str(question)])
+        )
+        save_answer = Answer.objects.create(
+            question=question,
+            choice=chosed_answer
+        )
 
     if Main_Cat.objects.get(slug=slug).org_widget:
         orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
