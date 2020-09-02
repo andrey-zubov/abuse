@@ -31,4 +31,12 @@
       color: $green;
     }
   }
+
+  &--white {
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
+  }
 }

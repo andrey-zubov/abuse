@@ -15,11 +15,11 @@ $(document).ready(async () => {
   window.refs = {
     mobileMenu: {
       init: () => new MobileMenu(),
-      selectors: [".header"],
+      selectors: [".header--main"],
     },
     stickyHeader: {
       init: () => new StickyHeader(),
-      selectors: [".header"],
+      selectors: [".header--secondary"],
     },
     stickySideMenu: {
       init: () => new StickySideMenu(),

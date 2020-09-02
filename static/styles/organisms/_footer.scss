@@ -1,8 +1,72 @@
 .footer {
-  // position: absolute;
-  bottom: 10px;
+  $self: &;
   width: 100%;
-  left: 0;
+
+  &--main {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+  }
+
+  &--secondary {
+    padding: 60px 0;
+    background-color: $green;
+
+    #{$self}__menu {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      &-item {
+        display: flex;
+        flex-direction: column;
+        margin-right: 25px;
+        min-width: 170px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .link {
+          margin-bottom: 28px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          p {
+            display: inline;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+          }
+
+          &:hover {
+            p {
+              border-color: inherit;
+            }
+          }
+        }
+      }
+    }
+
+    #{$self}__logos {
+      .logo-item {
+        width: 100%;
+        margin-bottom: 15px;
+        max-height: 76px;
+        display: flex;
+        justify-content: center;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        img {
+          object-fit: contain;
+        }
+      }
+    }
+  }
 
   &__container {
     display: flex;

@@ -7,7 +7,7 @@ export default class StickySideMenu {
   stick() {
     const isDesktop = window.innerWidth > 992;
     const headerHeight = document
-      .querySelector(".header")
+      .querySelector(".header--secondary")
       .getBoundingClientRect().height;
     const main = document.querySelector(".main");
     const mainMarginTop = window
