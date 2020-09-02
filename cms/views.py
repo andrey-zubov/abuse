@@ -13,7 +13,10 @@ from .models import (
     City,
     ServicesType,
     PageType,
-    OrganizationServices
+    OrganizationServices,
+    Question,
+    Choice,
+    Answer
 )
 
 
@@ -43,7 +46,8 @@ def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
     all_cats = Main_Cat.objects.filter(is_active=True)
     down_cats = all_cats.filter(header_menu='down')
     up_cats = all_cats.filter(header_menu='up')
-
+    questions = Question.objects.all().prefetch_related('choice_set')
+    question_choices = Choice.objects.filter()
     articles = Articles.objects.filter(category__id=category_number)
     return render(
         request,
@@ -56,6 +60,7 @@ def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
                  'all_cats': all_cats,
                  'down_cats': down_cats,
                  'up_cats': up_cats,
+                 'questions': questions,
                  })
 
 

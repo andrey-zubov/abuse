@@ -11,7 +11,10 @@ from .models import (
     ServicesPayment,
     OrganizationServices,
     City,
-    PageType
+    PageType,
+    Question,
+    Answer,
+    Choice
 )
 
 
@@ -39,5 +42,9 @@ admin.site.register(ServicesPayment)
 admin.site.register(ServicesStuff)
 
 admin.site.register(PageType)
+
+admin.site.register(Question)
+admin.site.register(Answer)
+admin.site.register(Choice)
 
 # Register your models here.
