@@ -94,6 +94,15 @@
                     Запись на консультацию производится по телефону
                     <strong>+375 17 311 00 00</strong>
                   </p>
+                  {% for q in questions %}
+                    {{q.title}}
+                    {% for choice in q.get_choices %}
+                      <label for="{{choice.id}}">{{choice.title}}</label>
+                      <input id="{{choice.id}}" type="radio" value="{{choice}}">
+                    {% endfor %}
+                    <br>
+                  {% endfor %}
+
                 </div>
                 <div class="information-block__image aspect-ratio">
                   <img src="https://via.placeholder.com/1140x764" />

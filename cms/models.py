@@ -412,3 +412,46 @@ class TypeExtension(Extension):
         )
 
 Page.register_extensions(TypeExtension)
+
+
+# опросник
+class Question(models.Model):
+    title = models.CharField(
+        verbose_name='вопрос',
+        max_length=150
+    )
+    is_active = models.BooleanField(
+        verbose_name='Опрос активен',
+        default=True
+    )
+    def __str__(self):
+        return self.title
+
+    def get_choices(self):
+        return self.choice_set.all()
+
+
+class Choice(models.Model):
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE,
+    )
+    title = models.CharField(
+        verbose_name='Вариант для ответа',
+        max_length=150
+    )
+    def __str__(self):
+        return self.title
+
+
+class Answer(models.Model):
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE,
+    )
+    choice = models.ForeignKey(
+        Choice,
+        on_delete=models.CASCADE,
+    )
+    def __str__(self):
+        return f'{self.question.title}: {self.choice.title}'
