@@ -109,32 +109,11 @@
     <section class="main">
       <div class="container">
         <div class="row">
-          <div class="col-lg-3">
-            <div class="side-menu">
-              <div class="side-menu__content">
-                <div class="side-menu__links side-menu__links--main">
-                  <a class="link link--medium-blue" href="#help"
-                    ><p>Первая помощь</p></a
-                  >
-                  <a
-                    class="link link--medium-blue"
-                    href="http://pomogut.by/hiv-hepatitis/"
-                    ><p>Вич и гепатит</p></a
-                  >
-                  <a
-                    class="link link--medium-blue"
-                    href="http://pomogut.by/filling-page"
-                    ><p>Срыв</p></a
-                  >
-                </div>
-                <div class="side-menu__links">
-                  {% block side_links %} {% endblock %}
-                </div>
-              </div>
-            </div>
-          </div>
+          {% block side_bar %} {% endblock %}
 
            {% block content %} {% endblock %} {% block organizations %} {% endblock %}
+
+          {% block footer %} {% endblock %}
 
 <!--          <div class="col-lg-6">-->
 <!--            <div class="article">-->
@@ -604,32 +583,32 @@
             </div>
           </div>
     </section>
-    <footer class="footer">
-      <div class="container footer__container">
-        <a class="footer__phone" href="tel:+375173110000">+ 375 17 311 00 00</a>
-        <nav class="main-menu footer__menu">
-          <ul class="main-menu__links footer__menu__links">
-            <li>
-              <p>
-                <a class="link" href="https://abuse.pomogut.by/about/"
-                  ><span>О проекте</span></a
-                >
-              </p>
-            </li>
+<!--    <footer class="footer">-->
+<!--      <div class="container footer__container">-->
+<!--        <a class="footer__phone" href="tel:+375173110000">+ 375 17 311 00 00</a>-->
+<!--        <nav class="main-menu footer__menu">-->
+<!--          <ul class="main-menu__links footer__menu__links">-->
+<!--            <li>-->
+<!--              <p>-->
+<!--                <a class="link" href="https://abuse.pomogut.by/about/"-->
+<!--                  ><span>О проекте</span></a-->
+<!--                >-->
+<!--              </p>-->
+<!--            </li>-->
 
-            <li>
-              <p>
-                <a class="link" href="https://abuse.pomogut.by/to-partners/"
-                  ><span>Стать партнером</span></a
-                >
-              </p>
-            </li>
-          </ul>
-        </nav>
-        <a class="footer__logo" href="http://www.unodc.org/" target="_blank"
-          ><i class="icon-un"></i
-        ></a>
-      </div>
-    </footer>
+<!--            <li>-->
+<!--              <p>-->
+<!--                <a class="link" href="https://abuse.pomogut.by/to-partners/"-->
+<!--                  ><span>Стать партнером</span></a-->
+<!--                >-->
+<!--              </p>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </nav>-->
+<!--        <a class="footer__logo" href="http://www.unodc.org/" target="_blank"-->
+<!--          ><i class="icon-un"></i-->
+<!--        ></a>-->
+<!--      </div>-->
+<!--    </footer>-->
   </body>
 </html>
