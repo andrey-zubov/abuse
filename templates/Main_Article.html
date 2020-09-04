@@ -1,13 +1,44 @@
 {%extends 'base.html' %}
-{% load static %}
+<!--{% load static %}-->
 
-{% block side_links %}
-  {% for article in articles %}
-    <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
-  {% endfor %}
-    {% if org_widget_flag %}
-      <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
-    {% endif %}
+{% block side_bar %}
+<div class="col-lg-3">
+            <div class="side-menu">
+              <div class="side-menu__content">
+                <div class="side-menu__links side-menu__links--main">
+                  <a class="link link--medium-blue" href="#help"
+                    ><p>Первая помощь</p></a
+                  >
+                  <a
+                    class="link link--medium-blue"
+                    href="http://pomogut.by/hiv-hepatitis/"
+                    ><p>Вич и гепатит</p></a
+                  >
+                  <a
+                    class="link link--medium-blue"
+                    href="http://pomogut.by/filling-page"
+                    ><p>Срыв</p></a
+                  >
+                </div>
+                <div class="side-menu__links">
+                 {% for article in articles %}
+                    <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
+                  {% endfor %}
+                    {% if org_widget_flag %}
+                      <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
 {% endblock %}
 
 {% block header_links %}
@@ -306,46 +337,32 @@
 {% endif %}
 {% endblock %}
 
+{% block footer %}
+  <footer class="footer">
+    <div class="container footer__container">
+      <a class="footer__phone" href="tel:+375173110000">+ 375 17 311 00 00</a>
+      <nav class="main-menu footer__menu">
+        <ul class="main-menu__links footer__menu__links">
+          <li>
+            <p>
+              <a class="link" href="https://abuse.pomogut.by/about/"
+                ><span>О проекте</span></a
+              >
+            </p>
+          </li>
 
-
-
-  <a name="local_orgs"></a>
-  <p><p>Мы собрали организации, которые готовы тебе помочь. Их список будет постоянно расширяться, чтобы ты всегда мог получить ближайшую к тебе помощь.</p><p>
-  <em>(Организациям, оказывающим услуги лицам в проблеме наркотиков! Если вы не нашли свою организацию - отправьте заявку на ее добавление.
-    <a href="http://pomogut.by/to-partners/">Добавить организацию </a>)</em></p></p>
-
-  <form method="get">
-    <input hidden name="is_org_finder" value="1">
-    <select name="choosed_city">
-      {% for city in all_cites %}
-          <option value="{{ city.id }}">{{ city.title }}</option>
-      {% endfor %}
-    </select>
-    <select name="choosed_type">
-      {% for type in all_types %}
-        <option value="{{ type.id }}">{{ type.title }}</option>
-      {% endfor %}
-    </select>
-    <BUTTON>OJ</BUTTON>
-  </form>
-
-<br><br><br>ОРГИ
-  {% for org in orgs %}
-    Организация <a href="{% url 'org_info' slug=org.slug %}" >{{ org.title }}</a>
-    деятельность
-    {% for serv in org.get_services %}
-      {{ serv.org_type.title }}
-      {{ serv.stuff.title }}
-      {{ serv.conf.title }}
-      {{ serv.payment.title }}
-      <br>
-    {% endfor %}
-    <hr>
-
-  {% endfor %}
-<!--  <script src="{% static '/js/jquery-3.5.1.min.js' %}"></script>-->
-<!--  <script>-->
-<!--    $('document').ready(function () {-->
-<!--      console.log('Hello article');-->
-<!--    })-->
-<!--  </script>-->
+          <li>
+            <p>
+              <a class="link" href="https://abuse.pomogut.by/to-partners/"
+                ><span>Стать партнером</span></a
+              >
+            </p>
+          </li>
+        </ul>
+      </nav>
+      <a class="footer__logo" href="http://www.unodc.org/" target="_blank"
+        ><i class="icon-un"></i
+      ></a>
+    </div>
+  </footer>
+{% endblock %}
