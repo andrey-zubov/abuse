@@ -22,10 +22,11 @@
 
   &__button {
     margin-top: 20px;
-    padding: 11px 43px;
+    padding: 15px 30px;
     border-radius: 12px;
     background-color: rgba($silver, 0.5);
     font-weight: 700;
+    font-size: 16px;
 
     &:hover {
       background-color: $blue;
