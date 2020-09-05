@@ -1,0 +1,44 @@
+.news-item {
+  color: $gray;
+  margin-bottom: 45px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &__title {
+    color: $blue;
+    font-size: 18px;
+    line-height: 36px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  &__data {
+    margin-bottom: 5px;
+    color: $medium-gray;
+    line-height: 29px;
+  }
+
+  &__image {
+    padding-bottom: 50%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 5px;
+  }
+
+  &__description {
+  }
+
+  &__button {
+    margin-top: 20px;
+    padding: 11px 43px;
+    border-radius: 12px;
+    background-color: rgba($silver, 0.5);
+    font-weight: 700;
+
+    &:hover {
+      background-color: $blue;
+    }
+  }
+}
