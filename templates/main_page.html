@@ -1,16 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% for up_cat in up_cats %}
-    <a href="{% url 'main_articles' slug=up_cat.slug %}">{{ up_cat.title }}</a>
-{% endfor %}
-<br>
-{% for down_cat in down_cats %}
-    <a href="{% url 'main_articles' slug=down_cat.slug %}">{{ down_cat.title }}</a>
-{% endfor %}
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+
+    <!-- {% load compress %}-->
+
+    <!-- {% compress css %}-->
+    <!--        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">-->
+    <!--    {% endcompress %}-->
+
+    <link
+      type="text/css"
+      href="/static/styles/index.min.css"
+      rel="stylesheet"
+      media="screen"
+    />
+
+    <script type="module" src="/static/scripts/index.js"></script>
+
+    <title>Test page</title>
+  </head>
+  <body>
+    <!-- 
+    <br />
+     -->
+
+    <header class="header header--main">
+      <div class="container">
+        <div class="header__content">
+          <div class="header__content__nav">
+            <nav class="main-menu">
+              <ul class="main-menu__links">
+                {% for up_cat in up_cats %}
+                <li>
+                  <a href="{% url 'main_articles' slug=up_cat.slug %}"
+                    ><span>{{ up_cat.title }}</span></a
+                  >
+                </li>
+                {% endfor %}
+              </ul>
+            </nav>
+
+            <nav class="main-menu">
+              <ul class="main-menu__navigation">
+                {% for down_cat in down_cats %}
+                <li>
+                  <a href="{% url 'main_articles' slug=down_cat.slug %}"
+                    ><span>{{ down_cat.title }}</span></a
+                  >
+                </li>
+                {% endfor %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <button class="header__button" type="button"><span></span></button>
+      </div>
+    </header>
+
+    <section class="main main--page"></section>
+
+    <footer class="footer footer--main">
+      <div class="container footer__container">
+        <a class="footer__phone" href="tel:+375173110000">+ 375 17 311 00 00</a>
+        <nav class="main-menu footer__menu">
+          <ul class="main-menu__links footer__menu__links">
+            <li>
+              <p>
+                <a class="link" href="https://abuse.pomogut.by/about/"
+                  ><span>О проекте</span></a
+                >
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <a class="link" href="https://abuse.pomogut.by/to-partners/"
+                  ><span>Стать партнером</span></a
+                >
+              </p>
+            </li>
+          </ul>
+        </nav>
+        <a class="footer__logo" href="http://www.unodc.org/" target="_blank"
+          ><i class="icon-un"></i
+        ></a>
+      </div>
+    </footer>
+  </body>
 </html>

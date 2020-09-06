@@ -71,6 +71,10 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    #{$self}__content {
+      background-color: transparent;
+    }
   }
 
   &--secondary {
@@ -117,6 +121,7 @@
 
 @media (max-width: $lg) {
   .header {
+    $self: &;
     padding: 30px 15px;
 
     &__button {
@@ -148,6 +153,20 @@
         display: flex;
         flex-direction: column-reverse;
         justify-content: center;
+      }
+    }
+
+    &--main {
+      #{$self}__content {
+        background-color: $white;
+
+        .main-menu__navigation li {
+          border: none;
+
+          .link {
+            background-color: transparent;
+          }
+        }
       }
     }
   }
