@@ -24,6 +24,7 @@
     align-items: flex-start;
     opacity: 0;
     transition: opacity 0.5s ease-out;
+    display: none;
 
     &--active {
       opacity: 1;

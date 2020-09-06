@@ -3,6 +3,13 @@ export default class Partners{
         this.init()
     }
 
+    setFirstActiveForm(selectForm){
+        selectForm[0].classList.add('link--active');
+        const form = document.querySelector(`.partners .partners__form[data-form='${+selectForm[0].getAttribute('data-form')}']`);
+        form.style.display = "block";
+        form.classList.add("partners__form--active");
+    }
+
     init(){
         $('.form-item__select--type').select2({
             closeOnSelect: true,
@@ -29,6 +36,8 @@ export default class Partners{
 
         const selectForm = Array.from(document.querySelectorAll('.partners .main-menu__navigation .link'));
         const forms = Array.from(document.querySelectorAll('.partners .partners__form'));
+
+        this.setFirstActiveForm(selectForm);
 
         selectForm.forEach(link=>{
             link.addEventListener('click', (e)=>{
