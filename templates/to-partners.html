@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+
+    <link
+      type="text/css"
+      href="/static/styles/index.min.css"
+      rel="stylesheet"
+      media="screen"
+    />
+
+    <script type="module" src="/static/scripts/index.js"></script>
+
+    <title>Test page</title>
+  </head>
+
+  <body>
+    <section class="partners">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <h1 class="partners__title headline-1">ПАРТНЕРАМ</h1>
+          </div>
+          <div class="col-lg-8 offset-lg-2">
+            <nav class="main-menu partners__navigation">
+              <ul class="main-menu__navigation">
+                <li>
+                  <p class="link link--blue link--active" data-form="1">
+                    <span>Зарегистрировать организацию</span>
+                  </p>
+                </li>
+
+                <li>
+                  <p class="link link--blue" data-form="2">
+                    <span>Опубликовать вакансию</span>
+                  </p>
+                </li>
+
+                <li>
+                  <p class="link link--blue" data-form="3">
+                    <span>Опубликовать мероприятия</span>
+                  </p>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-lg-6 offset-lg-3">
+            <div class="partners__content">
+              <div class="partners__form partners__form--active" data-form="1">
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Наименование"
+                  />
+                </div>
+
+                <div class="form-item__required">
+                  <select class="form-item__select--organization form-item">
+                    <option></option>
+                    <option value="Title">Title</option>
+                  </select>
+                </div>
+
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Населенный пункт"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <div class="form-item__phone form-item">
+                    <p>Контактный телефон</p>
+                    <input
+                      class="form-item"
+                      type="text"
+                      placeholder="+375 (__) ___ - __ - __"
+                    />
+                  </div>
+                </div>
+                <div class="form-item__required">
+                  <input class="form-item" type="text" placeholder="email" />
+                </div>
+                <div class="form-item__required">
+                  <input class="form-item" type="text" placeholder="сайт" />
+                </div>
+                <div class="form-item__required">
+                  <textarea
+                    class="form-item form-item__textarea"
+                    placeholder="Описание организации"
+                  ></textarea>
+                </div>
+                <button type="button" class="btn">Отправить заявку</button>
+              </div>
+              <div class="partners__form" data-form="2">
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Наименование вакансии"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <textarea
+                    class="form-item form-item__textarea"
+                    placeholder="Описание вакансии"
+                  ></textarea>
+                </div>
+                <div class="form-item__required">
+                  <select class="form-item__select--work form-item">
+                    <option></option>
+                    <option value="Title">Title</option>
+                  </select>
+                </div>
+                <div class="form-item__required">
+                  <select class="form-item__select--form form-item">
+                    <option></option>
+                    <option value="Title">Title</option>
+                  </select>
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Работодатель"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <div class="form-item form-item__phone">
+                    <p>Контактный телефон</p>
+                    <input
+                      class="form-item"
+                      type="text"
+                      placeholder="+375 (__) ___ - __ - __"
+                    />
+                  </div>
+                </div>
+                <div class="form-item__required">
+                  <input class="form-item" type="text" placeholder="Адрес" />
+                </div>
+                <div class="form-item__required">
+                  <input class="form-item" type="text" placeholder="Позиция" />
+                </div>
+                <div class="form-item__required">
+                  <input class="form-item" type="text" placeholder="email" />
+                </div>
+                <button type="button" class="btn">Отправить заявку</button>
+              </div>
+              <div class="partners__form" data-form="3">
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Дата начала"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Время начала"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Наименование мероприятия"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <select class="form-item__select--type form-item">
+                    <option></option>
+                    <option value="Title">Title</option>
+                  </select>
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Стоимость"
+                  />
+                </div>
+
+                <div class="form-item form-item__checkbox">
+                  <input type="checkbox" id="checkbox" /><label for="checkbox"
+                    >Вход бесплатный</label
+                  >
+                </div>
+
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Населенный пункт"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Адрес проведения"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Организатор мероприятия"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <textarea
+                    class="form-item form-item__textarea"
+                    placeholder="Описание мероприятия"
+                  ></textarea>
+                </div>
+                <div class="form-item__required">
+                  <div class="form-item form-item__phone">
+                    <p>Контактный телефон</p>
+                    <input
+                      class="form-item"
+                      type="text"
+                      placeholder="+375 (__) ___ - __ - __"
+                    />
+                  </div>
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Контактное лицо"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <input class="form-item" type="text" placeholder="email" />
+                </div>
+                <button type="button" class="btn">Отправить заявку</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
