@@ -35,48 +35,6 @@ Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
     ('lightbox', _('lightbox')),
 ))
 
-#
-# class Column(models.Model):  # page format
-#     class Meta:
-#         verbose_name = 'Одноколоночный'
-#         abstract = True
-#
-#     title = models.CharField(
-#         verbose_name='Название виджета',
-#         max_length=256,
-#     )
-#     picture = MediaFileForeignKey(
-#         MediaFile,
-#         on_delete=models.SET_NULL,
-#         verbose_name='Картинка',
-#         null=True,
-#     )
-#     pic_text = models.CharField(
-#         verbose_name='Подпись катринки',
-#         max_length=256
-#     )
-#     text = models.TextField(
-#         verbose_name='основной текст',
-#     )
-#
-#     def render(self):
-#         return render_to_string(
-#             'singlecolumn_article.html',
-#             context={
-#                 'widget': self,
-#                 'text': mark_safe(self.text)
-#             })
-#
-#     def get_img(self):
-#         if not self.picture:
-#             return None
-#         else:
-#             return join(settings.MEDIA_URL, str(self.picture.file))
-#
-#
-# Page.create_content_type(Column)
-
-
 class Articles(models.Model):
     class Meta:
         verbose_name = 'Статья'
@@ -414,6 +372,11 @@ class TypeExtension(Extension):
 Page.register_extensions(TypeExtension)
 
 class NewsSource(models.Model):
+    class Meta:
+        db_table = 'newssource'
+        verbose_name = 'Тип статьи'
+        verbose_name_plural = 'Типы статьей'
+
     source = models.CharField(
         verbose_name='Источник',
         max_length=256,
@@ -429,7 +392,7 @@ class NewsSourceExtension(Extension):
         self.model.add_to_class(
             'source',
             models.ForeignKey(
-                PageType,
+                NewsSource,
                 verbose_name='Ссылка на источник',
                 on_delete=models.CASCADE,
                 null=True,
@@ -443,7 +406,7 @@ class NewsSourceExtension(Extension):
             {"fields": ("source",), },
         )
 
-Page.register_extensions(TypeExtension)
+Page.register_extensions(NewsSourceExtension)
 
 # опросник
 class Question(models.Model):
