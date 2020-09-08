@@ -413,6 +413,37 @@ class TypeExtension(Extension):
 
 Page.register_extensions(TypeExtension)
 
+class NewsSource(models.Model):
+    source = models.CharField(
+        verbose_name='Источник',
+        max_length=256,
+        null=True,
+        blank=True
+    )
+
+
+class NewsSourceExtension(Extension):
+    model = 'newssource'
+
+    def handle_model(self):
+        self.model.add_to_class(
+            'source',
+            models.ForeignKey(
+                PageType,
+                verbose_name='Ссылка на источник',
+                on_delete=models.CASCADE,
+                null=True,
+                blank=True
+            )
+        )
+
+    def handle_modeladmin(self, modeladmin):
+        modeladmin.add_extension_options(
+            _("Ссылка на источник"),
+            {"fields": ("source",), },
+        )
+
+Page.register_extensions(TypeExtension)
 
 # опросник
 class Question(models.Model):

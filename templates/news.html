@@ -1,20 +1,74 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--this is news<br>-->
+
+<!--{% for n in news %}-->
+<!--  {{ n.title }}-->
+<!--  {{ n.publication_date }}-->
+<!--  {{ n.text }}-->
+<!--  {{ n.content.main.0.text|safe|slice:":256" }}...-->
+<!--  <a href="/{{ n.slug }}">Подробнее</a>-->
+
+<!--<br><br>-->
+<!--{% endfor %}-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-this is news<br>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
 
-{% for n in news %}
-  {{ n.title }}
-  {{ n.publication_date }}
-  {{ n.text }}
-  {{ n.content.main.0.text|safe|slice:":256" }}...
-  <a href="/{{ n.slug }}">Подробнее</a>
+    <link
+      type="text/css"
+      href="/static/styles/index.min.css"
+      rel="stylesheet"
+      media="screen"
+    />
 
-<br><br>
-{% endfor %}
-</body>
+    <script type="module" src="/static/scripts/index.js"></script>
+
+    <title>Test page</title>
+  </head>
+
+  <body>
+    <section class="news">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="news__container">
+              <h1 class="news__title">НОВОСТИ</h1>
+              <div class="news__content">
+                {% for n in news %}
+                  <div class="news-item">
+                    <h3 class="news-item__title">
+                      {{ n.title }}
+                    </h3>
+                    <p class="news-item__data">{{ n.publication_date }}}</p>
+                    <div class="news-item__image aspect-ratio">
+                      <img src="https://via.placeholder.com/1500x750" />
+                    </div>
+                    <p class="news-item__description">
+                      {{ n.content.main.0.text|safe|slice:":256" }}
+                    </p>
+                    <a class="news-item__button link link--blue" href="/{{ n.slug }}"
+                      >Подробнее</a
+                    >
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>

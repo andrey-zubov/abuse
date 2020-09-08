@@ -2,6 +2,7 @@ import "./vendor/jquery.js";
 import "./vendor/jquery.sticky.js";
 import "./vendor/select2.js";
 import "./vendor/datepicker.js";
+import "./vendor/maskedinput.js";
 
 import MobileMenu from "./shared/mobile-menu.js";
 import StickyHeader from "./shared/sticky-header.js";
@@ -10,16 +11,17 @@ import ArticleAccordeon from "./shared/article-accordeon.js";
 import ArticleSelect from "./shared/article-select.js";
 import ArticleCalendar from "./shared/article-calendar.js";
 import Organizations from "./shared/organizations.js";
+import Partners from "./shared/partners.js";
 
 $(document).ready(async () => {
   window.refs = {
     mobileMenu: {
       init: () => new MobileMenu(),
-      selectors: [".header"],
+      selectors: [".header--main"],
     },
     stickyHeader: {
       init: () => new StickyHeader(),
-      selectors: [".header"],
+      selectors: [".header--secondary"],
     },
     stickySideMenu: {
       init: () => new StickySideMenu(),
@@ -40,6 +42,10 @@ $(document).ready(async () => {
     organizations: {
       init: () => new Organizations(),
       selectors: [".organizations"],
+    },
+    partners: {
+      init: () => new Partners(),
+      selectors: [".partners"],
     },
   };
 

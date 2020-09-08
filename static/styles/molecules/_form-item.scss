@@ -1,0 +1,61 @@
+.form-item {
+  width: 100%;
+
+  &__required {
+    position: relative;
+    width: 100%;
+    margin-bottom: 28px;
+
+    &:before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      background-color: $gray;
+      position: absolute;
+      left: -10px;
+      top: 5px;
+      border-radius: 50%;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &:not(.form-item__phone) {
+    padding: 10px;
+    box-sizing: border-box;
+    background: $light-gray;
+    outline: none;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 300;
+
+    transition: background-color 0.3s ease-out;
+  }
+
+  &__textarea {
+    height: 125px;
+    resize: none;
+  }
+
+  &::placeholder {
+    text-transform: capitalize;
+  }
+
+  &:focus {
+    background: $silver;
+  }
+
+  &__checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 28px;
+
+    label {
+      margin-left: 10px;
+    }
+  }
+}

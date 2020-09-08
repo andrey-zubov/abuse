@@ -1,0 +1,44 @@
+.feedback {
+  .container {
+    padding: 80px 15px 125px;
+    background-image: url($images + "/doctor.png");
+    background-position: bottom right;
+    background-repeat: no-repeat;
+  }
+
+  &__item {
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 28px;
+
+    .btn {
+      margin-top: 28px;
+      width: max-content;
+    }
+
+    &__input {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      outline: none;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      padding: 10px;
+      background-color: #e9e9e9;
+      margin-bottom: 28px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    textarea {
+      height: 125px;
+      resize: none;
+    }
+  }
+}

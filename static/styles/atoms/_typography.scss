@@ -5,7 +5,9 @@ h4,
 h5,
 h6,
 p,
-span {
+span,
+textarea,
+input {
   font-family: "GothamPro", sans-serif;
 }
 
@@ -19,6 +21,7 @@ p {
   line-height: 27px;
   color: $gray;
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 .headline-3 {
