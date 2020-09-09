@@ -68,6 +68,11 @@ class Articles(models.Model):
         null=True,
         help_text='<li> текст пункта </li>'
     )
+    button_orgs = models.BooleanField(
+        verbose_name='Добавить кнопку-переход к организациям',
+
+    )
+
     link = models.ManyToManyField(
         'Link',
         null=True,
@@ -169,6 +174,16 @@ class Main_Cat(models.Model):
         verbose_name='Название',
         max_length=50
     )
+    help_widget = models.BooleanField(
+        verbose_name='Отображать виджет "первая помощь"'
+    )
+    hiv_widget = models.BooleanField(
+        verbose_name='Отображать виджет "вич и гепатит"'
+    )
+    relapse_widget = models.BooleanField(
+        verbose_name='Отображать виджет "срыв"'
+    )
+
     org_widget = models.BooleanField(
         verbose_name='Отображать виджет организаций'
     )

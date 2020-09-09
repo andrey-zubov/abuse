@@ -1,135 +1,129 @@
 {%extends 'base.html' %}
-<!--{% load static %}-->
 
 {% block side_bar %}
-<div class="col-lg-3">
-            <div class="side-menu">
-              <div class="side-menu__content">
-                <div class="side-menu__links side-menu__links--main">
-                  <a class="link link--medium-blue" href="#help"
-                    ><p>Первая помощь</p></a
-                  >
-                  <a
-                    class="link link--medium-blue"
-                    href="http://pomogut.by/hiv-hepatitis/"
-                    ><p>Вич и гепатит</p></a
-                  >
-                  <a
-                    class="link link--medium-blue"
-                    href="http://pomogut.by/filling-page"
-                    ><p>Срыв</p></a
-                  >
-                </div>
-                <div class="side-menu__links">
-                 {% for article in articles %}
-                    <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
-                  {% endfor %}
-                    {% if org_widget_flag %}
-                      <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
-                    {% endif %}
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
-
-
-
-
-
+  <div class="col-lg-3">
+    <div class="side-menu">
+      <div class="side-menu__content">
+        <div class="side-menu__links side-menu__links--main">
+         wqe
+          <a class="link link--medium-blue" href="#help"
+            ><p>Первая помощь</p></a
+          >
+          <a
+            class="link link--medium-blue"
+            href="http://pomogut.by/hiv-hepatitis/"
+            ><p>Вич и гепатит</p></a
+          >
+          <a
+            class="link link--medium-blue"
+            href="http://pomogut.by/filling-page"
+            ><p>Срыв</p></a
+          >
+        </div>
+        <div class="side-menu__links">
+         {% for article in articles %}
+            <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
+          {% endfor %}
+            {% if org_widget_flag %}
+              <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 {% block header_links %}
-<header class="header header--secondary">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3">
-            <a href="/" class="header__logo">
-              <img src="/static/images/logo.png" />
-            </a>
-          </div>
-          <div class="col-lg-6">
-            <div class="header__title">
-              <h2 class="headline-2">page title</h2>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <a class="header__phone" href="tel:+375173110000"
-              ><p>+ 375 17 311 00 00</p></a
-            >
+  <header class="header header--secondary">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <a href="{% url 'main_page' %}" class="header__logo">
+            <img src="/static/images/logo.png" />
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <div class="header__title">
+            <h2 class="headline-2">page title</h2>
           </div>
         </div>
+        <div class="col-lg-3">
+          <a class="header__phone" href="tel:+375173110000"
+            ><p>+ 375 17 311 00 00</p></a
+          >
+        </div>
       </div>
-    </header>
+    </div>
+  </header>
 {% endblock %}
 
 {% block content %}
-<div class="col-lg-6">
-  {% for article in articles %}
-  <a name="{{ article.id }}"></a>
-  <div class="article">
+  <div class="col-lg-6">
+    {% for article in articles %}
+    <a name="{{ article.id }}"></a>
+    <div class="article">
 
-    <h1 class="article__title headline-1">{{ article.title }}</h1>
-    {% if article.get_img %}
-      <div class="article__image-wrapper aspect-ratio">
-          <img src="{{ article.get_img }}" alt=""></img>
+      <h1 class="article__title headline-1">{{ article.title }}</h1>
+      {% if article.get_img %}
+        <div class="article__image-wrapper aspect-ratio">
+            <img src="{{ article.get_img }}" alt=""></img>
+        </div>
+      {% endif %}
+      <div class="article__description">
+        <p>{{ article.text|safe }}</p>
       </div>
-    {% endif %}
-    <div class="article__description">
-      <p>{{ article.text|safe }}</p>
+        <ul class="article__list">
+          {{ article.points|safe }}
+        </ul>
+      <div class="article__buttons article__buttons--center">
+        {% for link in article.link.all %}
+          <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
+          <br>
+        {% endfor %}
+        {% if article.button_orgs and org_widget_flag %}
+        <a href="#local_orgs" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
+        {% endif %}
+
+      </div>
     </div>
-      <ul class="article__list">
-        {{ article.points|safe }}
-      </ul>
-    <div class="article__buttons article__buttons--center">
-      {% for link in article.link.all %}
-        <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
-        <br>
-      {% endfor %}
-      <a href="#" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
-      <a href="#" class="btn"><span>Правовая информация</span></a>
+  {% endfor %}
+  </div>
+  <div class="col-lg-3">
+    <div class="information-side">
+      <div class="information-block">
+        <h1 class="information-block__title headline-1">Анкеты</h1>
+        <div class="information-block__text">
+          <p><strong>ОРГАНИЗОВАНЫ ОЧНЫЕ КОНСУЛЬТАЦИИ</strong></p>
+          <p>
+            Начиная с марта 2019 года можно получить непосредственную
+            консультацию специалистов РОО «Матери против наркотиков», РЦ
+            «Феникс», МФ «Центр здоровой молодежи» по адресу
+            <strong>г.Минск, ул.Чеботарева, 6а </strong>по
+            предварительной записи.
+          </p>
+          <p>
+            Запись на консультацию производится по телефону
+            <strong>+375 17 311 00 00</strong>
+          </p>
+          {% for q in questions %}
+            <form name="question_form">
+              <input hidden name="answer_for" value="{{q.title}}">
+              {{q.title}}
+              {% for choice in q.get_choices %}
+                <label for="{{choice.id}}">{{choice.title}}</label>
+                <input name="{{q.title}}" id="{{choice.id}}" type="radio" value="{{choice}}">
+              {% endfor %}
+              <br><button type="submit">Голосовать</button>
+              </form>
+          {% endfor %}
+
+        </div>
+        <div class="information-block__image aspect-ratio">
+          <img src="https://via.placeholder.com/1140x764" />
+        </div>
+      </div>
     </div>
   </div>
-{% endfor %}
-</div>
-<div class="col-lg-3">
-            <div class="information-side">
-              <div class="information-block">
-                <h1 class="information-block__title headline-1">Анкеты</h1>
-                <div class="information-block__text">
-                  <p><strong>ОРГАНИЗОВАНЫ ОЧНЫЕ КОНСУЛЬТАЦИИ</strong></p>
-                  <p>
-                    Начиная с марта 2019 года можно получить непосредственную
-                    консультацию специалистов РОО «Матери против наркотиков», РЦ
-                    «Феникс», МФ «Центр здоровой молодежи» по адресу
-                    <strong>г.Минск, ул.Чеботарева, 6а </strong>по
-                    предварительной записи.
-                  </p>
-                  <p>
-                    Запись на консультацию производится по телефону
-                    <strong>+375 17 311 00 00</strong>
-                  </p>
-                  {% for q in questions %}
-                    <form name="question_form">
-                      <input hidden name="answer_for" value="{{q.title}}">
-                      {{q.title}}
-                      {% for choice in q.get_choices %}
-                        <label for="{{choice.id}}">{{choice.title}}</label>
-                        <input name="{{q.title}}" id="{{choice.id}}" type="radio" value="{{choice}}">
-                      {% endfor %}
-                      <br><button type="submit">Голосовать</button>
-                      </form>
-                  {% endfor %}
-
-                </div>
-                <div class="information-block__image aspect-ratio">
-                  <img src="https://via.placeholder.com/1140x764" />
-                </div>
-              </div>
-            </div>
-          </div>
 {% endblock %}
 
 {% block organizations %}
@@ -211,7 +205,6 @@
             </div>
           </div>
         </div>
-
         <div class="organizations__map"></div>
       </section>
 {% endif %}
@@ -219,64 +212,64 @@
 
 {% block footer %}
   <footer class="footer footer--secondary">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-9">
-            <div class="footer__menu">
-              <div class="footer__menu-item">
-                <a class="link link--white" href="#help"
-                  ><p>Первая медицинская помощь</p></a
-                >
-                <a class="link link--white" href="/relapse/"><p>Срыв</p></a>
-                <a class="link link--white" href="/hiv-hepatitis/"
-                  ><p>Вич/Гепатит</p></a
-                >
-                <a class="link link--white" href="http://pomogut.by/legal-info/"
-                  ><p>Правовая информация</p></a
-                >
-              </div>
-              <div class="footer__menu-item">
-                <a
-                  class="link link--white"
-                  href="https://abuse.pomogut.by/i-am-codependent/"
-                  ><p>Мой близкий в проблеме</p></a
-                >
-                <a class="link link--white" href="https://abuse.pomogut.by/org/"
-                  ><p>Я употребляю</p></a
-                >
-                <a
-                  class="link link--white"
-                  href="https://abuse.pomogut.by/i-am-on-remission/"
-                  ><p>Я на ремиссии</p></a
-                >
-              </div>
-              <div class="footer__menu-item">
-                <a class="link link--white" href="/сareers/"
-                  ><p>Центры занятости</p></a
-                >
-                <a
-                  class="link link--white"
-                  href="https://abuse.pomogut.by/events/"
-                  ><p>Мероприятия</p></a
-                >
-                <a
-                  class="link link--white"
-                  href="https://abuse.pomogut.by/about/"
-                  ><p>О проекте</p></a
-                >
-                <a
-                  class="link link--white"
-                  href="http://pomogut.by/to-partners/"
-                  ><p>Стать партнером</p></a
-                >
-                <a
-                  class="link link--white"
-                  href="http://pomogut.by/about/#contacts"
-                  ><p>Написать нам</p></a
-                >
-              </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="footer__menu">
+          <div class="footer__menu-item">
+            <a class="link link--white" href="#help"
+              ><p>Первая медицинская помощь</p></a
+            >
+            <a class="link link--white" href="/relapse/"><p>Срыв</p></a>
+            <a class="link link--white" href="/hiv-hepatitis/"
+              ><p>Вич/Гепатит</p></a
+            >
+            <a class="link link--white" href="http://pomogut.by/legal-info/"
+              ><p>Правовая информация</p></a
+            >
           </div>
+          <div class="footer__menu-item">
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/i-am-codependent/"
+              ><p>Мой близкий в проблеме</p></a
+            >
+            <a class="link link--white" href="https://abuse.pomogut.by/org/"
+              ><p>Я употребляю</p></a
+            >
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/i-am-on-remission/"
+              ><p>Я на ремиссии</p></a
+            >
+          </div>
+          <div class="footer__menu-item">
+            <a class="link link--white" href="/сareers/"
+              ><p>Центры занятости</p></a
+            >
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/events/"
+              ><p>Мероприятия</p></a
+            >
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/about/"
+              ><p>О проекте</p></a
+            >
+            <a
+              class="link link--white"
+              href="http://pomogut.by/to-partners/"
+              ><p>Стать партнером</p></a
+            >
+            <a
+              class="link link--white"
+              href="http://pomogut.by/about/#contacts"
+              ><p>Написать нам</p></a
+            >
+          </div>
+        </div>
+      </div>
           <div class="offset-lg-1 col-lg-2">
             <div class="footer__logos">
               <div class="logo-item">
