@@ -7,7 +7,6 @@ from django.forms import inlineformset_factory
 from .models import (
     Articles,
     Page,
-    Block,
     Main_Cat,
     Organizations,
     City,
@@ -86,12 +85,17 @@ def org_info(request, slug):
 def news_view(request):
     news_type = PageType.objects.get(type='Новость')
     news = Page.objects.filter(type=news_type)
+    all_cats = Main_Cat.objects.filter(is_active=True)
+    down_cats = all_cats.filter(header_menu='down')
+    up_cats = all_cats.filter(header_menu='up')
 
     return render(
         request,
         template_name='news.html',
         context={
             'news': news,
+            'down_cats': down_cats,
+            'up_cats': up_cats,
         }
     )
 

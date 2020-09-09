@@ -118,30 +118,30 @@ class Link(models.Model):
             self.title
 
 
-class Block(models.Model):  # Todo REFACTOR
-    is_active = models.BooleanField(default=True)
-    title = models.CharField(max_length=100, verbose_name="Название блока")
-    slug = models.SlugField(verbose_name="Слаг")
-    name_button = models.CharField(
-        max_length=100,
-        verbose_name="Название кнопки",
-        null=True,
-        blank=True
-    )
-    text = models.TextField(verbose_name="Текст блока")
-    picture = MediaFileForeignKey(MediaFile,
-                                  on_delete=models.SET_NULL,
-                                  null=True,
-                                  blank=True,
-                                  verbose_name="Картинка")
-    # categories = models.ManyToManyField(Category, verbose_name="Раздел-категория-тег")
-    pages = models.ManyToManyField(Page, verbose_name="Статьи")
-
-    def get_img(self):
-        if not self.picture:
-            return None
-        else:
-            return join(settings.MEDIA_URL, str(self.picture.file))
+# class Block(models.Model):  # Todo REFACTOR
+#     is_active = models.BooleanField(default=True)
+#     title = models.CharField(max_length=100, verbose_name="Название блока")
+#     slug = models.SlugField(verbose_name="Слаг")
+#     name_button = models.CharField(
+#         max_length=100,
+#         verbose_name="Название кнопки",
+#         null=True,
+#         blank=True
+#     )
+#     text = models.TextField(verbose_name="Текст блока")
+#     picture = MediaFileForeignKey(MediaFile,
+#                                   on_delete=models.SET_NULL,
+#                                   null=True,
+#                                   blank=True,
+#                                   verbose_name="Картинка")
+#     # categories = models.ManyToManyField(Category, verbose_name="Раздел-категория-тег")
+#     pages = models.ManyToManyField(Page, verbose_name="Статьи")
+#
+#     def get_img(self):
+#         if not self.picture:
+#             return None
+#         else:
+#             return join(settings.MEDIA_URL, str(self.picture.file))
 
 
 class Main_Cat(models.Model):
@@ -372,6 +372,33 @@ class TypeExtension(Extension):
 Page.register_extensions(TypeExtension)
 
 
+class NewsImageExtension(Extension):
+    def handle_model(self):
+        self.model.add_to_class(
+            'preview_img',
+            MediaFileForeignKey(
+                MediaFile,
+                on_delete=models.SET_NULL,
+                verbose_name='Выбрать картинку',
+                null=True,
+                blank=True,
+            )
+        )
+
+    def handle_modeladmin(self, modeladmin):
+        modeladmin.add_extension_options(
+            _("Выбрать картинку на превью"),
+            {"fields": ("preview_img",), },
+        )
+
+    @property
+    def url_img(self):
+        return join(settings.MEDIA_URL, str(self.mediafile.preview_img))
+
+
+Page.register_extensions(NewsImageExtension)
+
+
 class NewsSourceExtension(Extension):
     def handle_model(self):
         self.model.add_to_class(
@@ -390,7 +417,9 @@ class NewsSourceExtension(Extension):
             {"fields": ("source",), },
         )
 
+
 Page.register_extensions(NewsSourceExtension)
+
 
 # опросник
 class Question(models.Model):

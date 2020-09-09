@@ -20,6 +20,47 @@
   </head>
 
   <body>
+     <header class="header">
+  <div class="container">
+    <div class="header__content">
+      <div class="header__content__nav">
+        <nav class="main-menu">
+          <ul class="main-menu__links">
+            <li>
+              <a class="link" href="{% url 'main_page' %}"
+              ><span>Главная</span></a
+              >
+            </li>
+            {% for category in up_cats %}
+            <li>
+              <a class="link" href="/abuse/{{ category.slug }}"
+              ><span>{{ category.title }}</span></a
+              >
+            </li>
+            {% endfor %}
+          </ul>
+        </nav>
+
+        <nav class="main-menu">
+          <ul class="main-menu__navigation">
+            {% for category in down_cats %}
+            <li>
+              <a
+                      class="link link--blue"
+                      href="/abuse/{{ category.slug }}"
+              ><span>{{ category.title }}</span></a
+              >
+            </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <button class="header__button" type="button"><span></span></button>
+  </div>
+</header>
+
+
     <section class="news">
       <div class="container">
         <div class="row">
@@ -34,10 +75,10 @@
                     </h3>
                     <p class="news-item__data">{{ n.publication_date }}}</p>
                     <div class="news-item__image aspect-ratio">
-                      <img src="https://via.placeholder.com/1500x750" />
+                      <img src="{{ n.preview_img }}" />
                     </div>
                     <p class="news-item__description">
-                      {{ n.content.main.0.text|safe|slice:":256" }}
+                      {{ n.content.main.0.text|safe|slice:":400" }}...
                     </p>
                     <a class="news-item__button link link--blue" href="/{{ n.slug }}"
                       >Подробнее</a
