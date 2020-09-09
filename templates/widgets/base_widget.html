@@ -40,10 +40,12 @@
                     {% endblock %}
                   </p>
                 </div>
-                <div class="single-news__source">
-                  <p>Источник:</p>
-                  <a class="" href="#">example.com</a>
-                </div>
+                {% if feincms_page.source %}
+                  <div class="single-news__source">
+                    <p>Источник:</p>
+                    <a class="" href="{{ feincms_page.source }}">{{ feincms_page.source }}</a>
+                  </div>
+                {% endif %}
               </div>
               <a class="single-news__button link link--blue" href="#"
                 >Назад ко всем новостям</a

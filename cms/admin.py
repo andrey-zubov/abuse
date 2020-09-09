@@ -12,7 +12,6 @@ from .models import (
     OrganizationServices,
     City,
     PageType,
-    NewsSource,
     Question,
     Answer,
     Choice
@@ -43,7 +42,6 @@ admin.site.register(ServicesPayment)
 admin.site.register(ServicesStuff)
 
 admin.site.register(PageType)
-admin.site.register(NewsSource)
 
 admin.site.register(Question)
 admin.site.register(Answer)

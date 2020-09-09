@@ -371,30 +371,14 @@ class TypeExtension(Extension):
 
 Page.register_extensions(TypeExtension)
 
-class NewsSource(models.Model):
-    class Meta:
-        db_table = 'newssource'
-        verbose_name = 'Тип статьи'
-        verbose_name_plural = 'Типы статьей'
-
-    source = models.CharField(
-        verbose_name='Источник',
-        max_length=256,
-        null=True,
-        blank=True
-    )
-
 
 class NewsSourceExtension(Extension):
-    model = 'newssource'
-
     def handle_model(self):
         self.model.add_to_class(
             'source',
-            models.ForeignKey(
-                NewsSource,
+            models.CharField(
                 verbose_name='Ссылка на источник',
-                on_delete=models.CASCADE,
+                max_length=256,
                 null=True,
                 blank=True
             )
