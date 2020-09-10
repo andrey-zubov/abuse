@@ -386,10 +386,6 @@ class NewsImageExtension(Extension):
             {"fields": ("preview_img",), },
         )
 
-    @property
-    def url_img(self):
-        return join(settings.MEDIA_URL, str(self.mediafile.preview_img))
-
 
 Page.register_extensions(NewsImageExtension)
 
