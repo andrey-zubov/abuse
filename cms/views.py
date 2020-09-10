@@ -43,7 +43,13 @@ def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
             choice=choice
         )
 
-    if Main_Cat.objects.get(slug=slug).org_widget:
+    this_category = Main_Cat.objects.get(slug=slug)
+
+    show_help = this_category.help_widget
+    show_hiv = this_category.help_widget
+    show_relapse = this_category.relapse_widget
+
+    if this_category.org_widget:
         orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
         org_widget_flag = True
     else:
@@ -70,6 +76,9 @@ def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
                  'down_cats': down_cats,
                  'up_cats': up_cats,
                  'questions': questions,
+                 'show_help': show_help,
+                 'show_hiv': show_hiv,
+                 'show_relapse': show_relapse,
                  })
 
 

@@ -32,7 +32,6 @@ Page.register_templates({
 Page.create_content_type(RichTextContent)
 Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
     ('default', _('default')),
-    ('lightbox', _('lightbox')),
 ))
 
 class Articles(models.Model):
