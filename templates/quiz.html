@@ -26,55 +26,39 @@
           <div class="col-lg-3">
             <div class="quiz">
               <div class="quiz-item">
-                <p class="quiz-item__title">
-                  Готовы ли Вы пройти бесплатную программу лечения?
-                </p>
-                <div class="quiz-item__content">
-                  <div class="quiz-item__radio">
-                    <input
-                      type="radio"
-                      name="ready"
-                      value="1"
-                      id="check1"
-                    /><label for="check1"><p>Да, готов</p></label>
-                  </div>
-                  <div class="quiz-item__radio">
-                    <input
-                      type="radio"
-                      name="ready"
-                      value="2"
-                      id="check2"
-                    /><label for="check2"><p>Нет, не готов</p></label>
-                  </div>
-                  <div class="quiz-item__radio">
-                    <input
-                      type="radio"
-                      name="ready"
-                      value="3"
-                      id="check3"
-                    /><label for="check3"><p>Зависит от условия</p></label>
-                  </div>
-                  <div class="quiz-item__radio">
-                    <input
-                      type="radio"
-                      name="ready"
-                      value="4"
-                      id="check4"
-                    /><label for="check4"
-                      ><p>Зависит от других факторов</p></label
-                    >
-                  </div>
-                </div>
-                <button type="button" class="btn quiz-item__button">
-                  Голосовать
-                </button>
 
+                {% for q in questions %}
+            <form name="question_form">
+              <input hidden name="answer_for" value="{{q.title}}">
+              <p class="quiz-item__title">
+                  {{q.title}}
+              </p>
+              <div class="quiz-item__content">
+                {% for choice in q.get_choices %}
+                  <div class="quiz-item__radio">
+                    <p>
+                      <input
+                      type="radio"
+                      name="{{q.title}}"
+                      value="{{choice}}"
+                      id="{{choice.id}}"
+                      />
+                      <label for="{{choice.id}}">{{choice.title}}</label>
+                    </p>
+                  </div>
+                {% endfor %}
+                  <button type="submit" class="btn quiz-item__button">
+                    Голосовать
+                  </button>
+                </div>
                 <button
                   type="button"
                   class="quiz-item__button quiz-item__button--transparent"
                 >
                   Показать результаты
                 </button>
+              </form>
+          {% endfor %}
               </div>
 
               <div class="quiz-item quiz-item--done">
