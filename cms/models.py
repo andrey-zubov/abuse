@@ -348,33 +348,13 @@ class ServicesPayment(models.Model):
         return self.title
 
 
-class PageType(models.Model):
-    class Meta:
-        db_table = 'pagetype'
-        verbose_name = 'Тип статьи'
-        verbose_name_plural = 'Типы статьей'
-
-    type = models.CharField(
-        verbose_name='тип модели',
-        max_length=24,
-    )
-
-    def __str__(self):
-        return self.type
-
-
 class TypeExtension(Extension):
-    model = 'pagetype'
-
     def handle_model(self):
         self.model.add_to_class(
             'type',
-            models.ForeignKey(
-                PageType,
-                verbose_name='Тип статьи',
-                on_delete=models.DO_NOTHING,
-                null=True,
-                blank=True
+            models.BooleanField(
+                verbose_name='Является новостью',
+                default=True
             )
         )
 

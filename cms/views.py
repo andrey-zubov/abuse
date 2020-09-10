@@ -11,7 +11,6 @@ from .models import (
     Organizations,
     City,
     ServicesType,
-    PageType,
     OrganizationServices,
     Question,
     Choice,
@@ -83,8 +82,7 @@ def org_info(request, slug):
 
 
 def news_view(request):
-    news_type = PageType.objects.get(type='Новость')
-    news = Page.objects.filter(type=news_type)
+    news = Page.objects.filter(type=True)
     all_cats = Main_Cat.objects.filter(is_active=True)
     down_cats = all_cats.filter(header_menu='down')
     up_cats = all_cats.filter(header_menu='up')
