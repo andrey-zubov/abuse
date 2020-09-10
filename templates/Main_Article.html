@@ -108,12 +108,24 @@
           {% for q in questions %}
             <form name="question_form">
               <input hidden name="answer_for" value="{{q.title}}">
-              {{q.title}}
-              {% for choice in q.get_choices %}
-                <label for="{{choice.id}}">{{choice.title}}</label>
-                <input name="{{q.title}}" id="{{choice.id}}" type="radio" value="{{choice}}">
-              {% endfor %}
-              <br><button type="submit">Голосовать</button>
+              <p class="quiz-item__title">
+                  {{q.title}}
+              </p>
+              <div class="quiz-item__content">
+                {% for choice in q.get_choices %}
+                  <div class="quiz-item__radio">
+                    <p>
+                      <input
+                      type="radio"
+                      name="{{q.title}}"
+                      value="{{choice}}"
+                      id="{{choice.id}}"
+                      />
+                      <label for="{{choice.id}}">{{choice.title}}</label>
+                    </p>
+                  </div>
+                {% endfor %}
+              <button type="submit">Голосовать</button>
               </form>
           {% endfor %}
 

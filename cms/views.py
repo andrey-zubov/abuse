@@ -31,14 +31,16 @@ def main_page(request):
 
 
 def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
+    print(request.GET
+          )
     if request.GET.__contains__('answer_for'):  # hold an answer in db
         question = Question.objects.get(title=request.GET['answer_for'])
-        chosed_answer = Choice.objects.get(
-            Q(question=question) & Q(title=request.GET[str(question)])
+        choice = Choice.objects.get(
+            Q(question=question) & Q(title=request.GET[question.title])
         )
         save_answer = Answer.objects.create(
-            question=question,
-            choice=chosed_answer
+            question_id=question.id,
+            choice=choice
         )
 
     if Main_Cat.objects.get(slug=slug).org_widget:
