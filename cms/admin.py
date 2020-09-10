@@ -27,6 +27,15 @@ class OrganizationAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',), }
 
 
+class ChoicesAdmin(admin.StackedInline):
+    model = Choice
+    extra = 1
+
+class QuestionAdmin(admin.ModelAdmin):
+    inlines = [ChoicesAdmin]
+
+
+
 admin.site.register(Articles)
 admin.site.register(Link)
 admin.site.register(Main_Cat)
@@ -41,8 +50,7 @@ admin.site.register(ServicesStuff)
 
 admin.site.register(PageType)
 
-admin.site.register(Question)
+admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
-admin.site.register(Choice)
 
 # Register your models here.

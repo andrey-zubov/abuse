@@ -447,7 +447,12 @@ class Question(models.Model):
         default=True
     )
     def __str__(self):
-        return self.title
+        answers = Answer.objects.filter(question=self)
+        choices = [i.title for i in self.get_choices()]
+        dic = {}
+        for ch in choices:
+            dic[ch] = answers.filter(choice__title=ch).count()
+        return f'{self.title} проголосовало: {answers.count()}. Итоги: {dic}'
 
     def get_choices(self):
         return self.choice_set.all()
@@ -475,5 +480,7 @@ class Answer(models.Model):
         Choice,
         on_delete=models.CASCADE,
     )
+
     def __str__(self):
         return f'{self.question.title}: {self.choice.title}'
+
