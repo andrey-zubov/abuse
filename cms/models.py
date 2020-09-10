@@ -29,6 +29,15 @@ Page.register_templates({
     ),
 })
 
+
+Page.register_templates({
+    'title': _('Test template'),
+    'path': 'widgets/test_page.html',
+    'regions': (
+        ('main', _('Main content area')),
+    ),
+})
+
 Page.create_content_type(RichTextContent)
 Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
     ('default', _('default')),
