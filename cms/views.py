@@ -103,8 +103,11 @@ def news_view(request):
 def add_new_org(request):
     if request.method == 'POST':
         org_form = OrgForm(request.POST)
-        ServFormset = inlineformset_factory(Organizations, OrganizationServices, exclude=[])
-        # formset = ServFormset(request.POST)
+        ServFormset = inlineformset_factory(
+            Organizations,
+            OrganizationServices,
+            exclude=[]
+        )
         if org_form.is_valid():
             new_org = org_form.save(commit=False)
             new_org.slug = request.POST['title']
@@ -117,7 +120,13 @@ def add_new_org(request):
             return HttpResponse(1341)
     else:
         form = OrgForm()
-        OrgFomset = inlineformset_factory(Organizations, OrganizationServices, exclude=(), extra=5)
+        OrgFomset = inlineformset_factory(
+            Organizations,
+            OrganizationServices,
+            exclude=(),
+            extra=5,
+            can_delete=False
+        )
         formset = OrgFomset()
         return render(
             request,
