@@ -15,10 +15,12 @@ export default class Partners{
             closeOnSelect: true,
             placeholder: 'Тип организации',
         });
+        
         $('.form-item__select--form').select2({
             closeOnSelect: true,
             placeholder: 'Форма собственности организации',
         });
+
         $('.form-item__select--work').select2({
             closeOnSelect: true,
             placeholder: 'Тип занятости',
