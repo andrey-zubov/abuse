@@ -50,7 +50,7 @@
           {% endif %}
         </div>
         <div class="side-menu__links">
-         {% for article in articles %}
+         {% for article in pages %}
             <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
           {% endfor %}
             {% if org_widget_flag %}
@@ -64,13 +64,6 @@
 
 
 {% block content %}
-
-<!--{% for p in pages %}-->
-<!--  {% for i in p.content.main%}-->
-<!--    {{i.render}}-->
-<!--  {% endfor %}-->
-<!--{% endfor %}-->
-
   <div class="col-lg-6">
     {% for article in pages %}
     <a name="{{ article.id }}"></a>
@@ -85,9 +78,14 @@
           <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
           <br>
         {% endfor %}
-        {% if article.button_orgs and org_widget_flag %}
+        werqw
+        {% for link in article.button.all %}
+          {{link.title}} +++
+        {%endfor%}
         <a href="#local_orgs" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
-        {% endif %}
+
+
+
 
       </div>
     </div>
@@ -99,7 +97,7 @@
             <div class="quiz">
               <div class="quiz-item">
               {% for q in questions %}
-                <form name="question_form">
+                <form name="question_form" action="{% url 'news_page %}">
                   <input hidden name="answer_for" value="{{q.title}}">
                   <p class="quiz-item__title">
                     {{q.title}}

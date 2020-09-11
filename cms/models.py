@@ -434,6 +434,34 @@ class NewsSourceExtension(Extension):
 Page.register_extensions(NewsSourceExtension)
 
 
+class LinkExtension(Extension):
+    def handle_model(self):
+        self.model.add_to_class(
+            'button',
+            models.ManyToManyField(
+                Link,
+                verbose_name='Ссылка на источник',
+                null=True,
+                blank=True,
+            )
+        )
+        self.model.add_to_class(
+            'wat',
+            models.CharField(
+                max_length=256,
+                null=True,
+                blank=True
+            )
+        )
+
+    def handle_modeladmin(self, modeladmin):
+        modeladmin.add_extension_options(
+            _("Кнопки"),
+            {"fields": ("button", "wat"), },
+        )
+
+Page.register_extensions(LinkExtension)
+
 # опросник
 class Question(models.Model):
     title = models.CharField(

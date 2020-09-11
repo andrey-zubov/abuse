@@ -155,5 +155,8 @@ def add_new_org(request):
 
 def megapage(request):
     pages = Page.objects.all()
-
-    return render(request, 'widgets/wtf_t.html', context={'pages': pages})
+    questions = Question.objects.all().prefetch_related('choice_set')
+    return render(request, 'widgets/wtf_t.html', context={
+        'pages': pages,
+        'questions': questions
+    })
