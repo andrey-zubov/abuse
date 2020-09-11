@@ -1,0 +1,268 @@
+{%extends 'base.html' %}
+
+{% block header_links %}
+  <header class="header header--secondary">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <a href="{% url 'main_page' %}" class="header__logo">
+            <img src="/static/images/logo.png" />
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <div class="header__title">
+            <h2 class="headline-2">page title</h2>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <a class="header__phone" href="tel:+375173110000"
+            ><p>+ 375 17 311 00 00</p></a
+          >
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block side_bar %}
+  <div class="col-lg-3">
+    <div class="side-menu">
+      <div class="side-menu__content">
+        <div class="side-menu__links side-menu__links--main">
+          {% if show_help %}
+          <a class="link link--medium-blue" href="{% url 'help_pdf' %}"
+            ><p>Первая помощь</p></a
+          >
+          {% endif %}
+          {% if show_hiv %}
+          <a
+            class="link link--medium-blue"
+            href="http://pomogut.by/hiv-hepatitis/"
+            ><p>Вич и гепатит</p></a
+          >
+          {% endif %}
+          {% if show_relapse %}
+          <a
+            class="link link--medium-blue"
+            href="http://pomogut.by/filling-page"
+            ><p>Срыв</p></a
+          >
+          {% endif %}
+        </div>
+        <div class="side-menu__links">
+         {% for article in articles %}
+            <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
+          {% endfor %}
+            {% if org_widget_flag %}
+              <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+
+<!--{% for p in pages %}-->
+<!--  {% for i in p.content.main%}-->
+<!--    {{i.render}}-->
+<!--  {% endfor %}-->
+<!--{% endfor %}-->
+
+  <div class="col-lg-6">
+    {% for article in pages %}
+    <a name="{{ article.id }}"></a>
+    <div class="article">
+
+      <h1 class="article__title headline-1">{{ article.title }}</h1>
+       {% for i in article.content.main%}
+        {{i.render}}
+      {% endfor %}
+      <div class="article__buttons article__buttons--center">
+        {% for link in article.link.all %}
+          <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
+          <br>
+        {% endfor %}
+        {% if article.button_orgs and org_widget_flag %}
+        <a href="#local_orgs" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
+        {% endif %}
+
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+  <div class="col-lg-3">
+    <div class="information-side">
+      <div class="information-block">
+            <div class="quiz">
+              <div class="quiz-item">
+              {% for q in questions %}
+                <form name="question_form">
+                  <input hidden name="answer_for" value="{{q.title}}">
+                  <p class="quiz-item__title">
+                    {{q.title}}
+                  </p>
+                  <div class="quiz-item__content">
+                    {% for choice in q.get_choices %}
+                      <div class="quiz-item__radio">
+                        <p>
+                          <input
+                          type="radio"
+                          name="{{q.title}}"
+                          value="{{choice}}"
+                          id="{{choice.id}}"
+                          />
+                          <label for="{{choice.id}}">{{choice.title}}</label>
+                        </p>
+                      </div>
+                    {% endfor %}
+                    <button type="submit" class="btn quiz-item__button">
+                      Голосовать
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    class="quiz-item__button quiz-item__button--transparent"
+                  >
+                    Показать результаты
+                  </button>
+                </form>
+              {% endfor %}
+              </div>
+            </div>
+
+
+              <div class="quiz-item quiz-item--done">
+                <div class="quiz-item__content">
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Да, готов (72%, 129 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 72%"
+                    ></div>
+                  </div>
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Зависит от условия (16%, 29 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 16%"
+                    ></div>
+                  </div>
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Нет, не готов (9%, 16 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 9%"
+                    ></div>
+                  </div>
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Зависит от других факторов (3%, 5 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 3%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="quiz-item__all">
+                  <p>Всего проголосовавших:<strong>129</strong></p>
+                </div>
+                <button
+                  type="button"
+                  class="quiz-item__button quiz-item__button--transparent"
+                >
+                  Голосовать
+                </button>
+              </div>
+            </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block footer %}
+  <footer class="footer footer--secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="footer__menu">
+          <div class="footer__menu-item">
+            <a class="link link--white" href="#help"
+              ><p>Первая медицинская помощь</p></a
+            >
+            <a class="link link--white" href="/relapse/"><p>Срыв</p></a>
+            <a class="link link--white" href="/hiv-hepatitis/"
+              ><p>Вич/Гепатит</p></a
+            >
+            <a class="link link--white" href="http://pomogut.by/legal-info/"
+              ><p>Правовая информация</p></a
+            >
+          </div>
+          <div class="footer__menu-item">
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/i-am-codependent/"
+              ><p>Мой близкий в проблеме</p></a
+            >
+            <a class="link link--white" href="https://abuse.pomogut.by/org/"
+              ><p>Я употребляю</p></a
+            >
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/i-am-on-remission/"
+              ><p>Я на ремиссии</p></a
+            >
+          </div>
+          <div class="footer__menu-item">
+            <a class="link link--white" href="/сareers/"
+              ><p>Центры занятости</p></a
+            >
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/events/"
+              ><p>Мероприятия</p></a
+            >
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/about/"
+              ><p>О проекте</p></a
+            >
+            <a
+              class="link link--white"
+              href="http://pomogut.by/to-partners/"
+              ><p>Стать партнером</p></a
+            >
+            <a
+              class="link link--white"
+              href="http://pomogut.by/about/#contacts"
+              ><p>Написать нам</p></a
+            >
+          </div>
+        </div>
+      </div>
+          <div class="offset-lg-1 col-lg-2">
+            <div class="footer__logos">
+              <div class="logo-item">
+                <img src="/static/images/logo-belhard.png" />
+              </div>
+              <div class="logo-item">
+                <img src="/static/images/AIPSIN-logo.png" />
+              </div>
+              <div class="logo-item">
+                <img src="/static/images/logo-un.png" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+{% endblock %}
