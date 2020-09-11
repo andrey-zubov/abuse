@@ -21,21 +21,19 @@ Page.register_extensions(
 )  # Example set of extensions
 
 Page.register_templates({
-    'title': _('Standard template'),
+    'title': _('Новость'),
     'path': 'widgets/base_widget.html',
     'regions': (
         ('main', _('Main content area')),
-        ('sidebar', _('Sidebar'), 'inherited'),
     ),
 })
 
 
 Page.register_templates({
-    'title': _('Test template'),
-    'path': 'widgets/test_page.html',
+    'title': _('Отдельная статья'),
+    'path': 'widgets/single_article.html',
     'regions': (
         ('main', _('Main content area')),
-        ('sidebar', _('Sidebar'), 'inherited'),
     ),
 })
 

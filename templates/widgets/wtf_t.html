@@ -74,18 +74,9 @@
         {{i.render}}
       {% endfor %}
       <div class="article__buttons article__buttons--center">
-        {% for link in article.link.all %}
-          <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
-          <br>
-        {% endfor %}
-        werqw
         {% for link in article.button.all %}
-          {{link.title}} +++
+         <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
         {%endfor%}
-        <a href="#local_orgs" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
-
-
-
 
       </div>
     </div>

@@ -99,7 +99,7 @@ def org_info(request, slug):
 
 
 def news_view(request):
-    news = Page.objects.filter(type=True)
+    news = Page.objects.filter(template_key='widgets/base_widget.html')
     all_cats = Main_Cat.objects.filter(is_active=True)
     down_cats = all_cats.filter(header_menu='down')
     up_cats = all_cats.filter(header_menu='up')
