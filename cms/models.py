@@ -39,6 +39,25 @@ Page.register_templates({
 
 Page.create_content_type(RichTextContent)
 
+class OrgWidget(models.Model):
+    class Meta:
+        abstract = True
+
+    def render(self):
+        orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+        all_cites = City.objects.filter()
+        all_types = ServicesType.objects.filter()
+        return render_to_string(
+            'widgets/org_widget.html',
+            context={'widget': self,
+                     'orgs': orgs,
+                     'all_cites': all_cites,
+                     'all_types': all_types,
+                     })
+
+
+Page.create_content_type(OrgWidget)
+
 class ArticlePicture(models.Model):
     class Meta:
         abstract = True
@@ -459,24 +478,23 @@ class LinkExtension(Extension):
             'button',
             models.ManyToManyField(
                 Link,
-                verbose_name='Ссылка на источник',
+                verbose_name='Ссылка под статьей',
                 null=True,
                 blank=True,
             )
         )
         self.model.add_to_class(
-            'wat',
-            models.CharField(
-                max_length=256,
-                null=True,
-                blank=True
+            'org_button',
+            models.BooleanField(
+                default=True,
+                verbose_name='Отображать кнопку быстрого перехода к организациям'
             )
         )
 
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(
             _("Кнопки"),
-            {"fields": ("button", "wat"), },
+            {"fields": ("button", "org_button"), },
         )
 
 Page.register_extensions(LinkExtension)
