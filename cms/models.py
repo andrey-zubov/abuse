@@ -35,6 +35,7 @@ Page.register_templates({
     'path': 'widgets/test_page.html',
     'regions': (
         ('main', _('Main content area')),
+        ('sidebar', _('Sidebar'), 'inherited'),
     ),
 })
 
