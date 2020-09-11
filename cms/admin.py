@@ -12,7 +12,8 @@ from .models import (
     City,
     Question,
     Answer,
-    Choice
+    Choice,
+    HelpFile
 )
 
 
@@ -46,6 +47,8 @@ admin.site.register(ServicesType)
 admin.site.register(ServicesConf)
 admin.site.register(ServicesPayment)
 admin.site.register(ServicesStuff)
+
+admin.site.register(HelpFile)
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)

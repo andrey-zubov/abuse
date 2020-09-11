@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from django.db.models import Q
 from .forms import OrgForm
 from django.forms import inlineformset_factory
@@ -14,7 +14,8 @@ from .models import (
     OrganizationServices,
     Question,
     Choice,
-    Answer
+    Answer,
+    HelpFile
 )
 
 
@@ -28,6 +29,11 @@ def main_page(request):
         context={'down_cats': down_cats,
                  'up_cats': up_cats,
                  })
+
+
+def help_file(request):
+    file = HelpFile.objects.latest('id')
+    return FileResponse(open(file.get_file, 'rb'))
 
 
 def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):

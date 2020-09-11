@@ -131,6 +131,17 @@ class Link(models.Model):
             self.title
 
 
+class HelpFile(models.Model):
+    file = models.FileField(
+        verbose_name='Файл',
+        null=True,
+        blank=False
+    )
+
+    @property
+    def get_file(self):
+        return join(settings.MEDIA_URL, str(self.file.file))
+
 # class Block(models.Model):  # Todo REFACTOR
 #     is_active = models.BooleanField(default=True)
 #     title = models.CharField(max_length=100, verbose_name="Название блока")
