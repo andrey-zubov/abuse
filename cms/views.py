@@ -151,3 +151,9 @@ def add_new_org(request):
                 'formset': formset,
             }
         )
+
+
+def megapage(request):
+    pages = Page.objects.all()
+
+    return render(request, 'widgets/wtf_t.html', context={'pages': pages})

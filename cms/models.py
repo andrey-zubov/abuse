@@ -410,6 +410,8 @@ class NewsImageExtension(Extension):
 Page.register_extensions(NewsImageExtension)
 
 
+
+
 class NewsSourceExtension(Extension):
     def handle_model(self):
         self.model.add_to_class(
