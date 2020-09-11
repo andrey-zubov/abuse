@@ -97,7 +97,7 @@
             <div class="quiz">
               <div class="quiz-item">
               {% for q in questions %}
-                <form name="question_form" action="{% url 'news_page %}">
+                <form name="question_form" action="">
                   <input hidden name="answer_for" value="{{q.title}}">
                   <p class="quiz-item__title">
                     {{q.title}}

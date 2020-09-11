@@ -154,6 +154,15 @@ def add_new_org(request):
 
 
 def megapage(request):
+    if request.GET.__contains__('answer_for'):  # hold an answer in db
+        question = Question.objects.get(title=request.GET['answer_for'])
+        choice = Choice.objects.get(
+            Q(question=question) & Q(title=request.GET[question.title])
+        )
+        save_answer = Answer.objects.create(
+            question_id=question.id,
+            choice=choice
+        )
     pages = Page.objects.all()
     questions = Question.objects.all().prefetch_related('choice_set')
     return render(request, 'widgets/wtf_t.html', context={

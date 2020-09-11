@@ -40,9 +40,30 @@ Page.register_templates({
 })
 
 Page.create_content_type(RichTextContent)
-Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
-    ('default', _('default')),
-))
+
+class ArticlePicture(models.Model):
+    class Meta:
+        abstract = True
+
+    picture = MediaFileForeignKey(
+        MediaFile,
+        on_delete=models.SET_NULL,
+        verbose_name='Картинка',
+        null=True,
+        blank=True,
+    )
+
+    def get_img(self):
+        return join(settings.MEDIA_URL, str(self.picture.file))
+
+    def render(self):
+        return render_to_string(
+            'widgets/picture_widget.html',
+            context={'widget': self})
+
+
+Page.create_content_type(ArticlePicture)
+
 
 class Articles(models.Model):
     class Meta:
