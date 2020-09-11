@@ -163,9 +163,15 @@ def megapage(request):
             question_id=question.id,
             choice=choice
         )
+    orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+    all_cites = City.objects.filter()
+    all_types = ServicesType.objects.filter()
     pages = Page.objects.all()
     questions = Question.objects.all().prefetch_related('choice_set')
     return render(request, 'widgets/wtf_t.html', context={
         'pages': pages,
-        'questions': questions
+        'questions': questions,
+        'orgs': orgs,
+        'all_cites': all_cites,
+        'all_types': all_types,
     })

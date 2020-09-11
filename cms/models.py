@@ -39,24 +39,24 @@ Page.register_templates({
 
 Page.create_content_type(RichTextContent)
 
-class OrgWidget(models.Model):
-    class Meta:
-        abstract = True
-
-    def render(self):
-        orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
-        all_cites = City.objects.filter()
-        all_types = ServicesType.objects.filter()
-        return render_to_string(
-            'widgets/org_widget.html',
-            context={'widget': self,
-                     'orgs': orgs,
-                     'all_cites': all_cites,
-                     'all_types': all_types,
-                     })
-
-
-Page.create_content_type(OrgWidget)
+# class OrgWidget(models.Model):
+#     class Meta:
+#         abstract = True
+#
+#     def render(self):
+#         orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+#         all_cites = City.objects.filter()
+#         all_types = ServicesType.objects.filter()
+#         return render_to_string(
+#             'widgets/org_widget.html',
+#             context={'widget': self,
+#                      'orgs': orgs,
+#                      'all_cites': all_cites,
+#                      'all_types': all_types,
+#                      })
+#
+#
+# Page.create_content_type(OrgWidget)
 
 class ArticlePicture(models.Model):
     class Meta:
