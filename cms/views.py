@@ -36,9 +36,38 @@ def help_file(request):
     return FileResponse(open(file.get_file, 'rb'))
 
 
+def megapage(request, slug):
+    this_category = Main_Cat.objects.get(slug=slug)
+
+    if request.GET.__contains__('answer_for'):  # hold an answer in db
+        question = Question.objects.get(title=request.GET['answer_for'])
+        choice = Choice.objects.get(
+            Q(question=question) & Q(title=request.GET[question.title])
+        )
+        save_answer = Answer.objects.create(
+            question_id=question.id,
+            choice=choice
+        )
+    orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+    all_cites = City.objects.filter()
+    all_types = ServicesType.objects.filter()
+    pages = Page.objects.filter(
+        Q(template_key='widgets/single_article.html') & Q(category__id=this_category.id)
+    )
+    questions = Question.objects.all().prefetch_related('choice_set')
+    return render(
+        request,
+        template_name='widgets/wtf_t.html',
+        context={
+            'pages': pages,
+            'questions': questions,
+            'orgs': orgs,
+            'all_cites': all_cites,
+            'all_types': all_types,
+        })
+
+
 def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
-    print(request.GET
-          )
     if request.GET.__contains__('answer_for'):  # hold an answer in db
         question = Question.objects.get(title=request.GET['answer_for'])
         choice = Choice.objects.get(
@@ -151,27 +180,3 @@ def add_new_org(request):
                 'formset': formset,
             }
         )
-
-
-def megapage(request):
-    if request.GET.__contains__('answer_for'):  # hold an answer in db
-        question = Question.objects.get(title=request.GET['answer_for'])
-        choice = Choice.objects.get(
-            Q(question=question) & Q(title=request.GET[question.title])
-        )
-        save_answer = Answer.objects.create(
-            question_id=question.id,
-            choice=choice
-        )
-    orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
-    all_cites = City.objects.filter()
-    all_types = ServicesType.objects.filter()
-    pages = Page.objects.all()
-    questions = Question.objects.all().prefetch_related('choice_set')
-    return render(request, 'widgets/wtf_t.html', context={
-        'pages': pages,
-        'questions': questions,
-        'orgs': orgs,
-        'all_cites': all_cites,
-        'all_types': all_types,
-    })

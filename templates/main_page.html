@@ -53,8 +53,13 @@
             <nav class="main-menu">
               <ul class="main-menu__navigation">
                 {% for down_cat in down_cats %}
+<!--                <li>-->
+<!--                  <a  class="link link&#45;&#45;blue" href="{% url 'main_articles' slug=down_cat.slug %}"-->
+<!--                    ><span>{{ down_cat.title }}</span></a-->
+<!--                  >-->
+<!--                </li>-->
                 <li>
-                  <a  class="link link--blue" href="{% url 'main_articles' slug=down_cat.slug %}"
+                  <a  class="link link--blue" href="{% url 'articles_page' slug=down_cat.slug %}"
                     ><span>{{ down_cat.title }}</span></a
                   >
                 </li>

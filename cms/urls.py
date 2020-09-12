@@ -10,5 +10,5 @@ urlpatterns = [
 
     path('abuse/<slug>/', articles_by_cat, name='main_articles'),
 
-    path('megapage/', megapage)
+    path('megapage/<slug>/', megapage, name='articles_page')
 ]

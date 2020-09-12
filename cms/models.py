@@ -58,6 +58,7 @@ Page.create_content_type(RichTextContent)
 #
 # Page.create_content_type(OrgWidget)
 
+
 class ArticlePicture(models.Model):
     class Meta:
         abstract = True
@@ -406,23 +407,26 @@ class ServicesPayment(models.Model):
         return self.title
 
 
-class TypeExtension(Extension):
+class ArticleCategory(Extension):
     def handle_model(self):
         self.model.add_to_class(
-            'type',
-            models.BooleanField(
-                verbose_name='Является новостью',
-                default=True
+            'category',
+            models.ManyToManyField(
+                Main_Cat,
+                null=False,
+                blank=False
+
             )
         )
 
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(
-            _("Тип статьи"),
-            {"fields": ("type",), },
+            _("Категория"),
+            {"fields": ("category",), },
         )
 
-Page.register_extensions(TypeExtension)
+
+Page.register_extensions(ArticleCategory)
 
 
 class NewsImageExtension(Extension):

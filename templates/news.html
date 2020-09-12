@@ -76,7 +76,8 @@
                     </h3>
                     <p class="news-item__data">{{ n.publication_date }}}</p>
                     <div class="news-item__image aspect-ratio">
-                      <img src="{% get_media_prefix %}{{ n.preview_img.file }}" />
+                      {{n.content.main.0}}
+<!--                      <img src="{% get_media_prefix %}{{ n.preview_img.file }}" />-->
                     </div>
                     <p class="news-item__description">
                       {{ n.content.main.0.text|safe|slice:":400" }}...
