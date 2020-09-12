@@ -77,6 +77,9 @@
         {% for link in article.button.all %}
          <a href="{{ link.link }}" class="btn" target=""><span>{{ link.title }}</span></a>
         {%endfor%}
+        {% if article.org_button %}
+          <a href="#local_orgs" class="btn" target=""><span>Найти ближайшую организацию</span></a>
+        {% endif %}
 
       </div>
     </div>
