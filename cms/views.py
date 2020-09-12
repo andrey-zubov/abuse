@@ -48,7 +48,14 @@ def megapage(request, slug):
             question_id=question.id,
             choice=choice
         )
-    orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+
+    if this_category.org_widget:
+        orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+        org_widget_flag = True
+    else:
+        orgs = None
+        org_widget_flag = False
+
     all_cites = City.objects.filter()
     all_types = ServicesType.objects.filter()
     pages = Page.objects.filter(
@@ -71,6 +78,8 @@ def megapage(request, slug):
             'show_help': show_help,
             'show_hiv': show_hiv,
             'show_relapse': show_relapse,
+            'org_widget_flag': org_widget_flag,
+            'this_category': this_category
     })
 
 #

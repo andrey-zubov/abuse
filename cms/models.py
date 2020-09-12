@@ -246,6 +246,10 @@ class Main_Cat(models.Model):
     org_widget = models.BooleanField(
         verbose_name='Отображать виджет организаций'
     )
+    cross_link = models.ManyToManyField(
+        'self',
+
+    )
 
     def __str__(self):
         return self.title
@@ -498,7 +502,7 @@ class LinkExtension(Extension):
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(
             _("Кнопки"),
-            {"fields": ("button", "org_button"), },
+            {"fields": ("button", "org_button",), },
         )
 
 Page.register_extensions(LinkExtension)

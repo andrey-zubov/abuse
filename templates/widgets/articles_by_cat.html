@@ -30,24 +30,15 @@
       <div class="side-menu__content">
         <div class="side-menu__links side-menu__links--main">
           {% if show_help %}
-          <a class="link link--medium-blue" href="{% url 'help_pdf' %}"
-            ><p>Первая помощь</p></a
-          >
+            <a class="link link--medium-blue" href="{% url 'help_pdf' %}"
+              ><p>Первая помощь</p></a
+            >
           {% endif %}
-          {% if show_hiv %}
-          <a
-            class="link link--medium-blue"
-            href="http://pomogut.by/hiv-hepatitis/"
-            ><p>Вич и гепатит</p></a
-          >
-          {% endif %}
-          {% if show_relapse %}
-          <a
-            class="link link--medium-blue"
-            href="http://pomogut.by/filling-page"
-            ><p>Срыв</p></a
-          >
-          {% endif %}
+          {% for link in  this_category.cross_link.all %}
+            <a class="link link--medium-blue" href="{% url 'main_articles' slug=link.slug %}"
+              ><p>{{link.title}}</p></a
+            >
+          {% endfor %}
         </div>
         <div class="side-menu__links">
          {% for article in pages %}
