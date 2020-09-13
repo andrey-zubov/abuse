@@ -78,6 +78,7 @@ class AccordeonArticle(models.Model):
             'widgets/accordeon_widget.html',
             context={'widget': self})
 
+
 Page.create_content_type(AccordeonArticle)
 
 
@@ -105,62 +106,62 @@ class ArticlePicture(models.Model):
 Page.create_content_type(ArticlePicture)
 
 
-class Articles(models.Model):
-    class Meta:
-        verbose_name = 'Статья'
-        verbose_name_plural = 'Статьи'
-
-    category = models.ManyToManyField('Main_Cat')
-    is_active = models.BooleanField(default=True)
-    title = models.CharField(
-        verbose_name='Название',
-        max_length=256,
-    )
-    picture = MediaFileForeignKey(
-        MediaFile,
-        on_delete=models.SET_NULL,
-        verbose_name='Картинка',
-        null=True,
-        blank=True,
-    )
-    pic_text = models.CharField(
-        verbose_name='Подпись катринки',
-        max_length=256,
-        null=True,
-        blank=True
-    )
-    text = models.TextField(
-        verbose_name='основной текст',
-    )
-    points = models.TextField(
-        verbose_name='Пункты/список',
-        blank=True,
-        null=True,
-        help_text='<li> текст пункта </li>'
-    )
-    button_orgs = models.BooleanField(
-        verbose_name='Добавить кнопку-переход к организациям',
-
-    )
-
-    link = models.ManyToManyField(
-        'Link',
-        null=True,
-        blank=True,
-        verbose_name='Ссылка',
-        help_text='Можно добавить ардесс-ссылку на внешний источник или'
-                  ' на статью.'
-    )
-
-
-    def get_img(self):
-        if not self.picture:
-            return None
-        else:
-            return join(settings.MEDIA_URL, str(self.picture.file))
-
-    def __str__(self):
-        return self.title
+# class Articles(models.Model):
+#     class Meta:
+#         verbose_name = 'Статья'
+#         verbose_name_plural = 'Статьи'
+#
+#     category = models.ManyToManyField('Main_Cat')
+#     is_active = models.BooleanField(default=True)
+#     title = models.CharField(
+#         verbose_name='Название',
+#         max_length=256,
+#     )
+#     picture = MediaFileForeignKey(
+#         MediaFile,
+#         on_delete=models.SET_NULL,
+#         verbose_name='Картинка',
+#         null=True,
+#         blank=True,
+#     )
+#     pic_text = models.CharField(
+#         verbose_name='Подпись катринки',
+#         max_length=256,
+#         null=True,
+#         blank=True
+#     )
+#     text = models.TextField(
+#         verbose_name='основной текст',
+#     )
+#     points = models.TextField(
+#         verbose_name='Пункты/список',
+#         blank=True,
+#         null=True,
+#         help_text='<li> текст пункта </li>'
+#     )
+#     button_orgs = models.BooleanField(
+#         verbose_name='Добавить кнопку-переход к организациям',
+#
+#     )
+#
+#     link = models.ManyToManyField(
+#         'Link',
+#         null=True,
+#         blank=True,
+#         verbose_name='Ссылка',
+#         help_text='Можно добавить ардесс-ссылку на внешний источник или'
+#                   ' на статью.'
+#     )
+#
+#
+#     def get_img(self):
+#         if not self.picture:
+#             return None
+#         else:
+#             return join(settings.MEDIA_URL, str(self.picture.file))
+#
+#     def __str__(self):
+#         return self.title
 
 
 class Link(models.Model):
@@ -258,19 +259,20 @@ class Main_Cat(models.Model):
     help_widget = models.BooleanField(
         verbose_name='Отображать виджет "первая помощь"'
     )
-    hiv_widget = models.BooleanField(
-        verbose_name='Отображать виджет "вич и гепатит"'
+    # hiv_widget = models.BooleanField(
+    #     verbose_name='Отображать виджет "вич и гепатит"'
+    # )
+    # relapse_widget = models.BooleanField(
+    #     verbose_name='Отображать виджет "срыв"'
+    # )
+    employment_widget = models.BooleanField(
+        verbose_name='Отображать виджет трудоустройство'
     )
-    relapse_widget = models.BooleanField(
-        verbose_name='Отображать виджет "срыв"'
-    )
-
     org_widget = models.BooleanField(
         verbose_name='Отображать виджет организаций'
     )
     cross_link = models.ManyToManyField(
         'self',
-
     )
 
     def __str__(self):

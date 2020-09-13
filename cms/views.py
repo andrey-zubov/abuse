@@ -5,7 +5,6 @@ from .forms import OrgForm
 from django.forms import inlineformset_factory
 
 from .models import (
-    Articles,
     Page,
     Main_Cat,
     Organizations,
@@ -56,6 +55,8 @@ def megapage(request, slug):
         orgs = None
         org_widget_flag = False
 
+    employment_flag = True if this_category.employment_widget else False
+
     all_cites = City.objects.filter()
     all_types = ServicesType.objects.filter()
     pages = Page.objects.filter(
@@ -64,8 +65,8 @@ def megapage(request, slug):
     questions = Question.objects.all().prefetch_related('choice_set')
 
     show_help = this_category.help_widget
-    show_hiv = this_category.help_widget
-    show_relapse = this_category.relapse_widget
+    # show_hiv = this_category.help_widget
+    # show_relapse = this_category.relapse_widget
     return render(
         request,
         template_name='widgets/articles_by_cat.html',
@@ -76,10 +77,11 @@ def megapage(request, slug):
             'all_cites': all_cites,
             'all_types': all_types,
             'show_help': show_help,
-            'show_hiv': show_hiv,
-            'show_relapse': show_relapse,
+            # 'show_hiv': show_hiv,
+            # 'show_relapse': show_relapse,
             'org_widget_flag': org_widget_flag,
-            'this_category': this_category
+            'this_category': this_category,
+            'employment_flag': employment_flag
     })
 
 #

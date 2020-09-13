@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import (
-    Articles,
     Link,
     Main_Cat,
     Organizations,
@@ -35,8 +34,6 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [ChoicesAdmin]
 
 
-
-admin.site.register(Articles)
 admin.site.register(Link)
 admin.site.register(Main_Cat)
 admin.site.register(Organizations, OrganizationAdmin)
