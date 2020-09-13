@@ -59,6 +59,28 @@ Page.create_content_type(RichTextContent)
 # Page.create_content_type(OrgWidget)
 
 
+class AccordeonArticle(models.Model):
+    class Meta:
+        abstract = True
+
+    title = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True
+    )
+    text = models.TextField(
+        null=True,
+        blank=True
+    )
+
+    def render(self):
+        return render_to_string(
+            'widgets/accordeon_widget.html',
+            context={'widget': self})
+
+Page.create_content_type(AccordeonArticle)
+
+
 class ArticlePicture(models.Model):
     class Meta:
         abstract = True

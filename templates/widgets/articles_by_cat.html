@@ -251,7 +251,7 @@
 {% endblock %}
 
 {% block organizations %}
-
+  {% if org_widget_flag %}
   <section class="organizations">
     <a name="local_orgs"></a>
         <div class="container">
@@ -331,5 +331,6 @@
         </div>
         <div class="organizations__map"></div>
       </section>
+      {% endif %}
 
 {% endblock %}
