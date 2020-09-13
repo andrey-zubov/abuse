@@ -6,17 +6,41 @@ export default class Organizations {
     this.interval = null;
     this.markers;
     this.map;
-    this.test = []; 
+    this.firstArray = []; 
     this.YOUR_API = '';
     this.init();
   }
 
-  filterMarkers(showMarkers){
-    for (var i = 0; i < this.test.length; i++) {
-      this.test[i].setMap(null); //Remove the marker from the map
-    }
+  setMarkersOnMap(markersArray){
+    let infowindow = new google.maps.InfoWindow();
 
-    this.test = [];
+    let marker;
+
+    for (let i = 0; i < markersArray.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(markersArray[i].lat, markersArray[i].lon),
+        map: this.map,
+      });
+
+      this.firstArray[i] = marker;
+
+      google.maps.event.addListener(
+        marker,
+        "click",
+        ((marker, i) =>{
+          return  () => {
+            infowindow.setContent(markersArray[i].city);
+            infowindow.open(this.map, marker);
+          };
+        })(marker, i)
+      );
+    }
+  }
+
+  filterMarkers(showMarkers){
+    for (var i = 0; i < this.firstArray.length; i++) {
+      this.firstArray[i].setMap(null); //Remove the marker from the map
+    }
 
     const activeMarkers =  showMarkers.map((dataMapId)=>{
       const m = this.markers.find(({id})=>{
@@ -25,29 +49,7 @@ export default class Organizations {
       return m;
     })
 
-    let infowindow = new google.maps.InfoWindow();
-
-    let marker;
-
-    for (let i = 0; i < activeMarkers.length; i++) {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(activeMarkers[i].lat, activeMarkers[i].lon),
-        map: this.map,
-      });
-
-      this.test[i] = marker;
-
-      google.maps.event.addListener(
-        marker,
-        "click",
-        (function (marker, i) {
-          return function () {
-            infowindow.setContent(activeMarkers[i].city);
-            infowindow.open(this.map, marker);
-          };
-        })(marker, i)
-      );
-    }
+    this.setMarkersOnMap(activeMarkers);
   }
 
   addMarkers() {
@@ -63,34 +65,12 @@ export default class Organizations {
     this.markers = locations;
 
     this.map = new google.maps.Map(this.map, {
-      zoom: 6,
+      zoom: 5,
       center: new google.maps.LatLng(locations[0].lat, locations[0].lon),
       mapTypeId: google.maps.MapTypeId.ROADMAP,
     });
 
-    let infowindow = new google.maps.InfoWindow();
-
-    let marker;
-
-    for (let i = 0; i < locations.length; i++) {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i].lat, locations[i].lon),
-        map: this.map,
-      });
-
-      this.test[i] = marker;
-
-      google.maps.event.addListener(
-        marker,
-        "click",
-        ( (marker, i) =>{
-          return  () => {
-            infowindow.setContent(locations[i].city);
-            infowindow.open(this.map, marker);
-          };
-        })(marker, i)
-      );
-    }
+    this.setMarkersOnMap(locations);
   }
 
   initMap() {
