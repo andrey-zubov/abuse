@@ -7,7 +7,7 @@ export default class Organizations {
     this.markers;
     this.map;
     this.firstArray = []; 
-    this.YOUR_API = '';
+    this.YOUR_API = 'AIzaSyAknqsh2KRjjBbPy3V7Cahj1j0M7eDITF0';
     this.init();
   }
 
