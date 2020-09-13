@@ -4,18 +4,27 @@
     flex-direction: column;
 
     &__item {
-      display: grid;
-      grid-template-columns: 0.3fr 0.6fr;
-      grid-column-gap: 25px;
-      grid-row-gap: 22px;
+      // display: grid;
+      // grid-template-columns: 0.3fr 0.6fr;
+      // grid-column-gap: 25px;
+      // grid-row-gap: 22px;
       align-items: center;
+      margin-bottom: 22px;
+      display: flex;
+      height: 42px;
 
       & > p {
         font-weight: bold;
+        width: 35%;
+        margin-right: 5%;
       }
 
       .select2-container {
         width: 100% !important;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
@@ -26,5 +35,10 @@
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 30px;
+  }
+
+  &__map {
+    width: 100%;
+    padding-bottom: 500/1920 * 100%;
   }
 }

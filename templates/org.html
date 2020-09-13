@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+
+    <!-- {% load compress %}-->
+
+    <!-- {% compress css %}-->
+    <!--        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">-->
+    <!--    {% endcompress %}-->
+
+    <link
+      type="text/css"
+      href="../static/styles/index.min.css"
+      rel="stylesheet"
+      media="screen"
+    />
+
+    <script type="module" src="/static/scripts/index.js"></script>
+
+    <title>Test page</title>
+  </head>
+
+  <body>
+    <section class="organizations">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <div class="article article-map">
+              <h2 class="article__title headline-1">Участники проекта</h2>
+              <div class="article__description">
+                <p>
+                  Мы собрали организации, которые готовы тебе помочь. Их список
+                  будет постоянно расширяться, чтобы ты всегда мог получить
+                  ближайшую к тебе помощь.
+                </p>
+                <p>
+                  (Организациям, оказывающим услуги лицам в проблеме наркотиков!
+                  Если вы не нашли свою организацию -
+                  <a href="#">отправьте заявку на ее добавление.</a>
+                  )
+                </p>
+              </div>
+              <div class="article__select organizations__select">
+                <div class="organizations__select__item">
+                  <p>Выберите вид деятельности</p>
+                  <select class="organizations__select__specifications">
+                    <option></option>
+                    <option value="All">Любая деятельность</option>
+                    <option value="Askorbinka">Аскорбинка</option>
+                    <option value="Analgin">Анальгин</option>
+                  </select>
+                </div>
+                <div class="organizations__select__item">
+                  <p>Выберите область</p>
+                  <select class="organizations__select__region">
+                    <option></option>
+                    <option value="All">Вся Беларусь</option>
+                    <option value="Minski">Минск</option>
+                    <option value="Gomelski">Гомель</option>
+                  </select>
+                </div>
+                <div class="organizations__select__item">
+                  <p>Выберите район</p>
+                  <select class="organizations__select__district">
+                    <option></option>
+                    <option value="All">Вся Беларусь</option>
+                    <option value="Minskaya">Минск</option>
+                    <option value="Gomelskaya">Гомель</option>
+                  </select>
+                </div>
+                <div class="organizations__select__item">
+                  <p>Выберите город</p>
+                  <select class="organizations__select__cities">
+                    <option></option>
+                    <option value="All">Вся Беларусь</option>
+                    <option value="Minsk">Минск</option>
+                    <option value="Gomel">Гомель</option>
+                  </select>
+                </div>
+              </div>
+              <div class="organizations__content">
+                <div
+                  class="organization-item"
+                  data-city="Minsk"
+                  data-region="Minski"
+                  data-district="Minskaya"
+                  data-spec="Analgin"
+                  data-map-id="123"
+                >
+                  <div class="organization-item__information">
+                    <p class="organization-item__title">
+                      ГУ «Республиканский научно-практический центр психического
+                      здоровья», отделение реабилитации
+                    </p>
+                    <div class="organization-item__adress">
+                      <div class="icon-wrapper">
+                        <i class="icon-map-marker"></i>
+                      </div>
+                      <p class="">
+                        г. Минск, минская, минский Долгиновский тракт, 152
+                      </p>
+                    </div>
+                    <a class="organization-item__link" href="#"></a>
+                  </div>
+
+                  <div class="organization-item__phone">
+                    <div class="icon-wrapper">
+                      <i class="icon-phone"></i>
+                    </div>
+
+                    <a class="link link--green" href="tel:+375172898833"
+                      ><p class="">+375172898833</p></a
+                    >
+                  </div>
+                </div>
+                <div
+                  class="organization-item"
+                  data-city="Gomel"
+                  data-spec="Askorbinka"
+                  data-region="Gomelski"
+                  data-district="Gomelskaya"
+                  data-map-id="345"
+                >
+                  <div class="organization-item__information">
+                    <p class="organization-item__title">
+                      ГУ «Республиканский научно-практический центр психического
+                      здоровья», отделение реабилитации
+                    </p>
+                    <div class="organization-item__adress">
+                      <div class="icon-wrapper">
+                        <i class="icon-map-marker"></i>
+                      </div>
+                      <p class="">
+                        г. Гомель, Гомельский, Гомельская Долгиновский тракт,
+                        152
+                      </p>
+                    </div>
+                    <a class="organization-item__link" href="#"></a>
+                  </div>
+
+                  <div class="organization-item__phone">
+                    <div class="icon-wrapper">
+                      <i class="icon-phone"></i>
+                    </div>
+                    <a class="link link--green" href="tel:+375172898833"
+                      ><p class="">+375172898833</p></a
+                    >
+                  </div>
+                </div>
+                <div
+                  class="organization-item"
+                  data-city="Gomel"
+                  data-spec="Analgin"
+                  data-region="Gomelski"
+                  data-district="Gomelskaya"
+                  data-map-id="567"
+                >
+                  <div class="organization-item__information">
+                    <p class="organization-item__title">
+                      ГУ «Республиканский научно-практический центр психического
+                      здоровья», отделение реабилитации
+                    </p>
+                    <div class="organization-item__adress">
+                      <div class="icon-wrapper">
+                        <i class="icon-map-marker"></i>
+                      </div>
+                      <p class="">
+                        г. Гомель, Гомельский, Гомельская, Долгиновский тракт,
+                        152
+                      </p>
+                    </div>
+                    <a class="organization-item__link" href="#"></a>
+                  </div>
+
+                  <div class="organization-item__phone">
+                    <div class="icon-wrapper">
+                      <i class="icon-phone"></i>
+                    </div>
+                    <a class="link link--green" href="tel:+375172898833"
+                      ><p class="">+375172898833</p></a
+                    >
+                  </div>
+                </div>
+                <div
+                  class="organization-item"
+                  data-city="Minsk"
+                  data-spec="Askorbinka, Analgin"
+                  data-district="Minskaya"
+                  data-region="Minski"
+                  data-map-id="789"
+                >
+                  <div class="organization-item__information">
+                    <p class="organization-item__title">
+                      ГУ «Республиканский научно-практический центр психического
+                      здоровья», отделение реабилитации
+                    </p>
+                    <div class="organization-item__adress">
+                      <div class="icon-wrapper">
+                        <i class="icon-map-marker"></i>
+                      </div>
+                      <p class="">
+                        г. Минск, минская, минский Долгиновский тракт, 152
+                      </p>
+                    </div>
+                    <div class="organization-item__time">
+                      <div class="icon-wrapper">
+                        <i class="icon-clock"></i>
+                      </div>
+                      <p class="">с 8:00 до 20:00 без выходных</p>
+                    </div>
+                    <a class="organization-item__link" href="#"></a>
+                  </div>
+
+                  <div class="organization-item__phone">
+                    <div class="icon-wrapper">
+                      <i class="icon-phone"></i>
+                    </div>
+                    <a class="link link--green" href="tel:+375172898833"
+                      ><p class="">+375172898833</p></a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="organizations__map"></div>
+    </section>
+  </body>
+</html>
