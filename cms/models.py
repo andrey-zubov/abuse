@@ -335,7 +335,7 @@ class Organizations(models.Model):
         verbose_name='Телефон',
         null=True,
         blank=True,
-        max_length=16
+        max_length=32
     )
     tel2 = models.CharField(
         verbose_name='Телефон',

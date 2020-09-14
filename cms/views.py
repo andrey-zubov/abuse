@@ -124,61 +124,48 @@ def news_view(request):
 
 def add_new_org(request):
     if request.method == 'POST':
-        print(request.POST)
+        #print(request.POST)
         org_type = ServicesType.objects.get(
             id=request.POST['org_type']
         )
+        city = check_city(request.POST['pre_city'])
+        form = OrgForm(request.POST)
 
+        if form.is_valid():
+            new_org = form.save(commit=False)
+            new_org.city = city
+            new_org.slug = request.POST['title']
+            new_org.save()
+            return HttpResponse('save')
 
+        else:
+            print(form.errors)
         return HttpResponse('post')
     else:
         all_types = ServicesType.objects.filter()
+        form = OrgForm()
 
 
         return render(
             request,
             template_name='add_new_org.html',
             context={
+                'form': form,
                 'all_types': all_types
 
             }
         )
 
-
-
-
-    # if request.method == 'POST':
-    #     org_form = OrgForm(request.POST)
-    #     ServFormset = inlineformset_factory(
-    #         Organizations,
-    #         OrganizationServices,
-    #         exclude=[]
-    #     )
-    #     if org_form.is_valid():
-    #         new_org = org_form.save(commit=False)
-    #         new_org.slug = request.POST['title']
-    #         formset = ServFormset(request.POST, instance=new_org)
-    #         if formset.is_valid():
-    #             new_org.save()
-    #             formset.save()
-    #             return HttpResponse('kkk')
-    #     else:
-    #         return HttpResponse(1341)
-    # else:
-    #     form = OrgForm()
-    #     OrgFomset = inlineformset_factory(
-    #         Organizations,
-    #         OrganizationServices,
-    #         exclude=(),
-    #         extra=5,
-    #         can_delete=False
-    #     )
-    #     formset = OrgFomset()
-    #     return render(
-    #         request,
-    #         template_name='add_new_org.html',
-    #         context={
-    #             'form': form,
-    #             'formset': formset,
-    #         }
-    #     )
+import re
+def check_city(looknig_city):
+    pre_city = re.sub(r'\w+\.', '', looknig_city).strip().capitalize()  # clear data from г.
+    all_cityes = City.objects.all()
+    if all_cityes.filter(title__iexact=pre_city).exists():
+        return all_cityes.get(title__iexact=pre_city)
+    elif all_cityes.filter(title__icontains=pre_city).exists():
+        return all_cityes.get(title__icontains=pre_city)
+    else:
+        new_city = City.objects.create(
+            title=pre_city
+        )
+        return new_city

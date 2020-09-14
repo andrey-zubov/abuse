@@ -66,12 +66,13 @@
               <div class="partners__form" data-form="1">
                 <form method="post" action="">
                   {% csrf_token %}
+
                   <div class="form-item__required">
                     <input
                       class="form-item"
                       type="text"
                       placeholder="Наименование",
-                      name="title"
+                      name="{{form.title.name}}"
                     />
                   </div>
 
@@ -89,7 +90,7 @@
                       class="form-item"
                       type="text"
                       placeholder="Населенный пункт"
-                      name="pre-city"
+                      name="pre_city"
                     />
                   </div>
                   <div class="form-item__required">
@@ -99,7 +100,7 @@
                         class="form-item"
                         type="text"
                         placeholder="+375 (__) ___ - __ - __"
-                        name="phone"
+                        name="{{form.tel1.name}}"
                       />
                     </div>
                   </div>
@@ -108,7 +109,7 @@
                       class="form-item"
                       type="text"
                       placeholder="email"
-                      name="email"
+                      name="{{form.email.name}}"
                     />
                   </div>
                   <div class="form-item__required">
@@ -116,13 +117,13 @@
                       class="form-item"
                       type="text"
                       placeholder="сайт"
-                      name="website"/>
+                      name="{{form.website.name}}"/>
                   </div>
                   <div class="form-item__required">
                     <textarea
                       class="form-item form-item__textarea"
                       placeholder="Описание организации"
-                      name="description"
+                      name="{{form.description.name}}"
                     ></textarea>
                   </div>
                   <button type="submit" class="btn">Отправить заявку</button>
