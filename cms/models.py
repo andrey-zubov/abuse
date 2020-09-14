@@ -290,6 +290,8 @@ class Main_Cat(models.Model):
     )
     cross_link = models.ManyToManyField(
         'self',
+        null=True,
+        blank=True
     )
 
     def __str__(self):
