@@ -17,7 +17,7 @@
 
     <script type="module" src="/static/scripts/index.js"></script>
 
-    <title>Test page</title>
+    <title>Pomogut</title>
   </head>
 
   <body>
@@ -75,10 +75,11 @@
                       {{ n.title }}
                     </h3>
                     <p class="news-item__data">{{ n.publication_date }}}</p>
-                    <div class="news-item__image aspect-ratio">
-                      {{n.content.main.0}}
-<!--                      <img src="{% get_media_prefix %}{{ n.preview_img.file }}" />-->
-                    </div>
+                    {% if n.preview_img.file %}
+                      <div class="news-item__image aspect-ratio">
+                        <img src="{% get_media_prefix %}{{ n.preview_img.file }}" />
+                      </div>
+                    {% endif %}
                     <p class="news-item__description">
                       {{ n.content.main.0.text|safe|slice:":400" }}...
                     </p>

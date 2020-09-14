@@ -44,9 +44,12 @@
          {% for article in pages %}
             <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
           {% endfor %}
-            {% if org_widget_flag %}
-              <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
-            {% endif %}
+          {% if employment_flag %}
+            <a class="link link--green" href="#employment_widget"><p>Трудоустройство</p></a>
+          {% endif %}
+          {% if org_widget_flag %}
+            <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -342,13 +345,14 @@
   <div class="row">
     <div class="col-lg-6 offset-lg-3">
       <div class="article article-calendar">
-      <h1 class="article__title headline-1">ТРУДОУСТРОЙСТВО</h1>
-      <div class="article__description">
-      <p>
-        По вопросам содействия в трудоустройстве вы можете обратиться
-        в орган государственной службы занятости по месту регистрации
-        или жительства. Здесь вам окажут следующие услуги:
-      </p>
+        <h1 class="article__title headline-1">ТРУДОУСТРОЙСТВО</h1>
+        <a name="employment_widget"></a>
+        <div class="article__description">
+        <p>
+          По вопросам содействия в трудоустройстве вы можете обратиться
+          в орган государственной службы занятости по месту регистрации
+          или жительства. Здесь вам окажут следующие услуги:
+        </p>
       </div>
       <ul class="article__list">
       <li><p>Обменять использованные шприцы и иглы на новые</p></li>
@@ -429,11 +433,6 @@
           </div>
         </div>
       </div>
-      </div>
-      <div class="article__buttons article__buttons--left">
-      <a href="#" class="btn" target="_blank"
-        ><span>Найти ближайшую организацию</span></a
-      >
       </div>
     </div>
   </div>
