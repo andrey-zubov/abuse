@@ -1,0 +1,191 @@
+{%extends 'widgets/articles_by_cat.html' %}
+
+{% block side_bar %}
+  <div class="col-lg-3">
+    <div class="side-menu">
+      <div class="side-menu__content">
+        <div class="side-menu__links side-menu__links--main">
+            <a class="link link--medium-blue" href="{% url 'help_pdf' %}"
+              ><p>Первая помощь</p></a
+            >
+          тут будет выподашка
+
+          тут будет выподашка
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="col-lg-6">
+  <div class="article article-accordeon">
+    <h1 class="article__title headline-1">ПРАВОВАЯ ИНФОРМАЦИЯ</h1>
+    <div class="article-accordeon__content">
+      <ul>
+        {% for q in faq %}
+          <li class="accordeon-item">
+          <p class="accordeon-item__title headline-3">
+            {{ q.title }}
+          </p>
+          <ul class="accordeon-item__links">
+            {% for article in q.faqlist_set.all %}
+            <li class="accordeon-item__link">
+              <p class="accordeon-item__link__title">
+                {{ article.title }}
+              </p>
+              <div class="accordeon-item__link__content">
+                <p>
+                  {{ article.text |safe}}
+                </p>
+  <!--              <p>-->
+  <!--                2. Нахождение на рабочем месте в рабочее время в-->
+  <!--                состоянии алкогольного, наркотического или-->
+  <!--                токсикоманического опьянения – влечет наложение-->
+  <!--                штрафа в размере от одной до десяти базовых величин.-->
+  <!--              </p>-->
+  <!--              <p>-->
+  <!--                3. Действия, предусмотренные частями 1 и 2 настоящей-->
+  <!--                статьи, совершенные повторно в течение одного года-->
+  <!--                после наложения административного взыскания за такие-->
+  <!--                же нарушения, – влекут наложение штрафа в размере от-->
+  <!--                двух до пятнадцати базовых величин или-->
+  <!--                административный арест.-->
+  <!--              </p>-->
+              </div>
+            </li>
+            {% endfor %}
+  <!--          <li class="accordeon-item__link">-->
+  <!--            <p class="accordeon-item__link__title">-->
+  <!--              Статья 17.3. Распитие алкогольных, слабоалкогольных-->
+  <!--              напитков или пива, потребление наркотических средств-->
+  <!--              или психотропных веществ, их аналогов в общественном-->
+  <!--              месте либо появление в общественном месте или на-->
+  <!--              работе в состоянии опьянения-->
+  <!--            </p>-->
+  <!--            <div class="accordeon-item__link__content">-->
+  <!--              <p>-->
+  <!--                Распитие алкогольных, слабоалкогольных напитков или-->
+  <!--                пива на улице, стадионе, в сквере, парке,-->
+  <!--                общественном транспорте или в других общественных-->
+  <!--                местах, кроме мест, предназначенных для употребления-->
+  <!--                алкогольных, слабоалкогольных напитков или пива,-->
+  <!--                либо появление в общественном месте в пьяном виде,-->
+  <!--                оскорбляющем человеческое достоинство и-->
+  <!--                нравственность, либо потребление в общественном-->
+  <!--                месте наркотических средств или психотропных веществ-->
+  <!--                без назначения врача, либо потребление в-->
+  <!--                общественном месте аналогов наркотических средств-->
+  <!--                или психотропных веществ – влекут наложение штрафа в-->
+  <!--                размере до восьми базовых величин.-->
+  <!--              </p>-->
+  <!--            </div>-->
+  <!--          </li>-->
+          </ul>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  <!--  <div class="article__buttons">-->
+  <!--    <a href="#" class="btn"-->
+  <!--      ><span>Найти ближайшую организацию</span></a-->
+  <!--    >-->
+  <!--    <a href="#" class="btn"><span>Правовая информация</span></a>-->
+  <!--  </div>-->
+  </div>
+</div>
+
+  <div class="col-lg-3">
+    <div class="information-side">
+      <div class="information-block">
+            <div class="quiz">
+              <div class="quiz-item">
+              {% for q in questions %}
+                <form name="question_form" action="">
+                  <input hidden name="answer_for" value="{{q.title}}">
+                  <p class="quiz-item__title">
+                    {{q.title}}
+                  </p>
+                  <div class="quiz-item__content">
+                    {% for choice in q.get_choices %}
+                      <div class="quiz-item__radio">
+                        <p>
+                          <input
+                          type="radio"
+                          name="{{q.title}}"
+                          value="{{choice}}"
+                          id="{{choice.id}}"
+                          />
+                          <label for="{{choice.id}}">{{choice.title}}</label>
+                        </p>
+                      </div>
+                    {% endfor %}
+                    <button type="submit" class="btn quiz-item__button">
+                      Голосовать
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    class="quiz-item__button quiz-item__button--transparent"
+                  >
+                    Показать результаты
+                  </button>
+                </form>
+              {% endfor %}
+              </div>
+            </div>
+
+
+              <div class="quiz-item quiz-item--done">
+                <div class="quiz-item__content">
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Да, готов (72%, 129 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 72%"
+                    ></div>
+                  </div>
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Зависит от условия (16%, 29 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 16%"
+                    ></div>
+                  </div>
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Нет, не готов (9%, 16 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 9%"
+                    ></div>
+                  </div>
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Зависит от других факторов (3%, 5 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 3%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="quiz-item__all">
+                  <p>Всего проголосовавших:<strong>129</strong></p>
+                </div>
+                <button
+                  type="button"
+                  class="quiz-item__button quiz-item__button--transparent"
+                >
+                  Голосовать
+                </button>
+              </div>
+            </div>
+    </div>
+  </div>
+{% endblock %}

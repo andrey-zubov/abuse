@@ -88,10 +88,12 @@ def megapage(request, slug):
 
 def faq(request):
     faq = FAQ.objects.all()
+    questions = Question.objects.all().prefetch_related('choice_set')
     return render(
         request,
         template_name='faq.html',
-        context={'faq': faq}
+        context={'faq': faq,
+                 'questions': questions}
     )
 
 #
