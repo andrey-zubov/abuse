@@ -124,37 +124,61 @@ def news_view(request):
 
 def add_new_org(request):
     if request.method == 'POST':
-        org_form = OrgForm(request.POST)
-        ServFormset = inlineformset_factory(
-            Organizations,
-            OrganizationServices,
-            exclude=[]
+        print(request.POST)
+        org_type = ServicesType.objects.get(
+            id=request.POST['org_type']
         )
-        if org_form.is_valid():
-            new_org = org_form.save(commit=False)
-            new_org.slug = request.POST['title']
-            formset = ServFormset(request.POST, instance=new_org)
-            if formset.is_valid():
-                new_org.save()
-                formset.save()
-                return HttpResponse('kkk')
-        else:
-            return HttpResponse(1341)
+
+
+        return HttpResponse('post')
     else:
-        form = OrgForm()
-        OrgFomset = inlineformset_factory(
-            Organizations,
-            OrganizationServices,
-            exclude=(),
-            extra=5,
-            can_delete=False
-        )
-        formset = OrgFomset()
+        all_types = ServicesType.objects.filter()
+
+
         return render(
             request,
             template_name='add_new_org.html',
             context={
-                'form': form,
-                'formset': formset,
+                'all_types': all_types
+
             }
         )
+
+
+
+
+    # if request.method == 'POST':
+    #     org_form = OrgForm(request.POST)
+    #     ServFormset = inlineformset_factory(
+    #         Organizations,
+    #         OrganizationServices,
+    #         exclude=[]
+    #     )
+    #     if org_form.is_valid():
+    #         new_org = org_form.save(commit=False)
+    #         new_org.slug = request.POST['title']
+    #         formset = ServFormset(request.POST, instance=new_org)
+    #         if formset.is_valid():
+    #             new_org.save()
+    #             formset.save()
+    #             return HttpResponse('kkk')
+    #     else:
+    #         return HttpResponse(1341)
+    # else:
+    #     form = OrgForm()
+    #     OrgFomset = inlineformset_factory(
+    #         Organizations,
+    #         OrganizationServices,
+    #         exclude=(),
+    #         extra=5,
+    #         can_delete=False
+    #     )
+    #     formset = OrgFomset()
+    #     return render(
+    #         request,
+    #         template_name='add_new_org.html',
+    #         context={
+    #             'form': form,
+    #             'formset': formset,
+    #         }
+    #     )
