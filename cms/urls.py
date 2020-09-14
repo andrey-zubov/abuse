@@ -5,7 +5,8 @@ from .views import (
     news_view,
     add_new_org,
     help_file,
-    megapage
+    megapage,
+    faq,
 )
 
 urlpatterns = [
@@ -14,6 +15,7 @@ urlpatterns = [
     path('abuse/news/', news_view, name='news_page'),
     path('abuse/to-partners/', add_new_org),
     path('abuse/help', help_file, name='help_pdf'),
+    path('abuse/legal-info/', faq, name='faq'),
 
     path('abuse/<slug>/', megapage, name='main_articles'),
 

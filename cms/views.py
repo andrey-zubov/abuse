@@ -14,7 +14,8 @@ from .models import (
     Question,
     Choice,
     Answer,
-    HelpFile
+    HelpFile,
+    FAQ
 )
 
 
@@ -83,6 +84,15 @@ def megapage(request, slug):
             'this_category': this_category,
             'employment_flag': employment_flag
     })
+
+
+def faq(request):
+    faq = FAQ.objects.all()
+    return render(
+        request,
+        template_name='faq.html',
+        context={'faq': faq}
+    )
 
 #
 # def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
