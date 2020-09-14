@@ -1,8 +1,6 @@
 .header {
-  // position: absolute;
-  top: 0;
+  $self: &;
   width: 100%;
-  left: 0;
   z-index: 1;
 
   &__content {
@@ -68,10 +66,62 @@
       }
     }
   }
+
+  &--main {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    #{$self}__content {
+      background-color: transparent;
+    }
+  }
+
+  &--secondary {
+    background-color: $white;
+    box-shadow: 0 3px 43px #cccccc;
+
+    #{$self}__logo {
+    }
+    #{$self}__logo,
+    #{$self}__title,
+    #{$self}__phone {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    #{$self}__title {
+      justify-content: center;
+      opacity: 0.8;
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    #{$self}__phone {
+      margin-top: 10px;
+      p {
+        transition: opacity 0.5s;
+        color: $blue;
+        font-weight: 500;
+        font-size: 19px;
+        line-height: 38px;
+      }
+
+      &:hover {
+        p {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: $lg) {
   .header {
+    $self: &;
     padding: 30px 15px;
 
     &__button {
@@ -103,6 +153,20 @@
         display: flex;
         flex-direction: column-reverse;
         justify-content: center;
+      }
+    }
+
+    &--main {
+      #{$self}__content {
+        background-color: $white;
+
+        .main-menu__navigation li {
+          border: none;
+
+          .link {
+            background-color: transparent;
+          }
+        }
       }
     }
   }

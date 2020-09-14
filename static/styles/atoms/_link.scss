@@ -3,6 +3,7 @@
   line-height: 18px;
   color: $medium-gray;
   transition: all 0.3s ease-out;
+  cursor: pointer;
 
   &:hover {
     color: $blue;
@@ -29,6 +30,14 @@
 
     &:hover {
       color: $green;
+    }
+  }
+
+  &--white {
+    color: $white;
+
+    &:hover {
+      color: $white;
     }
   }
 }

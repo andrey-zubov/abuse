@@ -16,7 +16,7 @@
 
     <script type="module" src="/static/scripts/index.js"></script>
 
-    <title>Pomogut</title>
+    <title>Test page</title>
   </head>
 
   <body>
@@ -26,27 +26,24 @@
           <div class="col-12">
             <div class="single-news__container">
               <h1 class="single-news__title">
-                {{feincms_page.title}}
+                Основополагающие принципы в выздоровлении от наркомании и
+                алкоголизма
               </h1>
               <div class="single-news__content">
                 <p class="single-news__data">28-08-2020</p>
                 <div class="single-news__content__description">
                   <p>
-                    {% block content %}
-                      {% for content in feincms_page.content.main %}
-                        {{ content.render }}
-                      {% endfor %}
-                    {% endblock %}
+                    Зрелая личность в основу своей жизнедеятельности ставит
+                    основополагающие жизненные принципы, необходимые для
+                    нормального существования в обществе.
                   </p>
                 </div>
-                {% if feincms_page.source %}
-                  <div class="single-news__source">
-                    <p>Источник:</p>
-                    <a class="" href="{{ feincms_page.source }}">{{ feincms_page.source }}</a>
-                  </div>
-                {% endif %}
+                <div class="single-news__source">
+                  <p>Источник:</p>
+                  <a class="" href="#">example.com</a>
+                </div>
               </div>
-              <a class="single-news__button link link--blue" href="{% url 'news_page' %}"
+              <a class="single-news__button link link--blue" href="#"
                 >Назад ко всем новостям</a
               >
             </div>
@@ -56,4 +53,3 @@
     </section>
   </body>
 </html>
-

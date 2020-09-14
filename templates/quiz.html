@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
+
+    <link
+      type="text/css"
+      href="/static/styles/index.min.css"
+      rel="stylesheet"
+      media="screen"
+    />
+
+    <script type="module" src="/static/scripts/index.js"></script>
+
+    <title>Test page</title>
+  </head>
+
+  <body>
+    <section class="">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="quiz">
+              <div class="quiz-item">
+
+                {% for q in questions %}
+            <form name="question_form">
+              <input hidden name="answer_for" value="{{q.title}}">
+              <p class="quiz-item__title">
+                  {{q.title}}
+              </p>
+              <div class="quiz-item__content">
+                {% for choice in q.get_choices %}
+                  <div class="quiz-item__radio">
+                    <p>
+                      <input
+                      type="radio"
+                      name="{{q.title}}"
+                      value="{{choice}}"
+                      id="{{choice.id}}"
+                      />
+                      <label for="{{choice.id}}">{{choice.title}}</label>
+                    </p>
+                  </div>
+                {% endfor %}
+                  <button type="submit" class="btn quiz-item__button">
+                    Голосовать
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  class="quiz-item__button quiz-item__button--transparent"
+                >
+                  Показать результаты
+                </button>
+              </form>
+          {% endfor %}
+              </div>
+
+              <div class="quiz-item quiz-item--done">
+                <div class="quiz-item__content">
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Да, готов (72%, 129 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 72%"
+                    ></div>
+                  </div>
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Зависит от условия (16%, 29 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 16%"
+                    ></div>
+                  </div>
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Нет, не готов (9%, 16 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 9%"
+                    ></div>
+                  </div>
+                  <div class="quiz-item__result">
+                    <p class="quiz-item__result__title">
+                      Зависит от других факторов (3%, 5 голосов)
+                    </p>
+                    <div
+                      class="quiz-item__result__progress"
+                      style="width: 3%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="quiz-item__all">
+                  <p>Всего проголосовавших:<strong>129</strong></p>
+                </div>
+                <button
+                  type="button"
+                  class="quiz-item__button quiz-item__button--transparent"
+                >
+                  Голосовать
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

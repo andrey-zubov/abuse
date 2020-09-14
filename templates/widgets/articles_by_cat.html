@@ -1,43 +1,5 @@
 {%extends 'base.html' %}
 
-{% block side_bar %}
-  <div class="col-lg-3">
-    <div class="side-menu">
-      <div class="side-menu__content">
-        <div class="side-menu__links side-menu__links--main">
-          {% if show_help %}
-          <a class="link link--medium-blue" href="{% url 'help_pdf' %}"
-            ><p>Первая помощь</p></a
-          >
-          {% endif %}
-          {% if show_hiv %}
-          <a
-            class="link link--medium-blue"
-            href="http://pomogut.by/hiv-hepatitis/"
-            ><p>Вич и гепатит</p></a
-          >
-          {% endif %}
-          {% if show_relapse %}
-          <a
-            class="link link--medium-blue"
-            href="http://pomogut.by/filling-page"
-            ><p>Срыв</p></a
-          >
-          {% endif %}
-        </div>
-        <div class="side-menu__links">
-         {% for article in articles %}
-            <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
-          {% endfor %}
-            {% if org_widget_flag %}
-              <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
-            {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-{% endblock %}
-
 {% block header_links %}
   <header class="header header--secondary">
     <div class="container">
@@ -62,31 +24,55 @@
   </header>
 {% endblock %}
 
+{% block side_bar %}
+  <div class="col-lg-3">
+    <div class="side-menu">
+      <div class="side-menu__content">
+        <div class="side-menu__links side-menu__links--main">
+          {% if show_help %}
+            <a class="link link--medium-blue" href="{% url 'help_pdf' %}"
+              ><p>Первая помощь</p></a
+            >
+          {% endif %}
+          {% for link in  this_category.cross_link.all %}
+            <a class="link link--medium-blue" href="{% url 'main_articles' slug=link.slug %}"
+              ><p>{{link.title}}</p></a
+            >
+          {% endfor %}
+        </div>
+        <div class="side-menu__links">
+         {% for article in pages %}
+            <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
+          {% endfor %}
+          {% if employment_flag %}
+            <a class="link link--green" href="#employment_widget"><p>Трудоустройство</p></a>
+          {% endif %}
+          {% if org_widget_flag %}
+            <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
 {% block content %}
   <div class="col-lg-6">
-    {% for article in articles %}
+    {% for article in pages %}
     <a name="{{ article.id }}"></a>
     <div class="article">
 
       <h1 class="article__title headline-1">{{ article.title }}</h1>
-      {% if article.get_img %}
-        <div class="article__image-wrapper aspect-ratio">
-            <img src="{{ article.get_img }}" alt=""></img>
-        </div>
-      {% endif %}
-      <div class="article__description">
-        <p>{{ article.text|safe }}</p>
-      </div>
-        <ul class="article__list">
-          {{ article.points|safe }}
-        </ul>
+       {% for i in article.content.main%}
+        {{i.render}}
+      {% endfor %}
       <div class="article__buttons article__buttons--center">
-        {% for link in article.link.all %}
-          <a href="{{ link.link }}" class="btn" target="_blank"><span>{{ link.title }}</span></a>
-          <br>
-        {% endfor %}
-        {% if article.button_orgs and org_widget_flag %}
-        <a href="#local_orgs" class="btn" target="_blank"><span>Найти ближайшую организацию</span></a>
+        {% for link in article.button.all %}
+         <a href="{{ link.link }}" class="btn" target=""><span>{{ link.title }}</span></a>
+        {%endfor%}
+        {% if article.org_button and org_widget_flag %}
+          <a href="#local_orgs" class="btn" target=""><span>Найти ближайшую организацию</span></a>
         {% endif %}
 
       </div>
@@ -99,7 +85,7 @@
             <div class="quiz">
               <div class="quiz-item">
               {% for q in questions %}
-                <form name="question_form">
+                <form name="question_form" action="">
                   <input hidden name="answer_for" value="{{q.title}}">
                   <p class="quiz-item__title">
                     {{q.title}}
@@ -188,8 +174,87 @@
   </div>
 {% endblock %}
 
+
+{% block footer %}
+  <footer class="footer footer--secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="footer__menu">
+          <div class="footer__menu-item">
+            <a class="link link--white" href="#help"
+              ><p>Первая медицинская помощь</p></a
+            >
+            <a class="link link--white" href="/relapse/"><p>Срыв</p></a>
+            <a class="link link--white" href="/hiv-hepatitis/"
+              ><p>Вич/Гепатит</p></a
+            >
+            <a class="link link--white" href="http://pomogut.by/legal-info/"
+              ><p>Правовая информация</p></a
+            >
+          </div>
+          <div class="footer__menu-item">
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/i-am-codependent/"
+              ><p>Мой близкий в проблеме</p></a
+            >
+            <a class="link link--white" href="https://abuse.pomogut.by/org/"
+              ><p>Я употребляю</p></a
+            >
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/i-am-on-remission/"
+              ><p>Я на ремиссии</p></a
+            >
+          </div>
+          <div class="footer__menu-item">
+            <a class="link link--white" href="/сareers/"
+              ><p>Центры занятости</p></a
+            >
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/events/"
+              ><p>Мероприятия</p></a
+            >
+            <a
+              class="link link--white"
+              href="https://abuse.pomogut.by/about/"
+              ><p>О проекте</p></a
+            >
+            <a
+              class="link link--white"
+              href="http://pomogut.by/to-partners/"
+              ><p>Стать партнером</p></a
+            >
+            <a
+              class="link link--white"
+              href="http://pomogut.by/about/#contacts"
+              ><p>Написать нам</p></a
+            >
+          </div>
+        </div>
+      </div>
+          <div class="offset-lg-1 col-lg-2">
+            <div class="footer__logos">
+              <div class="logo-item">
+                <img src="/static/images/logo-belhard.png" />
+              </div>
+              <div class="logo-item">
+                <img src="/static/images/AIPSIN-logo.png" />
+              </div>
+              <div class="logo-item">
+                <img src="/static/images/logo-un.png" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+{% endblock %}
+
 {% block organizations %}
-{% if org_widget_flag %}
+  {% if org_widget_flag %}
   <section class="organizations">
     <a name="local_orgs"></a>
         <div class="container">
@@ -269,84 +334,108 @@
         </div>
         <div class="organizations__map"></div>
       </section>
-{% endif %}
+      {% endif %}
 {% endblock %}
 
 
-{% block footer %}
-  <footer class="footer footer--secondary">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-9">
-        <div class="footer__menu">
-          <div class="footer__menu-item">
-            <a class="link link--white" href="#help"
-              ><p>Первая медицинская помощь</p></a
+
+{% block employment %}
+{% if employment_flag %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="article article-calendar">
+        <h1 class="article__title headline-1">ТРУДОУСТРОЙСТВО</h1>
+        <a name="employment_widget"></a>
+        <div class="article__description">
+        <p>
+          По вопросам содействия в трудоустройстве вы можете обратиться
+          в орган государственной службы занятости по месту регистрации
+          или жительства. Здесь вам окажут следующие услуги:
+        </p>
+      </div>
+      <ul class="article__list">
+      <li><p>Обменять использованные шприцы и иглы на новые</p></li>
+      </ul>
+      <!--  <div class="article__select article-calendar__inputs">-->
+      <!--    <div class="article-calendar__input">-->
+      <!--      <p>Дата проведения</p>-->
+      <!--      <div class="article-calendar__input__content">-->
+      <!--        <input-->
+      <!--          type="text"-->
+      <!--          class="calendar"-->
+      <!--          placeholder="Выберите дату"-->
+      <!--        />-->
+      <!--        <i class="icon-calendar"></i>-->
+      <!--      </div>-->
+      <!--    </div>-->
+      <div class="article-calendar__input">
+        <p>Место проведения</p>
+        <div class="article-calendar__input__content">
+          <select class="select__activity">
+            <option></option>
+            <option class="select__option" value="Minsk"
+              >Минск</option
             >
-            <a class="link link--white" href="/relapse/"><p>Срыв</p></a>
-            <a class="link link--white" href="/hiv-hepatitis/"
-              ><p>Вич/Гепатит</p></a
+            <option class="select__option" value="Gomel"
+              >Гомель</option
             >
-            <a class="link link--white" href="http://pomogut.by/legal-info/"
-              ><p>Правовая информация</p></a
-            >
+          </select>
+        </div>
+      </div>
+      </div>
+      <div class="activities">
+      <div
+        class="vacancy"
+        data-city="Minsk"
+        data-active-day="01-09-2020"
+      >
+        <p class="vacancy__title headline-3">
+          УПРАВЛЕНИЕ ПО ТРУДУ ЗАНЯТОСТИ И СОЦИАЛЬНОЙ ЗАЩИТЕ
+          КРАСНОПОЛЬСКОГО РАЙИСПОЛКОМА
+        </p>
+        <div class="vacancy__info">
+          <div class="vacancy__info__item">
+            <p><strong>Адрес:</strong></p>
+            <p>
+              213561 Могилевская область, г.Минск, ул.Ленинская, 2
+            </p>
           </div>
-          <div class="footer__menu-item">
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/i-am-codependent/"
-              ><p>Мой близкий в проблеме</p></a
-            >
-            <a class="link link--white" href="https://abuse.pomogut.by/org/"
-              ><p>Я употребляю</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/i-am-on-remission/"
-              ><p>Я на ремиссии</p></a
-            >
-          </div>
-          <div class="footer__menu-item">
-            <a class="link link--white" href="/сareers/"
-              ><p>Центры занятости</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/events/"
-              ><p>Мероприятия</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/about/"
-              ><p>О проекте</p></a
-            >
-            <a
-              class="link link--white"
-              href="http://pomogut.by/to-partners/"
-              ><p>Стать партнером</p></a
-            >
-            <a
-              class="link link--white"
-              href="http://pomogut.by/about/#contacts"
-              ><p>Написать нам</p></a
+          <div class="vacancy__info__item vacancy__info__item--phone">
+            <p><strong>Контактный телефон:</strong></p>
+            <a href="tel:+375 29 123 45 67" title="Позвонить"
+              ><p>+375 29 123 45 67</p></a
             >
           </div>
         </div>
       </div>
-          <div class="offset-lg-1 col-lg-2">
-            <div class="footer__logos">
-              <div class="logo-item">
-                <img src="/static/images/logo-belhard.png" />
-              </div>
-              <div class="logo-item">
-                <img src="/static/images/AIPSIN-logo.png" />
-              </div>
-              <div class="logo-item">
-                <img src="/static/images/logo-un.png" />
-              </div>
-            </div>
+      <div
+        class="vacancy"
+        data-city="Gomel"
+        data-active-day="02-09-2020"
+      >
+        <p class="vacancy__title headline-3">
+          УПРАВЛЕНИЕ ПО ТРУДУ ЗАНЯТОСТИ И СОЦИАЛЬНОЙ ЗАЩИТЕ
+          КРАСНОПОЛЬСКОГО РАЙИСПОЛКОМА
+        </p>
+        <div class="vacancy__info">
+          <div class="vacancy__info__item">
+            <p><strong>Адрес:</strong></p>
+            <p>
+              213561 Могилевская область, г.Минск, ул.Ленинская, 2
+            </p>
+          </div>
+          <div class="vacancy__info__item vacancy__info__item--phone">
+            <p><strong>Контактный телефон:</strong></p>
+            <a href="tel:+375 29 123 45 67" title="Позвонить"
+              ><p>+375 29 123 45 67</p></a
+            >
           </div>
         </div>
       </div>
-    </footer>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 {% endblock %}

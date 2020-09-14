@@ -1,0 +1,57 @@
+.partners {
+  padding: 60px 0;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__navigation {
+    margin: 20px 0 48px;
+
+    .main-menu__navigation {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .link--active {
+      background-color: #5bb3d8;
+      color: #fff;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+    display: none;
+
+    &--active {
+      opacity: 1;
+    }
+
+    .select2-container {
+      z-index: 0;
+      width: 100% !important;
+
+      &--open {
+        .select2-selection {
+          background: $silver;
+        }
+      }
+    }
+
+    .select2-selection {
+      background: $light-gray;
+      outline: none;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 300;
+
+      &__placeholder {
+        color: #777 !important;
+      }
+    }
+  }
+}

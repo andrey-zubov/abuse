@@ -22,6 +22,9 @@
 @import "molecules/select";
 @import "molecules/vacancy";
 @import "molecules/organization-item";
+@import "molecules/news-item";
+@import "molecules/form-item";
+@import "molecules/quiz-item";
 
 @import "organisms/header";
 @import "organisms/main";
@@ -34,3 +37,7 @@
 @import "organisms/article-health";
 @import "organisms/article-calendar";
 @import "organisms/organizations";
+@import "organisms/feedback";
+@import "organisms/news";
+@import "organisms/single-news";
+@import "organisms/partners";

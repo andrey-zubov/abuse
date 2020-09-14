@@ -21,73 +21,75 @@ Page.register_extensions(
 )  # Example set of extensions
 
 Page.register_templates({
-    'title': _('Standard template'),
+    'title': _('Новость'),
     'path': 'widgets/base_widget.html',
     'regions': (
         ('main', _('Main content area')),
-        ('sidebar', _('Sidebar'), 'inherited'),
+    ),
+})
+
+
+Page.register_templates({
+    'title': _('Отдельная статья'),
+    'path': 'widgets/single_article.html',
+    'regions': (
+        ('main', _('Main content area')),
     ),
 })
 
 Page.create_content_type(RichTextContent)
-Page.create_content_type(MediaFileContent, TYPE_CHOICES=(
-    ('default', _('default')),
-    ('lightbox', _('lightbox')),
-))
 
-#
-# class Column(models.Model):  # page format
+# class OrgWidget(models.Model):
 #     class Meta:
-#         verbose_name = 'Одноколоночный'
 #         abstract = True
 #
-#     title = models.CharField(
-#         verbose_name='Название виджета',
-#         max_length=256,
-#     )
-#     picture = MediaFileForeignKey(
-#         MediaFile,
-#         on_delete=models.SET_NULL,
-#         verbose_name='Картинка',
-#         null=True,
-#     )
-#     pic_text = models.CharField(
-#         verbose_name='Подпись катринки',
-#         max_length=256
-#     )
-#     text = models.TextField(
-#         verbose_name='основной текст',
-#     )
-#
 #     def render(self):
+#         orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+#         all_cites = City.objects.filter()
+#         all_types = ServicesType.objects.filter()
 #         return render_to_string(
-#             'singlecolumn_article.html',
-#             context={
-#                 'widget': self,
-#                 'text': mark_safe(self.text)
-#             })
-#
-#     def get_img(self):
-#         if not self.picture:
-#             return None
-#         else:
-#             return join(settings.MEDIA_URL, str(self.picture.file))
+#             'widgets/org_widget.html',
+#             context={'widget': self,
+#                      'orgs': orgs,
+#                      'all_cites': all_cites,
+#                      'all_types': all_types,
+#                      })
 #
 #
-# Page.create_content_type(Column)
+# Page.create_content_type(OrgWidget)
 
 
-class Articles(models.Model):
+class AccordeonArticle(models.Model):
     class Meta:
-        verbose_name = 'Статья'
-        verbose_name_plural = 'Статьи'
+        abstract = True
 
-    category = models.ManyToManyField('Main_Cat')
-    is_active = models.BooleanField(default=True)
     title = models.CharField(
-        verbose_name='Название',
         max_length=256,
+        null=True,
+        blank=True
     )
+    text = models.TextField(
+        null=True,
+        blank=True,
+        help_text='в формате <p>Текст пункта</p>'
+    )
+
+    def render(self):
+        faq = FAQ.objects.all()
+        return render_to_string(
+            'widgets/accordeon_widget.html',
+            context={'widget': self,
+                     'faq':faq
+                     })
+
+
+Page.create_content_type(AccordeonArticle)
+
+
+class ArticlePicture(models.Model):
+    class Meta:
+        abstract = True
+
     picture = MediaFileForeignKey(
         MediaFile,
         on_delete=models.SET_NULL,
@@ -95,39 +97,95 @@ class Articles(models.Model):
         null=True,
         blank=True,
     )
-    pic_text = models.CharField(
-        verbose_name='Подпись катринки',
-        max_length=256,
-        null=True,
-        blank=True
-    )
-    text = models.TextField(
-        verbose_name='основной текст',
-    )
-    points = models.TextField(
-        verbose_name='Пункты/список',
-        blank=True,
-        null=True,
-        help_text='<li> текст пункта </li>'
-    )
-    link = models.ManyToManyField(
-        'Link',
-        null=True,
-        blank=True,
-        verbose_name='Ссылка',
-        help_text='Можно добавить ардесс-ссылку на внешний источник или'
-                  ' на статью.'
-    )
-
 
     def get_img(self):
-        if not self.picture:
-            return None
-        else:
-            return join(settings.MEDIA_URL, str(self.picture.file))
+        return join(settings.MEDIA_URL, str(self.picture.file))
 
-    def __str__(self):
-        return self.title
+    def render(self):
+        return render_to_string(
+            'widgets/picture_widget.html',
+            context={'widget': self})
+
+
+Page.create_content_type(ArticlePicture)
+
+
+# class Articles(models.Model):
+#     class Meta:
+#         verbose_name = 'Статья'
+#         verbose_name_plural = 'Статьи'
+#
+#     category = models.ManyToManyField('Main_Cat')
+#     is_active = models.BooleanField(default=True)
+#     title = models.CharField(
+#         verbose_name='Название',
+#         max_length=256,
+#     )
+#     picture = MediaFileForeignKey(
+#         MediaFile,
+#         on_delete=models.SET_NULL,
+#         verbose_name='Картинка',
+#         null=True,
+#         blank=True,
+#     )
+#     pic_text = models.CharField(
+#         verbose_name='Подпись катринки',
+#         max_length=256,
+#         null=True,
+#         blank=True
+#     )
+#     text = models.TextField(
+#         verbose_name='основной текст',
+#     )
+#     points = models.TextField(
+#         verbose_name='Пункты/список',
+#         blank=True,
+#         null=True,
+#         help_text='<li> текст пункта </li>'
+#     )
+#     button_orgs = models.BooleanField(
+#         verbose_name='Добавить кнопку-переход к организациям',
+#
+#     )
+#
+#     link = models.ManyToManyField(
+#         'Link',
+#         null=True,
+#         blank=True,
+#         verbose_name='Ссылка',
+#         help_text='Можно добавить ардесс-ссылку на внешний источник или'
+#                   ' на статью.'
+#     )
+#
+#
+#     def get_img(self):
+#         if not self.picture:
+#             return None
+#         else:
+#             return join(settings.MEDIA_URL, str(self.picture.file))
+#
+#     def __str__(self):
+#         return self.title
+
+
+class FAQ(models.Model):
+    title = models.CharField(
+        max_length=256,
+        verbose_name='пункт FAQ'
+    )
+
+
+class FAQlist(models.Model):
+    article = models.ForeignKey(
+        FAQ,
+        on_delete=models.CASCADE,
+    )
+    title = models.TextField(
+        verbose_name='Заголовок статьи'
+    )
+    text = models.TextField(
+        verbose_name='Содержимое статьи'
+    )
 
 
 class Link(models.Model):
@@ -135,6 +193,16 @@ class Link(models.Model):
         verbose_name = 'Ссылка'
         verbose_name_plural = 'Ссылки'
 
+    title = models.CharField(
+        verbose_name='Назание ссылки',
+        help_text='Будет отображаться на кнопке',
+        max_length=256
+    )
+    link = models.CharField(
+        max_length=1024,
+        verbose_name='ссылка',
+        help_text='Для навигации',
+    )
     info = models.CharField(
         verbose_name='Описание',
         null=True,
@@ -142,48 +210,48 @@ class Link(models.Model):
         max_length=50
     )
 
-    link = models.URLField(
-        verbose_name='ссылка',
-        help_text='Для навигации',
-    )
-    title = models.CharField(
-        verbose_name='Назание ссылки',
-        help_text='Будет отображаться на кнопке',
-        max_length=256
-    )
-
-
     def __str__(self):
         if self.info:
             return self.info
         else:
-            self.title
+            return self.title
 
 
-class Block(models.Model):  # Todo REFACTOR
-    is_active = models.BooleanField(default=True)
-    title = models.CharField(max_length=100, verbose_name="Название блока")
-    slug = models.SlugField(verbose_name="Слаг")
-    name_button = models.CharField(
-        max_length=100,
-        verbose_name="Название кнопки",
+class HelpFile(models.Model):
+    file = models.FileField(
+        verbose_name='Файл',
         null=True,
-        blank=True
+        blank=False
     )
-    text = models.TextField(verbose_name="Текст блока")
-    picture = MediaFileForeignKey(MediaFile,
-                                  on_delete=models.SET_NULL,
-                                  null=True,
-                                  blank=True,
-                                  verbose_name="Картинка")
-    # categories = models.ManyToManyField(Category, verbose_name="Раздел-категория-тег")
-    pages = models.ManyToManyField(Page, verbose_name="Статьи")
 
-    def get_img(self):
-        if not self.picture:
-            return None
-        else:
-            return join(settings.MEDIA_URL, str(self.picture.file))
+    @property
+    def get_file(self):
+        return join(settings.MEDIA_URL, str(self.file.file))
+
+# class Block(models.Model):  # Todo REFACTOR
+#     is_active = models.BooleanField(default=True)
+#     title = models.CharField(max_length=100, verbose_name="Название блока")
+#     slug = models.SlugField(verbose_name="Слаг")
+#     name_button = models.CharField(
+#         max_length=100,
+#         verbose_name="Название кнопки",
+#         null=True,
+#         blank=True
+#     )
+#     text = models.TextField(verbose_name="Текст блока")
+#     picture = MediaFileForeignKey(MediaFile,
+#                                   on_delete=models.SET_NULL,
+#                                   null=True,
+#                                   blank=True,
+#                                   verbose_name="Картинка")
+#     # categories = models.ManyToManyField(Category, verbose_name="Раздел-категория-тег")
+#     pages = models.ManyToManyField(Page, verbose_name="Статьи")
+#
+#     def get_img(self):
+#         if not self.picture:
+#             return None
+#         else:
+#             return join(settings.MEDIA_URL, str(self.picture.file))
 
 
 class Main_Cat(models.Model):
@@ -211,8 +279,17 @@ class Main_Cat(models.Model):
         verbose_name='Название',
         max_length=50
     )
+    help_widget = models.BooleanField(
+        verbose_name='Отображать виджет "первая помощь"'
+    )
+    employment_widget = models.BooleanField(
+        verbose_name='Отображать виджет трудоустройство'
+    )
     org_widget = models.BooleanField(
         verbose_name='Отображать виджет организаций'
+    )
+    cross_link = models.ManyToManyField(
+        'self',
     )
 
     def __str__(self):
@@ -258,7 +335,7 @@ class Organizations(models.Model):
         verbose_name='Телефон',
         null=True,
         blank=True,
-        max_length=16
+        max_length=32
     )
     tel2 = models.CharField(
         verbose_name='Телефон',
@@ -375,31 +452,60 @@ class ServicesPayment(models.Model):
         return self.title
 
 
-class PageType(models.Model):
-    class Meta:
-        db_table = 'pagetype'
-        verbose_name = 'Тип статьи'
-        verbose_name_plural = 'Типы статьей'
-
-    type = models.CharField(
-        verbose_name='тип модели',
-        max_length=24,
-    )
-
-    def __str__(self):
-        return self.type
-
-
-class TypeExtension(Extension):
-    model = 'pagetype'
-
+class ArticleCategory(Extension):
     def handle_model(self):
         self.model.add_to_class(
-            'type',
-            models.ForeignKey(
-                PageType,
-                verbose_name='Тип статьи',
-                on_delete=models.DO_NOTHING,
+            'category',
+            models.ManyToManyField(
+                Main_Cat,
+                null=False,
+                blank=False
+
+            )
+        )
+
+    def handle_modeladmin(self, modeladmin):
+        modeladmin.add_extension_options(
+            _("Категория"),
+            {"fields": ("category",), },
+        )
+
+
+Page.register_extensions(ArticleCategory)
+
+
+class NewsImageExtension(Extension):
+    def handle_model(self):
+        self.model.add_to_class(
+            'preview_img',
+            MediaFileForeignKey(
+                MediaFile,
+                on_delete=models.SET_NULL,
+                verbose_name='Выбрать картинку',
+                null=True,
+                blank=True,
+            )
+        )
+
+    def handle_modeladmin(self, modeladmin):
+        modeladmin.add_extension_options(
+            _("Выбрать картинку на превью"),
+            {"fields": ("preview_img",), },
+        )
+
+
+Page.register_extensions(NewsImageExtension)
+
+
+
+
+class NewsSourceExtension(Extension):
+    def handle_model(self):
+        self.model.add_to_class(
+            'source',
+            models.CharField(
+                verbose_name='Ссылка на источник',
+                max_length=256,
                 null=True,
                 blank=True
             )
@@ -407,12 +513,40 @@ class TypeExtension(Extension):
 
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(
-            _("Тип статьи"),
-            {"fields": ("type",), },
+            _("Ссылка на источник"),
+            {"fields": ("source",), },
         )
 
-Page.register_extensions(TypeExtension)
 
+Page.register_extensions(NewsSourceExtension)
+
+
+class LinkExtension(Extension):
+    def handle_model(self):
+        self.model.add_to_class(
+            'button',
+            models.ManyToManyField(
+                Link,
+                verbose_name='Ссылка под статьей',
+                null=True,
+                blank=True,
+            )
+        )
+        self.model.add_to_class(
+            'org_button',
+            models.BooleanField(
+                default=True,
+                verbose_name='Отображать кнопку быстрого перехода к организациям'
+            )
+        )
+
+    def handle_modeladmin(self, modeladmin):
+        modeladmin.add_extension_options(
+            _("Кнопки"),
+            {"fields": ("button", "org_button",), },
+        )
+
+Page.register_extensions(LinkExtension)
 
 # опросник
 class Question(models.Model):
@@ -425,7 +559,12 @@ class Question(models.Model):
         default=True
     )
     def __str__(self):
-        return self.title
+        answers = Answer.objects.filter(question=self)
+        choices = [i.title for i in self.get_choices()]
+        dic = {}
+        for ch in choices:
+            dic[ch] = answers.filter(choice__title=ch).count()
+        return f'{self.title} проголосовало: {answers.count()}. Итоги: {dic}'
 
     def get_choices(self):
         return self.choice_set.all()
@@ -453,5 +592,7 @@ class Answer(models.Model):
         Choice,
         on_delete=models.CASCADE,
     )
+
     def __str__(self):
         return f'{self.question.title}: {self.choice.title}'
+
