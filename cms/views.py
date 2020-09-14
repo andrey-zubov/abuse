@@ -3,6 +3,7 @@ from django.http import HttpResponse, FileResponse
 from django.db.models import Q
 from .forms import OrgForm
 from django.forms import inlineformset_factory
+import re
 
 from .models import (
     Page,
@@ -156,7 +157,7 @@ def add_new_org(request):
             }
         )
 
-import re
+
 def check_city(looknig_city):
     pre_city = re.sub(r'\w+\.', '', looknig_city).strip().capitalize()  # clear data from г.
     all_cityes = City.objects.all()
