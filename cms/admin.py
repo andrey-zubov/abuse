@@ -12,7 +12,9 @@ from .models import (
     Question,
     Answer,
     Choice,
-    HelpFile
+    HelpFile,
+    FAQ,
+    FAQlist
 )
 
 
@@ -34,6 +36,14 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [ChoicesAdmin]
 
 
+class FAQinline(admin.StackedInline):
+    model = FAQlist
+    extra = 1
+
+
+class FAQAdmin(admin.ModelAdmin):
+    inlines = [FAQinline]
+
 admin.site.register(Link)
 admin.site.register(Main_Cat)
 admin.site.register(Organizations, OrganizationAdmin)
@@ -50,4 +60,4 @@ admin.site.register(HelpFile)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
 
-# Register your models here.
+admin.site.register(FAQ, FAQAdmin)

@@ -70,13 +70,17 @@ class AccordeonArticle(models.Model):
     )
     text = models.TextField(
         null=True,
-        blank=True
+        blank=True,
+        help_text='в формате <p>Текст пункта</p>'
     )
 
     def render(self):
+        faq = FAQ.objects.all()
         return render_to_string(
             'widgets/accordeon_widget.html',
-            context={'widget': self})
+            context={'widget': self,
+                     'faq':faq
+                     })
 
 
 Page.create_content_type(AccordeonArticle)
@@ -162,6 +166,26 @@ Page.create_content_type(ArticlePicture)
 #
 #     def __str__(self):
 #         return self.title
+
+
+class FAQ(models.Model):
+    title = models.CharField(
+        max_length=256,
+        verbose_name='пункт FAQ'
+    )
+
+
+class FAQlist(models.Model):
+    article = models.ForeignKey(
+        FAQ,
+        on_delete=models.CASCADE,
+    )
+    title = models.TextField(
+        verbose_name='Заголовок статьи'
+    )
+    text = models.TextField(
+        verbose_name='Содержимое статьи'
+    )
 
 
 class Link(models.Model):
