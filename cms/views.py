@@ -78,8 +78,6 @@ def megapage(request, slug):
             'all_cites': all_cites,
             'all_types': all_types,
             'show_help': show_help,
-            # 'show_hiv': show_hiv,
-            # 'show_relapse': show_relapse,
             'org_widget_flag': org_widget_flag,
             'this_category': this_category,
             'employment_flag': employment_flag
@@ -95,56 +93,6 @@ def faq(request):
         context={'faq': faq,
                  'questions': questions}
     )
-
-#
-# def articles_by_cat(request, slug, choosed_city=None, choosed_type=None):
-#     if request.GET.__contains__('answer_for'):  # hold an answer in db
-#         question = Question.objects.get(title=request.GET['answer_for'])
-#         choice = Choice.objects.get(
-#             Q(question=question) & Q(title=request.GET[question.title])
-#         )
-#         save_answer = Answer.objects.create(
-#             question_id=question.id,
-#             choice=choice
-#         )
-#
-#     this_category = Main_Cat.objects.get(slug=slug)
-#
-#     show_help = this_category.help_widget
-#     show_hiv = this_category.help_widget
-#     show_relapse = this_category.relapse_widget
-#
-#     if this_category.org_widget:
-#         orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
-#         org_widget_flag = True
-#     else:
-#         orgs = None
-#         org_widget_flag = False
-#
-#     category_number = Main_Cat.objects.get(slug=slug).id
-#     all_cites = City.objects.filter()
-#     all_types = ServicesType.objects.filter()
-#     all_cats = Main_Cat.objects.filter(is_active=True)
-#     down_cats = all_cats.filter(header_menu='down')
-#     up_cats = all_cats.filter(header_menu='up')
-#     questions = Question.objects.all().prefetch_related('choice_set')
-#     articles = Articles.objects.filter(category__id=category_number)
-#     return render(
-#         request,
-#         template_name='Main_Article.html',
-#         context={'articles': articles,
-#                  'orgs': orgs,
-#                  'org_widget_flag': org_widget_flag,
-#                  'all_cites': all_cites,
-#                  'all_types': all_types,
-#                  'all_cats': all_cats,
-#                  'down_cats': down_cats,
-#                  'up_cats': up_cats,
-#                  'questions': questions,
-#                  'show_help': show_help,
-#                  'show_hiv': show_hiv,
-#                  'show_relapse': show_relapse,
-#                  })
 
 
 def org_info(request, slug):

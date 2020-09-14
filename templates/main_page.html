@@ -43,6 +43,11 @@
                 </li>
                 {% endfor %}
                 <li>
+                  <a class="link" href="{% url 'faq' %}"
+                    ><span>Правовая информация</span></a
+                  >
+                </li>
+                <li>
                   <a class="link" href="{% url 'news_page' %}"
                     ><span>Новости</span></a
                   >
@@ -84,7 +89,7 @@
 
             <li>
               <p>
-                <a class="link" href="https://abuse.pomogut.by/to-partners/"
+                <a class="link" href="{% url 'to-partners' %}"
                   ><span>Стать партнером</span></a
                 >
               </p>

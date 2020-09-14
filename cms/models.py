@@ -193,6 +193,16 @@ class Link(models.Model):
         verbose_name = 'Ссылка'
         verbose_name_plural = 'Ссылки'
 
+    title = models.CharField(
+        verbose_name='Назание ссылки',
+        help_text='Будет отображаться на кнопке',
+        max_length=256
+    )
+    link = models.CharField(
+        max_length=1024,
+        verbose_name='ссылка',
+        help_text='Для навигации',
+    )
     info = models.CharField(
         verbose_name='Описание',
         null=True,
@@ -200,22 +210,11 @@ class Link(models.Model):
         max_length=50
     )
 
-    link = models.URLField(
-        verbose_name='ссылка',
-        help_text='Для навигации',
-    )
-    title = models.CharField(
-        verbose_name='Назание ссылки',
-        help_text='Будет отображаться на кнопке',
-        max_length=256
-    )
-
-
     def __str__(self):
         if self.info:
             return self.info
         else:
-            self.title
+            return self.title
 
 
 class HelpFile(models.Model):
@@ -283,12 +282,6 @@ class Main_Cat(models.Model):
     help_widget = models.BooleanField(
         verbose_name='Отображать виджет "первая помощь"'
     )
-    # hiv_widget = models.BooleanField(
-    #     verbose_name='Отображать виджет "вич и гепатит"'
-    # )
-    # relapse_widget = models.BooleanField(
-    #     verbose_name='Отображать виджет "срыв"'
-    # )
     employment_widget = models.BooleanField(
         verbose_name='Отображать виджет трудоустройство'
     )
