@@ -1,0 +1,27 @@
+{% load static %}
+{% block content %}
+<div class="participants">
+  <h2 class="participants__title headline-1">Участники проекта</h2>
+  <div class="participants__content">
+    {% for partner in partners %}
+      <div class="participant">
+        <div class="participant__img-wrapper">
+          <img
+            class="participant__img"
+            src="{% get_media_prefix %}{{partner.picture.file}}"
+            alt=""
+          />
+        </div>
+        <p class="participant__title">
+          {{partner.title}}
+        </p>
+        <a
+          class="participant__link"
+          href="{{partner.link}}"
+          title="participant-title"
+        ></a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
