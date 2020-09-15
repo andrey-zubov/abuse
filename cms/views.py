@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, FileResponse
 from django.db.models import Q
-from .forms import OrgForm
+from .forms import OrgForm, VacancyForm
 from django.forms import inlineformset_factory
 import re
 
@@ -144,6 +144,7 @@ def add_new_org(request):
     else:
         all_types = ServicesType.objects.filter()
         form = OrgForm()
+        vac_form = VacancyForm()
 
 
         return render(
@@ -151,13 +152,34 @@ def add_new_org(request):
             template_name='add_new_org.html',
             context={
                 'form': form,
+                'vac_form': vac_form,
                 'all_types': all_types
 
             }
         )
 
 
-def check_city(looknig_city):
+def create_vac(request):
+    print(request.POST)
+    if request.method == 'POST':
+        vac_form = VacancyForm(request.POST)
+        if vac_form.is_valid():
+            new_vac = vac_form.save(commit=False)
+            new_vac.city = check_city(request.POST['pre_city'])
+            new_vac.save()
+            return HttpResponse('save')
+
+        else:
+            print(vac_form.errors)
+            return HttpResponse('post')
+
+
+    return HttpResponse(3)
+
+
+
+
+def check_city(looknig_city):  # TODO move to utils
     pre_city = re.sub(r'\w+\.', '', looknig_city).strip().capitalize()  # clear data from г.
     all_cityes = City.objects.all()
     if all_cityes.filter(title__iexact=pre_city).exists():
@@ -171,9 +193,3 @@ def check_city(looknig_city):
         return new_city
 
 
-def create_vac(request):
-    print(request.POST)
-    if request.method == 'POST':
-        pass
-
-    return HttpResponse(3)

@@ -146,7 +146,7 @@ class Vacancy(models.Model):
     title = models.CharField(
         max_length=256,
     )
-    desctiption = models.TextField()
+    description = models.TextField()
     time = models.CharField(
         choices=[
             ('1', 'Полная занятость'),
@@ -177,9 +177,6 @@ class Vacancy(models.Model):
     )
     adress = models.TextField()
     position = models.CharField(
-        max_length=256
-    )
-    org_employer = models.CharField(
         max_length=256
     )
     email = models.EmailField()

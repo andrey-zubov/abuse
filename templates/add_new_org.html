@@ -54,7 +54,6 @@
           <div class="partners__form" data-form="1">
             <form method="post" action="">
               {% csrf_token %}
-
               <div class="form-item__required">
                 <input
                   class="form-item"
@@ -68,7 +67,7 @@
                 <select name="org_type" class="form-item__select--organization form-item">
                   <option></option>
                   {% for type in all_types %}
-                    <option value="{{type.id}}">{{type}}</option>
+                    <option value="{{type.id}}">{{type.title}}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -118,32 +117,41 @@
             </form>
           </div>
 
+
           <div class="partners__form" data-form="2">
-            <div class="form-item__required">
-              <form method="post" action="{% url 'create_vacancy'%}">
-                {%csrf_token%}
+            <form method="post" action="{% url 'create_vacancy'%}">
+              {%csrf_token%}
+              <div class="form-item__required">
                 <input
                   class="form-item"
                   type="text"
-                  placeholder="Наименование вакансии"
+                  placeholder="Наименование вакансии",
+                  name="title"
                 />
               </div>
               <div class="form-item__required">
                 <textarea
                   class="form-item form-item__textarea"
                   placeholder="Описание вакансии"
+                  name="description"
                 ></textarea>
               </div>
               <div class="form-item__required">
-                <select class="form-item__select--work form-item">
+                <select name="time" class="form-item__select--work form-item">
                   <option></option>
-                  <option value="Title">Title</option>
+                  <option value="1">Полная занятость</option>
+                  <option value="2">Частичная занятость</option>
+                  <option value="3">Подработка</option>
+                  <option value="4">Гибкий график</option>
                 </select>
               </div>
               <div class="form-item__required">
-                <select class="form-item__select--form form-item">
+                <select name="ownership" class="form-item__select--form form-item">
                   <option></option>
-                  <option value="Title">Title</option>
+                  <option value="1">Государственная</option>
+                  <option value="2">Комерческая</option>
+                  <option value="3">Общественная организация</option>
+                  <option value="4">Религиозная организация</option>
                 </select>
               </div>
               <div class="form-item__required">
@@ -151,6 +159,7 @@
                   class="form-item"
                   type="text"
                   placeholder="Работодатель"
+                  name="employer"
                 />
               </div>
               <div class="form-item__required">
@@ -160,17 +169,43 @@
                     class="form-item"
                     type="text"
                     placeholder="+375 (__) ___ - __ - __"
+                    name="tel"
                   />
                 </div>
               </div>
+
               <div class="form-item__required">
-                <input class="form-item" type="text" placeholder="Адрес" />
+                <input
+                  class="form-item"
+                  type="text"
+                  placeholder="Населенный пункт"
+                  name="pre_city"
+                />
+              </div>
+
+              <div class="form-item__required">
+                <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Адрес"
+                    name="adress"
+                />
               </div>
               <div class="form-item__required">
-                <input class="form-item" type="text" placeholder="Позиция" />
+                <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Позиция"
+                    name="position"
+                />
               </div>
               <div class="form-item__required">
-                <input class="form-item" type="text" placeholder="email" />
+                <input
+                    class="form-item"
+                    type="text"
+                    placeholder="email"
+                    name="email"
+                />
               </div>
               <button type="submit" class="btn">Отправить заявку</button>
             </form>
