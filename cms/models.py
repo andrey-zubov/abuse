@@ -39,33 +39,30 @@ Page.register_templates({
 
 Page.create_content_type(RichTextContent)
 
-# class OrgWidget(models.Model):
-#     class Meta:
-#         abstract = True
-#
-#     def render(self):
-#         orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
-#         all_cites = City.objects.filter()
-#         all_types = ServicesType.objects.filter()
-#         return render_to_string(
-#             'widgets/org_widget.html',
-#             context={'widget': self,
-#                      'orgs': orgs,
-#                      'all_cites': all_cites,
-#                      'all_types': all_types,
-#                      })
-#
-#
-# Page.create_content_type(OrgWidget)
-
 
 class CalendarArticle(models.Model):
     class Meta:
         abstract = True
+
+    text = models.TextField()
+    list = models.TextField(
+        default='<li></li>',
+    )
+    bank_link = models.CharField(
+        verbose_name='Ссылка на банк вакансий',
+        max_length=256,
+        null=True,
+        blank=True
+    )
+
     def render(self):
+        all_cityes = City.objects.all()
+        all_events = Event.objects.all()
         return render_to_string(
             'widgets/calendar_widget.html',
             context={'widget': self,
+                     'all_cityes': all_cityes,
+                     'all_events': all_events
                      })
 
 Page.create_content_type(CalendarArticle)
@@ -285,31 +282,6 @@ class HelpFile(models.Model):
     @property
     def get_file(self):
         return join(settings.MEDIA_URL, str(self.file.file))
-
-# class Block(models.Model):  # Todo REFACTOR
-#     is_active = models.BooleanField(default=True)
-#     title = models.CharField(max_length=100, verbose_name="Название блока")
-#     slug = models.SlugField(verbose_name="Слаг")
-#     name_button = models.CharField(
-#         max_length=100,
-#         verbose_name="Название кнопки",
-#         null=True,
-#         blank=True
-#     )
-#     text = models.TextField(verbose_name="Текст блока")
-#     picture = MediaFileForeignKey(MediaFile,
-#                                   on_delete=models.SET_NULL,
-#                                   null=True,
-#                                   blank=True,
-#                                   verbose_name="Картинка")
-#     # categories = models.ManyToManyField(Category, verbose_name="Раздел-категория-тег")
-#     pages = models.ManyToManyField(Page, verbose_name="Статьи")
-#
-#     def get_img(self):
-#         if not self.picture:
-#             return None
-#         else:
-#             return join(settings.MEDIA_URL, str(self.picture.file))
 
 
 class Main_Cat(models.Model):

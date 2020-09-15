@@ -177,10 +177,13 @@ def create_vac(request):
 
 
 def create_event(request):
+    print(request.POST)
     if request.method == 'POST':
         event_form = EventForm(request.POST)
         if event_form.is_valid():
             new_event = event_form.save(commit=False)
+            if request.POST.__contains__('free_entrance'):
+                new_event.payment = 0
             new_event.city = check_city(request.POST['pre_city'])
             new_event.save()
         else:
