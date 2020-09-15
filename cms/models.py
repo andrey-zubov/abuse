@@ -77,12 +77,14 @@ class EmploymentArticle(models.Model):
 
     def render(self):
         all_cityes = City.objects.all()
-        orgs = Organizations.objects.filter(vacancies=True)
+        vacancies = Vacancy.objects.all()
+      #  orgs = Organizations.objects.filter(vacancies=True)
         return render_to_string(
             'widgets/employment_widget.html',
             context={'widget': self,
                      'all_cityes': all_cityes,
-                     'orgs': orgs
+                     # 'orgs': orgs,
+                     'vacancies': vacancies
                      })
 
 
@@ -138,6 +140,49 @@ class ArticlePicture(models.Model):
 
 
 Page.create_content_type(ArticlePicture)
+
+
+class Vacancy(models.Model):
+    title = models.CharField(
+        max_length=256,
+    )
+    desctiption = models.TextField()
+    time = models.CharField(
+        choices=[
+            ('1', 'Полная занятость'),
+            ('2', 'Частичная занятость'),
+            ('3', 'Подработка'),
+            ('4', 'Гибкий график'),
+        ],
+        max_length=64
+    )
+    ownership = models.CharField(
+        choices=[
+            ('1', 'Государственная'),
+            ('2', 'Комерческая'),
+            ('3', 'Общественная организация'),
+            ('4', 'Религиозная организация'),
+        ],
+        max_length=64
+    )
+    employer = models.CharField(
+        max_length=256,
+    )
+    tel = models.CharField(
+        max_length=30
+    )
+    city = models.ForeignKey(
+        'City',
+        on_delete=models.CASCADE
+    )
+    adress = models.TextField()
+    position = models.CharField(
+        max_length=256
+    )
+    org_employer = models.CharField(
+        max_length=256
+    )
+    email = models.EmailField()
 
 
 class FAQ(models.Model):
@@ -278,10 +323,6 @@ class Organizations(models.Model):
     title = models.CharField(
         verbose_name='Название организации',
         max_length=256
-    )
-    vacancies = models.BooleanField(
-        verbose_name='Занимается трудоустройством',
-        default=False
     )
     slug = models.SlugField(
         verbose_name='Слаг',

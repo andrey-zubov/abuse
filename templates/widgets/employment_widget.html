@@ -17,25 +17,23 @@
           {% for city in all_cityes %}
             <option class="select__option" value="{{city.title}}">{{city.title}}</option>
           {% endfor %}
-          <option class="select__option" value="Krasnoe">Краснополье</option>
-          <option class="select__option" value="Gomel">Гомель</option>
         </select>
       </div>
       <div class="vacancies">
-        {% for org in orgs %}
-        <div class="vacancy" data-city="{{org.city}}">
+        {% for vac in vacancies %}
+        <div class="vacancy" data-city="{{vac.city}}">
           <p class="vacancy__title headline-3">
-            {{ org.title }}
+            {{ vac.title }}
           </p>
           <div class="vacancy__info">
             <div class="vacancy__info__item">
               <p><strong>Адрес:</strong></p>
-              <p>{{org.adress}}</p>
+              <p>{{vac.adress}}</p>
             </div>
-            <div class="vacancy__info__item vacancy__info__item&#45;&#45;phone">
+            <div class="vacancy__info__item vacancy__info__item--phone">
               <p><strong>Контактный телефон:</strong></p>
               <a href="tel:+375 29 123 45 67" title="Позвонить"
-                ><p>{{org.tel1}}</p></a
+                ><p>{{vac.tel}}</p></a
               >
             </div>
           </div>
@@ -49,7 +47,7 @@
         </div>
       </div>
 
-      <div class="article__buttons article__buttons&#45;&#45;left">
+      <div class="article__buttons article__buttons--left">
         <a href="#" class="btn" target="_blank"
           ><span>Найти ближайшую организацию</span></a
         >

@@ -169,3 +169,11 @@ def check_city(looknig_city):
             title=pre_city
         )
         return new_city
+
+
+def create_vac(request):
+    print(request.POST)
+    if request.method == 'POST':
+        pass
+
+    return HttpResponse(3)
