@@ -68,6 +68,22 @@ class CalendarArticle(models.Model):
 Page.create_content_type(CalendarArticle)
 
 
+class ParticipantWidget(models.Model):
+    class Meta:
+        abstract = True
+
+    def render(self):
+        partners = Partner.objects.all()
+        return render_to_string(
+            'widgets/participant_widget.html',
+            context={'widget': self,
+                     'partners': partners
+                     })
+
+
+Page.create_content_type(ParticipantWidget)
+
+
 class EmploymentArticle(models.Model):
     class Meta:
         abstract = True
@@ -282,6 +298,23 @@ class HelpFile(models.Model):
     @property
     def get_file(self):
         return join(settings.MEDIA_URL, str(self.file.file))
+
+
+class Partner(models.Model):
+    title = models.CharField(
+        verbose_name='Наименование',
+        max_length=256
+    )
+    link = models.URLField(
+        verbose_name='Ссылка',
+    )
+    picture = MediaFileForeignKey(
+        MediaFile,
+        on_delete=models.SET_NULL,
+        verbose_name='Выбрать картинку',
+        null=True,
+        blank=True,
+    )
 
 
 class Main_Cat(models.Model):
