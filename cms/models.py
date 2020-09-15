@@ -59,6 +59,36 @@ Page.create_content_type(RichTextContent)
 # Page.create_content_type(OrgWidget)
 
 
+class CalendarArticle(models.Model):
+    class Meta:
+        abstract = True
+    def render(self):
+        return render_to_string(
+            'widgets/calendar_widget.html',
+            context={'widget': self,
+                     })
+
+Page.create_content_type(CalendarArticle)
+
+
+class EmploymentArticle(models.Model):
+    class Meta:
+        abstract = True
+
+    def render(self):
+        all_cityes = City.objects.all()
+        orgs = Organizations.objects.filter(vacancies=True)
+        return render_to_string(
+            'widgets/employment_widget.html',
+            context={'widget': self,
+                     'all_cityes': all_cityes,
+                     'orgs': orgs
+                     })
+
+
+Page.create_content_type(EmploymentArticle)
+
+
 class AccordeonArticle(models.Model):
     class Meta:
         abstract = True
@@ -108,64 +138,6 @@ class ArticlePicture(models.Model):
 
 
 Page.create_content_type(ArticlePicture)
-
-
-# class Articles(models.Model):
-#     class Meta:
-#         verbose_name = 'Статья'
-#         verbose_name_plural = 'Статьи'
-#
-#     category = models.ManyToManyField('Main_Cat')
-#     is_active = models.BooleanField(default=True)
-#     title = models.CharField(
-#         verbose_name='Название',
-#         max_length=256,
-#     )
-#     picture = MediaFileForeignKey(
-#         MediaFile,
-#         on_delete=models.SET_NULL,
-#         verbose_name='Картинка',
-#         null=True,
-#         blank=True,
-#     )
-#     pic_text = models.CharField(
-#         verbose_name='Подпись катринки',
-#         max_length=256,
-#         null=True,
-#         blank=True
-#     )
-#     text = models.TextField(
-#         verbose_name='основной текст',
-#     )
-#     points = models.TextField(
-#         verbose_name='Пункты/список',
-#         blank=True,
-#         null=True,
-#         help_text='<li> текст пункта </li>'
-#     )
-#     button_orgs = models.BooleanField(
-#         verbose_name='Добавить кнопку-переход к организациям',
-#
-#     )
-#
-#     link = models.ManyToManyField(
-#         'Link',
-#         null=True,
-#         blank=True,
-#         verbose_name='Ссылка',
-#         help_text='Можно добавить ардесс-ссылку на внешний источник или'
-#                   ' на статью.'
-#     )
-#
-#
-#     def get_img(self):
-#         if not self.picture:
-#             return None
-#         else:
-#             return join(settings.MEDIA_URL, str(self.picture.file))
-#
-#     def __str__(self):
-#         return self.title
 
 
 class FAQ(models.Model):
@@ -282,9 +254,9 @@ class Main_Cat(models.Model):
     help_widget = models.BooleanField(
         verbose_name='Отображать виджет "первая помощь"'
     )
-    employment_widget = models.BooleanField(
-        verbose_name='Отображать виджет трудоустройство'
-    )
+    # employment_widget = models.BooleanField(
+    #     verbose_name='Отображать виджет трудоустройство'
+    # )
     org_widget = models.BooleanField(
         verbose_name='Отображать виджет организаций'
     )
@@ -306,6 +278,10 @@ class Organizations(models.Model):
     title = models.CharField(
         verbose_name='Название организации',
         max_length=256
+    )
+    vacancies = models.BooleanField(
+        verbose_name='Занимается трудоустройством',
+        default=False
     )
     slug = models.SlugField(
         verbose_name='Слаг',
@@ -537,7 +513,7 @@ class LinkExtension(Extension):
         self.model.add_to_class(
             'org_button',
             models.BooleanField(
-                default=True,
+                default=False,
                 verbose_name='Отображать кнопку быстрого перехода к организациям'
             )
         )

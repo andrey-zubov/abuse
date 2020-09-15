@@ -1,0 +1,58 @@
+{% block content %}
+    <div class="article article-select">
+      <h1 class="article__title headline-1">ТРУДОУСТРОЙСТВО</h1>
+      <div class="article__description">
+        <p>
+          По вопросам содействия в трудоустройстве вы можете обратиться в орган
+          государственной службы занятости по месту регистрации или жительства.
+          Здесь вам окажут следующие услуги:
+        </p>
+      </div>
+      <ul class="article__list">
+        <li><p>Обменять использованные шприцы и иглы на новые</p></li>
+      </ul>
+      <div class="article__select">
+        <select class="article__select-item">
+          <option></option>
+          {% for city in all_cityes %}
+            <option class="select__option" value="{{city.title}}">{{city.title}}</option>
+          {% endfor %}
+          <option class="select__option" value="Krasnoe">Краснополье</option>
+          <option class="select__option" value="Gomel">Гомель</option>
+        </select>
+      </div>
+      <div class="vacancies">
+        {% for org in orgs %}
+        <div class="vacancy" data-city="{{org.city}}">
+          <p class="vacancy__title headline-3">
+            {{ org.title }}
+          </p>
+          <div class="vacancy__info">
+            <div class="vacancy__info__item">
+              <p><strong>Адрес:</strong></p>
+              <p>{{org.adress}}</p>
+            </div>
+            <div class="vacancy__info__item vacancy__info__item&#45;&#45;phone">
+              <p><strong>Контактный телефон:</strong></p>
+              <a href="tel:+375 29 123 45 67" title="Позвонить"
+                ><p>{{org.tel1}}</p></a
+              >
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="vacancy--empty">
+          <p class="headline-3">
+            НА СЕГОДНЯ НЕТ АКТУАЛЬНЫХ ПРЕДЛОЖЕНИЙ ОТ КЛУБОВ
+          </p>
+        </div>
+      </div>
+
+      <div class="article__buttons article__buttons&#45;&#45;left">
+        <a href="#" class="btn" target="_blank"
+          ><span>Найти ближайшую организацию</span></a
+        >
+      </div>
+    </div>
+{% endblock %}

@@ -5,7 +5,7 @@ from .models import Organizations, OrganizationServices
 class OrgForm(ModelForm):
     class Meta:
         model = Organizations
-        exclude = ['slug', 'city']
+        exclude = ['slug', 'city', 'vacancies']
 
 
 class OrgServsForm(ModelForm):

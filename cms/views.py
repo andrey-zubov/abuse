@@ -57,7 +57,7 @@ def megapage(request, slug):
         orgs = None
         org_widget_flag = False
 
-    employment_flag = True if this_category.employment_widget else False
+    # employment_flag = True if this_category.employment_widget else False
 
     all_cites = City.objects.filter()
     all_types = ServicesType.objects.filter()
@@ -81,7 +81,6 @@ def megapage(request, slug):
             'show_help': show_help,
             'org_widget_flag': org_widget_flag,
             'this_category': this_category,
-            'employment_flag': employment_flag
     })
 
 
