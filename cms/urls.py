@@ -7,7 +7,8 @@ from .views import (
     help_file,
     megapage,
     faq,
-    create_vac
+    create_vac,
+    create_event
 )
 
 urlpatterns = [
@@ -18,6 +19,7 @@ urlpatterns = [
     path('abuse/help', help_file, name='help_pdf'),
     path('abuse/legal-info/', faq, name='faq'),
     path('create_vac', create_vac, name='create_vacancy'),
+    path('create_event', create_event, name='create_event'),
 
     path('abuse/<slug>/', megapage, name='main_articles'),
 

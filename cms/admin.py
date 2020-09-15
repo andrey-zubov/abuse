@@ -15,7 +15,8 @@ from .models import (
     HelpFile,
     FAQ,
     FAQlist,
-    Vacancy
+    Vacancy,
+    Event
 )
 
 
@@ -62,5 +63,6 @@ admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer)
 
 admin.site.register(Vacancy)
+admin.site.register(Event)
 
 admin.site.register(FAQ, FAQAdmin)

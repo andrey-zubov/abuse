@@ -1,5 +1,9 @@
 from django.forms import ModelForm, BaseInlineFormSet
-from .models import Organizations, OrganizationServices, Vacancy
+from .models import (
+    Organizations,
+    Vacancy,
+    Event
+)
 
 
 class OrgForm(ModelForm):
@@ -8,12 +12,13 @@ class OrgForm(ModelForm):
         exclude = ['slug', 'city', 'vacancies']
 
 
-# class OrgServsForm(ModelForm):
-#     class Meta:
-#         model = OrganizationServices
-#         exclude = []
-
 class VacancyForm(ModelForm):
     class Meta:
         model = Vacancy
+        exclude = ['city']
+
+
+class EventForm(ModelForm):
+    class Meta:
+        model = Event
         exclude = ['city']

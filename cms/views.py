@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, FileResponse
 from django.db.models import Q
-from .forms import OrgForm, VacancyForm
+from .forms import OrgForm, VacancyForm, EventForm
 from django.forms import inlineformset_factory
 import re
 
@@ -145,6 +145,7 @@ def add_new_org(request):
         all_types = ServicesType.objects.filter()
         form = OrgForm()
         vac_form = VacancyForm()
+        event_form = EventForm()
 
 
         return render(
@@ -153,6 +154,7 @@ def add_new_org(request):
             context={
                 'form': form,
                 'vac_form': vac_form,
+                'event_form': event_form,
                 'all_types': all_types
 
             }
@@ -160,7 +162,6 @@ def add_new_org(request):
 
 
 def create_vac(request):
-    print(request.POST)
     if request.method == 'POST':
         vac_form = VacancyForm(request.POST)
         if vac_form.is_valid():
@@ -172,8 +173,19 @@ def create_vac(request):
         else:
             print(vac_form.errors)
             return HttpResponse('post')
+    return HttpResponse(3)
 
 
+def create_event(request):
+    if request.method == 'POST':
+        event_form = EventForm(request.POST)
+        if event_form.is_valid():
+            new_event = event_form.save(commit=False)
+            new_event.city = check_city(request.POST['pre_city'])
+            new_event.save()
+        else:
+            print(event_form.errors)
+            return HttpResponse('siad')
     return HttpResponse(3)
 
 

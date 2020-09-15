@@ -182,6 +182,50 @@ class Vacancy(models.Model):
     email = models.EmailField()
 
 
+class Event(models.Model):
+    title = models.CharField(
+        max_length=256
+    )
+    start_date = models.DateField()
+    start_time = models.CharField(
+        max_length=30
+    )
+    event_type = models.CharField(
+        choices=[
+            ('1', 'Культурные'),
+            ('2', 'Образовательные'),
+            ('3', 'Просветительские'),
+            ('4', 'Религиозные'),
+            ('5', 'Спортивные'),
+            ('6', 'Отдых'),
+            ('7', 'Профориентация'),
+            ('8', 'Тренинги'),
+
+
+
+        ],
+        max_length=32
+    )
+    payment = models.CharField(
+        max_length=64
+    )
+    city = models.ForeignKey(
+        'City',
+        on_delete=models.CASCADE
+    )
+    adress = models.TextField()
+    organizator = models.TextField()
+    description = models.TextField()
+    tel = models.CharField(
+        max_length=32
+    )
+    person = models.CharField(
+        max_length=64,
+        verbose_name="Контактное лицо"
+    )
+
+
+
 class FAQ(models.Model):
     title = models.CharField(
         max_length=256,
