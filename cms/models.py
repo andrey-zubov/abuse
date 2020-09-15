@@ -131,6 +131,19 @@ class AccordeonArticle(models.Model):
 Page.create_content_type(AccordeonArticle)
 
 
+class Feedback(models.Model):
+    class Meta:
+        abstract = True
+
+    def render(self):
+        return render_to_string(
+            'widgets/feedback_widget.html',
+            context={'widget': self})
+
+
+Page.create_content_type(Feedback)
+
+
 class ArticlePicture(models.Model):
     class Meta:
         abstract = True
