@@ -15,6 +15,8 @@ from feincms.extensions import Extension
 from mptt import register
 from mptt.models import MPTTModel, TreeForeignKey
 
+import geocoder
+
 Page.register_extensions(
     'feincms.extensions.datepublisher',
     'feincms.extensions.translations'
@@ -404,6 +406,16 @@ class Organizations(models.Model):
         null=True,
         blank=True
     )
+    lat = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True
+    )
+    lng = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True
+    )
     desctiption = models.TextField(
         verbose_name="описание",
         null=True,
@@ -441,6 +453,17 @@ class Organizations(models.Model):
     @property
     def get_services(self):
         return self.organizationservices_set.all()
+
+    def save(self, *args, **kwargs):
+        if str(self.city).lower() in str(self.adress).lower():
+            g = geocoder.osm(self.adress)
+        else:
+            g = geocoder.osm(f'{self.city} {self.adress}')
+        self.lat = g.lat
+        self.lng = g.lng
+
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return self.title
