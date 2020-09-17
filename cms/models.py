@@ -15,6 +15,8 @@ from feincms.extensions import Extension
 from mptt import register
 from mptt.models import MPTTModel, TreeForeignKey
 
+import geocoder
+
 Page.register_extensions(
     'feincms.extensions.datepublisher',
     'feincms.extensions.translations'
@@ -39,24 +41,69 @@ Page.register_templates({
 
 Page.create_content_type(RichTextContent)
 
-# class OrgWidget(models.Model):
-#     class Meta:
-#         abstract = True
-#
-#     def render(self):
-#         orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
-#         all_cites = City.objects.filter()
-#         all_types = ServicesType.objects.filter()
-#         return render_to_string(
-#             'widgets/org_widget.html',
-#             context={'widget': self,
-#                      'orgs': orgs,
-#                      'all_cites': all_cites,
-#                      'all_types': all_types,
-#                      })
-#
-#
-# Page.create_content_type(OrgWidget)
+
+class CalendarArticle(models.Model):
+    class Meta:
+        abstract = True
+
+    text = models.TextField()
+    list = models.TextField(
+        default='<li></li>',
+    )
+    bank_link = models.CharField(
+        verbose_name='Ссылка на банк вакансий',
+        max_length=256,
+        null=True,
+        blank=True
+    )
+
+    def render(self):
+        all_cityes = City.objects.all()
+        all_events = Event.objects.all()
+        return render_to_string(
+            'widgets/calendar_widget.html',
+            context={'widget': self,
+                     'all_cityes': all_cityes,
+                     'all_events': all_events
+                     })
+
+Page.create_content_type(CalendarArticle)
+
+
+class ParticipantWidget(models.Model):
+    class Meta:
+        abstract = True
+
+    def render(self):
+        partners = Partner.objects.all()
+        return render_to_string(
+            'widgets/participant_widget.html',
+            context={'widget': self,
+                     'partners': partners
+                     })
+
+
+Page.create_content_type(ParticipantWidget)
+
+
+class EmploymentArticle(models.Model):
+    class Meta:
+        abstract = True
+
+    def render(self):
+        all_cityes = City.objects.all()
+        vacancies = Vacancy.objects.all()
+      #  orgs = Organizations.objects.filter(vacancies=True)
+        return render_to_string(
+            'widgets/employment_widget.html',
+            context={'widget': self,
+                     'all_cityes': all_cityes,
+                     # 'orgs': orgs,
+                     'vacancies': vacancies
+                     })
+
+
+Page.create_content_type(EmploymentArticle)
 
 
 class AccordeonArticle(models.Model):
@@ -86,6 +133,19 @@ class AccordeonArticle(models.Model):
 Page.create_content_type(AccordeonArticle)
 
 
+class Feedback(models.Model):
+    class Meta:
+        abstract = True
+
+    def render(self):
+        return render_to_string(
+            'widgets/feedback_widget.html',
+            context={'widget': self})
+
+
+Page.create_content_type(Feedback)
+
+
 class ArticlePicture(models.Model):
     class Meta:
         abstract = True
@@ -110,62 +170,88 @@ class ArticlePicture(models.Model):
 Page.create_content_type(ArticlePicture)
 
 
-# class Articles(models.Model):
-#     class Meta:
-#         verbose_name = 'Статья'
-#         verbose_name_plural = 'Статьи'
-#
-#     category = models.ManyToManyField('Main_Cat')
-#     is_active = models.BooleanField(default=True)
-#     title = models.CharField(
-#         verbose_name='Название',
-#         max_length=256,
-#     )
-#     picture = MediaFileForeignKey(
-#         MediaFile,
-#         on_delete=models.SET_NULL,
-#         verbose_name='Картинка',
-#         null=True,
-#         blank=True,
-#     )
-#     pic_text = models.CharField(
-#         verbose_name='Подпись катринки',
-#         max_length=256,
-#         null=True,
-#         blank=True
-#     )
-#     text = models.TextField(
-#         verbose_name='основной текст',
-#     )
-#     points = models.TextField(
-#         verbose_name='Пункты/список',
-#         blank=True,
-#         null=True,
-#         help_text='<li> текст пункта </li>'
-#     )
-#     button_orgs = models.BooleanField(
-#         verbose_name='Добавить кнопку-переход к организациям',
-#
-#     )
-#
-#     link = models.ManyToManyField(
-#         'Link',
-#         null=True,
-#         blank=True,
-#         verbose_name='Ссылка',
-#         help_text='Можно добавить ардесс-ссылку на внешний источник или'
-#                   ' на статью.'
-#     )
-#
-#
-#     def get_img(self):
-#         if not self.picture:
-#             return None
-#         else:
-#             return join(settings.MEDIA_URL, str(self.picture.file))
-#
-#     def __str__(self):
-#         return self.title
+class Vacancy(models.Model):
+    title = models.CharField(
+        max_length=256,
+    )
+    description = models.TextField()
+    time = models.CharField(
+        choices=[
+            ('1', 'Полная занятость'),
+            ('2', 'Частичная занятость'),
+            ('3', 'Подработка'),
+            ('4', 'Гибкий график'),
+        ],
+        max_length=64
+    )
+    ownership = models.CharField(
+        choices=[
+            ('1', 'Государственная'),
+            ('2', 'Комерческая'),
+            ('3', 'Общественная организация'),
+            ('4', 'Религиозная организация'),
+        ],
+        max_length=64
+    )
+    employer = models.CharField(
+        max_length=256,
+    )
+    tel = models.CharField(
+        max_length=30
+    )
+    city = models.ForeignKey(
+        'City',
+        on_delete=models.CASCADE
+    )
+    adress = models.TextField()
+    position = models.CharField(
+        max_length=256
+    )
+    email = models.EmailField()
+
+
+class Event(models.Model):
+    title = models.CharField(
+        max_length=256
+    )
+    start_date = models.DateField()
+    start_time = models.CharField(
+        max_length=30
+    )
+    event_type = models.CharField(
+        choices=[
+            ('1', 'Культурные'),
+            ('2', 'Образовательные'),
+            ('3', 'Просветительские'),
+            ('4', 'Религиозные'),
+            ('5', 'Спортивные'),
+            ('6', 'Отдых'),
+            ('7', 'Профориентация'),
+            ('8', 'Тренинги'),
+
+
+
+        ],
+        max_length=32
+    )
+    payment = models.CharField(
+        max_length=64
+    )
+    city = models.ForeignKey(
+        'City',
+        on_delete=models.CASCADE
+    )
+    adress = models.TextField()
+    organizator = models.TextField()
+    description = models.TextField()
+    tel = models.CharField(
+        max_length=32
+    )
+    person = models.CharField(
+        max_length=64,
+        verbose_name="Контактное лицо"
+    )
+
 
 
 class FAQ(models.Model):
@@ -228,30 +314,22 @@ class HelpFile(models.Model):
     def get_file(self):
         return join(settings.MEDIA_URL, str(self.file.file))
 
-# class Block(models.Model):  # Todo REFACTOR
-#     is_active = models.BooleanField(default=True)
-#     title = models.CharField(max_length=100, verbose_name="Название блока")
-#     slug = models.SlugField(verbose_name="Слаг")
-#     name_button = models.CharField(
-#         max_length=100,
-#         verbose_name="Название кнопки",
-#         null=True,
-#         blank=True
-#     )
-#     text = models.TextField(verbose_name="Текст блока")
-#     picture = MediaFileForeignKey(MediaFile,
-#                                   on_delete=models.SET_NULL,
-#                                   null=True,
-#                                   blank=True,
-#                                   verbose_name="Картинка")
-#     # categories = models.ManyToManyField(Category, verbose_name="Раздел-категория-тег")
-#     pages = models.ManyToManyField(Page, verbose_name="Статьи")
-#
-#     def get_img(self):
-#         if not self.picture:
-#             return None
-#         else:
-#             return join(settings.MEDIA_URL, str(self.picture.file))
+
+class Partner(models.Model):
+    title = models.CharField(
+        verbose_name='Наименование',
+        max_length=256
+    )
+    link = models.URLField(
+        verbose_name='Ссылка',
+    )
+    picture = MediaFileForeignKey(
+        MediaFile,
+        on_delete=models.SET_NULL,
+        verbose_name='Выбрать картинку',
+        null=True,
+        blank=True,
+    )
 
 
 class Main_Cat(models.Model):
@@ -282,9 +360,9 @@ class Main_Cat(models.Model):
     help_widget = models.BooleanField(
         verbose_name='Отображать виджет "первая помощь"'
     )
-    employment_widget = models.BooleanField(
-        verbose_name='Отображать виджет трудоустройство'
-    )
+    # employment_widget = models.BooleanField(
+    #     verbose_name='Отображать виджет трудоустройство'
+    # )
     org_widget = models.BooleanField(
         verbose_name='Отображать виджет организаций'
     )
@@ -328,6 +406,16 @@ class Organizations(models.Model):
         null=True,
         blank=True
     )
+    lat = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True
+    )
+    lng = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True
+    )
     desctiption = models.TextField(
         verbose_name="описание",
         null=True,
@@ -365,6 +453,17 @@ class Organizations(models.Model):
     @property
     def get_services(self):
         return self.organizationservices_set.all()
+
+    def save(self, *args, **kwargs):
+        if str(self.city).lower() in str(self.adress).lower():
+            g = geocoder.osm(self.adress)
+        else:
+            g = geocoder.osm(f'{self.city} {self.adress}')
+        self.lat = g.lat
+        self.lng = g.lng
+
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return self.title
@@ -537,7 +636,7 @@ class LinkExtension(Extension):
         self.model.add_to_class(
             'org_button',
             models.BooleanField(
-                default=True,
+                default=False,
                 verbose_name='Отображать кнопку быстрого перехода к организациям'
             )
         )

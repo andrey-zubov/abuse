@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, FileResponse
 from django.db.models import Q
-from .forms import OrgForm
+from .forms import OrgForm, VacancyForm, EventForm
 from django.forms import inlineformset_factory
 import re
 
@@ -57,7 +57,7 @@ def megapage(request, slug):
         orgs = None
         org_widget_flag = False
 
-    employment_flag = True if this_category.employment_widget else False
+    # employment_flag = True if this_category.employment_widget else False
 
     all_cites = City.objects.filter()
     all_types = ServicesType.objects.filter()
@@ -81,7 +81,6 @@ def megapage(request, slug):
             'show_help': show_help,
             'org_widget_flag': org_widget_flag,
             'this_category': this_category,
-            'employment_flag': employment_flag
     })
 
 
@@ -145,6 +144,8 @@ def add_new_org(request):
     else:
         all_types = ServicesType.objects.filter()
         form = OrgForm()
+        vac_form = VacancyForm()
+        event_form = EventForm()
 
 
         return render(
@@ -152,13 +153,48 @@ def add_new_org(request):
             template_name='add_new_org.html',
             context={
                 'form': form,
+                'vac_form': vac_form,
+                'event_form': event_form,
                 'all_types': all_types
 
             }
         )
 
 
-def check_city(looknig_city):
+def create_vac(request):
+    if request.method == 'POST':
+        vac_form = VacancyForm(request.POST)
+        if vac_form.is_valid():
+            new_vac = vac_form.save(commit=False)
+            new_vac.city = check_city(request.POST['pre_city'])
+            new_vac.save()
+            return HttpResponse('save')
+
+        else:
+            print(vac_form.errors)
+            return HttpResponse('post')
+    return HttpResponse(3)
+
+
+def create_event(request):
+    print(request.POST)
+    if request.method == 'POST':
+        event_form = EventForm(request.POST)
+        if event_form.is_valid():
+            new_event = event_form.save(commit=False)
+            if request.POST.__contains__('free_entrance'):
+                new_event.payment = 0
+            new_event.city = check_city(request.POST['pre_city'])
+            new_event.save()
+        else:
+            print(event_form.errors)
+            return HttpResponse('siad')
+    return HttpResponse(3)
+
+
+
+
+def check_city(looknig_city):  # TODO move to utils
     pre_city = re.sub(r'\w+\.', '', looknig_city).strip().capitalize()  # clear data from г.
     all_cityes = City.objects.all()
     if all_cityes.filter(title__iexact=pre_city).exists():
@@ -170,3 +206,5 @@ def check_city(looknig_city):
             title=pre_city
         )
         return new_city
+
+

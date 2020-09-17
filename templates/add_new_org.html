@@ -19,121 +19,316 @@
     <title>Test page</title>
   </head>
 <body>
-<!--<form method="post" action="">-->
-<!--  {% csrf_token %}-->
-<!--  {% for field in form %}-->
-<!--    {{field.label}}{{field}}-->
-<!--  {% endfor %}-->
-<!--  {{ formset.management_form }}-->
-<!--  {% for i in formset %}-->
-<!--    {{ i }}-->
-<!--  {% endfor %}-->
-<!--  <button type="submit">OK</button>-->
-<!--</form>-->
 <section class="partners">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 offset-lg-3">
-            <h1 class="partners__title headline-1">ПАРТНЕРАМ</h1>
-          </div>
-          <div class="col-lg-8 offset-lg-2">
-            <nav class="main-menu partners__navigation">
-              <ul class="main-menu__navigation">
-                <li>
-                  <p class="link link--blue" data-form="1">
-                    <span>Зарегистрировать организацию</span>
-                  </p>
-                </li>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <h1 class="partners__title headline-1">ПАРТНЕРАМ</h1>
+      </div>
+      <div class="col-lg-8 offset-lg-2">
+        <nav class="main-menu partners__navigation">
+          <ul class="main-menu__navigation">
+            <li>
+              <p class="link link--blue" data-form="1">
+                <span>Зарегистрировать организацию</span>
+              </p>
+            </li>
 
-                <li>
-                  <p class="link link--blue" data-form="2">
-                    <span>Опубликовать вакансию</span>
-                  </p>
-                </li>
+            <li>
+              <p class="link link--blue" data-form="2">
+                <span>Опубликовать вакансию</span>
+              </p>
+            </li>
 
-                <li>
-                  <p class="link link--blue" data-form="3">
-                    <span>Опубликовать мероприятия</span>
-                  </p>
-                </li>
-              </ul>
-            </nav>
-          </div>
+            <li>
+              <p class="link link--blue" data-form="3">
+                <span>Опубликовать мероприятия</span>
+              </p>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-
-          <div class="col-lg-6 offset-lg-3">
-            <div class="partners__content">
-              <div class="partners__form" data-form="1">
-                <form method="post" action="">
-                  {% csrf_token %}
-
-                  <div class="form-item__required">
-                    <input
-                      class="form-item"
-                      type="text"
-                      placeholder="Наименование",
-                      name="{{form.title.name}}"
-                    />
-                  </div>
-
-                  <div class="form-item__required">
-                    <select name="org_type" class="form-item__select--organization form-item">
-                      <option></option>
-                      {% for type in all_types %}
-                        <option value="{{type.id}}">{{type}}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-
-                  <div class="form-item__required">
-                    <input
-                      class="form-item"
-                      type="text"
-                      placeholder="Населенный пункт"
-                      name="pre_city"
-                    />
-                  </div>
-                  <div class="form-item__required">
-                    <div class="form-item__phone form-item">
-                      <p>Контактный телефон</p>
-                      <input
-                        class="form-item"
-                        type="text"
-                        placeholder="+375 (__) ___ - __ - __"
-                        name="{{form.tel1.name}}"
-                      />
-                    </div>
-                  </div>
-                  <div class="form-item__required">
-                    <input
-                      class="form-item"
-                      type="text"
-                      placeholder="email"
-                      name="{{form.email.name}}"
-                    />
-                  </div>
-                  <div class="form-item__required">
-                    <input
-                      class="form-item"
-                      type="text"
-                      placeholder="сайт"
-                      name="{{form.website.name}}"/>
-                  </div>
-                  <div class="form-item__required">
-                    <textarea
-                      class="form-item form-item__textarea"
-                      placeholder="Описание организации"
-                      name="{{form.description.name}}"
-                    ></textarea>
-                  </div>
-                  <button type="submit" class="btn">Отправить заявку</button>
-                </form>
+      <div class="col-lg-6 offset-lg-3">
+        <div class="partners__content">
+          <div class="partners__form" data-form="1">
+            <form method="post" action="">
+              {% csrf_token %}
+              <div class="form-item__required">
+                <input
+                  class="form-item"
+                  type="text"
+                  placeholder="Наименование",
+                  name="{{form.title.name}}"
+                />
               </div>
-            </div>
+
+              <div class="form-item__required">
+                <select name="org_type" class="form-item__select--organization form-item">
+                  <option></option>
+                  {% for type in all_types %}
+                    <option value="{{type.id}}">{{type.title}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="form-item__required">
+                <input
+                  class="form-item"
+                  type="text"
+                  placeholder="Населенный пункт"
+                  name="pre_city"
+                />
+              </div>
+              <div class="form-item__required">
+                <div class="form-item__phone form-item">
+                  <p>Контактный телефон</p>
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="+375 (__) ___ - __ - __"
+                    name="{{form.tel1.name}}"
+                  />
+                </div>
+              </div>
+              <div class="form-item__required">
+                <input
+                  class="form-item"
+                  type="text"
+                  placeholder="email"
+                  name="{{form.email.name}}"
+                />
+              </div>
+              <div class="form-item__required">
+                <input
+                  class="form-item"
+                  type="text"
+                  placeholder="сайт"
+                  name="{{form.website.name}}"/>
+              </div>
+              <div class="form-item__required">
+                <textarea
+                  class="form-item form-item__textarea"
+                  placeholder="Описание организации"
+                  name="{{form.description.name}}"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn">Отправить заявку</button>
+            </form>
           </div>
+
+
+          <div class="partners__form" data-form="2">
+            <form method="post" action="{% url 'create_vacancy'%}">
+              {%csrf_token%}
+              <div class="form-item__required">
+                <input
+                  class="form-item"
+                  type="text"
+                  placeholder="Наименование вакансии",
+                  name="title"
+                />
+              </div>
+              <div class="form-item__required">
+                <textarea
+                  class="form-item form-item__textarea"
+                  placeholder="Описание вакансии"
+                  name="description"
+                ></textarea>
+              </div>
+              <div class="form-item__required">
+                <select name="time" class="form-item__select--work form-item">
+                  <option></option>
+                  <option value="1">Полная занятость</option>
+                  <option value="2">Частичная занятость</option>
+                  <option value="3">Подработка</option>
+                  <option value="4">Гибкий график</option>
+                </select>
+              </div>
+              <div class="form-item__required">
+                <select name="ownership" class="form-item__select--form form-item">
+                  <option></option>
+                  <option value="1">Государственная</option>
+                  <option value="2">Комерческая</option>
+                  <option value="3">Общественная организация</option>
+                  <option value="4">Религиозная организация</option>
+                </select>
+              </div>
+              <div class="form-item__required">
+                <input
+                  class="form-item"
+                  type="text"
+                  placeholder="Работодатель"
+                  name="employer"
+                />
+              </div>
+              <div class="form-item__required">
+                <div class="form-item form-item__phone">
+                  <p>Контактный телефон</p>
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="+375 (__) ___ - __ - __"
+                    name="tel"
+                  />
+                </div>
+              </div>
+
+              <div class="form-item__required">
+                <input
+                  class="form-item"
+                  type="text"
+                  placeholder="Населенный пункт"
+                  name="pre_city"
+                />
+              </div>
+
+              <div class="form-item__required">
+                <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Адрес"
+                    name="adress"
+                />
+              </div>
+              <div class="form-item__required">
+                <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Позиция"
+                    name="position"
+                />
+              </div>
+              <div class="form-item__required">
+                <input
+                    class="form-item"
+                    type="text"
+                    placeholder="email"
+                    name="email"
+                />
+              </div>
+              <button type="submit" class="btn">Отправить заявку</button>
+            </form>
+          </div>
+
+          <div class="partners__form" data-form="3">
+            <form method="post" action="{% url 'create_event' %}">
+              {%csrf_token%}
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Дата начала (в формате YYYY-MM-DD)"
+                    name="start_date"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Время начала"
+                    name="start_time"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Наименование мероприятия"
+                    name="title"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <select name="event_type" class="form-item__select--type form-item">
+                    <option></option>
+                    <option value="1">Культурные</option>
+                    <option value="2">Образовательные</option>
+                    <option value="3">Просветительски</option>
+                    <option value="4">Религиозные</option>
+                    <option value="5">Спортивные</option>
+                    <option value="6">Отдых</option>
+                    <option value="7">Профориентация</option>
+                    <option value="8">Тренинги</option>
+                  </select>
+                </div>
+
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Стоимость"
+                    name="payment"
+                  />
+                </div>
+                <div class="form-item form-item__checkbox">
+                  <input name="free_entrance" type="checkbox" id="checkbox" /><label for="checkbox"
+                    >Вход бесплатный</label
+                  >
+                </div>
+
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Населенный пункт"
+                    name="pre_city"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Адрес проведения"
+                    name="adress"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Организатор мероприятия"
+                    name="organizator"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <textarea
+                    class="form-item form-item__textarea"
+                    placeholder="Описание мероприятия"
+                    name="description"
+                  ></textarea>
+                </div>
+                <div class="form-item__required">
+                  <div class="form-item form-item__phone">
+                    <p>Контактный телефон</p>
+                    <input
+                      class="form-item"
+                      type="text"
+                      placeholder="+375 (__) ___ - __ - __"
+                      name="tel"
+                    />
+                  </div>
+                </div>
+                <div class="form-item__required">
+                  <input
+                    class="form-item"
+                    type="text"
+                    placeholder="Контактное лицо"
+                    name="person"
+                  />
+                </div>
+                <div class="form-item__required">
+                  <input class="form-item" type="text" placeholder="email" />
+                </div>
+                <button type="submit" class="btn">Отправить заявку</button>
+              </form>
+            </div>
+
+
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>

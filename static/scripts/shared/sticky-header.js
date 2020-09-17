@@ -7,9 +7,9 @@ export default class StickyHeader {
   stick() {
     const isDesktop = window.innerWidth > 992;
     if (isDesktop) {
-      $(".header__content").sticky({ topSpacing: 0, zIndex: 1 });
+      $(".header--secondary").sticky({ topSpacing: 0, zIndex: 1 });
     } else {
-      $(".header__content").unstick();
+      $(".header--secondary").unstick();
     }
   }
 
