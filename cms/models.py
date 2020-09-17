@@ -4,6 +4,7 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from django.utils.safestring import mark_safe
 
+
 from os.path import join
 
 from feincms.module.page.models import Page
@@ -15,7 +16,7 @@ from feincms.extensions import Extension
 from mptt import register
 from mptt.models import MPTTModel, TreeForeignKey
 
-import geocoder
+import requests
 
 Page.register_extensions(
     'feincms.extensions.datepublisher',
@@ -456,14 +457,20 @@ class Organizations(models.Model):
 
     def save(self, *args, **kwargs):
         if str(self.city).lower() in str(self.adress).lower():
-            g = geocoder.osm(self.adress)
+            location = self.adress
         else:
-            g = geocoder.osm(f'{self.city} {self.adress}')
-        self.lat = g.lat
-        self.lng = g.lng
-
+            location = f'{self.city} {self.adress}'
+        url = 'https://maps.googleapis.com/maps/api/geocode/json'
+        google_key = 'AIzaSyAknqsh2KRjjBbPy3V7Cahj1j0M7eDITF0'
+        params = {
+            'address': location,
+            'key': google_key
+        }
+        r = requests.get(url, params=params)
+        results = r.json()['results']
+        location = results[0]['geometry']['location']
+        self.lat, self.lng = location['lat'], location['lng']
         super().save(*args, **kwargs)
-
 
     def __str__(self):
         return self.title
