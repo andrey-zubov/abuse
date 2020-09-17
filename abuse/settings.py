@@ -25,7 +25,9 @@ INSTALLED_APPS = [
     'mptt',
     'feincms.module.page',
     'feincms.module.medialibrary',
+    'rest_framework',
     'cms',
+    'api',
     'compressor',
 
     'django.contrib.admin',
