@@ -476,7 +476,42 @@ class Organizations(models.Model):
         return self.title
 
 
+class Region(models.Model):
+    class Meta:
+        verbose_name = 'Область'
+        verbose_name_plural = 'Области'
+
+    title = models.CharField(
+        max_length=256
+    )
+
+
+class Area(models.Model):
+    class Meta:
+        verbose_name = 'Район'
+        verbose_name_plural = 'Районы'
+
+    region = models.ForeignKey(
+        Region,
+        on_delete=models.CASCADE
+    )
+    title = models.CharField(
+        max_length=256
+    )
+
+    def __str__(self):
+        return f'{self.region.title} > {self.title}'
+
+
 class City(models.Model):
+
+    area = models.ForeignKey(
+        Area,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
     title = models.CharField(
         max_length=50,
         verbose_name='Город'
