@@ -23,6 +23,7 @@ CORS_ALLOWED_ORIGINS = [
 
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     'cms',
     'api',
     'compressor',
+    'corsheaders',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'abuse.urls'
@@ -154,3 +157,7 @@ MIGRATION_MODULES = {
     'page': 'cms.migrate.page',
     'medialibrary': 'cms.migrate.medialibrary',
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500",
+]
