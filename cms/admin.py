@@ -17,7 +17,9 @@ from .models import (
     FAQlist,
     Vacancy,
     Event,
-    Partner
+    Partner,
+    Region,
+    Area
 )
 
 
@@ -69,3 +71,6 @@ admin.site.register(Event)
 admin.site.register(FAQ, FAQAdmin)
 
 admin.site.register(Partner)
+
+admin.site.register(Region)
+admin.site.register(Area)
