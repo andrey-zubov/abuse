@@ -40,9 +40,12 @@
   &__navigation {
     border-radius: 12px;
     box-shadow: 0 0px 43px #cccccc;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(227px, 1fr));
+    // display: grid;
+    // grid-template-columns: repeat(4, minmax(227px, 1fr));
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
     .link {
       height: 100%;
@@ -64,6 +67,8 @@
     }
 
     li {
+      flex: 1;
+      
       &:not(:last-child) {
         border-right: 1px solid #e4e4e4;
       }

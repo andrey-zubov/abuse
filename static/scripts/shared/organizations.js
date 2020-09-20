@@ -4,21 +4,25 @@ export default class Organizations {
     this.map = document.querySelector(".organizations__map");
     this.initMapInterval = false;
     this.interval = null;
+    this.locations;
     this.markers;
     this.map;
-    this.firstArray = []; 
-    this.YOUR_API = 'AIzaSyAknqsh2KRjjBbPy3V7Cahj1j0M7eDITF0';
+    this.firstArray = [];
+    this.YOUR_API = "AIzaSyAknqsh2KRjjBbPy3V7Cahj1j0M7eDITF0";
     this.init();
   }
 
-  setMarkersOnMap(markersArray){
+  setMarkersOnMap(markersArray) {
     let infowindow = new google.maps.InfoWindow();
 
     let marker;
 
     for (let i = 0; i < markersArray.length; i++) {
       marker = new google.maps.Marker({
-        position: new google.maps.LatLng(markersArray[i].lat, markersArray[i].lon),
+        position: new google.maps.LatLng(
+          markersArray[i].lat,
+          markersArray[i].lng
+        ),
         map: this.map,
       });
 
@@ -27,8 +31,8 @@ export default class Organizations {
       google.maps.event.addListener(
         marker,
         "click",
-        ((marker, i) =>{
-          return  () => {
+        ((marker, i) => {
+          return () => {
             infowindow.setContent(markersArray[i].city);
             infowindow.open(this.map, marker);
           };
@@ -37,17 +41,17 @@ export default class Organizations {
     }
   }
 
-  filterMarkers(showMarkers){
+  filterMarkers(showMarkers) {
     for (var i = 0; i < this.firstArray.length; i++) {
       this.firstArray[i].setMap(null); //Remove the marker from the map
     }
 
-    const activeMarkers =  showMarkers.map((dataMapId)=>{
-      const m = this.markers.find(({id})=>{
-        return id === +dataMapId
-      })
+    const activeMarkers = showMarkers.map((dataMapId) => {
+      const m = this.markers.find(({ id }) => {
+        return id === +dataMapId;
+      });
       return m;
-    })
+    });
 
     this.setMarkersOnMap(activeMarkers);
   }
@@ -55,22 +59,18 @@ export default class Organizations {
   addMarkers() {
     clearInterval(this.interval);
 
-    let locations = [
-      {city : "Minsk", lat : 53.953585, lon : 27.545537, id : 123},
-      {city : "Gomel", lat :52.441076, lon :28.985343, id: 345},
-      {city : "Minsk", lat :53.441076, lon :29.985343, id: 567},
-      {city : "Gomel", lat :55.441076, lon :30.985343, id: 789},
-    ];
-
-    this.markers = locations;
+    this.markers = this.locations;
 
     this.map = new google.maps.Map(this.map, {
       zoom: 5,
-      center: new google.maps.LatLng(locations[0].lat, locations[0].lon),
+      center: new google.maps.LatLng(
+        this.locations[0].lat,
+        this.locations[0].lng
+      ),
       mapTypeId: google.maps.MapTypeId.ROADMAP,
     });
 
-    this.setMarkersOnMap(locations);
+    this.setMarkersOnMap(this.locations);
   }
 
   initMap() {
@@ -78,14 +78,15 @@ export default class Organizations {
     script.type = "text/javascript";
     script.async = true;
     script.defer = true;
-    script.src =
-      `https://maps.googleapis.com/maps/api/js?key=${this.YOUR_API}`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${this.YOUR_API}`;
     document.body.insertAdjacentElement("afterbegin", script);
 
     this.interval = setInterval(() => {
       if (!this.initMapInterval) {
-        this.initMapInterval = true;
-        this.addMarkers();
+        if (google) {
+          this.initMapInterval = true;
+          this.addMarkers();
+        }
       }
     }, 200);
   }
@@ -96,11 +97,11 @@ export default class Organizations {
     const isRegion = this.organizations.getAttribute("data-active-region");
     const isDistrict = this.organizations.getAttribute("data-active-district");
 
-    const cityAttr = isCityData ? `[data-city="${isCityData}"]` : '';
-    const regionAttr = isRegion ? `[data-region="${isRegion}"]` : '';
-    const disctrictAttr = isDistrict ? `[data-district="${isDistrict}"]` : '';
+    const cityAttr = isCityData ? `[data-city="${isCityData}"]` : "";
+    const regionAttr = isRegion ? `[data-region="${isRegion}"]` : "";
+    const disctrictAttr = isDistrict ? `[data-district="${isDistrict}"]` : "";
 
-    const attr = cityAttr + regionAttr + disctrictAttr
+    const attr = cityAttr + regionAttr + disctrictAttr;
     const cities = document.querySelectorAll(`.organization-item${attr}`);
 
     $(".organizations__content").slideUp();
@@ -108,29 +109,29 @@ export default class Organizations {
 
     let showMarkers = [];
 
-    if(!isSpecData){
-      cities.forEach((item)=>{
-        const mapId = item.getAttribute('data-map-id');
-        showMarkers.push(mapId)
-        item.style.display="block";
-      })
-    }else{
+    if (!isSpecData) {
+      cities.forEach((item) => {
+        const mapId = item.getAttribute("data-map-id");
+        showMarkers.push(mapId);
+        item.style.display = "block";
+      });
+    } else {
       cities.forEach((item) => {
         let specifications = item.getAttribute("data-spec").split(", ");
-  
+
         let specFind = specifications.find((item) => {
           return item === isSpecData;
         });
-  
+
         if (specFind) {
-          const mapId = item.getAttribute('data-map-id');
-          showMarkers.push(mapId)
-          item.style.display="block";
+          const mapId = item.getAttribute("data-map-id");
+          showMarkers.push(mapId);
+          item.style.display = "block";
         }
       });
     }
 
-    if(this.initMapInterval){
+    if (this.initMapInterval) {
       this.filterMarkers(showMarkers);
     }
 
@@ -160,10 +161,10 @@ export default class Organizations {
 
     $(".organizations__select__specifications").on("select2:close", (e) => {
       const data = e.params.originalSelect2Event?.data.id;
-      if(data){
-        if(data === "All"){
-          this.organizations.removeAttribute('data-active-spec')
-        }else{
+      if (data) {
+        if (data === "All") {
+          this.organizations.removeAttribute("data-active-spec");
+        } else {
           this.organizations.dataset.activeSpec = data;
         }
         this.showOrganization();
@@ -172,10 +173,10 @@ export default class Organizations {
 
     $(".organizations__select__region").on("select2:close", (e) => {
       const data = e.params.originalSelect2Event?.data.id;
-      if(data){
-        if(data === "All"){
-          this.organizations.removeAttribute('data-active-region')
-        }else{
+      if (data) {
+        if (data === "All") {
+          this.organizations.removeAttribute("data-active-region");
+        } else {
           this.organizations.dataset.activeRegion = data;
         }
         this.showOrganization();
@@ -184,10 +185,10 @@ export default class Organizations {
 
     $(".organizations__select__district").on("select2:close", (e) => {
       const data = e.params.originalSelect2Event?.data.id;
-      if(data){
-        if(data === "All"){
-          this.organizations.removeAttribute('data-active-district')
-        }else{
+      if (data) {
+        if (data === "All") {
+          this.organizations.removeAttribute("data-active-district");
+        } else {
           this.organizations.dataset.activeDistrict = data;
         }
         this.showOrganization();
@@ -196,18 +197,26 @@ export default class Organizations {
 
     $(".organizations__select__cities").on("select2:close", (e) => {
       const data = e.params.originalSelect2Event?.data.id;
-      if(data){
-        if(data === "All"){
-          this.organizations.removeAttribute('data-active-city')
-        }else{
+      if (data) {
+        if (data === "All") {
+          this.organizations.removeAttribute("data-active-city");
+        } else {
           this.organizations.dataset.activeCity = data;
         }
         this.showOrganization();
       }
     });
 
-    if (this.map) {
-      this.initMap();
-    }
+    fetch("http://taac.pythonanywhere.com/api/orgs/")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        this.locations = data.orgs;
+        this.initMap();
+      })
+      .catch((error) => {
+        console.log("error");
+      });
   }
 }
