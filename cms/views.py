@@ -71,7 +71,7 @@ def megapage(request, slug):
     # show_relapse = this_category.relapse_widget
     return render(
         request,
-        template_name='widgets/articles_by_cat.html',
+        template_name='widgets/articles_by_cat_mk2.html',
         context={
             'pages': pages,
             'questions': questions,
