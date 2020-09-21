@@ -1,13 +1,18 @@
+{% block content %}
 <div class="article">
 <!--  <h1 class="article__title headline-1">{{widget.title}}</h1>-->
-  <div class="article__image-wrapper aspect-ratio">
-    <img src="{{widget.get_img}}" alt="{{widget.picture}}" />
-  </div>
-  <div class="article__description">
-    <p>
-      {{widget.text|safe}}
-    </p>
-  </div>
+  {% if widget.picture %}
+    <div class="article__image-wrapper aspect-ratio">
+      <img src="{{widget.get_img}}" alt="{{widget.picture}}" />
+    </div>
+  {% endif %}
+  {% if widget.text %}
+    <div class="article__description">
+      <p>
+        {{widget.text|safe}}
+      </p>
+    </div>
+  {% endif %}
   {% if widget.list %}
   <ul class="article__list">
     {{widget.list|safe}}
@@ -21,3 +26,4 @@
     {% endfor %}
   </div>
 </div>
+{% endblock %}

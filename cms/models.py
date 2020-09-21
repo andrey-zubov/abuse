@@ -132,6 +132,22 @@ class EmploymentArticle(models.Model):
     class Meta:
         abstract = True
 
+    text = models.TextField(
+        verbose_name='Текст',
+        null=True,
+        blank=True
+    )
+    list = models.TextField(
+        verbose_name='Список',
+        null=True,
+        blank=True,
+        help_text='<li><p>Текст пункта</p></li>'
+    )
+    link = models.ManyToManyField(
+        "cms.Link",
+        verbose_name='Добавить ссылку',
+    )
+
     def render(self):
         all_cityes = City.objects.all()
         vacancies = Vacancy.objects.all()
@@ -161,6 +177,10 @@ class AccordeonArticle(models.Model):
         null=True,
         blank=True,
         help_text='в формате <p>Текст пункта</p>'
+    )
+    link = models.ManyToManyField(
+        "cms.Link",
+        verbose_name='Добавить ссылку',
     )
 
     def render(self):
