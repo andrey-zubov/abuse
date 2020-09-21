@@ -32,7 +32,7 @@ class RegionAPI(APIView):
 class AreaAPI(APIView):
     def get(self, request):
         areas = Area.objects.filter()
-        serializer = Area(areas, many=True)
+        serializer = RegionSerializer(areas, many=True)
         return Response(
             {'areas': serializer.data}
         )
