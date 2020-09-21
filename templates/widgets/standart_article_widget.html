@@ -1,0 +1,23 @@
+<div class="article">
+<!--  <h1 class="article__title headline-1">{{widget.title}}</h1>-->
+  <div class="article__image-wrapper aspect-ratio">
+    <img src="{{widget.get_img}}" alt="{{widget.picture}}" />
+  </div>
+  <div class="article__description">
+    <p>
+      {{widget.text|safe}}
+    </p>
+  </div>
+  {% if widget.list %}
+  <ul class="article__list">
+    {{widget.list|safe}}
+  </ul>
+  {% endif %}
+  <div class="article__buttons article__buttons--center">
+    {% for link in widget.link.all %}
+      <a href="{{link.link}}" class="btn" target="{{link.target}}"
+        ><span>{{link.title}}</span></a
+      >
+    {% endfor %}
+  </div>
+</div>

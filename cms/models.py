@@ -43,6 +43,47 @@ Page.register_templates({
 Page.create_content_type(RichTextContent)
 
 
+class StandartArticle(models.Model):
+    class Meta:
+        abstract = True
+
+    picture = MediaFileForeignKey(
+        MediaFile,
+        on_delete=models.SET_NULL,
+        verbose_name='Картинка',
+        null=True,
+        blank=True,
+    )
+    text = models.TextField(
+        verbose_name='Текст',
+        null=True,
+        blank=True)
+    list = models.TextField(
+        verbose_name='Список',
+        null=True,
+        blank=True,
+        help_text='<li><p>Текст пункта списка</p></li>'
+    )
+    link = models.ManyToManyField(
+        "cms.Link",
+        verbose_name='Добавить ссылку',
+    )
+    org_button = models.BooleanField(
+        verbose_name="Ссылка на ближайшие организации"
+    )
+
+    def render(self):
+        return render_to_string(
+            'widgets/standart_article_widget.html',
+            context={'widget': self}
+        )
+
+    def get_img(self):
+        return join(settings.MEDIA_URL, str(self.picture.file))
+
+Page.create_content_type(StandartArticle)
+
+
 class CalendarArticle(models.Model):
     class Meta:
         abstract = True
@@ -295,6 +336,15 @@ class Link(models.Model):
         null=True,
         blank=True,
         max_length=50
+    )
+    target = models.CharField(
+        choices = [
+            ('', 'Открывать в текущей вкладке'),
+            ('_blank', 'Открывать в новой вкладке')
+        ],
+        max_length=64,
+        default=('', 'Открывать в текущей вкладке'),
+        blank=True
     )
 
     def __str__(self):
@@ -663,32 +713,32 @@ class NewsSourceExtension(Extension):
 Page.register_extensions(NewsSourceExtension)
 
 
-class LinkExtension(Extension):
-    def handle_model(self):
-        self.model.add_to_class(
-            'button',
-            models.ManyToManyField(
-                Link,
-                verbose_name='Ссылка под статьей',
-                null=True,
-                blank=True,
-            )
-        )
-        self.model.add_to_class(
-            'org_button',
-            models.BooleanField(
-                default=False,
-                verbose_name='Отображать кнопку быстрого перехода к организациям'
-            )
-        )
-
-    def handle_modeladmin(self, modeladmin):
-        modeladmin.add_extension_options(
-            _("Кнопки"),
-            {"fields": ("button", "org_button",), },
-        )
-
-Page.register_extensions(LinkExtension)
+# class LinkExtension(Extension):
+#     def handle_model(self):
+#         self.model.add_to_class(
+#             'button',
+#             models.ManyToManyField(
+#                 Link,
+#                 verbose_name='Ссылка под статьей',
+#                 null=True,
+#                 blank=True,
+#             )
+#         )
+#         self.model.add_to_class(
+#             'org_button',
+#             models.BooleanField(
+#                 default=False,
+#                 verbose_name='Отображать кнопку быстрого перехода к организациям'
+#             )
+#         )
+#
+#     def handle_modeladmin(self, modeladmin):
+#         modeladmin.add_extension_options(
+#             _("Кнопки"),
+#             {"fields": ("button", "org_button",), },
+#         )
+#
+# Page.register_extensions(LinkExtension)
 
 # опросник
 class Question(models.Model):
