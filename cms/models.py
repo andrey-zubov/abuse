@@ -431,9 +431,9 @@ class Main_Cat(models.Model):
     help_widget = models.BooleanField(
         verbose_name='Отображать виджет "первая помощь"'
     )
-    # employment_widget = models.BooleanField(
-    #     verbose_name='Отображать виджет трудоустройство'
-    # )
+    feedback_section = models.BooleanField(
+        verbose_name='Отобразить секцию "обратная связь"'
+    )
     org_widget = models.BooleanField(
         verbose_name='Отображать виджет организаций'
     )
