@@ -1,11 +1,13 @@
 {% block content %}
   <div class="article article-accordeon">
 <!--    <h1 class="article__title headline-1">ПРАВОВАЯ ИНФОРМАЦИЯ</h1>-->
-    <div class="article__description">
-      <p>
-        {{widget.text|safe}}
-      </p>
-    </div>
+    {% if widget.text %}
+      <div class="article__description">
+        <p>
+          {{widget.text|safe}}
+        </p>
+      </div>
+    {% endif %}
     <div class="article-accordeon__content">
       <ul>
         {% for q in faq %}
