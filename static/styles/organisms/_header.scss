@@ -169,5 +169,16 @@
         }
       }
     }
+
+    &--secondary {
+      #{$self}__logo {
+        max-width: 200px;
+      }
+
+      #{$self}__title,
+      #{$self}__phone {
+        display: none;
+      }
+    }
   }
 }

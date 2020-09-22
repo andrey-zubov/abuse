@@ -14,3 +14,11 @@
     margin-bottom: 30px;
   }
 }
+
+@media (max-width: $lg) {
+  .participants {
+    &__content {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

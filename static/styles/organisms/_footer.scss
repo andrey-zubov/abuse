@@ -101,10 +101,44 @@
 
 @media (max-width: $lg) {
   .footer {
+    $self: &;
+
     &__phone {
       font-size: 20px;
       line-height: 40px;
       font-weight: 700;
+    }
+
+    &--secondary {
+      #{$self}__menu {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &-item {
+          margin-right: 0;
+          min-width: unset;
+          align-items: center;
+          margin-bottom: 28px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .link {
+            margin-bottom: 28px;
+          }
+        }
+      }
+
+      #{$self}__logos {
+        margin-top: 64px;
+
+        .logo-item {
+          margin-bottom: 25px;
+          max-height: 50px;
+        }
+      }
     }
   }
 }
