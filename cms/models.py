@@ -34,7 +34,8 @@ Page.register_templates({
 
 Page.register_templates({
     'title': _('Отдельная статья'),
-    'path': 'widgets/single_article.html',
+    'path': 'widgets/refactor_art.html',
+    # 'path': 'widgets/single_article.html',
     'regions': (
         ('main', _('Main content area')),
     ),
@@ -47,6 +48,10 @@ class StandartArticle(models.Model):
     class Meta:
         abstract = True
 
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=256
+    )
     picture = MediaFileForeignKey(
         MediaFile,
         on_delete=models.SET_NULL,
@@ -67,6 +72,8 @@ class StandartArticle(models.Model):
     link = models.ManyToManyField(
         "cms.Link",
         verbose_name='Добавить ссылку',
+        null=True,
+        blank=True
     )
     org_button = models.BooleanField(
         verbose_name="Ссылка на ближайшие организации"
@@ -146,6 +153,8 @@ class EmploymentArticle(models.Model):
     link = models.ManyToManyField(
         "cms.Link",
         verbose_name='Добавить ссылку',
+        null=True,
+        blank=True
     )
 
     def render(self):
@@ -181,6 +190,8 @@ class AccordeonArticle(models.Model):
     link = models.ManyToManyField(
         "cms.Link",
         verbose_name='Добавить ссылку',
+        null=True,
+        blank=True
     )
 
     def render(self):
@@ -672,7 +683,6 @@ class ArticleCategory(Extension):
                 Main_Cat,
                 null=False,
                 blank=False
-
             )
         )
 
