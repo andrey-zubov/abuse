@@ -726,7 +726,8 @@ class ArticleSection(Extension):
             'cross_link',
             models.ManyToManyField(
                 Page,
-                verbose_name='Ссылки на страницы в левом сайд-баре'
+                verbose_name='Ссылки на страницы в левом сайд-баре',
+                blank=True
             )
         )
 

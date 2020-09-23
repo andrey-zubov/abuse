@@ -22,7 +22,7 @@ urlpatterns = [
     path('create_vac', create_vac, name='create_vacancy'),
     path('create_event', create_event, name='create_event'),
 
-    path('get_answer', get_answer, name='get_answer'),
+    path('get_answer/', get_answer, name='get_answer'),
 
     path('abuse/<slug>/', megapage, name='main_articles'),
 

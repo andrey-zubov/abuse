@@ -127,7 +127,7 @@
               <div class="quiz">
                 <div class="quiz-item">
                 {% for q in feincms_page.quiz.all %}
-                  <form name="question_form" action="{% url 'get_answer' %}">
+                  <form id="form_{{q.id}}" class="form_quiz" name="question_form" action="{% url 'get_answer' %}">
                     <input hidden name="answer_for" value="{{q.title}}">
                     <p class="quiz-item__title">
                       {{q.title}}
@@ -146,7 +146,7 @@
                           </p>
                         </div>
                       {% endfor %}
-                      <button type="submit" class="btn quiz-item__button">
+                      <button id="button_{{q.id}}" name="submit_answer" type="submit" class="btn quiz-item__button">
                         Голосовать
                       </button>
                     </div>
@@ -424,4 +424,21 @@
   </div>
 </footer>
 </body>
+<script src="/static/js/jquery-3.5.1.min.js"></script>
+<script>
+  $('document').ready(function () {
+      console.log(4)
+      $('.form_quiz').submit(function(fun){
+          fun.preventDefault();
+          form_id = this.id
+          $.ajax({
+            url: '/get_answer/',
+            type: 'get',
+            data: $('#' + form_id).serialize(),
+            success: function(){
+            }
+          });
+      });
+  })
+</script>
 </html>

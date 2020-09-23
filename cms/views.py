@@ -49,7 +49,7 @@ def get_answer(request):  # handle quiz answer
             question_id=question.id,
             choice=choice
         )
-    return HttpResponse('ok')
+    return HttpResponse(111)
 
 def megapage(request, slug):
     this_category = Main_Cat.objects.get(slug=slug)
