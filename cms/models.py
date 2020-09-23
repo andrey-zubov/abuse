@@ -859,6 +859,14 @@ class Question(models.Model):
     def get_choices(self):
         return self.choice_set.all()
 
+    def get_amount(self):
+        answers = Answer.objects.filter(question=self)
+        dic = {'all': answers.count()}
+        choices = [i.title for i in self.get_choices()]
+        for ch in choices:
+            dic[ch] = answers.filter(choice__title=ch).count()
+        return dic
+
 
 class Choice(models.Model):
     question = models.ForeignKey(
