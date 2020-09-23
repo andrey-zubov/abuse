@@ -677,14 +677,14 @@ class ServicesPayment(models.Model):
 
 class ArticleCategory(Extension):
     def handle_model(self):
-        self.model.add_to_class(
-            'category',
-            models.ManyToManyField(
-                Main_Cat,
-                null=False,
-                blank=False
-            )
-        )
+        # self.model.add_to_class(
+        #     'category',
+        #     models.ManyToManyField(
+        #         Main_Cat,
+        #         null=False,
+        #         blank=False
+        #     )
+        # )
         self.model.add_to_class(
             'test_category',
             models.CharField(
@@ -700,11 +700,37 @@ class ArticleCategory(Extension):
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(
             _("Категория"),
-            {"fields": ("category", 'test_category'), },
+            {"fields": ('test_category', ), },
         )
 
 
 Page.register_extensions(ArticleCategory)
+
+
+class ArticleSection(Extension):
+    def handle_model(self):
+        self.model.add_to_class(
+            'org_section',
+            models.BooleanField(
+                verbose_name='Секция организаций'
+            )
+        )
+        self.model.add_to_class(
+            'feedback_section',
+            models.BooleanField(
+                verbose_name='Секция обратной связи'
+            )
+        )
+
+    def handle_modeladmin(self, modeladmin):
+        modeladmin.add_extension_options(
+            _("Секции"),
+            {"fields": ('org_section', 'feedback_section',), },
+        )
+
+
+Page.register_extensions(ArticleSection)
+
 
 
 class NewsImageExtension(Extension):
