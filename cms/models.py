@@ -859,6 +859,22 @@ class Question(models.Model):
     def get_choices(self):
         return self.choice_set.all()
 
+    def get_percent(self):
+        answers = Answer.objects.filter(question=self)
+        choices = [i.title for i in self.get_choices()]
+        dic = {}
+        for ch in choices:
+            answer_amount = answers.filter(choice__title=ch).count()
+            if answers.exists():
+                answer_percent = round(answer_amount / answers.count() * 100)
+            else:
+                answer_percent = 0
+            dic[ch] = [
+                answer_percent,
+                answer_amount,
+            ]
+        return dic
+
     def get_amount(self):
         answers = Answer.objects.filter(question=self)
         dic = {'all': answers.count()}
