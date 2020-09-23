@@ -685,11 +685,22 @@ class ArticleCategory(Extension):
                 blank=False
             )
         )
+        self.model.add_to_class(
+            'test_category',
+            models.CharField(
+                choices=[
+                    ('no', 'Без располажение в header-е'),
+                    ('down', 'Нижний header'),
+                    ('up', 'Верхний header'),
+                ],
+                max_length=64
+            )
+        )
 
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(
             _("Категория"),
-            {"fields": ("category",), },
+            {"fields": ("category", 'test_category'), },
         )
 
 

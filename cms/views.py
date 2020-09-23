@@ -22,8 +22,10 @@ from .models import (
 
 def main_page(request):
     all_cats = Main_Cat.objects.filter(is_active=True)
-    down_cats = all_cats.filter(header_menu='down')
-    up_cats = all_cats.filter(header_menu='up')
+    down_cats = Page.objects.filter(test_category='down')
+    up_cats = Page.objects.filter(test_category='up')
+    # down_cats = all_cats.filter(header_menu='down')
+    # up_cats = all_cats.filter(header_menu='up')
     return render(
         request,
         template_name='main_page.html',

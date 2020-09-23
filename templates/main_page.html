@@ -52,7 +52,7 @@
               <ul class="main-menu__links">
                 {% for up_cat in up_cats %}
                 <li>
-                  <a class="link" href="{% url 'main_articles' slug=up_cat.slug %}"
+                  <a class="link" href="/{{up_cat.slug}}"
                     ><span>{{ up_cat.title }}</span></a
                   >
                 </li>
@@ -74,7 +74,7 @@
               <ul class="main-menu__navigation">
                 {% for down_cat in down_cats %}
                 <li>
-                  <a  class="link link--blue" href="{% url 'main_articles' slug=down_cat.slug %}"
+                  <a  class="link link--blue" href="/{{down_cat.slug}}"
                     ><span>{{ down_cat.title }}</span></a
                   >
                 </li>
