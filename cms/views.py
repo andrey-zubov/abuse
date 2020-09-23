@@ -39,6 +39,18 @@ def help_file(request):
     return FileResponse(open(file.get_file, 'rb'))
 
 
+def get_answer(request):  # handle quiz answer
+    if request.GET.__contains__('answer_for'):  # hold an answer in db
+        question = Question.objects.get(title=request.GET['answer_for'])
+        choice = Choice.objects.get(
+            Q(question=question) & Q(title=request.GET[question.title])
+        )
+        save_answer = Answer.objects.create(
+            question_id=question.id,
+            choice=choice
+        )
+    return HttpResponse('ok')
+
 def megapage(request, slug):
     this_category = Main_Cat.objects.get(slug=slug)
 

@@ -78,8 +78,8 @@
                     ><p>Первая помощь</p></a
                   >
                 {% endif %}
-                {% for link in  this_category.cross_link.all %}
-                  <a class="link link--medium-blue" href="{% url 'main_articles' slug=link.slug %}"
+                {% for link in feincms_page.cross_link.all %}
+                  <a class="link link--medium-blue" href="/{{link.slug}}"
                     ><p>{{link.title}}</p></a
                   >
                 {% endfor %}
@@ -94,7 +94,7 @@
                 {% if employment_flag %}
                   <a class="link link--green" href="#employment_widget"><p>Трудоустройство</p></a>
                 {% endif %}
-                {% if org_widget_flag %}
+                {% if feincms_page.org_section %}
                   <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
                 {% endif %}
               </div>
@@ -126,8 +126,8 @@
             <div class="information-block">
               <div class="quiz">
                 <div class="quiz-item">
-                {% for q in questions %}
-                  <form name="question_form" action="">
+                {% for q in feincms_page.quiz.all %}
+                  <form name="question_form" action="{% url 'get_answer' %}">
                     <input hidden name="answer_for" value="{{q.title}}">
                     <p class="quiz-item__title">
                       {{q.title}}

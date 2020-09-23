@@ -44,6 +44,7 @@ Page.register_templates({
 Page.create_content_type(RichTextContent)
 
 
+
 class StandartArticle(models.Model):
     class Meta:
         abstract = True
@@ -721,16 +722,45 @@ class ArticleSection(Extension):
                 verbose_name='Секция обратной связи'
             )
         )
+        self.model.add_to_class(
+            'cross_link',
+            models.ManyToManyField(
+                Page,
+                verbose_name='Ссылки на страницы в левом сайд-баре'
+            )
+        )
 
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(
             _("Секции"),
-            {"fields": ('org_section', 'feedback_section',), },
+            {"fields": ('org_section', 'feedback_section', 'cross_link',), },
         )
 
 
 Page.register_extensions(ArticleSection)
 
+
+class ArticleQuiz(Extension):
+    def handle_model(self):
+        self.model.add_to_class(
+            'quiz',
+            models.ManyToManyField(
+                'cms.Question',
+                null=True,
+                blank=True,
+                verbose_name='Выбрать опросы'
+            )
+
+        )
+
+    def handle_modeladmin(self, modeladmin):
+        modeladmin.add_extension_options(
+            _("Опросы"),
+            {"fields": ("quiz",), },
+        )
+
+
+Page.register_extensions(ArticleQuiz)
 
 
 class NewsImageExtension(Extension):
