@@ -34,7 +34,7 @@
             </li>
             {% for category in up_cats %}
             <li>
-              <a class="link" href="/abuse/{{ category.slug }}"
+              <a class="link" href="/{{ category.slug }}"
               ><span>{{ category.title }}</span></a
               >
             </li>
@@ -47,8 +47,8 @@
             {% for category in down_cats %}
             <li>
               <a
-                      class="link link--blue"
-                      href="/abuse/{{ category.slug }}"
+                class="link link--blue"
+                href="/{{ category.slug }}"
               ><span>{{ category.title }}</span></a
               >
             </li>
@@ -60,7 +60,6 @@
     <button class="header__button" type="button"><span></span></button>
   </div>
 </header>
-
 
     <section class="news">
       <div class="container">
@@ -74,7 +73,7 @@
                     <h3 class="news-item__title">
                       {{ n.title }}
                     </h3>
-                    <p class="news-item__data">{{ n.publication_date }}}</p>
+                    <p class="news-item__data">{{ n.publication_date }}</p>
                     {% if n.preview_img.file %}
                       <div class="news-item__image aspect-ratio">
                         <img src="{% get_media_prefix %}{{ n.preview_img.file }}" />

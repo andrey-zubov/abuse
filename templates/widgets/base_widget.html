@@ -20,40 +20,110 @@
   </head>
 
   <body>
-    <section class="single-news">
+     <header class="header">
       <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="single-news__container">
-              <h1 class="single-news__title">
-                {{feincms_page.title}}
-              </h1>
-              <div class="single-news__content">
-                <p class="single-news__data">28-08-2020</p>
-                <div class="single-news__content__description">
-                  <p>
-                    {% block content %}
-                      {% for content in feincms_page.content.main %}
-                        {{ content.render }}
-                      {% endfor %}
-                    {% endblock %}
-                  </p>
-                </div>
-                {% if feincms_page.source %}
-                  <div class="single-news__source">
-                    <p>Источник:</p>
-                    <a class="" href="{{ feincms_page.source }}">{{ feincms_page.source }}</a>
-                  </div>
-                {% endif %}
+        <div class="header__content">
+          <div class="header__content__nav">
+            <nav class="main-menu">
+              <ul class="main-menu__links">
+                <li>
+                  <a class="link" href="{% url 'main_page' %}"
+                  ><span>Главная</span></a
+                  >
+                </li>
+                {% for category in feincms_page.up_cats.all %}
+                <li>
+                  <a class="link" href="/{{ category.slug }}"
+                  ><span>{{ category.title }}</span></a
+                  >
+                </li>
+                {% endfor %}
+              </ul>
+            </nav>
+
+            <nav class="main-menu">
+              <ul class="main-menu__navigation">
+                {% for category in feincms_page.down_cats.all %}
+                <li>
+                  <a
+                          class="link link--blue"
+                          href="/{{ category.slug }}"
+                  ><span>{{ category.title }}</span></a
+                  >
+                </li>
+                {% endfor %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <button class="header__button" type="button"><span></span></button>
+      </div>
+    </header>
+
+  <section class="single-news">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="single-news__container">
+            <h1 class="single-news__title">
+              {{feincms_page.title}}
+            </h1>
+            <div class="single-news__content">
+              <p class="single-news__data">{{feincms_page.publication_date}}</p>
+              <div class="single-news__content__description">
+                <p>
+                  {% block content %}
+                    {% for content in feincms_page.content.main %}
+                      {{ content.render }}
+                    {% endfor %}
+                  {% endblock %}
+                </p>
               </div>
-              <a class="single-news__button link link--blue" href="{% url 'news_page' %}"
-                >Назад ко всем новостям</a
-              >
+              {% if feincms_page.source %}
+                <div class="single-news__source">
+                  <p>Источник:</p>
+                  <a class="" href="{{ feincms_page.source }}">{{ feincms_page.source }}</a>
+                </div>
+              {% endif %}
             </div>
+            <a class="single-news__button link link--blue" href="{% url 'news_page' %}"
+              >Назад ко всем новостям</a
+            >
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+
+<!--  <footer class="footer footer&#45;&#45;main">-->
+<!--      <div class="container footer__container">-->
+<!--        <a class="footer__phone" href="tel:+375173110000">+ 375 17 311 00 00</a>-->
+<!--        <nav class="main-menu footer__menu">-->
+<!--          <ul class="main-menu__links footer__menu__links">-->
+<!--            <li>-->
+<!--              <p>-->
+<!--                <a class="link" href="/about/"-->
+<!--                  ><span>О проекте</span></a-->
+<!--                >-->
+<!--              </p>-->
+<!--            </li>-->
+
+<!--            <li>-->
+<!--              <p>-->
+<!--                <a class="link" href="{% url 'to-partners' %}"-->
+<!--                  ><span>Стать партнером</span></a-->
+<!--                >-->
+<!--              </p>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </nav>-->
+<!--        <a class="footer__logo" href="http://www.unodc.org/" target="_blank"-->
+<!--          ><i class="icon-un"></i-->
+<!--        ></a>-->
+<!--      </div>-->
+<!--    </footer>-->
+
+
   </body>
 </html>
 

@@ -21,11 +21,9 @@ from .models import (
 
 
 def main_page(request):
-    all_cats = Main_Cat.objects.filter(is_active=True)
     down_cats = Page.objects.filter(test_category='down')
     up_cats = Page.objects.filter(test_category='up')
-    # down_cats = all_cats.filter(header_menu='down')
-    # up_cats = all_cats.filter(header_menu='up')
+
     return render(
         request,
         template_name='main_page.html',
@@ -71,8 +69,6 @@ def megapage(request, slug):
         orgs = None
         org_widget_flag = False
 
-    # employment_flag = True if this_category.employment_widget else False
-
     all_cites = City.objects.filter()
     all_types = ServicesType.objects.filter()
     pages = Page.objects.filter(
@@ -81,8 +77,6 @@ def megapage(request, slug):
     questions = Question.objects.all().prefetch_related('choice_set')
 
     show_help = this_category.help_widget
-    # show_hiv = this_category.help_widget
-    # show_relapse = this_category.relapse_widget
     return render(
         request,
         template_name='widgets/articles_by_cat_mk2.html',
@@ -122,8 +116,8 @@ def org_info(request, slug):
 def news_view(request):
     news = Page.objects.filter(template_key='widgets/base_widget.html')
     all_cats = Main_Cat.objects.filter(is_active=True)
-    down_cats = all_cats.filter(header_menu='down')
-    up_cats = all_cats.filter(header_menu='up')
+    down_cats = Page.objects.filter(test_category='down')
+    up_cats = Page.objects.filter(test_category='up')
 
     return render(
         request,

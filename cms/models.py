@@ -678,14 +678,6 @@ class ServicesPayment(models.Model):
 
 class ArticleCategory(Extension):
     def handle_model(self):
-        # self.model.add_to_class(
-        #     'category',
-        #     models.ManyToManyField(
-        #         Main_Cat,
-        #         null=False,
-        #         blank=False
-        #     )
-        # )
         self.model.add_to_class(
             'test_category',
             models.CharField(
@@ -709,6 +701,7 @@ Page.register_extensions(ArticleCategory)
 
 
 class ArticleSection(Extension):
+    article_pages = Page.objects.filter(template_key='widgets/refactor_art.html')
     def handle_model(self):
         self.model.add_to_class(
             'org_section',
@@ -730,6 +723,16 @@ class ArticleSection(Extension):
                 blank=True
             )
         )
+
+        self.model.add_to_class(
+            'down_cats',
+            self.article_pages.filter(test_category='down')
+        )
+        self.model.add_to_class(
+            'up_cats',
+            self.article_pages.filter(test_category='up')
+        )
+
 
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(

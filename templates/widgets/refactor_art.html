@@ -146,7 +146,7 @@
                           </p>
                         </div>
                       {% endfor %}
-                      
+
                       <button
                         type="submit"
                         class="quiz-item__button quiz-item__button--transparent"
@@ -331,9 +331,13 @@
       <div class="col-lg-9">
         <div class="footer__menu">
           <div class="footer__menu-item">
-            <a class="link link--white" href="#help"
+            <a class="link link--white" href="{% url 'help_pdf' %}"
               ><p>Первая медицинская помощь</p></a
             >
+            {% for cat in feincms_page.up_cats.all %}
+              <a class="link link--white" href="/{{cat.slug}}"><p>{{cat.title}}</p></a>
+            {% endfor %}
+
             <a class="link link--white" href="/relapse/"><p>Срыв</p></a>
             <a class="link link--white" href="/hiv-hepatitis/"
               ><p>Вич/Гепатит</p></a
@@ -343,6 +347,13 @@
             >
           </div>
           <div class="footer__menu-item">
+            {% for cat in feincms_page.down_cats.all %}
+              <a
+              class="link link--white"
+              href="/{{cat.slug}}"
+              ><p>{{cat.title}}</p></a
+            >
+            {% endfor %}
             <a
               class="link link--white"
               href="https://abuse.pomogut.by/i-am-codependent/"
