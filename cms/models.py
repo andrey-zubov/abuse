@@ -34,7 +34,8 @@ Page.register_templates({
 
 Page.register_templates({
     'title': _('Отдельная статья'),
-    'path': 'widgets/single_article.html',
+    'path': 'widgets/refactor_art.html',
+    # 'path': 'widgets/single_article.html',
     'regions': (
         ('main', _('Main content area')),
     ),
@@ -43,10 +44,15 @@ Page.register_templates({
 Page.create_content_type(RichTextContent)
 
 
+
 class StandartArticle(models.Model):
     class Meta:
         abstract = True
 
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=256
+    )
     picture = MediaFileForeignKey(
         MediaFile,
         on_delete=models.SET_NULL,
@@ -67,6 +73,8 @@ class StandartArticle(models.Model):
     link = models.ManyToManyField(
         "cms.Link",
         verbose_name='Добавить ссылку',
+        null=True,
+        blank=True
     )
     org_button = models.BooleanField(
         verbose_name="Ссылка на ближайшие организации"
@@ -146,6 +154,8 @@ class EmploymentArticle(models.Model):
     link = models.ManyToManyField(
         "cms.Link",
         verbose_name='Добавить ссылку',
+        null=True,
+        blank=True
     )
 
     def render(self):
@@ -181,6 +191,8 @@ class AccordeonArticle(models.Model):
     link = models.ManyToManyField(
         "cms.Link",
         verbose_name='Добавить ссылку',
+        null=True,
+        blank=True
     )
 
     def render(self):
@@ -667,23 +679,92 @@ class ServicesPayment(models.Model):
 class ArticleCategory(Extension):
     def handle_model(self):
         self.model.add_to_class(
-            'category',
-            models.ManyToManyField(
-                Main_Cat,
-                null=False,
-                blank=False
-
+            'test_category',
+            models.CharField(
+                choices=[
+                    ('no', 'Без располажение в header-е'),
+                    ('down', 'Нижний header'),
+                    ('up', 'Верхний header'),
+                ],
+                max_length=64
             )
         )
 
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(
             _("Категория"),
-            {"fields": ("category",), },
+            {"fields": ('test_category', ), },
         )
 
 
 Page.register_extensions(ArticleCategory)
+
+
+class ArticleSection(Extension):
+    article_pages = Page.objects.filter(template_key='widgets/refactor_art.html')
+    def handle_model(self):
+        self.model.add_to_class(
+            'org_section',
+            models.BooleanField(
+                verbose_name='Секция организаций'
+            )
+        )
+        self.model.add_to_class(
+            'feedback_section',
+            models.BooleanField(
+                verbose_name='Секция обратной связи'
+            )
+        )
+        self.model.add_to_class(
+            'cross_link',
+            models.ManyToManyField(
+                Page,
+                verbose_name='Ссылки на страницы в левом сайд-баре',
+                blank=True
+            )
+        )
+
+        self.model.add_to_class(
+            'down_cats',
+            self.article_pages.filter(test_category='down')
+        )
+        self.model.add_to_class(
+            'up_cats',
+            self.article_pages.filter(test_category='up')
+        )
+
+
+    def handle_modeladmin(self, modeladmin):
+        modeladmin.add_extension_options(
+            _("Секции"),
+            {"fields": ('org_section', 'feedback_section', 'cross_link',), },
+        )
+
+
+Page.register_extensions(ArticleSection)
+
+
+class ArticleQuiz(Extension):
+    def handle_model(self):
+        self.model.add_to_class(
+            'quiz',
+            models.ManyToManyField(
+                'cms.Question',
+                null=True,
+                blank=True,
+                verbose_name='Выбрать опросы'
+            )
+
+        )
+
+    def handle_modeladmin(self, modeladmin):
+        modeladmin.add_extension_options(
+            _("Опросы"),
+            {"fields": ("quiz",), },
+        )
+
+
+Page.register_extensions(ArticleQuiz)
 
 
 class NewsImageExtension(Extension):
@@ -780,6 +861,30 @@ class Question(models.Model):
 
     def get_choices(self):
         return self.choice_set.all()
+
+    def get_percent(self):
+        answers = Answer.objects.filter(question=self)
+        choices = [i.title for i in self.get_choices()]
+        dic = {}
+        for ch in choices:
+            answer_amount = answers.filter(choice__title=ch).count()
+            if answers.exists():
+                answer_percent = round(answer_amount / answers.count() * 100)
+            else:
+                answer_percent = 0
+            dic[ch] = [
+                answer_percent,
+                answer_amount,
+            ]
+        return dic
+
+    def get_amount(self):
+        answers = Answer.objects.filter(question=self)
+        dic = {'all': answers.count()}
+        choices = [i.title for i in self.get_choices()]
+        for ch in choices:
+            dic[ch] = answers.filter(choice__title=ch).count()
+        return dic
 
 
 class Choice(models.Model):

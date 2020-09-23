@@ -40,10 +40,6 @@
     <title>Test page</title>
   </head>
   <body>
-    <!-- 
-    <br />
-     -->
-
     <header class="header header--main">
       <div class="container">
         <div class="header__content">
@@ -52,7 +48,7 @@
               <ul class="main-menu__links">
                 {% for up_cat in up_cats %}
                 <li>
-                  <a class="link" href="{% url 'main_articles' slug=up_cat.slug %}"
+                  <a class="link" href="/{{up_cat.slug}}"
                     ><span>{{ up_cat.title }}</span></a
                   >
                 </li>
@@ -74,7 +70,7 @@
               <ul class="main-menu__navigation">
                 {% for down_cat in down_cats %}
                 <li>
-                  <a  class="link link--blue" href="{% url 'main_articles' slug=down_cat.slug %}"
+                  <a  class="link link--blue" href="/{{down_cat.slug}}"
                     ><span>{{ down_cat.title }}</span></a
                   >
                 </li>
@@ -96,7 +92,7 @@
           <ul class="main-menu__links footer__menu__links">
             <li>
               <p>
-                <a class="link" href="https://abuse.pomogut.by/about/"
+                <a class="link" href="/about/"
                   ><span>О проекте</span></a
                 >
               </p>
