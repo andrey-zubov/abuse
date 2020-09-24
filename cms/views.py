@@ -114,7 +114,7 @@ def org_info(request, slug):
 
 
 def news_view(request):
-    news = Page.objects.filter(template_key='widgets/base_widget.html')
+    news = Page.objects.filter(template_key='widgets/news_widget.html')
     all_cats = Main_Cat.objects.filter(is_active=True)
     down_cats = Page.objects.filter(test_category='down')
     up_cats = Page.objects.filter(test_category='up')

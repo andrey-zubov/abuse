@@ -25,7 +25,7 @@ Page.register_extensions(
 
 Page.register_templates({
     'title': _('Новость'),
-    'path': 'widgets/base_widget.html',
+    'path': 'widgets/news_widget.html',
     'regions': (
         ('main', _('Main content area')),
     ),
@@ -550,8 +550,9 @@ class Organizations(models.Model):
         }
         r = requests.get(url, params=params)
         results = r.json()['results']
-        location = results[0]['geometry']['location']
-        self.lat, self.lng = location['lat'], location['lng']
+        if results != []:
+            location = results[0]['geometry']['location']
+            self.lat, self.lng = location['lat'], location['lng']
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -702,6 +703,10 @@ Page.register_extensions(ArticleCategory)
 
 class ArticleSection(Extension):
     article_pages = Page.objects.filter(template_key='widgets/refactor_art.html')
+    all_orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+    all_cites = City.objects.filter()
+    all_types = ServicesType.objects.filter()
+
     def handle_model(self):
         self.model.add_to_class(
             'org_section',
@@ -732,7 +737,18 @@ class ArticleSection(Extension):
             'up_cats',
             self.article_pages.filter(test_category='up')
         )
-
+        self.model.add_to_class(
+            'orgs',
+            self.all_orgs
+        )
+        self.model.add_to_class(
+            'all_cites',
+            self.all_cites
+        )
+        self.model.add_to_class(
+            'all_types',
+            self.all_types
+        )
 
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(

@@ -221,7 +221,7 @@
                       <p>Выберите вид деятельности</p>
                       <select class="organizations__select__specifications">
                         <option></option>
-                        {% for type in all_types %}
+                        {% for type in feincms_page.all_types %}
                           <option value="{{type.title}}">{{type.title}}</option>
                         {% endfor %}
                       </select>
@@ -230,14 +230,14 @@
                       <p>Выберите город</p>
                       <select class="organizations__select__cities">
                         <option></option>
-                        {% for city in all_cites %}
+                        {% for city in feincms_page.all_cites %}
                           <option value="{{city.title}}">{{city.title}}</option>
                         {% endfor %}
                       </select>
                     </div>
                   </div>
                   <div class="organizations__content">
-                    {% for org in orgs %}
+                    {% for org in feincms_page.orgs %}
                       <div
                       class="organization-item"
                       data-city="{{org.city.title}}"
