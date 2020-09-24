@@ -48,47 +48,47 @@ def get_answer(request):  # handle quiz answer
         )
     return HttpResponse(111)
 
-def megapage(request, slug):
-    this_category = Main_Cat.objects.get(slug=slug)
-
-    if request.GET.__contains__('answer_for'):  # hold an answer in db
-        question = Question.objects.get(title=request.GET['answer_for'])
-        choice = Choice.objects.get(
-            Q(question=question) & Q(title=request.GET[question.title])
-        )
-        save_answer = Answer.objects.create(
-            question_id=question.id,
-            choice=choice
-        )
-
-    if this_category.org_widget:
-        orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
-        org_widget_flag = True
-    else:
-        orgs = None
-        org_widget_flag = False
-
-    all_cites = City.objects.filter()
-    all_types = ServicesType.objects.filter()
-    pages = Page.objects.filter(
-        Q(template_key='widgets/single_article.html') & Q(category__id=this_category.id)
-    )
-    questions = Question.objects.all().prefetch_related('choice_set')
-
-    show_help = this_category.help_widget
-    return render(
-        request,
-        template_name='widgets/articles_by_cat_mk2.html',
-        context={
-            'pages': pages,
-            'questions': questions,
-            'orgs': orgs,
-            'all_cites': all_cites,
-            'all_types': all_types,
-            'show_help': show_help,
-            'org_widget_flag': org_widget_flag,
-            'this_category': this_category,
-    })
+# def megapage(request, slug):
+#     this_category = Main_Cat.objects.get(slug=slug)
+#
+#     if request.GET.__contains__('answer_for'):  # hold an answer in db
+#         question = Question.objects.get(title=request.GET['answer_for'])
+#         choice = Choice.objects.get(
+#             Q(question=question) & Q(title=request.GET[question.title])
+#         )
+#         save_answer = Answer.objects.create(
+#             question_id=question.id,
+#             choice=choice
+#         )
+#
+#     if this_category.org_widget:
+#         orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+#         org_widget_flag = True
+#     else:
+#         orgs = None
+#         org_widget_flag = False
+#
+#     all_cites = City.objects.filter()
+#     all_types = ServicesType.objects.filter()
+#     pages = Page.objects.filter(
+#         Q(template_key='widgets/single_article.html') & Q(category__id=this_category.id)
+#     )
+#     questions = Question.objects.all().prefetch_related('choice_set')
+#
+#     show_help = this_category.help_widget
+#     return render(
+#         request,
+#         template_name='widgets/articles_by_cat_mk2.html',
+#         context={
+#             'pages': pages,
+#             'questions': questions,
+#             'orgs': orgs,
+#             'all_cites': all_cites,
+#             'all_types': all_types,
+#             'show_help': show_help,
+#             'org_widget_flag': org_widget_flag,
+#             'this_category': this_category,
+#     })
 
 
 def faq(request):
@@ -114,7 +114,6 @@ def org_info(request, slug):
 
 def news_view(request):
     news = Page.objects.filter(template_key='widgets/news_widget.html')
-    all_cats = Main_Cat.objects.filter(is_active=True)
     down_cats = Page.objects.filter(test_category='down')
     up_cats = Page.objects.filter(test_category='up')
 

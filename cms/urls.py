@@ -5,7 +5,7 @@ from .views import (
     news_view,
     add_new_org,
     help_file,
-    megapage,
+    # megapage,
     faq,
     create_vac,
     create_event,
@@ -24,6 +24,6 @@ urlpatterns = [
 
     path('get_answer/', get_answer, name='get_answer'),
 
-    path('abuse/<slug>/', megapage, name='main_articles'),
+    # path('abuse/<slug>/', megapage, name='main_articles'),
 
 ]
