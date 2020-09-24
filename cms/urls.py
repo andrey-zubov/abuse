@@ -18,7 +18,7 @@ urlpatterns = [
     path('abuse/news/', news_view, name='news_page'),
     path('abuse/to-partners/', add_new_org, name='to-partners'),
     path('abuse/help', help_file, name='help_pdf'),
-    path('abuse/legal-info/', faq, name='faq'),
+    # path('abuse/legal-info/', faq, name='faq'),
     path('create_vac', create_vac, name='create_vacancy'),
     path('create_event', create_event, name='create_event'),
 
