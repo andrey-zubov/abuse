@@ -1,0 +1,100 @@
+<section class="organizations">
+<a name="local_orgs"></a>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3">
+        <div class="article article-map">
+          <h2 class="article__title headline-1">Организации</h2>
+          <div class="article__description">
+            <p>
+              Мы собрали организации, которые готовы тебе помочь. Их список
+              будет постоянно расширяться, чтобы ты всегда мог получить
+              ближайшую к тебе помощь.
+            </p>
+            <p>
+              (Организациям, оказывающим услуги лицам в проблеме наркотиков!
+              Если вы не нашли свою организацию -
+              <a href="#">отправьте заявку на ее добавление.</a>
+              )
+            </p>
+          </div>
+          <div class="article__select organizations__select">
+            <div class="organizations__select__item">
+              <p>Выберите вид деятельности</p>
+              <select class="organizations__select__specifications">
+                <option></option>
+                {% for type in all_types %}
+                  <option value="{{type.title}}">{{type.title}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="organizations__select__item">
+              <p>Выберите область</p>
+              <select class="organizations__select__region">
+                <option value="All">Вся Беларусь</option>
+                {% for reg in all_regions %}
+                  <option value="{{reg.title}}">{{reg.title}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="organizations__select__item">
+              <p>Выберите район</p>
+              <select class="organizations__select__district">
+                <option></option>
+                {% for area in all_areas %}
+                  <option value="{{area.title}}">{{area.title}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="organizations__select__item">
+              <p>Выберите город</p>
+              <select class="organizations__select__cities">
+                <option></option>
+                {% for city in all_cites %}
+                  <option value="{{city.title}}">{{city.title}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="organizations__content">
+            {% for org in all_orgs %}
+              <div
+              class="organization-item"
+              data-city="{{org.city.title}}"
+              data-spec="{% for type in org.get_services %}{{ type.org_type.title }}, {% endfor %}"
+              data-region="{{org.city.area.region.title}}"
+              data-district="{{org.city.area.title}}"
+              data-map-id="123"
+            >
+              <div class="organization-item__information">
+                <p class="organization-item__title">
+                  {{org.title}}
+                </p>
+                <div class="organization-item__adress">
+                  <div class="icon-wrapper">
+                    <i class="icon-map-marker"></i>
+                  </div>
+                  <p class="">{{org.adress}}</p>
+                </div>
+                <a class="organization-item__link" href="/abuse/organization/{{org.slug}}"></a>
+              </div>
+
+              <div class="organization-item__phone">
+                <div class="icon-wrapper">
+                  <i class="icon-phone"></i>
+                </div>
+                <a class="link link--green" href="tel:{{org.tel1}}"
+                  ><p class="">
+                    {{org.tel1}}
+                  </p></a
+                >
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="organizations__map"></div>
+</section>

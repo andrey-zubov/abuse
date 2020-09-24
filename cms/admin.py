@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import (
     Link,
-    Main_Cat,
     Organizations,
     ServicesStuff,
     ServicesType,
@@ -50,7 +49,6 @@ class FAQAdmin(admin.ModelAdmin):
     inlines = [FAQinline]
 
 admin.site.register(Link)
-admin.site.register(Main_Cat)
 admin.site.register(Organizations, OrganizationAdmin)
 
 

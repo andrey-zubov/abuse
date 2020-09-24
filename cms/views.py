@@ -7,7 +7,6 @@ import re
 
 from .models import (
     Page,
-    Main_Cat,
     Organizations,
     City,
     ServicesType,

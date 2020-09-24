@@ -207,18 +207,6 @@ class AccordeonArticle(models.Model):
 Page.create_content_type(AccordeonArticle, regions=('main',))
 
 
-class Feedback(models.Model):
-    class Meta:
-        abstract = True
-
-    def render(self):
-        return render_to_string(
-            'widgets/feedback_widget.html',
-            context={'widget': self})
-
-
-Page.create_content_type(Feedback, regions=('main',))
-
 
 class ArticlePicture(models.Model):
     class Meta:
@@ -270,6 +258,21 @@ class OrgSection(models.Model):
 
 
 Page.create_content_type(OrgSection, regions=('sections',))
+
+
+class FeedbackSection(models.Model):
+    class Meta:
+        abstract = True
+
+    def render(self):
+        return render_to_string(
+            'widgets/feedback_section.html',
+            context={
+                'widget': self,
+            })
+
+
+Page.create_content_type(FeedbackSection, regions=('sections',))
 
 
 class Vacancy(models.Model):
@@ -443,48 +446,48 @@ class Partner(models.Model):
     )
 
 
-class Main_Cat(models.Model):
-    class Meta:
-        verbose_name = 'Главные категории'
-        verbose_name_plural = 'Главные категории'
-
-    header_choices = [
-        ('up', 'Верхний header'),
-        ('down', 'Нижний header')
-    ]
-
-    is_active = models.BooleanField(default=True)
-    header_menu = models.CharField(
-        verbose_name='Местоположение',
-        choices=header_choices,
-        max_length=256
-    )
-    slug = models.SlugField(
-        verbose_name='слаг',
-        null=True,
-        blank=True
-    )
-    title = models.CharField(
-        verbose_name='Название',
-        max_length=50
-    )
-    help_widget = models.BooleanField(
-        verbose_name='Отображать виджет "первая помощь"'
-    )
-    feedback_section = models.BooleanField(
-        verbose_name='Отобразить секцию "обратная связь"'
-    )
-    org_widget = models.BooleanField(
-        verbose_name='Отображать виджет организаций'
-    )
-    cross_link = models.ManyToManyField(
-        'self',
-        null=True,
-        blank=True
-    )
-
-    def __str__(self):
-        return self.title
+# class Main_Cat(models.Model):
+#     class Meta:
+#         verbose_name = 'Главные категории'
+#         verbose_name_plural = 'Главные категории'
+#
+#     header_choices = [
+#         ('up', 'Верхний header'),
+#         ('down', 'Нижний header')
+#     ]
+#
+#     is_active = models.BooleanField(default=True)
+#     header_menu = models.CharField(
+#         verbose_name='Местоположение',
+#         choices=header_choices,
+#         max_length=256
+#     )
+#     slug = models.SlugField(
+#         verbose_name='слаг',
+#         null=True,
+#         blank=True
+#     )
+#     title = models.CharField(
+#         verbose_name='Название',
+#         max_length=50
+#     )
+#     help_widget = models.BooleanField(
+#         verbose_name='Отображать виджет "первая помощь"'
+#     )
+#     feedback_section = models.BooleanField(
+#         verbose_name='Отобразить секцию "обратная связь"'
+#     )
+#     org_widget = models.BooleanField(
+#         verbose_name='Отображать виджет организаций'
+#     )
+#     cross_link = models.ManyToManyField(
+#         'self',
+#         null=True,
+#         blank=True
+#     )
+#
+#     def __str__(self):
+#         return self.title
 
 
 class Organizations(models.Model):
@@ -730,26 +733,7 @@ Page.register_extensions(ArticleCategory)
 
 
 class ArticleSection(Extension):
-    article_pages = Page.objects.filter(template_key='widgets/refactor_art.html')
-    all_orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
-    all_cites = City.objects.filter()
-    all_types = ServicesType.objects.filter()
-    all_regions = Region.objects.filter()
-    all_areas = Area.objects.filter()
-
     def handle_model(self):
-        self.model.add_to_class(
-            'org_section',
-            models.BooleanField(
-                verbose_name='Секция организаций'
-            )
-        )
-        self.model.add_to_class(
-            'feedback_section',
-            models.BooleanField(
-                verbose_name='Секция обратной связи'
-            )
-        )
         self.model.add_to_class(
             'cross_link',
             models.ManyToManyField(
@@ -759,39 +743,10 @@ class ArticleSection(Extension):
             )
         )
 
-        self.model.add_to_class(
-            'down_cats',
-            self.article_pages.filter(test_category='down')
-        )
-        self.model.add_to_class(
-            'up_cats',
-            self.article_pages.filter(test_category='up')
-        )
-        self.model.add_to_class(
-            'orgs',
-            self.all_orgs
-        )
-        self.model.add_to_class(
-            'all_cites',
-            self.all_cites
-        )
-        self.model.add_to_class(
-            'all_types',
-            self.all_types
-        )
-        self.model.add_to_class(
-            'all_regions',
-            self.all_regions
-        )
-        self.model.add_to_class(
-            'all_areas',
-            self.all_areas
-        )
-
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(
-            _("Секции"),
-            {"fields": ('org_section', 'feedback_section', 'cross_link',), },
+            _("Перекрестные ссылки"),
+            {"fields": ('cross_link',), },
         )
 
 
