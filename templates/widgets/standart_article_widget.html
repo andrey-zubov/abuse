@@ -1,6 +1,6 @@
 {% block content %}
 <div class="article">
-  <h1 class="article__title headline-1">{{widget.title}}<a name="{{ widget.id }}"></a></h1>
+  <h1 class="article__title headline-1">{{widget.title}}<a name="{{ widget.title }}"></a></h1>
   {% if widget.picture %}
     <div class="article__image-wrapper aspect-ratio">
       <img src="{{widget.get_img}}" alt="{{widget.picture}}" />

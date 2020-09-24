@@ -1,59 +1,58 @@
-{% block content %}
-  <div class="article article-select">
-<!--    <h1 class="article__title headline-1">qwqРУДОУСТРОЙСТВО</h1>-->
-    {% if widget.text %}
-      <div class="article__description">
-        <p>
-          {{widget.text|safe}}
-        </p>
-      </div>
-    {% endif %}
-    {% if widget.list %}
-      <ul class="article__list">
-        {{widget.list|safe}}
-      </ul>
-    {% endif %}
-    <div class="article__select">
-      <select class="article__select-item">
-        <option></option>
-        {% for city in all_cityes %}
-          <option class="select__option" value="{{city.title}}">{{city.title}}</option>
-        {% endfor %}
-      </select>
+
+<div class="article article-select">
+  <h1 class="article__title headline-1">{{widget.title}}<a name="{{ widget.title }}"></a></h1>
+  {% if widget.text %}
+    <div class="article__description">
+      <p>
+        {{widget.text|safe}}
+      </p>
     </div>
-    <div class="vacancies">
-      {% for vac in vacancies %}
-      <div class="vacancy" data-city="{{vac.city}}">
-        <p class="vacancy__title headline-3">
-          {{ vac.title }}
-        </p>
-        <div class="vacancy__info">
-          <div class="vacancy__info__item">
-            <p><strong>Адрес:</strong></p>
-            <p>{{vac.adress}}</p>
-          </div>
-          <div class="vacancy__info__item vacancy__info__item--phone">
-            <p><strong>Контактный телефон:</strong></p>
-            <a href="tel:+375 29 123 45 67" title="Позвонить"
-              ><p>{{vac.tel}}</p></a
-            >
-          </div>
+  {% endif %}
+  {% if widget.list %}
+    <ul class="article__list">
+      {{widget.list|safe}}
+    </ul>
+  {% endif %}
+  <div class="article__select">
+    <select class="article__select-item">
+      <option></option>
+      {% for city in all_cityes %}
+        <option class="select__option" value="{{city.title}}">{{city.title}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="vacancies">
+    {% for vac in vacancies %}
+    <div class="vacancy" data-city="{{vac.city}}">
+      <p class="vacancy__title headline-3">
+        {{ vac.title }}
+      </p>
+      <div class="vacancy__info">
+        <div class="vacancy__info__item">
+          <p><strong>Адрес:</strong></p>
+          <p>{{vac.adress}}</p>
+        </div>
+        <div class="vacancy__info__item vacancy__info__item--phone">
+          <p><strong>Контактный телефон:</strong></p>
+          <a href="tel:+375 29 123 45 67" title="Позвонить"
+            ><p>{{vac.tel}}</p></a
+          >
         </div>
       </div>
-      {% endfor %}
-      <div class="vacancy--empty">
-        <p class="headline-3">
-          НА СЕГОДНЯ НЕТ АКТУАЛЬНЫХ ПРЕДЛОЖЕНИЙ ОТ КЛУБОВ
-        </p>
-      </div>
     </div>
-
-    <div class="article__buttons article__buttons--left">
-      {% for link in widget.link.all %}
-        <a href="{{link.link}}" class="btn" target="{{link.target}}"
-          ><span>{{link.title}}</span></a
-        >
-      {% endfor %}
+    {% endfor %}
+    <div class="vacancy--empty">
+      <p class="headline-3">
+        НА СЕГОДНЯ НЕТ АКТУАЛЬНЫХ ПРЕДЛОЖЕНИЙ ОТ КЛУБОВ
+      </p>
     </div>
   </div>
-{% endblock %}
+
+  <div class="article__buttons article__buttons--left">
+    {% for link in widget.link.all %}
+      <a href="{{link.link}}" class="btn" target="{{link.target}}"
+        ><span>{{link.title}}</span></a
+      >
+    {% endfor %}
+  </div>
+</div>

@@ -1,78 +1,77 @@
-{% block content %}
-  <div class="article article-calendar">
-<!--    <h1 class="article__title headline-1">{{widget.title}}</h1>-->
-    {% if widget.text %}
-      <div class="article__description">
-        <p>
-          {{widget.text}}
-        </p>
-      </div>
-    {% endif %}
-    {% if widget.list %}
-      <ul class="article__list">
-        <li><p>{{widget.list|safe}}</p></li>
-      </ul>
-    {% endif %}
-    <div class="article__select article-calendar__inputs">
-      <div class="article-calendar__input">
-        <p>Дата проведения</p>
-        <div class="article-calendar__input__content">
-          <input
-            type="text"
-            class="calendar"
-            placeholder="Выберите дату"
-          />
-          <i class="icon-calendar"></i>
-        </div>
-      </div>
-      <div class="article-calendar__input">
-        <p>Место проведения</p>
-        <div class="article-calendar__input__content">
-          <select class="select__activity">
-            <option></option>
-            {% for city in all_cityes %}
-            <option class="select__option" value="{{city.title}}"
-              >{{city.title}}</option
-            >
-            {% endfor %}
-            <option class="select__option" value="Gomel"
-              >Гомель</option
-            >
-          </select>
-        </div>
+
+<div class="article article-calendar">
+  <h1 class="article__title headline-1">{{widget.title}}<a name="{{ widget.title }}"></h1>
+  {% if widget.text %}
+    <div class="article__description">
+      <p>
+        {{widget.text}}
+      </p>
+    </div>
+  {% endif %}
+  {% if widget.list %}
+    <ul class="article__list">
+      <li><p>{{widget.list|safe}}</p></li>
+    </ul>
+  {% endif %}
+  <div class="article__select article-calendar__inputs">
+    <div class="article-calendar__input">
+      <p>Дата проведения</p>
+      <div class="article-calendar__input__content">
+        <input
+          type="text"
+          class="calendar"
+          placeholder="Выберите дату"
+        />
+        <i class="icon-calendar"></i>
       </div>
     </div>
-    <div class="activities">
-      {% for event in all_events %}
-        <div
-          class="vacancy"
-          data-city="{{event.city}}"
-          data-active-day="{{event.start_date}}"
-        >
-          <p class="vacancy__title headline-3">
-            {{event.title}}
-          </p>
-          <div class="vacancy__info">
-            <div class="vacancy__info__item">
-              <p><strong>Адрес:</strong></p>
-              <p>
-                {{event.adress}}
-              </p>
-            </div>
-            <div class="vacancy__info__item vacancy__info__item--phone">
-              <p><strong>Контактный телефон:</strong></p>
-              <a href="tel:+375 29 123 45 67" title="Позвонить"
-                ><p>{{event.tel}}</p></a
-              >
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-    <div class="article__buttons article__buttons--left">
-      <a href="{{widget.bank_link}}" class="btn" target="_blank"
-        ><span>Банк вакансий</span></a
-      >
+    <div class="article-calendar__input">
+      <p>Место проведения</p>
+      <div class="article-calendar__input__content">
+        <select class="select__activity">
+          <option></option>
+          {% for city in all_cityes %}
+          <option class="select__option" value="{{city.title}}"
+            >{{city.title}}</option
+          >
+          {% endfor %}
+          <option class="select__option" value="Gomel"
+            >Гомель</option
+          >
+        </select>
+      </div>
     </div>
   </div>
-{% endblock %}
+  <div class="activities">
+    {% for event in all_events %}
+      <div
+        class="vacancy"
+        data-city="{{event.city}}"
+        data-active-day="{{event.start_date}}"
+      >
+        <p class="vacancy__title headline-3">
+          {{event.title}}
+        </p>
+        <div class="vacancy__info">
+          <div class="vacancy__info__item">
+            <p><strong>Адрес:</strong></p>
+            <p>
+              {{event.adress}}
+            </p>
+          </div>
+          <div class="vacancy__info__item vacancy__info__item--phone">
+            <p><strong>Контактный телефон:</strong></p>
+            <a href="tel:+375 29 123 45 67" title="Позвонить"
+              ><p>{{event.tel}}</p></a
+            >
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="article__buttons article__buttons--left">
+    <a href="{{widget.bank_link}}" class="btn" target="_blank"
+      ><span>Банк вакансий</span></a
+    >
+  </div>
+</div>

@@ -96,6 +96,10 @@ class CalendarArticle(models.Model):
     class Meta:
         abstract = True
 
+    title = models.CharField(
+        verbose_name='Заголовок',
+        max_length=256
+    )
     text = models.TextField()
     list = models.TextField(
         default='<li></li>',
@@ -124,6 +128,11 @@ class ParticipantWidget(models.Model):
     class Meta:
         abstract = True
 
+    title = models.CharField(
+        verbose_name='заголовок',
+        max_length=256
+    )
+
     def render(self):
         partners = Partner.objects.all()
         return render_to_string(
@@ -139,6 +148,11 @@ Page.create_content_type(ParticipantWidget, regions=('main',))
 class EmploymentArticle(models.Model):
     class Meta:
         abstract = True
+
+    title = models.CharField(
+        verbose_name='заголовок',
+        max_length=256
+    )
 
     text = models.TextField(
         verbose_name='Текст',

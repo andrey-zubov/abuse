@@ -67,7 +67,6 @@
   <div class="container">
     <div class="row">
       {% block side_bar %}
-
         <div class="col-lg-3">
           <div class="side-menu">
             <div class="side-menu__content">
@@ -85,20 +84,12 @@
               </div>
               <div class="side-menu__links">
                 {% for i in feincms_page.content.main %}
-                  <a class="link link--green" href="#{{ i.id }}"><p>{{ i.title }}</p></a>
+                  <a class="link link--green" href="#{{ i.title }}"><p>{{ i.title }}</p></a>
                 {% endfor %}
-               {% for article in pages %}
-                  <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
-                {% endfor %}
-                {% if employment_flag %}
-                  <a class="link link--green" href="#employment_widget"><p>Трудоустройство</p></a>
-                {% endif %}
-                {% if feincms_page.org_section %}
-                  <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
-                {% endif %}
-
                 {% for i in feincms_page.content.sections %}
-                  <a class="link link--green" href="#{{i.title}}"><p>{{i.title}}</p></a>
+                  {% if i.title %}
+                    <a class="link link--green" href="#{{i.title}}"><p>{{i.title}}</p></a>
+                  {% endif %}
                 {% endfor %}
               </div>
             </div>
