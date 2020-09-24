@@ -236,6 +236,8 @@ class OrgSection(models.Model):
     class Meta:
         abstract = True
 
+    title = 'Организации'
+
     def render(self):
         article_pages = Page.objects.filter(template_key='widgets/refactor_art.html')
         all_orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
@@ -822,33 +824,6 @@ class NewsSourceExtension(Extension):
 
 Page.register_extensions(NewsSourceExtension)
 
-
-# class LinkExtension(Extension):
-#     def handle_model(self):
-#         self.model.add_to_class(
-#             'button',
-#             models.ManyToManyField(
-#                 Link,
-#                 verbose_name='Ссылка под статьей',
-#                 null=True,
-#                 blank=True,
-#             )
-#         )
-#         self.model.add_to_class(
-#             'org_button',
-#             models.BooleanField(
-#                 default=False,
-#                 verbose_name='Отображать кнопку быстрого перехода к организациям'
-#             )
-#         )
-#
-#     def handle_modeladmin(self, modeladmin):
-#         modeladmin.add_extension_options(
-#             _("Кнопки"),
-#             {"fields": ("button", "org_button",), },
-#         )
-#
-# Page.register_extensions(LinkExtension)
 
 # опросник
 class Question(models.Model):
