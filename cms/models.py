@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.utils.safestring import mark_safe
+import datetime
 
 
 from os.path import join
@@ -112,8 +113,9 @@ class CalendarArticle(models.Model):
     )
 
     def render(self):
+
         all_cityes = City.objects.all()
-        all_events = Event.objects.all()
+        all_events = Event.objects.filter(start_date__range=[datetime.date.today(), '2100-01-01',])
         return render_to_string(
             'widgets/calendar_widget.html',
             context={'widget': self,
@@ -254,7 +256,7 @@ class OrgSection(models.Model):
 
     def render(self):
         article_pages = Page.objects.filter(template_key='widgets/refactor_art.html')
-        all_orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+        all_orgs = Organizations.objects.filter(is_active=True).prefetch_related('organizationservices_set')
         all_cites = City.objects.filter()
         all_types = ServicesType.objects.filter()
         all_regions = Region.objects.filter()
@@ -372,7 +374,6 @@ class Event(models.Model):
         max_length=64,
         verbose_name="Контактное лицо"
     )
-
 
 
 class FAQ(models.Model):
@@ -511,6 +512,11 @@ class Organizations(models.Model):
         verbose_name = 'Организация'
         verbose_name_plural = 'Организации'
 
+    is_active = models.BooleanField(
+        verbose_name='Действующая организация',
+        default=False,
+        help_text='Подтвердить после проверки данных организации'
+    )
     title = models.CharField(
         verbose_name='Название организации',
         max_length=256
@@ -758,11 +764,18 @@ class ArticleSection(Extension):
                 blank=True
             )
         )
+        self.model.add_to_class(
+            'show_help',
+            models.BooleanField(
+                verbose_name='Отображать "первая помощь',
+                default=False
+            )
+        )
 
     def handle_modeladmin(self, modeladmin):
         modeladmin.add_extension_options(
-            _("Перекрестные ссылки"),
-            {"fields": ('cross_link',), },
+            _("Ссылки в левом сайдбаре"),
+            {"fields": ('cross_link', 'show_help',), },
         )
 
 
@@ -840,6 +853,20 @@ Page.register_extensions(NewsSourceExtension)
 
 
 # опросник
+class QuizText(models.Model):
+    class Meta:
+        verbose_name='Текст в шапке опросника'
+
+    title = models.CharField(
+        verbose_name="Заголовок",
+        max_length=64,
+        null=True,
+        blank=True
+    )
+    text = models.TextField()
+
+
+
 class Question(models.Model):
     title = models.CharField(
         verbose_name='вопрос',
