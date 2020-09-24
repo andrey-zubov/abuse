@@ -345,6 +345,13 @@
 {% endblock %}
 
 
+{% block sections %}
+  {% for content in feincms_page.content.sections %}
+    {{ content.render }}
+  {% endfor %}
+{% endblock %}
+
+
 <footer class="footer footer--secondary">
   <div class="container">
     <div class="row">

@@ -27,22 +27,21 @@ Page.register_templates({
     'title': _('Новость'),
     'path': 'widgets/news_widget.html',
     'regions': (
-        ('main', _('Main content area')),
+        ('main_news', _('Новость')),
     ),
 })
-
 
 Page.register_templates({
     'title': _('Отдельная статья'),
     'path': 'widgets/refactor_art.html',
-    # 'path': 'widgets/single_article.html',
     'regions': (
-        ('main', _('Main content area')),
+        ('main', _('Статьи')),
+        ('sections', _('Нижнии секции')),
     ),
 })
 
-Page.create_content_type(RichTextContent)
 
+Page.create_content_type(RichTextContent, regions=('main_news',))
 
 
 class StandartArticle(models.Model):
@@ -89,7 +88,8 @@ class StandartArticle(models.Model):
     def get_img(self):
         return join(settings.MEDIA_URL, str(self.picture.file))
 
-Page.create_content_type(StandartArticle)
+
+Page.create_content_type(StandartArticle, regions=('main',))
 
 
 class CalendarArticle(models.Model):
@@ -117,7 +117,7 @@ class CalendarArticle(models.Model):
                      'all_events': all_events
                      })
 
-Page.create_content_type(CalendarArticle)
+Page.create_content_type(CalendarArticle, regions=('main',))
 
 
 class ParticipantWidget(models.Model):
@@ -133,7 +133,7 @@ class ParticipantWidget(models.Model):
                      })
 
 
-Page.create_content_type(ParticipantWidget)
+Page.create_content_type(ParticipantWidget, regions=('main',))
 
 
 class EmploymentArticle(models.Model):
@@ -171,7 +171,7 @@ class EmploymentArticle(models.Model):
                      })
 
 
-Page.create_content_type(EmploymentArticle)
+Page.create_content_type(EmploymentArticle, regions=('main',))
 
 
 class AccordeonArticle(models.Model):
@@ -204,7 +204,7 @@ class AccordeonArticle(models.Model):
                      })
 
 
-Page.create_content_type(AccordeonArticle)
+Page.create_content_type(AccordeonArticle, regions=('main',))
 
 
 class Feedback(models.Model):
@@ -217,7 +217,7 @@ class Feedback(models.Model):
             context={'widget': self})
 
 
-Page.create_content_type(Feedback)
+Page.create_content_type(Feedback, regions=('main',))
 
 
 class ArticlePicture(models.Model):
@@ -241,7 +241,35 @@ class ArticlePicture(models.Model):
             context={'widget': self})
 
 
-Page.create_content_type(ArticlePicture)
+Page.create_content_type(ArticlePicture, regions=('main_news',))
+
+
+class OrgSection(models.Model):
+    class Meta:
+        abstract = True
+
+    def render(self):
+        article_pages = Page.objects.filter(template_key='widgets/refactor_art.html')
+        all_orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
+        all_cites = City.objects.filter()
+        all_types = ServicesType.objects.filter()
+        all_regions = Region.objects.filter()
+        all_areas = Area.objects.filter()
+
+        return render_to_string(
+            'widgets/org_section.html',
+            context={
+                'widget': self,
+                'article_pages': article_pages,
+                'all_orgs': all_orgs,
+                'all_cites': all_cites,
+                'all_types': all_types,
+                'all_regions': all_regions,
+                'all_areas': all_areas,
+            })
+
+
+Page.create_content_type(OrgSection, regions=('sections',))
 
 
 class Vacancy(models.Model):

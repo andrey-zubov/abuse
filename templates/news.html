@@ -80,7 +80,7 @@
                       </div>
                     {% endif %}
                     <p class="news-item__description">
-                      {{ n.content.main.0.text|safe|slice:":400" }}...
+                      {{ n.content.main_news.0.text|safe|slice:":400" }}...
                     </p>
                     <a class="news-item__button link link--blue" href="/{{ n.slug }}"
                       >Подробнее</a

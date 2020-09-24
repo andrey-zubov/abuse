@@ -73,7 +73,7 @@
               <div class="single-news__content__description">
                 <p>
                   {% block content %}
-                    {% for content in feincms_page.content.main %}
+                    {% for content in feincms_page.content.main_news %}
                       {{ content.render }}
                     {% endfor %}
                   {% endblock %}
