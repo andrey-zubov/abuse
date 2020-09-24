@@ -706,6 +706,8 @@ class ArticleSection(Extension):
     all_orgs = Organizations.objects.all().prefetch_related('organizationservices_set')
     all_cites = City.objects.filter()
     all_types = ServicesType.objects.filter()
+    all_regions = Region.objects.filter()
+    all_areas = Area.objects.filter()
 
     def handle_model(self):
         self.model.add_to_class(
@@ -748,6 +750,14 @@ class ArticleSection(Extension):
         self.model.add_to_class(
             'all_types',
             self.all_types
+        )
+        self.model.add_to_class(
+            'all_regions',
+            self.all_regions
+        )
+        self.model.add_to_class(
+            'all_areas',
+            self.all_areas
         )
 
     def handle_modeladmin(self, modeladmin):

@@ -227,6 +227,24 @@
                       </select>
                     </div>
                     <div class="organizations__select__item">
+                      <p>Выберите область</p>
+                      <select class="organizations__select__region">
+                        <option value="All">Вся Беларусь</option>
+                        {% for reg in feincms_page.all_regions %}
+                          <option value="{{reg.title}}">{{reg.title}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="organizations__select__item">
+                      <p>Выберите район</p>
+                      <select class="organizations__select__district">
+                        <option></option>
+                        {% for area in feincms_page.all_areas %}
+                          <option value="{{area.title}}">{{area.title}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="organizations__select__item">
                       <p>Выберите город</p>
                       <select class="organizations__select__cities">
                         <option></option>
@@ -242,6 +260,9 @@
                       class="organization-item"
                       data-city="{{org.city.title}}"
                       data-spec="{% for type in org.get_services %}{{ type.org_type.title }}, {% endfor %}"
+                      data-region="{{org.city.area.region.title}}"
+                      data-district="{{org.city.area.title}}"
+                      data-map-id="123"
                     >
                       <div class="organization-item__information">
                         <p class="organization-item__title">
