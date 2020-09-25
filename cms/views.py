@@ -196,18 +196,17 @@ def create_org(request):
 
 
 def create_vac(request):
-    if request.method == 'POST':
-        vac_form = VacancyForm(request.POST)
-        if vac_form.is_valid():
-            new_vac = vac_form.save(commit=False)
-            new_vac.city = check_city(request.POST['pre_city'])
-            new_vac.save()
-            return HttpResponse('save')
+    print(request.GET)
+    vac_form = VacancyForm(request.GET)
+    if vac_form.is_valid():
+        new_vac = vac_form.save(commit=False)
+        new_vac.city = check_city(request.GET['pre_city'])
+        new_vac.save()
+        return HttpResponse('save')
 
-        else:
-            print(vac_form.errors)
-            return HttpResponse('post')
-    return HttpResponse(3)
+    else:
+        print(vac_form.errors)
+        return HttpResponse('post')
 
 
 def create_event(request):

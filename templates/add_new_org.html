@@ -118,8 +118,7 @@
 
 
           <div class="partners__form" data-form="2">
-            <form method="post" action="{% url 'create_vacancy'%}">
-              {%csrf_token%}
+            <form id="add_vacancy_form" method="post" action="">
               <div class="form-item__required">
                 <input
                   class="form-item"
@@ -335,9 +334,21 @@
       $('#add_org_form').submit(function(fun){
           fun.preventDefault();
           form_id = this.id;
-          console.log(form_id)
           $.ajax({
             url: '/create_org/',
+            data: $('#' + form_id).serialize(),
+            success: function(){
+                console.log('suc');
+            }
+          });
+      });
+
+      $('#add_vacancy_form').submit(function(fun){
+          fun.preventDefault();
+          form_id = this.id;
+          console.log(form_id)
+          $.ajax({
+            url: '/create_vac/',
             data: $('#' + form_id).serialize(),
             success: function(){
                 console.log('suc');
