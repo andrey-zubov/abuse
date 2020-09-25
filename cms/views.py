@@ -208,7 +208,6 @@ def create_vac(request):
 
 
 def create_event(request):
-    print(request.GET)
     event_form = EventForm(request.GET)
     if event_form.is_valid():
         new_event = event_form.save(commit=False)
