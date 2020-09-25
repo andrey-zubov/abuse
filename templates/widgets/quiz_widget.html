@@ -65,3 +65,27 @@
   {% endfor %}
   </div>
 </div>
+<script src="/static/js/jquery-3.5.1.min.js"></script>
+<script>
+  $('document').ready(function () {
+      $('.quiz-item__button--transparent').on('click', function () {
+          form_id = this.id.slice(5)
+          console.log(form_id);
+          $('#res_' + form_id).toggle();
+
+      });
+
+      $('.form_quiz').submit(function(fun){
+          fun.preventDefault();
+          form_id = this.id;
+          $.ajax({
+            url: '/get_answer/',
+            data: $('#' + form_id).serialize(),
+            success: function(){
+                $('#' + form_id).toggle();
+                $('#res_' + form_id).toggle();
+            }
+          });
+      });
+  })
+</script>
