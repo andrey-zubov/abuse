@@ -38,6 +38,7 @@ Page.register_templates({
     'regions': (
         ('main', _('Статьи')),
         ('sections', _('Нижнии секции')),
+        ('right_sidebar', _('Правый сайдбар')),
     ),
 })
 
@@ -782,29 +783,6 @@ class ArticleSection(Extension):
 Page.register_extensions(ArticleSection)
 
 
-class ArticleQuiz(Extension):
-    def handle_model(self):
-        self.model.add_to_class(
-            'quiz',
-            models.ManyToManyField(
-                'cms.Question',
-                null=True,
-                blank=True,
-                verbose_name='Выбрать опросы'
-            )
-
-        )
-
-    def handle_modeladmin(self, modeladmin):
-        modeladmin.add_extension_options(
-            _("Опросы"),
-            {"fields": ("quiz",), },
-        )
-
-
-Page.register_extensions(ArticleQuiz)
-
-
 class NewsImageExtension(Extension):
     def handle_model(self):
         self.model.add_to_class(
@@ -853,17 +831,32 @@ Page.register_extensions(NewsSourceExtension)
 
 
 # опросник
-class QuizText(models.Model):
+class QuizWidget(models.Model):
     class Meta:
-        verbose_name='Текст в шапке опросника'
+        abstract=True
 
     title = models.CharField(
-        verbose_name="Заголовок",
-        max_length=64,
+        verbose_name='Заголовок блока',
+        max_length=256,
         null=True,
         blank=True
     )
-    text = models.TextField()
+    text = models.TextField(
+        verbose_name='Текстовая информация',
+        null=True,
+        blank=True
+    )
+
+    def render(self):
+        quiz = Question.objects.filter(is_active=True)
+        return render_to_string(
+            'widgets/quiz_widget.html',
+            context={
+                'widget': self,
+                'quiz': quiz
+            })
+
+Page.create_content_type(QuizWidget, regions=('right_sidebar',))
 
 
 
