@@ -321,7 +321,7 @@ class Vacancy(models.Model):
         max_length=256,
     )
     tel = models.CharField(
-        max_length=30
+        max_length=64
     )
     city = models.ForeignKey(
         'City',
@@ -528,7 +528,7 @@ class Organizations(models.Model):
     )
     working_hours = models.CharField(
         verbose_name='Время работы',
-        max_length=50,
+        max_length=128,
         null=True,
         blank=True
     )
@@ -562,19 +562,19 @@ class Organizations(models.Model):
         verbose_name='Телефон',
         null=True,
         blank=True,
-        max_length=32
+        max_length=64
     )
     tel2 = models.CharField(
         verbose_name='Телефон',
         null=True,
         blank=True,
-        max_length=16
+        max_length=64
     )
     tel3 = models.CharField(
         verbose_name='Телефон',
         null=True,
         blank=True,
-        max_length=16
+        max_length=64
     )
     website = models.URLField(
         verbose_name='Сайт',
@@ -641,6 +641,11 @@ class Area(models.Model):
 
 
 class City(models.Model):
+    class Meta:
+        verbose_name='Населенный пункт'
+        verbose_name_plural='Населенные пункты'
+        ordering = ['title']
+
     area = models.ForeignKey(
         Area,
         on_delete=models.CASCADE,
@@ -650,7 +655,7 @@ class City(models.Model):
 
     title = models.CharField(
         max_length=50,
-        verbose_name='Город'
+        verbose_name='Населенный пункт'
     )
     def __str__(self):
         return self.title

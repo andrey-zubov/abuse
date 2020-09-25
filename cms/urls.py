@@ -10,7 +10,7 @@ from .views import (
     create_vac,
     create_event,
     get_answer,
-    create_org
+    create_org,
 )
 
 urlpatterns = [
@@ -27,5 +27,4 @@ urlpatterns = [
     path('get_answer/', get_answer, name='get_answer'),
 
     # path('abuse/<slug>/', megapage, name='main_articles'),
-
 ]

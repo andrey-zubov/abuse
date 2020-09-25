@@ -218,3 +218,5 @@ def check_city(looknig_city):  # TODO move to utils
         return new_city
 
 
+
+
