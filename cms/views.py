@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, FileResponse
 from django.db.models import Q
 from .forms import OrgForm, VacancyForm, EventForm
-from django.forms import inlineformset_factory
-import re
+from .utils import check_city
 
 from .models import (
     Page,
@@ -148,7 +147,7 @@ def add_new_org(request):
     )
 
 
-def create_org(request):
+def create_org(request):  # ajax
     org_type = ServicesType.objects.get(
         id=request.GET['org_type']
     )
@@ -174,7 +173,7 @@ def create_org(request):
 
 
 
-def create_vac(request):
+def create_vac(request):  # ajax
     vac_form = VacancyForm(request.GET)
     if vac_form.is_valid():
         new_vac = vac_form.save(commit=False)
@@ -187,7 +186,7 @@ def create_vac(request):
         return HttpResponse('fail')
 
 
-def create_event(request):
+def create_event(request):  # ajax
     event_form = EventForm(request.GET)
     if event_form.is_valid():
         new_event = event_form.save(commit=False)
@@ -199,24 +198,6 @@ def create_event(request):
     else:
         print(event_form.errors)
         return HttpResponse('fail')
-
-
-
-
-
-def check_city(looknig_city):  # TODO move to utils
-    pre_city = re.sub(r'\w+\.', '', looknig_city).strip().capitalize()  # clear data from г.
-    all_cityes = City.objects.all()
-    if all_cityes.filter(title__iexact=pre_city).exists():
-        return all_cityes.get(title__iexact=pre_city)
-    elif all_cityes.filter(title__icontains=pre_city).exists():
-        return all_cityes.get(title__icontains=pre_city)
-    else:
-        new_city = City.objects.create(
-            title=pre_city
-        )
-        return new_city
-
 
 
 

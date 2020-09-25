@@ -1,9 +1,10 @@
 from .models import *
 import codecs
 from transliterate import translit
-import pandas as pd
-import numpy as np
 import pickle
+import re
+from .forms import OrgForm, VacancyForm, EventForm
+from django.http import HttpResponse
 
 
 def fill_db(request=None):
@@ -93,5 +94,17 @@ def fill_regions(request=None):
     return 'done regions and areas import'
 
 
+def check_city(looknig_city):
+    pre_city = re.sub(r'\w+\.', '', looknig_city).strip().capitalize()  # clear data from г.
+    all_cityes = City.objects.all()
+    if all_cityes.filter(title__iexact=pre_city).exists():
+        return all_cityes.get(title__iexact=pre_city)
+    elif all_cityes.filter(title__icontains=pre_city).exists():
+        return all_cityes.get(title__icontains=pre_city)
+    else:
+        new_city = City.objects.create(
+            title=pre_city
+        )
+        return new_city
 
 
