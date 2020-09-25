@@ -129,42 +129,23 @@ def news_view(request):
 
 
 def add_new_org(request):
-    if request.method == 'POST':
-        #print(request.POST)
-        org_type = ServicesType.objects.get(
-            id=request.POST['org_type']
-        )
-        city = check_city(request.POST['pre_city'])
-        form = OrgForm(request.POST)
-
-        if form.is_valid():
-            new_org = form.save(commit=False)
-            new_org.city = city
-            new_org.slug = request.POST['title']
-            new_org.save()
-            return HttpResponse('save')
-
-        else:
-            print(form.errors)
-        return HttpResponse('post')
-    else:
-        all_types = ServicesType.objects.filter()
-        form = OrgForm()
-        vac_form = VacancyForm()
-        event_form = EventForm()
+    all_types = ServicesType.objects.filter()
+    form = OrgForm()
+    vac_form = VacancyForm()
+    event_form = EventForm()
 
 
-        return render(
-            request,
-            template_name='add_new_org.html',
-            context={
-                'form': form,
-                'vac_form': vac_form,
-                'event_form': event_form,
-                'all_types': all_types
+    return render(
+        request,
+        template_name='add_new_org.html',
+        context={
+            'form': form,
+            'vac_form': vac_form,
+            'event_form': event_form,
+            'all_types': all_types
 
-            }
-        )
+        }
+    )
 
 
 def create_org(request):
@@ -185,7 +166,6 @@ def create_org(request):
             stuff='0',
             payment='0'
         )
-        print(new_org.id)
         new_org.save()
 
         return HttpResponse('save')
