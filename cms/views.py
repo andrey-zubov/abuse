@@ -168,7 +168,6 @@ def add_new_org(request):
 
 
 def create_org(request):
-    print(request.GET)
     org_type = ServicesType.objects.get(
         id=request.GET['org_type']
     )
@@ -196,7 +195,6 @@ def create_org(request):
 
 
 def create_vac(request):
-    print(request.GET)
     vac_form = VacancyForm(request.GET)
     if vac_form.is_valid():
         new_vac = vac_form.save(commit=False)
@@ -206,23 +204,23 @@ def create_vac(request):
 
     else:
         print(vac_form.errors)
-        return HttpResponse('post')
+        return HttpResponse('fail')
 
 
 def create_event(request):
-    print(request.POST)
-    if request.method == 'POST':
-        event_form = EventForm(request.POST)
-        if event_form.is_valid():
-            new_event = event_form.save(commit=False)
-            if request.POST.__contains__('free_entrance'):
-                new_event.payment = 0
-            new_event.city = check_city(request.POST['pre_city'])
-            new_event.save()
-        else:
-            print(event_form.errors)
-            return HttpResponse('siad')
-    return HttpResponse(3)
+    print(request.GET)
+    event_form = EventForm(request.GET)
+    if event_form.is_valid():
+        new_event = event_form.save(commit=False)
+        if request.POST.__contains__('free_entrance'):
+            new_event.payment = 0
+        new_event.city = check_city(request.GET['pre_city'])
+        new_event.save()
+        return HttpResponse('save')
+    else:
+        print(event_form.errors)
+        return HttpResponse('fail')
+
 
 
 
