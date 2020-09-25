@@ -167,6 +167,34 @@ def add_new_org(request):
         )
 
 
+def create_org(request):
+    print(request.GET)
+    org_type = ServicesType.objects.get(
+        id=request.GET['org_type']
+    )
+    city = check_city(request.GET['pre_city'])
+    form = OrgForm(request.GET)
+    if form.is_valid():
+        new_org = form.save(commit=False)
+        new_org.city = city
+        new_org.slug = request.GET['title']
+        new_org.save()
+        new_org.get_services.create(
+            conf_id=1,
+            org_type_id=1,
+            stuff_id=1,
+            payment_id=1,
+            organization_id=new_org.id
+        )
+        print(new_org.id)
+        new_org.save()
+
+        return HttpResponse('save')
+    else:
+        return HttpResponse('fail')
+
+
+
 def create_vac(request):
     if request.method == 'POST':
         vac_form = VacancyForm(request.POST)

@@ -52,8 +52,7 @@
       <div class="col-lg-6 offset-lg-3">
         <div class="partners__content">
           <div class="partners__form" data-form="1">
-            <form method="post" action="">
-              {% csrf_token %}
+            <form id='add_org_form' method="post" action="">
               <div class="form-item__required">
                 <input
                   class="form-item"
@@ -329,6 +328,22 @@
     </div>
   </div>
 </section>
-
 </body>
+<script src="/static/js/jquery-3.5.1.min.js"></script>
+<script>
+  $('document').ready(function () {
+      $('#add_org_form').submit(function(fun){
+          fun.preventDefault();
+          form_id = this.id;
+          console.log(form_id)
+          $.ajax({
+            url: '/create_org/',
+            data: $('#' + form_id).serialize(),
+            success: function(){
+                console.log('suc');
+            }
+          });
+      });
+  })
+</script>
 </html>

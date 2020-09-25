@@ -9,7 +9,8 @@ from .views import (
     faq,
     create_vac,
     create_event,
-    get_answer
+    get_answer,
+    create_org
 )
 
 urlpatterns = [
@@ -19,8 +20,9 @@ urlpatterns = [
     path('abuse/to-partners/', add_new_org, name='to-partners'),
     path('abuse/help', help_file, name='help_pdf'),
     # path('abuse/legal-info/', faq, name='faq'),
-    path('create_vac', create_vac, name='create_vacancy'),
-    path('create_event', create_event, name='create_event'),
+    path('create_org/', create_org, name='create_org'),
+    path('create_vac/', create_vac, name='create_vacancy'),
+    path('create_event/', create_event, name='create_event'),
 
     path('get_answer/', get_answer, name='get_answer'),
 
