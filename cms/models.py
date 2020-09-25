@@ -664,18 +664,35 @@ class OrganizationServices(models.Model):
     org_type = models.ForeignKey(
         'ServicesType',
         on_delete=models.DO_NOTHING,
+        verbose_name='Вид деятельности'
     )
-    stuff = models.ForeignKey(
-        'ServicesStuff',
-        on_delete=models.DO_NOTHING,
+    stuff = models.CharField(
+        choices=[
+            ('0', 'Не указано'),
+            ('1', 'Опиоиды'),
+            ('2', 'Психотропы'),
+            ('3', 'Галлюциногены'),
+        ],
+        max_length=64,
+        verbose_name="Вещества"
     )
-    conf = models.ForeignKey(
-        'ServicesConf',
-        on_delete=models.DO_NOTHING,
+    conf = models.CharField(
+        choices=[
+            ('0', 'Не указано'),
+            ('1', 'Анонимно'),
+            ('2', 'Постановка на учет'),
+        ],
+                max_length=64,
+        verbose_name="Конфиденциальность"
     )
-    payment = models.ForeignKey(
-        'ServicesPayment',
-        on_delete=models.DO_NOTHING,
+    payment = models.CharField(
+        choices=[
+            ('0', 'Не указано'),
+            ('1', 'Платно'),
+            ('2', 'Бесплатно'),
+        ],
+        max_length=64,
+        verbose_name="Оплата"
     )
 
 

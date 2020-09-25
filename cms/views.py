@@ -180,11 +180,11 @@ def create_org(request):
         new_org.slug = request.GET['title']
         new_org.save()
         new_org.get_services.create(
-            conf_id=1,
-            org_type_id=1,
-            stuff_id=1,
-            payment_id=1,
-            organization_id=new_org.id
+            org_type_id=request.GET['org_type'],
+            organization_id=new_org.id,
+            conf='0',
+            stuff='0',
+            payment='0'
         )
         print(new_org.id)
         new_org.save()
