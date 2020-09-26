@@ -24,6 +24,9 @@
         ><span>{{link.title}}</span></a
       >
     {% endfor %}
+    {% if widget.org_button %}
+      <a class="btn" href="#local_orgs"><p>Организации</p></a>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

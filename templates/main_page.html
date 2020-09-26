@@ -46,6 +46,11 @@
           <div class="header__content__nav">
             <nav class="main-menu">
               <ul class="main-menu__links">
+                <li>
+                  <a class="link" href="{% url 'help_pdf' %}"
+                    ><span>Первая помощь</span></a
+                  >
+                </li>
                 {% for up_cat in up_cats %}
                 <li>
                   <a class="link" href="/{{up_cat.slug}}"

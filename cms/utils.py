@@ -3,11 +3,9 @@ import codecs
 from transliterate import translit
 import pickle
 import re
-from .forms import OrgForm, VacancyForm, EventForm
-from django.http import HttpResponse
 
 
-def fill_db(request=None):
+def fill_orgs(request=None):
     file = codecs.open('init_org.txt', encoding='utf-8', mode='r')
     text = file.readlines()
     buffer = {}
@@ -94,6 +92,25 @@ def fill_regions(request=None):
     return 'done regions and areas import'
 
 
+def fill_crb(request=None):
+    with open('output_crb.txt', 'rb') as f:
+        crb = pickle.load(f)
+    pre_city = City.objects.get(title='Тестбург')
+    for i in crb.values():
+        title = i['Организация здравоохранения']
+        tel = i['Контактный телефон']
+        adress = i['Адрес']
+        pre_slug = translit(title[:31], 'ru', reversed=True)
+        pre_slug = pre_slug.replace(' ', '_').replace(',', '').replace('.', '').replace(':', '').replace(';', '').replace(
+            '!', '').replace('"', '').replace("'", '').replace('?', '').replace('/', '').replace('|', '').replace('«',
+                                                                                                                  '').replace(
+            '»', '').replace('(', '').replace(')', '')
+        slug = check_slug(pre_slug)
+        Organizations.objects.create(city=pre_city, title=title, adress=adress, slug=slug, tel1=tel)
+
+    return 'done crb'
+
+
 def check_city(looknig_city):
     pre_city = re.sub(r'\w+\.', '', looknig_city).strip().capitalize()  # clear data from г.
     all_cityes = City.objects.all()
@@ -106,5 +123,7 @@ def check_city(looknig_city):
             title=pre_city
         )
         return new_city
+
+
 
 
