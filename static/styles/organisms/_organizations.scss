@@ -42,3 +42,29 @@
     padding-bottom: 500/1920 * 100%;
   }
 }
+
+@media (max-width: $lg) {
+  .organizations {
+    &__select {
+      &__item {
+        display: unset;
+        height: unset;
+
+        & > p {
+          width: 100%;
+          margin-right: 0;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    &__content {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &__map {
+      padding-bottom: 500/375 * 100%;
+    }
+  }
+}

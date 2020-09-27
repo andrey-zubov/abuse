@@ -68,7 +68,7 @@
 
     li {
       flex: 1;
-      
+
       &:not(:last-child) {
         border-right: 1px solid #e4e4e4;
       }
@@ -98,17 +98,17 @@
     }
 
     &__navigation {
-      border-radius: 0;
-      box-shadow: none;
+      // border-radius: 0;
+      // box-shadow: none;
       display: flex;
       flex-direction: column;
 
+      li:not(:last-child) {
+        border: none;
+      }
+
       .link {
         padding: 10px 35px;
-
-        &:not(:last-child) {
-          border: none;
-        }
       }
     }
   }

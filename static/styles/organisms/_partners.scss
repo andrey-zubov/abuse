@@ -55,3 +55,70 @@
     }
   }
 }
+
+@media (max-width: $lg) {
+  .partners {
+    padding: 60px 0;
+
+    &__title {
+      text-align: center;
+    }
+
+    &__navigation {
+      padding: 0 20px;
+
+      .main-menu__navigation {
+        grid-template-columns: repeat(3, 1fr);
+
+        .link {
+          padding: 20px 35px;
+        }
+
+        li:not(:last-child) {
+          border-bottom: 1px solid #e4e4e4;
+        }
+      }
+    }
+
+    &__content {
+      padding: 0 15px;
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+      display: none;
+
+      &--active {
+        opacity: 1;
+      }
+
+      .select2-container {
+        z-index: 0;
+        width: 100% !important;
+
+        &--open {
+          .select2-selection {
+            background: $silver;
+          }
+        }
+      }
+
+      .select2-selection {
+        background: $light-gray;
+        outline: none;
+        border: none;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 300;
+
+        &__placeholder {
+          color: #777 !important;
+        }
+      }
+    }
+  }
+}
