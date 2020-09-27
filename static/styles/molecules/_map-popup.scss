@@ -1,0 +1,21 @@
+.map-popup{
+    &__content{
+        width: 350px;
+    }
+
+    &__title{
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    &__description{
+    }
+}
+
+@media (max-width: $lg){
+    .map-popup{
+        &__content{
+            width: 250px;
+        }
+    }
+}
