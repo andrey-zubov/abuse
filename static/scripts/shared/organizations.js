@@ -213,8 +213,6 @@ export default class Organizations {
       .then((data) => {
         this.locations = data.orgs;
         this.initMap();
-
-        console.log(this.locations);
       })
       .catch((error) => {
         console.log("error");
