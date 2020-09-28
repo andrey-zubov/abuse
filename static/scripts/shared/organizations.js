@@ -33,7 +33,8 @@ export default class Organizations {
         "click",
         ((marker, i) => {
           return () => {
-            infowindow.setContent(markersArray[i].city);
+            const content = `<div class="map-popup"><div class="map-popup__content"><p class="map-popup__title">${markersArray[i].title}</p><p class="map-popup__description">${markersArray[i].adress}</p></div></div>`
+            infowindow.setContent(content);
             infowindow.open(this.map, marker);
           };
         })(marker, i)
@@ -45,14 +46,13 @@ export default class Organizations {
     for (var i = 0; i < this.firstArray.length; i++) {
       this.firstArray[i].setMap(null); //Remove the marker from the map
     }
-
     const activeMarkers = showMarkers.map((dataMapId) => {
       const m = this.markers.find(({ id }) => {
-        return id === +dataMapId;
+        return id === dataMapId;
       });
       return m;
     });
-
+    
     this.setMarkersOnMap(activeMarkers);
   }
 
@@ -130,7 +130,6 @@ export default class Organizations {
         }
       });
     }
-
     if (this.initMapInterval) {
       this.filterMarkers(showMarkers);
     }
@@ -214,6 +213,8 @@ export default class Organizations {
       .then((data) => {
         this.locations = data.orgs;
         this.initMap();
+
+        console.log(this.locations);
       })
       .catch((error) => {
         console.log("error");
