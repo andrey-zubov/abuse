@@ -105,9 +105,6 @@
           {% endfor %}
         </div>
 
-
-
-
         <div class="col-lg-3">
           <div class="information-side">
             <div class="information-block">
@@ -131,93 +128,12 @@
   {% endfor %}
 {% endblock %}
 
+{% block footer %}
+  {% for footer in feincms_page.content.footer %}
+    {{ footer.render }}
+  {% endfor %}
+{% endblock %}
 
-<footer class="footer footer--secondary">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-9">
-        <div class="footer__menu">
-          <div class="footer__menu-item">
-            <a class="link link--white" href="{% url 'help_pdf' %}"
-              ><p>Первая медицинская помощь</p></a
-            >
-            {% for cat in feincms_page.up_cats.all %}
-              <a class="link link--white" href="/{{cat.slug}}"><p>{{cat.title}}</p></a>
-            {% endfor %}
-
-            <a class="link link--white" href="/relapse/"><p>Срыв</p></a>
-            <a class="link link--white" href="/hiv-hepatitis/"
-              ><p>Вич/Гепатит</p></a
-            >
-            <a class="link link--white" href="http://pomogut.by/legal-info/"
-              ><p>Правовая информация</p></a
-            >
-          </div>
-          <div class="footer__menu-item">
-            {% for cat in feincms_page.down_cats.all %}
-              <a
-              class="link link--white"
-              href="/{{cat.slug}}"
-              ><p>{{cat.title}}</p></a
-            >
-            {% endfor %}
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/i-am-codependent/"
-              ><p>Мой близкий в проблеме</p></a
-            >
-            <a class="link link--white" href="https://abuse.pomogut.by/org/"
-              ><p>Я употребляю</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/i-am-on-remission/"
-              ><p>Я на ремиссии</p></a
-            >
-          </div>
-          <div class="footer__menu-item">
-            <a class="link link--white" href="/сareers/"
-              ><p>Центры занятости</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/events/"
-              ><p>Мероприятия</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/about/"
-              ><p>О проекте</p></a
-            >
-            <a
-              class="link link--white"
-              href="http://pomogut.by/to-partners/"
-              ><p>Стать партнером</p></a
-            >
-            <a
-              class="link link--white"
-              href="http://pomogut.by/about/#contacts"
-              ><p>Написать нам</p></a
-            >
-          </div>
-        </div>
-      </div>
-      <div class="offset-lg-1 col-lg-2">
-        <div class="footer__logos">
-          <div class="logo-item">
-            <img src="/static/images/logo-belhard.png" />
-          </div>
-          <div class="logo-item">
-            <img src="/static/images/AIPSIN-logo.png" />
-          </div>
-          <div class="logo-item">
-            <img src="/static/images/logo-un.png" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
 </body>
 
 </html>

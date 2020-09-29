@@ -39,6 +39,7 @@ Page.register_templates({
         ('main', _('Статьи')),
         ('sections', _('Нижнии секции')),
         ('right_sidebar', _('Правый сайдбар')),
+        ('footer', _('footer')),
     ),
 })
 
@@ -294,6 +295,26 @@ class FeedbackSection(models.Model):
 Page.create_content_type(FeedbackSection, regions=('sections',))
 
 
+class FooterSection(models.Model):
+    class Meta:
+        abstract = True
+
+    def render(self):
+        down_cats = Page.objects.filter(test_category='down')
+        up_cats = Page.objects.filter(test_category='up')
+
+        return render_to_string(
+            'widgets/footer_section.html',
+            context={
+                'widget': self,
+                'down_cats': down_cats,
+                'up_cats': up_cats
+            })
+
+
+Page.create_content_type(FooterSection, regions=('footer',))
+
+
 class Vacancy(models.Model):
     title = models.CharField(
         max_length=256,
@@ -462,50 +483,6 @@ class Partner(models.Model):
         null=True,
         blank=True,
     )
-
-
-# class Main_Cat(models.Model):
-#     class Meta:
-#         verbose_name = 'Главные категории'
-#         verbose_name_plural = 'Главные категории'
-#
-#     header_choices = [
-#         ('up', 'Верхний header'),
-#         ('down', 'Нижний header')
-#     ]
-#
-#     is_active = models.BooleanField(default=True)
-#     header_menu = models.CharField(
-#         verbose_name='Местоположение',
-#         choices=header_choices,
-#         max_length=256
-#     )
-#     slug = models.SlugField(
-#         verbose_name='слаг',
-#         null=True,
-#         blank=True
-#     )
-#     title = models.CharField(
-#         verbose_name='Название',
-#         max_length=50
-#     )
-#     help_widget = models.BooleanField(
-#         verbose_name='Отображать виджет "первая помощь"'
-#     )
-#     feedback_section = models.BooleanField(
-#         verbose_name='Отобразить секцию "обратная связь"'
-#     )
-#     org_widget = models.BooleanField(
-#         verbose_name='Отображать виджет организаций'
-#     )
-#     cross_link = models.ManyToManyField(
-#         'self',
-#         null=True,
-#         blank=True
-#     )
-#
-#     def __str__(self):
-#         return self.title
 
 
 class Organizations(models.Model):

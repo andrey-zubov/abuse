@@ -34,7 +34,7 @@
             </li>
             {% for category in up_cats %}
             <li>
-              <a class="link" href="/{{ category.slug }}"
+              <a class="link" href="{{ category.get_absolute_url }}"
               ><span>{{ category.title }}</span></a
               >
             </li>
@@ -48,7 +48,7 @@
             <li>
               <a
                 class="link link--blue"
-                href="/{{ category.slug }}"
+                href="{{ category.get_absolute_url }}"
               ><span>{{ category.title }}</span></a
               >
             </li>
@@ -82,7 +82,7 @@
                     <p class="news-item__description">
                       {{ n.content.main_news.0.text|safe|slice:":400" }}...
                     </p>
-                    <a class="news-item__button link link--blue" href="/{{ n.slug }}"
+                    <a class="news-item__button link link--blue" href="{{ n.get_absolute_url }}"
                       >Подробнее</a
                     >
                   </div>
