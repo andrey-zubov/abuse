@@ -64,20 +64,21 @@
   &__list {
     margin-left: 20px;
     margin-top: 20px;
+    list-style-type: disc;
 
     li {
-      position: relative;
+      // position: relative;
 
-      &:before {
-        content: "";
-        position: absolute;
-        background-color: $gray;
-        top: 7px;
-        left: -14px;
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-      }
+      // &:before {
+      //   content: "";
+      //   position: absolute;
+      //   background-color: $gray;
+      //   top: 7px;
+      //   left: -14px;
+      //   width: 4px;
+      //   height: 4px;
+      //   border-radius: 50%;
+      // }
     }
   }
 
