@@ -50,6 +50,8 @@ Page.create_content_type(RichTextContent, regions=('main_news',))
 class StandartArticle(models.Model):
     class Meta:
         abstract = True
+        verbose_name = 'Стандартная статья'
+        verbose_name_plural = 'Стандартные статья'
 
     title = models.CharField(
         verbose_name='Заголовок',
@@ -98,6 +100,9 @@ Page.create_content_type(StandartArticle, regions=('main',))
 class CalendarArticle(models.Model):
     class Meta:
         abstract = True
+        verbose_name = 'Статья с календарем'
+        verbose_name_plural = 'Стати с календарем'
+
 
     title = models.CharField(
         verbose_name='Заголовок',
@@ -114,8 +119,8 @@ class CalendarArticle(models.Model):
         blank=True
     )
 
-    def render(self):
 
+    def render(self):
         all_cityes = City.objects.all()
         all_events = Event.objects.filter(start_date__range=[datetime.date.today(), '2100-01-01',])
         return render_to_string(
@@ -131,11 +136,16 @@ Page.create_content_type(CalendarArticle, regions=('main',))
 class ParticipantWidget(models.Model):
     class Meta:
         abstract = True
+        verbose_name = 'Участники проекта'
+        verbose_name_plural = 'Участники проекта'
 
     title = models.CharField(
         verbose_name='заголовок',
         max_length=256
     )
+
+    def __str__(self):
+        return str(self.title)
 
     def render(self):
         partners = Partner.objects.all()
@@ -152,6 +162,8 @@ Page.create_content_type(ParticipantWidget, regions=('main',))
 class EmploymentArticle(models.Model):
     class Meta:
         abstract = True
+        verbose_name = 'Трудоустройство'
+        verbose_name_plural = 'Трудоустройство'
 
     title = models.CharField(
         verbose_name='заголовок',
@@ -179,7 +191,6 @@ class EmploymentArticle(models.Model):
     def render(self):
         all_cityes = City.objects.all()
         vacancies = Vacancy.objects.all()
-      #  orgs = Organizations.objects.filter(vacancies=True)
         return render_to_string(
             'widgets/employment_widget.html',
             context={'widget': self,
@@ -195,6 +206,8 @@ Page.create_content_type(EmploymentArticle, regions=('main',))
 class AccordeonArticle(models.Model):
     class Meta:
         abstract = True
+        verbose_name = 'Правовая информация'
+        verbose_name_plural = 'Правовая информация'
 
     title = models.CharField(
         max_length=256,
@@ -213,6 +226,7 @@ class AccordeonArticle(models.Model):
         blank=True
     )
 
+
     def render(self):
         faq = FAQ.objects.all()
         return render_to_string(
@@ -229,6 +243,8 @@ Page.create_content_type(AccordeonArticle, regions=('main',))
 class ArticlePicture(models.Model):
     class Meta:
         abstract = True
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображение'
 
     picture = MediaFileForeignKey(
         MediaFile,
@@ -253,6 +269,8 @@ Page.create_content_type(ArticlePicture, regions=('main_news',))
 class OrgSection(models.Model):
     class Meta:
         abstract = True
+        verbose_name = 'Секция организаций'
+        verbose_name_plural = 'Секция организаций'
 
     title = 'Организации'
 
@@ -283,6 +301,7 @@ Page.create_content_type(OrgSection, regions=('sections',))
 class FeedbackSection(models.Model):
     class Meta:
         abstract = True
+        verbose_name = 'Секция обратной связи'
 
     def render(self):
         return render_to_string(
@@ -298,6 +317,7 @@ Page.create_content_type(FeedbackSection, regions=('sections',))
 class FooterSection(models.Model):
     class Meta:
         abstract = True
+        verbose_name = 'секция Footer'
 
     def render(self):
         down_cats = Page.objects.filter(test_category='down')
@@ -316,6 +336,10 @@ Page.create_content_type(FooterSection, regions=('footer',))
 
 
 class Vacancy(models.Model):
+    class Meta:
+        verbose_name = 'Вакансия'
+        verbose_name_plural = "Вакансии"
+
     title = models.CharField(
         max_length=256,
     )
@@ -354,8 +378,15 @@ class Vacancy(models.Model):
     )
     email = models.EmailField()
 
+    def __str__(self):
+        return str(self.title)
+
 
 class Event(models.Model):
+    class Meta:
+        verbose_name = 'Мероприятие'
+        verbose_name_plural = "Мероприятия"
+
     title = models.CharField(
         max_length=256
     )
@@ -373,9 +404,6 @@ class Event(models.Model):
             ('6', 'Отдых'),
             ('7', 'Профориентация'),
             ('8', 'Тренинги'),
-
-
-
         ],
         max_length=32
     )
@@ -397,15 +425,29 @@ class Event(models.Model):
         verbose_name="Контактное лицо"
     )
 
+    def __str__(self):
+        return str(self.title)
+
 
 class FAQ(models.Model):
+    class Meta:
+        verbose_name = 'Пункт правовой инофрмации (FAQ)'
+        verbose_name_plural = "Пункты правовой инофрмации (FAQ)"
+
     title = models.CharField(
         max_length=256,
         verbose_name='пункт FAQ'
     )
 
+    def __str__(self):
+        return str(self.title)
+
 
 class FAQlist(models.Model):
+    class Meta:
+        verbose_name = 'Статья'
+        verbose_name_plural = "Статьи"
+
     article = models.ForeignKey(
         FAQ,
         on_delete=models.CASCADE,
@@ -416,6 +458,9 @@ class FAQlist(models.Model):
     text = models.TextField(
         verbose_name='Содержимое статьи'
     )
+
+    def __str__(self):
+        return str(self.title)
 
 
 class Link(models.Model):
@@ -457,6 +502,9 @@ class Link(models.Model):
 
 
 class HelpFile(models.Model):
+    class Meta:
+        verbose_name = 'Файл первой медицинской помощи'
+
     file = models.FileField(
         verbose_name='Файл',
         null=True,
@@ -467,8 +515,18 @@ class HelpFile(models.Model):
     def get_file(self):
         return join(settings.MEDIA_URL, str(self.file.file))
 
+    def save(self, *args, **kwargs):
+        if HelpFile.objects.filter().exists():
+            raise ValidationError('Только один PDF-файл можно использовать в качестве помощи')
+        else:
+            super().save(*args, **kwargs)
+
 
 class Partner(models.Model):
+    class Meta:
+        verbose_name = 'Партнер'
+        verbose_name_plural = "Партнеры"
+
     title = models.CharField(
         verbose_name='Наименование',
         max_length=256
@@ -483,6 +541,8 @@ class Partner(models.Model):
         null=True,
         blank=True,
     )
+    def __str__(self):
+        return str(self.title)
 
 
 class Organizations(models.Model):
@@ -581,7 +641,7 @@ class Organizations(models.Model):
         }
         r = requests.get(url, params=params)
         results = r.json()['results']
-        if results != []:
+        if results:
             location = results[0]['geometry']['location']
             self.lat, self.lng = location['lat'], location['lng']
         super().save(*args, **kwargs)
@@ -598,6 +658,8 @@ class Region(models.Model):
     title = models.CharField(
         max_length=256
     )
+    def __str__(self):
+        return str(self.title)
 
 
 class Area(models.Model):
@@ -634,11 +696,15 @@ class City(models.Model):
         max_length=50,
         verbose_name='Населенный пункт'
     )
+
     def __str__(self):
         return self.title
 
 
 class OrganizationServices(models.Model):
+    class Meta:
+        verbose_name = 'Услуги организации'
+
     organization = models.ForeignKey(
         Organizations,
         on_delete=models.CASCADE,
@@ -687,45 +753,7 @@ class ServicesType(models.Model):
         max_length=50,
         unique=True
     )
-    def __str__(self):
-        return self.title
 
-
-class ServicesStuff(models.Model):
-    class Meta:
-        verbose_name = 'Вещество'
-        verbose_name_plural = 'Вещества'
-
-    title = models.CharField(
-        max_length=50,
-        unique=True
-    )
-    def __str__(self):
-        return self.title
-
-
-class ServicesConf(models.Model):
-    class Meta:
-        verbose_name = 'Конфиденциальнось'
-        verbose_name_plural = 'Конфиденциальнось'
-
-    title = models.CharField(
-        max_length=50,
-        unique=True
-    )
-    def __str__(self):
-        return self.title
-
-
-class ServicesPayment(models.Model):
-    class Meta:
-        verbose_name = 'Оплата услуг'
-        verbose_name_plural = 'Оплата услуг'
-
-    title = models.CharField(
-        max_length=50,
-        unique=True
-    )
     def __str__(self):
         return self.title
 
@@ -805,8 +833,6 @@ class NewsImageExtension(Extension):
 Page.register_extensions(NewsImageExtension)
 
 
-
-
 class NewsSourceExtension(Extension):
     def handle_model(self):
         self.model.add_to_class(
@@ -832,7 +858,9 @@ Page.register_extensions(NewsSourceExtension)
 # опросник
 class QuizWidget(models.Model):
     class Meta:
-        abstract=True
+        abstract = True
+        verbose_name = 'Опрос'
+        verbose_name_plural = 'Опросы'
 
     title = models.CharField(
         verbose_name='Заголовок блока',
@@ -855,11 +883,15 @@ class QuizWidget(models.Model):
                 'quiz': quiz
             })
 
+
 Page.create_content_type(QuizWidget, regions=('right_sidebar',))
 
 
-
 class Question(models.Model):
+    class Meta:
+        verbose_name = 'Опрос'
+        verbose_name_plural = 'Опросы'
+
     title = models.CharField(
         verbose_name='вопрос',
         max_length=150
@@ -868,6 +900,7 @@ class Question(models.Model):
         verbose_name='Опрос активен',
         default=True
     )
+
     def __str__(self):
         answers = Answer.objects.filter(question=self)
         choices = [i.title for i in self.get_choices()]
@@ -905,6 +938,10 @@ class Question(models.Model):
 
 
 class Choice(models.Model):
+    class Meta:
+        verbose_name = 'Вариант ответа'
+        verbose_name_plural = 'Варианты ответов'
+
     question = models.ForeignKey(
         Question,
         on_delete=models.CASCADE,
@@ -913,11 +950,16 @@ class Choice(models.Model):
         verbose_name='Вариант для ответа',
         max_length=150
     )
+
     def __str__(self):
         return self.title
 
 
 class Answer(models.Model):
+    class Meta:
+        verbose_name = 'Ответ'
+        verbose_name_plural = 'Ответы'
+
     question = models.ForeignKey(
         Question,
         on_delete=models.CASCADE,
@@ -929,4 +971,3 @@ class Answer(models.Model):
 
     def __str__(self):
         return f'{self.question.title}: {self.choice.title}'
-

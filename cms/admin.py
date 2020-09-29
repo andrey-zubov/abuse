@@ -2,10 +2,7 @@ from django.contrib import admin
 from .models import (
     Link,
     Organizations,
-    ServicesStuff,
     ServicesType,
-    ServicesConf,
-    ServicesPayment,
     OrganizationServices,
     City,
     Question,
@@ -54,9 +51,6 @@ admin.site.register(Organizations, OrganizationAdmin)
 
 admin.site.register(City)
 admin.site.register(ServicesType)
-admin.site.register(ServicesConf)
-admin.site.register(ServicesPayment)
-admin.site.register(ServicesStuff)
 
 admin.site.register(HelpFile)
 
