@@ -175,7 +175,16 @@
         max-width: 200px;
       }
 
-      #{$self}__title,
+      #{$self}__title {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: $md) {
+  .header {
+    &--secondary {
       #{$self}__phone {
         display: none;
       }
