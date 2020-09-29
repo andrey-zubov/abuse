@@ -100,3 +100,11 @@
     border: none;
   }
 }
+
+@media (max-width: $lg) {
+  .article {
+    &:nth-of-type(1) {
+      margin-top: 20px;
+    }
+  }
+}
