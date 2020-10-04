@@ -184,6 +184,8 @@
 
 @media (max-width: $md) {
   .header {
+    $self: &;
+
     &--secondary {
       #{$self}__phone {
         display: none;
