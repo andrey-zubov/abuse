@@ -141,12 +141,12 @@
           width: 100%;
           text-align: center;
 
-          &:before {
-            content: none;
-          }
-
           &:not(:first-child) {
             margin-top: 30px;
+
+            &:before {
+              content: none;
+            }
           }
 
           .desc {
