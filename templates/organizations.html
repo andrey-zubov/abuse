@@ -1,229 +1,390 @@
-{% extends 'widgets/refactor_art.html' %}
-  {% block side_bar %}
-  <div class="col-lg-3">
-    <div class="side-menu">
-      <div class="side-menu__content">
-        <div class="side-menu__links side-menu__links--main">
-          {% if feincms_page.show_help %}
-            <a class="link link--medium-blue" href="{% url 'help_pdf' %}"
-              ><p>Первая помощь</p></a
-            >
-          {% endif %}
-          {% for link in feincms_page.cross_link.all %}
-            <a class="link link--medium-blue" href="/{{link.slug}}"
-              ><p>{{link.title}}</p></a
-            >
-          {% endfor %}
-        </div>
-        <div class="side-menu__links">
-          {% for i in feincms_page.content.main %}
-            <a class="link link--green" href="#{{ i.title }}"><p>{{ i.title }}</p></a>
-          {% endfor %}
-          {% for i in feincms_page.content.sections %}
-            {% if i.title %}
-              <a class="link link--green" href="#{{i.title}}"><p>{{i.title}}</p></a>
-            {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
 
-{% block content %}
-  <div class="col-lg-6">
-    <div class="article article__organization">
-      <div class="article__image-wrapper aspect-ratio">
-        <img src="https://via.placeholder.com/1140x764" alt="" />
-        <a class="article__image-caption" href="/" target="__blank">
-          <p>
-            {{org.title}}
-          </p>
+    <!-- {% load compress %}-->
+
+    <!-- {% compress css %}-->
+    <!--        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">-->
+    <!--    {% endcompress %}-->
+
+    <link
+      type="text/css"
+      href="/static/styles/index.min.css"
+      rel="stylesheet"
+      media="screen"
+    />
+
+    <script type="module" src="/static/scripts/index.js"></script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(67440172, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/67440172" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <title>{{org.title}}</title>
+  </head>
+<body>
+
+<header class="header header--secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <a href="{% url 'main_page' %}" class="header__logo">
+          <img src="/static/images/logo.png" />
         </a>
       </div>
-      <div class="article__organization__info">
-        <div class="article__organization__info__item">
-          <div class="article__organization__info__desc">
-            <div class="icon-wrapper">
-              <i class="icon-map-marker-green"></i>
-            </div>
-            <p>Расположение</p>
-          </div>
-          <div class="article__organization__info__content">
-            <span>{{org.adress}}</span>
-          </div>
+      <div class="col-lg-6">
+        <div class="header__title">
+          <h2 class="headline-2">{{org.title}} - pomogut.by</h2>
         </div>
-        <div class="article__organization__info__item">
-          {% if org.organizationservices_set.all %}
-            <div class="article__organization__info__desc">
-              <div class="icon-wrapper"><i class="icon-card"></i></div>
-              <p>Услуги</p>
-            </div>
-            <div class="article__organization__info__content">
-              <ul>
-                {% for l in org.organizationservices_set.all %}
-                  <li><span>{{l.org_type.title}}</span></li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
-        </div>
+      </div>
+      <div class="col-lg-3">
+        <a class="header__phone" href="tel:+375173110000"
+          ><p>+ 375 17 311 00 00</p></a
+        >
       </div>
     </div>
   </div>
+</header>
 
-  <div class="col-lg-3">
-    <div class="information-side">
-      <div class="information-block">
-        <div class="quiz">
-          <h1 class="information-block__title headline-1">Анкеты</h1>
-            <div class="information-block__text">
-              <p><strong>{{widget.title}}</strong></p>
-                {{widget.text|safe}}
+<section class="main">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+          <div class="side-menu">
+            <div class="side-menu__content">
+              <div class="side-menu__links side-menu__links--main">
+                {% if org_settings.show_help %}
+                  <a class="link link--medium-blue" href="{% url 'help_pdf' %}"
+                    ><p>Первая помощь</p></a
+                  >
+                {% endif %}
+                {% for link in org_settings.side_links.all %}
+                  <a class="link link--medium-blue" href="/{{link.slug}}"
+                    ><p>{{link.title}}</p></a
+                  >
+                {% endfor %}
+              </div>
+              <div class="side-menu__links">
+                <a class="link link--green" href="#{{org.title}}"><p>Общая информация</p></a>
+                <a class="link link--green" href="#about_us"><p>О нас</p></a>
+              </div>
             </div>
-            <div class="quiz-item">
-              <br>
-            {% for q in quiz %}
-            <form id="form_{{q.id}}" class="form_quiz" name="question_form" action="{% url 'get_answer' %}">
-              <input hidden name="answer_for" value="{{q.title}}">
-              <p class="quiz-item__title">
-                {{q.title}}
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="article article__organization">
+            <div class="article__image-wrapper aspect-ratio">
+              <img src="https://via.placeholder.com/1140x764" alt="" />
+              {% if org.website %}
+                <a class="article__image-caption" href="{{org.website}}" target="__blank" name="{{ org.title }}">
+                  <p>
+                  {{org.title}}
+                  </p>
+                </a>
+              {% else %}
+                <a class="article__image-caption" name="{{ org.title }}">
+                  <p>
+                  {{org.title}}
+                  </p>
+                </a>
+              {% endif %}
+            </div>
+            <div class="article__organization__info">
+              <div class="article__organization__info__item">
+                <div class="article__organization__info__desc">
+                  <div class="icon-wrapper">
+                    <i class="icon-map-marker-green"></i>
+                  </div>
+                  <p>Расположение</p>
+                </div>
+                <div class="article__organization__info__content">
+                  <span>{{org.adress}}</span>
+                </div>
+              </div>
+              <div class="article__organization__info__item">
+                {% if org.organizationservices_set.all %}
+                  <div class="article__organization__info__desc">
+                    <div class="icon-wrapper"><i class="icon-card"></i></div>
+                    <p>Услуги</p>
+                  </div>
+                  <div class="article__organization__info__content">
+                    <ul>
+                      {% for l in org.organizationservices_set.all %}
+                        <li><span>{{l.org_type.title}}</span></li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <a name="about_us"></a>
+            <div class="article__description">
+              <h1 class="article__title headline-1">О нас</h1>
+              <p>
+                {% if org.desctiption %}
+                  {{org.desctiption}}
+                {% else %}
+                  {{ org.title }}
+                {% endif %}
               </p>
-              <div class="quiz-item__content">
-                {% for choice in q.get_choices %}
-                  <div class="quiz-item__radio">
-                    <p>
-                      <input
-                      type="radio"
-                      name="{{q.title}}"
-                      value="{{choice}}"
-                      id="{{choice.id}}"
-                      />
-                      <label for="{{choice.id}}">{{choice.title}}</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="information-side">
+            <div class="information-block">
+              <div class="quiz">
+                <h1 class="information-block__title headline-1">Анкеты</h1>
+<!--                  <div class="information-block__text">-->
+<!--                    <p><strong>{{widget.title}}</strong></p>-->
+<!--                      {{widget.text|safe}}-->
+<!--                  </div>-->
+                  <div class="quiz-item">
+                    <br>
+                  {% for q in quiz %}
+                  <form id="form_{{q.id}}" class="form_quiz" name="question_form" action="{% url 'get_answer' %}">
+                    <input hidden name="answer_for" value="{{q.title}}">
+                    <p class="quiz-item__title">
+                      {{q.title}}
                     </p>
+                    <div class="quiz-item__content">
+                      {% for choice in q.get_choices %}
+                        <div class="quiz-item__radio">
+                          <p>
+                            <input
+                            type="radio"
+                            name="{{q.title}}"
+                            value="{{choice}}"
+                            id="{{choice.id}}"
+                            />
+                            <label for="{{choice.id}}">{{choice.title}}</label>
+                          </p>
+                        </div>
+                      {% endfor %}
+
+                      <button
+                        type="submit"
+                        class="quiz-item__button btn quiz-item__button"
+                        id="button_{{q.id}}"
+                        name="submit_answer"
+                      >
+                        Голосовать
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      class="quiz-item__button quiz-item__button--transparent"
+                      id="show_form_{{q.id}}"
+                    >
+                      Показать результаты
+                    </button>
+                  </form>
+                  <div id="res_form_{{q.id}}" style="display: none" class="quiz-item quiz-item--done">
+                    <div class="quiz-item__content">
+                      <div class="quiz-item__result">
+                        {% for answ, res in q.get_percent.items %}
+                          <p class="quiz-item__result__title">
+                              {{answ}} ({{res.0}}%, {{res.1}} голосов) (72%, 129 голосов)
+                            </p>
+                            <div
+                              class="quiz-item__result__progress"
+                              style="width: {{res.0}}%"
+                            ></div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    <div class="quiz-item__all">
+                      <p>Всего проголосовавших:<strong>{{q.get_amount.all}}</strong></p>
+                    </div>
                   </div>
                 {% endfor %}
-
-                <button
-                  type="submit"
-                  class="quiz-item__button btn quiz-item__button"
-                  id="button_{{q.id}}"
-                  name="submit_answer"
-                >
-                  Голосовать
-                </button>
-              </div>
-              <button
-                type="button"
-                class="quiz-item__button quiz-item__button--transparent"
-                id="show_form_{{q.id}}"
-              >
-                Показать результаты
-              </button>
-            </form>
-            <div id="res_form_{{q.id}}" style="display: none" class="quiz-item quiz-item--done">
-              <div class="quiz-item__content">
-                <div class="quiz-item__result">
-                  {% for answ, res in q.get_percent.items %}
-                    <p class="quiz-item__result__title">
-                        {{answ}} ({{res.0}}%, {{res.1}} голосов) (72%, 129 голосов)
-                      </p>
-                      <div
-                        class="quiz-item__result__progress"
-                        style="width: {{res.0}}%"
-                      ></div>
-                  {% endfor %}
                 </div>
               </div>
-              <div class="quiz-item__all">
-                <p>Всего проголосовавших:<strong>{{q.get_amount.all}}</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="organizations__map">
+          <div class="organizations__map-contact">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <div class="organizations__map-contact__content">
+                    <div class="organizations__map-contact__item">
+                      <p class="title">Адрес</p>
+                      <div class="desc">
+                        <p>{{org.adress}}</p>
+                      </div>
+                    </div>
+                    <div class="organizations__map-contact__item">
+                      <p class="title">Время работы</p>
+                      {% if org.working_hours %}
+                        <div class="desc">
+                          <p>{{org.working_hours}}</p>
+                        </div>
+                      {% endif %}
+                    </div>
+                    <div class="organizations__map-contact__item">
+                      <p class="title">Телефоны</p>
+                      {% if org.tel1 %}
+                        <div class="desc">
+                          <a href="tel:{{org.tel1}}"><p>{{org.tel1}}</p></a>
+                        </div>
+                      {% endif %}
+                      {% if org.tel2 %}
+                        <div class="desc">
+                          <a href="tel:{{org.tel2}}"><p>{{org.tel2}}</p></a>
+                        </div>
+                      {% endif %}
+                      {% if org.tel3 %}
+                        <div class="desc">
+                          <a href="tel:{{org.tel3}}"><p>{{org.tel3}}</p></a>
+                        </div>
+                      {% endif %}
+                    </div>
+                    <div class="organizations__map-contact__item">
+                      <p class="title">Сайт</p>
+                      {% if org.website %}
+                        <div class="desc">
+                          <a href="/" target="__blank"
+                            ><p>{{org.website}}</p></a
+                          >
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          {% endfor %}
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="feedback">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="feedback__item">
+          <h2 class="feedback__item__title headline-1">Заказать звонок</h2>
+          <div class="feedback__content">
+            <input
+              class="feedback__content__input"
+              type="text"
+              placeholder="Ваше имя"
+              required
+            />
+            <input
+              class="feedback__content__input"
+              type="text"
+              placeholder="Ваш номер телефона"
+              required
+            />
+            <button type="button" class="btn">Отправить</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 offset-lg-1">
+        <div class="feedback__item">
+          <h2 class="feedback__item__title headline-1">Напишите нам</h2>
+          <div class="feedback__content">
+            <textarea
+              class="feedback__content__input"
+              placeholder="Текст сообщения"
+              required
+            ></textarea>
+            <button type="button" class="btn">Отправить</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="organizations__map">
-    <div class="organizations__map-contact">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="organizations__map-contact__content">
-              <div class="organizations__map-contact__item">
-                <p class="title">Адрес</p>
-                <div class="desc">
-                  <p>{{org.adress}}</p>
-                </div>
-              </div>
-              <div class="organizations__map-contact__item">
-                <p class="title">Время работы</p>
-                {% if org.working_hours %}
-                  <div class="desc">
-                    <p>{{org.working_hours}}</p>
-                  </div>
-                {% endif %}
-              </div>
-              <div class="organizations__map-contact__item">
-                <p class="title">Телефоны</p>
-                {% if org.tel1 %}
-                  <div class="desc">
-                    <a href="tel:{{org.tel1}}"><p>{{org.tel1}}</p></a>
-                  </div>
-                {% endif %}
-                {% if org.tel2 %}
-                  <div class="desc">
-                    <a href="tel:{{org.tel2}}"><p>{{org.tel2}}</p></a>
-                  </div>
-                {% endif %}
-                {% if org.tel3 %}
-                  <div class="desc">
-                    <a href="tel:{{org.tel3}}"><p>{{org.tel3}}</p></a>
-                  </div>
-                {% endif %}
-              </div>
-              <div class="organizations__map-contact__item">
-                <p class="title">Сайт</p>
-                {% if org.website %}
-                  <div class="desc">
-                    <a href="/" target="__blank"
-                      ><p>{{org.website}}</p></a
-                    >
-                  </div>
-                {% endif %}
-              </div>
-            </div>
+<footer class="footer footer--secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="footer__menu">
+          <div class="footer__menu-item">
+            <a class="link link--white" href="{% url 'help_pdf' %}"
+              ><p>Первая медицинская помощь</p></a
+            >
+            {% for cat in up_cats %}
+              <a class="link link--white" href="{{cat.get_absolute_url}}"><p>{{cat.title}}</p></a>
+            {% endfor %}
+          </div>
+
+          <div class="footer__menu-item">
+            {% for cat in down_cats %}
+              <a
+              class="link link--white"
+              href="{{cat.get_absolute_url}}"
+              ><p>{{cat.title}}</p></a
+            >
+            {% endfor %}
+          </div>
+          <div class="footer__menu-item">
+<!--            <a class="link link&#45;&#45;white" href="/сareers/"-->
+<!--              ><p>Центры занятости</p></a-->
+<!--            >-->
+
+            <a
+              class="link link--white"
+              href="/abuse/about/"
+              ><p>О проекте</p></a
+            >
+            <a
+              class="link link--white"
+              href="/abuse/to-partners/"
+              ><p>Стать партнером</p></a
+            >
+            <a
+              class="link link--white"
+              href="/abuse/about/"
+              ><p>Написать нам</p></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="offset-lg-1 col-lg-2">
+        <div class="footer__logos">
+          <div class="logo-item">
+            <img src="/static/images/logo-belhard.png" />
+          </div>
+          <div class="logo-item">
+            <img src="/static/images/AIPSIN-logo.png" />
+          </div>
+          <div class="logo-item">
+            <img src="/static/images/logo-un.png" />
           </div>
         </div>
       </div>
     </div>
   </div>
-  <script src="/static/js/jquery-3.5.1.min.js"></script>
-  <script>
-    $('document').ready(function () {
-        console.log('test')
-        $('.quiz-item__button--transparent').on('click', function () {
-            form_id = this.id.slice(5)
-            console.log(form_id);
-            $('#res_' + form_id).toggle();
+</footer>
 
-        });
+</body>
 
-        $('.form_quiz').submit(function(fun){
-            fun.preventDefault();
-            form_id = this.id;
-            $.ajax({
-              url: '{% url 'get_answer' %}',
-              data: $('#' + form_id).serialize(),
-              success: function(){
-                  $('#' + form_id).toggle();
-                  $('#res_' + form_id).toggle();
-              }
-            });
-        });
-    })
-  </script>
-{% endblock %}
-
+</html>

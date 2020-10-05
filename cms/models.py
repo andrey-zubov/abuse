@@ -971,3 +971,18 @@ class Answer(models.Model):
 
     def __str__(self):
         return f'{self.question.title}: {self.choice.title}'
+
+
+class OrgTemplate(models.Model):
+    class Meta:
+        verbose_name = 'Шаблон страницы организаций'
+        verbose_name_plural = 'Шаблон страницы организаций'
+
+    show_help = models.BooleanField(
+        verbose_name='Первая помощь',
+        default=True
+    )
+    side_links = models.ManyToManyField(
+        Page,
+        blank=True
+    )

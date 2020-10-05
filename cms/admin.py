@@ -15,7 +15,8 @@ from .models import (
     Event,
     Partner,
     Region,
-    Area
+    Area,
+    OrgTemplate
 )
 
 
@@ -48,7 +49,6 @@ class FAQAdmin(admin.ModelAdmin):
 admin.site.register(Link)
 admin.site.register(Organizations, OrganizationAdmin)
 
-
 admin.site.register(City)
 admin.site.register(ServicesType)
 
@@ -66,3 +66,5 @@ admin.site.register(Partner)
 
 admin.site.register(Region)
 admin.site.register(Area)
+
+admin.site.register(OrgTemplate)
