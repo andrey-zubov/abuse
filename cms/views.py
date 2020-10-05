@@ -103,11 +103,15 @@ def faq(request):
 
 def org_info(request, slug):
     org = Organizations.objects.get(slug=slug)
+    all_quiz = Question.objects.filter(is_active=True)
 
     return render(
         request,
         template_name='organizations.html',
-        context={'org': org}
+        context={
+            'org': org,
+            'quiz': all_quiz
+        }
     )
 
 

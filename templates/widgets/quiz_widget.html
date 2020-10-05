@@ -49,7 +49,7 @@
         <div class="quiz-item__result">
           {% for answ, res in q.get_percent.items %}
             <p class="quiz-item__result__title">
-                {{answ}} ({{res.0}}%, {{res.1}} голосов) (72%, 129 голосов)
+                {{answ}} ({{res.0}}%, {{res.1}} голосов)
               </p>
               <div
                 class="quiz-item__result__progress"
@@ -79,7 +79,7 @@
           fun.preventDefault();
           form_id = this.id;
           $.ajax({
-            url: '/get_answer/',
+            url: '{% url 'get_answer' %}',
             data: $('#' + form_id).serialize(),
             success: function(){
                 $('#' + form_id).toggle();
