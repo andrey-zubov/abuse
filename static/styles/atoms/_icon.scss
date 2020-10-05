@@ -29,8 +29,20 @@
   height: 20px;
 }
 
+.icon-map-marker-green {
+  background-image: url($icons + "/map-marker-green.svg");
+  width: 15px;
+  height: 25px;
+}
+
 .icon-clock {
   background-image: url($icons + "/clock.svg");
   width: 15px;
   height: 15px;
+}
+
+.icon-card {
+  background-image: url($icons + "/card.svg");
+  width: 22px;
+  height: 25px;
 }
