@@ -92,7 +92,11 @@
         <div class="col-lg-6">
           <div class="article article__organization">
             <div class="article__image-wrapper aspect-ratio">
-              <img src="https://via.placeholder.com/1140x764" alt="" />
+              {% if org.picture %}
+                <img src="{{org.get_img}}" alt="" />
+              {% else %}
+                <img src="/static/images/hands.png" alt="" />
+              {% endif %}
               {% if org.website %}
                 <a class="article__image-caption" href="{{org.website}}" target="__blank" name="{{ org.title }}">
                   <p>

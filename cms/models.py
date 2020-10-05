@@ -563,6 +563,13 @@ class Organizations(models.Model):
         verbose_name='Слаг',
         unique=True
     )
+    picture = MediaFileForeignKey(
+        MediaFile,
+        on_delete=models.SET_NULL,
+        verbose_name='Картинка',
+        null=True,
+        blank=True,
+    )
     working_hours = models.CharField(
         verbose_name='Время работы',
         max_length=128,
@@ -627,6 +634,9 @@ class Organizations(models.Model):
     @property
     def get_services(self):
         return self.organizationservices_set.all()
+
+    def get_img(self):
+        return join(settings.MEDIA_URL, str(self.picture.file))
 
     def save(self, *args, **kwargs):
         if str(self.city).lower() in str(self.adress).lower():
