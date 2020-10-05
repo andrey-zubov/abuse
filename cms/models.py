@@ -45,6 +45,7 @@ Page.register_templates({
 
 
 Page.create_content_type(RichTextContent, regions=('main_news',))
+Page.register_extensions('feincms.extensions.ct_tracker')
 
 
 class StandartArticle(models.Model):
