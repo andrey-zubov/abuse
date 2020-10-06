@@ -16,7 +16,22 @@
 
     <script type="module" src="/static/scripts/index.js"></script>
 
-    <title>Test page</title>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(67440172, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/67440172" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <title>Партнерам - Pomogut.by</title>
   </head>
 <body>
 <section class="partners">
@@ -332,12 +347,13 @@
   $('document').ready(function () {
       $('#add_org_form').submit(function(fun){
           fun.preventDefault();
+          alert('test')
           form_id = this.id;
           $.ajax({
-            url: '/create_org/',
+            url: '{% url "create_org"%}',
             data: $('#' + form_id).serialize(),
             success: function(){
-                console.log('suc');
+                console.log('done');
             }
           });
       });
@@ -346,10 +362,10 @@
           fun.preventDefault();
           form_id = this.id;
           $.ajax({
-            url: '/create_vac/',
+            url: '{% url "create_vacancy"%}',
             data: $('#' + form_id).serialize(),
             success: function(){
-                console.log('suc');
+                console.log('done');
             }
           });
       });
@@ -358,10 +374,10 @@
           fun.preventDefault();
           form_id = this.id;
           $.ajax({
-            url: '/create_event/',
+            url: '{% url "create_event"%}',
             data: $('#' + form_id).serialize(),
             success: function(){
-                console.log('suc');
+                console.log('done');
             }
           });
       });

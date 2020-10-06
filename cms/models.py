@@ -997,3 +997,41 @@ class OrgTemplate(models.Model):
         Page,
         blank=True
     )
+
+
+class Feedback(models.Model):
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+    text = models.TextField(
+        verbose_name='Текст обратной связи'
+    )
+    creation_date = models.DateTimeField(
+        verbose_name='Время и дата создания',
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f'{self.creation_date.strftime("%H:%M - %d.%m.%Y")}: {self.text[:32]}'
+
+
+class BackCall(models.Model):
+    class Meta:
+        verbose_name = 'Обратный звонок'
+        verbose_name_plural = 'Обратные звоноки'
+
+    name = models.CharField(
+        verbose_name='Имя',
+        max_length=256,
+    )
+    tel = models.CharField(
+        verbose_name='Телефон',
+        max_length=64
+    )
+    creation_date = models.DateTimeField(
+        verbose_name='Время и дата создания',
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return f'{self.creation_date.strftime("%H:%M - %d.%m.%Y")}: {self.name}'

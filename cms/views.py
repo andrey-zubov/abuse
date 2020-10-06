@@ -15,7 +15,9 @@ from .models import (
     Answer,
     HelpFile,
     FAQ,
-    OrgTemplate
+    OrgTemplate,
+    Feedback,
+    BackCall
 )
 
 
@@ -117,6 +119,7 @@ def add_new_org(request):
 
 
 def create_org(request):  # ajax
+
     org_type = ServicesType.objects.get(
         id=request.GET['org_type']
     )
@@ -135,11 +138,9 @@ def create_org(request):  # ajax
             payment='0'
         )
         new_org.save()
-
         return HttpResponse('save')
     else:
-        return HttpResponse('fail')
-
+        print(form.errors)
 
 
 def create_vac(request):  # ajax
@@ -149,10 +150,8 @@ def create_vac(request):  # ajax
         new_vac.city = check_city(request.GET['pre_city'])
         new_vac.save()
         return HttpResponse('save')
-
     else:
         print(vac_form.errors)
-        return HttpResponse('fail')
 
 
 def create_event(request):  # ajax
@@ -166,7 +165,22 @@ def create_event(request):  # ajax
         return HttpResponse('save')
     else:
         print(event_form.errors)
-        return HttpResponse('fail')
+
+
+def create_feedback(request):  # ajax
+    print(request.GET)
+    if request.GET.__contains__('message_text'):
+        print('msg')
+        Feedback.objects.create(
+            text=request.GET['message_text']
+        )
+    elif request.GET.__contains__('cal_tel'):
+        BackCall.objects.create(
+            name=request.GET['cal_name'],
+            tel=request.GET['cal_tel']
+        )
+    return HttpResponse(1)
+
 
 
 

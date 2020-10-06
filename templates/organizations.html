@@ -293,33 +293,40 @@
         <div class="feedback__item">
           <h2 class="feedback__item__title headline-1">Заказать звонок</h2>
           <div class="feedback__content">
-            <input
-              class="feedback__content__input"
-              type="text"
-              placeholder="Ваше имя"
-              required
-            />
-            <input
-              class="feedback__content__input"
-              type="text"
-              placeholder="Ваш номер телефона"
-              required
-            />
-            <button type="button" class="btn">Отправить</button>
+            <form id="cal" class="form_feedback">
+              <input
+                class="feedback__content__input"
+                type="text"
+                placeholder="Ваше имя"
+                required
+                name="cal_name"
+              />
+              <input
+                class="feedback__content__input"
+                type="text"
+                placeholder="Ваш номер телефона"
+                required
+                name="cal_tel"
+              />
+              <button type="submit" class="btn">Отправить</button>
+            </form>
           </div>
         </div>
       </div>
       <div class="col-lg-4 offset-lg-1">
         <div class="feedback__item">
-          <h2 class="feedback__item__title headline-1">Напишите нам</h2>
-          <div class="feedback__content">
-            <textarea
-              class="feedback__content__input"
-              placeholder="Текст сообщения"
-              required
-            ></textarea>
-            <button type="button" class="btn">Отправить</button>
-          </div>
+          <form id="message" class="form_feedback">
+            <h2 class="feedback__item__title headline-1">Напишите нам</h2>
+            <div class="feedback__content">
+              <textarea
+                class="feedback__content__input"
+                placeholder="Текст сообщения"
+                required
+                name="message_text"
+              ></textarea>
+              <button type="submit" class="btn">Отправить</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -390,5 +397,42 @@
 </footer>
 
 </body>
+<script src="/static/js/jquery-3.5.1.min.js"></script>
+<script>
+  $('document').ready(function (fun) {
+      $('.form_feedback').submit(function (fun) {
+        fun.preventDefault();
+        form_id = this.id;
+        $.ajax({
+          url: "{% url 'create_feedback' %}",
+            data: $('#' + form_id).serialize(),
+            success: function(){
+              console.log('done');
+            }
+        });
+      });
+
+
+      $('.quiz-item__button--transparent').on('click', function () {
+          form_id = this.id.slice(5)
+          $('#res_' + form_id).toggle();
+
+      });
+
+      $('.form_quiz').submit(function(fun){
+          fun.preventDefault();
+          form_id = this.id;
+          $.ajax({
+            url: "{% url 'get_answer' %}",
+            data: $('#' + form_id).serialize(),
+            success: function(){
+                $('#' + form_id).toggle();
+                $('#res_' + form_id).toggle();
+            }
+          });
+      });
+  })
+</script>
+
 
 </html>

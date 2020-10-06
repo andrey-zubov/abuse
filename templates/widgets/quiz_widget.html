@@ -79,7 +79,7 @@
           fun.preventDefault();
           form_id = this.id;
           $.ajax({
-            url: '{% url 'get_answer' %}',
+            url: "{% url 'get_answer' %}",
             data: $('#' + form_id).serialize(),
             success: function(){
                 $('#' + form_id).toggle();

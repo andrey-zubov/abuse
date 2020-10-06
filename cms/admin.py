@@ -16,7 +16,9 @@ from .models import (
     Partner,
     Region,
     Area,
-    OrgTemplate
+    OrgTemplate,
+    Feedback,
+    BackCall
 )
 
 
@@ -68,3 +70,6 @@ admin.site.register(Region)
 admin.site.register(Area)
 
 admin.site.register(OrgTemplate)
+
+admin.site.register(Feedback)
+admin.site.register(BackCall)
