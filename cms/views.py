@@ -103,7 +103,8 @@ def add_new_org(request):
     form = OrgForm()
     vac_form = VacancyForm()
     event_form = EventForm()
-
+    down_cats = Page.objects.filter(test_category='down')
+    up_cats = Page.objects.filter(test_category='up')
 
     return render(
         request,
@@ -112,7 +113,9 @@ def add_new_org(request):
             'form': form,
             'vac_form': vac_form,
             'event_form': event_form,
-            'all_types': all_types
+            'all_types': all_types,
+            'down_cats': down_cats,
+            'up_cats': up_cats,
 
         }
     )

@@ -34,6 +34,29 @@
     <title>Партнерам - Pomogut.by</title>
   </head>
 <body>
+<header class="header header--secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <a href="{% url 'main_page' %}" class="header__logo">
+          <img src="/static/images/logo.png" />
+        </a>
+      </div>
+      <div class="col-lg-6">
+        <div class="header__title">
+          <h2 class="headline-2">Партнерам - pomogut.by</h2>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <a class="header__phone" href="tel:+375173110000"
+          ><p>+ 375 17 311 00 00</p></a
+        >
+      </div>
+    </div>
+  </div>
+</header>
+
+
 <section class="partners">
   <div class="container">
     <div class="row">
@@ -341,6 +364,70 @@
     </div>
   </div>
 </section>
+
+<footer class="footer footer--secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="footer__menu">
+          <div class="footer__menu-item">
+            <a class="link link--white" href="{% url 'help_pdf' %}"
+              ><p>Первая медицинская помощь</p></a
+            >
+            {% for cat in up_cats %}
+              <a class="link link--white" href="{{cat.get_absolute_url}}"><p>{{cat.title}}</p></a>
+            {% endfor %}
+          </div>
+
+          <div class="footer__menu-item">
+            {% for cat in down_cats %}
+              <a
+              class="link link--white"
+              href="{{cat.get_absolute_url}}"
+              ><p>{{cat.title}}</p></a
+            >
+            {% endfor %}
+          </div>
+          <div class="footer__menu-item">
+<!--            <a class="link link&#45;&#45;white" href="/сareers/"-->
+<!--              ><p>Центры занятости</p></a-->
+<!--            >-->
+
+            <a
+              class="link link--white"
+              href="/abuse/about/"
+              ><p>О проекте</p></a
+            >
+            <a
+              class="link link--white"
+              href="/abuse/to-partners/"
+              ><p>Стать партнером</p></a
+            >
+            <a
+              class="link link--white"
+              href="/abuse/about/"
+              ><p>Написать нам</p></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="offset-lg-1 col-lg-2">
+        <div class="footer__logos">
+          <div class="logo-item">
+            <img src="/static/images/logo-belhard.png" />
+          </div>
+          <div class="logo-item">
+            <img src="/static/images/AIPSIN-logo.png" />
+          </div>
+          <div class="logo-item">
+            <img src="/static/images/logo-un.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 <script src="/static/js/jquery-3.5.1.min.js"></script>
 <script>
