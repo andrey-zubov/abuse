@@ -58,6 +58,12 @@ class StandartArticle(models.Model):
         verbose_name='Заголовок',
         max_length=256
     )
+    alt_title = models.CharField(
+        verbose_name='Альтернативное наименование в левом сайдбаре',
+        blank=True,
+        null=True,
+        max_length=256
+    )
     picture = MediaFileForeignKey(
         MediaFile,
         on_delete=models.SET_NULL,
@@ -104,9 +110,14 @@ class CalendarArticle(models.Model):
         verbose_name = 'Статья с календарем'
         verbose_name_plural = 'Стати с календарем'
 
-
     title = models.CharField(
         verbose_name='Заголовок',
+        max_length=256
+    )
+    alt_title = models.CharField(
+        verbose_name='Альтернативное наименование в левом сайдбаре',
+        blank=True,
+        null=True,
         max_length=256
     )
     text = models.TextField()
@@ -144,6 +155,12 @@ class ParticipantWidget(models.Model):
         verbose_name='заголовок',
         max_length=256
     )
+    alt_title = models.CharField(
+        verbose_name='Альтернативное наименование в левом сайдбаре',
+        blank=True,
+        null=True,
+        max_length=256
+    )
 
     def __str__(self):
         return str(self.title)
@@ -168,6 +185,12 @@ class EmploymentArticle(models.Model):
 
     title = models.CharField(
         verbose_name='заголовок',
+        max_length=256
+    )
+    alt_title = models.CharField(
+        verbose_name='Альтернативное наименование в левом сайдбаре',
+        blank=True,
+        null=True,
         max_length=256
     )
 
@@ -214,6 +237,12 @@ class AccordeonArticle(models.Model):
         max_length=256,
         null=True,
         blank=True
+    )
+    alt_title = models.CharField(
+        verbose_name='Альтернативное наименование в левом сайдбаре',
+        blank=True,
+        null=True,
+        max_length=256
     )
     text = models.TextField(
         null=True,
