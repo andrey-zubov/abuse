@@ -160,6 +160,10 @@
       #{$self}__content {
         background-color: $white;
 
+        .main-menu__navigation {
+          box-shadow: none;
+        }
+
         .main-menu__navigation li {
           border: none;
 
