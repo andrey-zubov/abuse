@@ -18,8 +18,16 @@ from .models import (
     Area,
     OrgTemplate,
     Feedback,
-    BackCall
+    BackCall,
+    NewsPage,
+    Page
 )
+from feincms.module.page.modeladmins import PageAdmin, PageAdminForm
+from feincms.admin import item_editor, tree_editor
+from threading import local
+
+from .mymodeladmin import MyPageAdmin
+
 
 
 class ServicesAdmin(admin.StackedInline):
@@ -47,6 +55,10 @@ class FAQinline(admin.StackedInline):
 
 class FAQAdmin(admin.ModelAdmin):
     inlines = [FAQinline]
+
+
+admin.site.register(Page, MyPageAdmin)
+admin.site.register(NewsPage, PageAdmin)
 
 admin.site.register(Link)
 admin.site.register(Organizations, OrganizationAdmin)

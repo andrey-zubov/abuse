@@ -8,7 +8,7 @@ import datetime
 
 from os.path import join
 
-from feincms.module.page.models import Page
+from feincms.module.page.models import Page, BasePage
 from feincms.contents import RichTextContent
 from feincms.module.medialibrary.contents import MediaFileContent
 from feincms.module.medialibrary.fields import MediaFileForeignKey, MediaFile
@@ -19,18 +19,48 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 import requests
 
-Page.register_extensions(
-    'feincms.extensions.datepublisher',
-    'feincms.extensions.translations'
-)  # Example set of extensions
 
-Page.register_templates({
+class NewsPage(BasePage):
+    class Meta:
+        ordering = ["tree_id", "lft"]
+        verbose_name = _("newspage")
+        verbose_name_plural = _("newspages")
+        app_label = "page"
+
+
+NewsPage.register_default_processors()
+
+
+NewsPage.register_templates({
     'title': _('Новость'),
     'path': 'widgets/news_widget.html',
     'regions': (
         ('main_news', _('Новость')),
     ),
 })
+
+NewsPage.register_extensions(
+    'feincms.extensions.datepublisher',
+    # 'feincms.extensions.translations'
+)
+
+NewsPage.create_content_type(RichTextContent, regions=('main_news',))
+NewsPage.register_extensions('feincms.extensions.ct_tracker')
+
+
+
+Page.register_extensions(
+    'feincms.extensions.datepublisher',
+    # 'feincms.extensions.translations'
+)  # Example set of extensions
+
+# Page.register_templates({
+#     'title': _('Новость'),
+#     'path': 'widgets/news_widget.html',
+#     'regions': (
+#         ('main_news', _('Новость')),
+#     ),
+# })
 
 Page.register_templates({
     'title': _('Отдельная статья'),
@@ -43,8 +73,7 @@ Page.register_templates({
     ),
 })
 
-
-Page.create_content_type(RichTextContent, regions=('main_news',))
+# Page.create_content_type(RichTextContent, regions=('main_news',))
 Page.register_extensions('feincms.extensions.ct_tracker')
 
 
