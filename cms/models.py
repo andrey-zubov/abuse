@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
 from django.conf import settings
@@ -20,12 +21,15 @@ from mptt.models import MPTTModel, TreeForeignKey
 import requests
 
 
-class NewsPage(BasePage):
+class NewsPage(BasePage):  # identical to Page class. Needed for several Page-like models.
     class Meta:
         ordering = ["tree_id", "lft"]
         verbose_name = _("newspage")
         verbose_name_plural = _("newspages")
         app_label = "page"
+
+    def get_absolute_url(self):
+        return reverse('testnews', kwargs={'slug': self.slug})
 
 
 NewsPage.register_default_processors()
@@ -51,16 +55,7 @@ NewsPage.register_extensions('feincms.extensions.ct_tracker')
 
 Page.register_extensions(
     'feincms.extensions.datepublisher',
-    # 'feincms.extensions.translations'
-)  # Example set of extensions
-
-# Page.register_templates({
-#     'title': _('Новость'),
-#     'path': 'widgets/news_widget.html',
-#     'regions': (
-#         ('main_news', _('Новость')),
-#     ),
-# })
+)
 
 Page.register_templates({
     'title': _('Отдельная статья'),
@@ -73,7 +68,6 @@ Page.register_templates({
     ),
 })
 
-# Page.create_content_type(RichTextContent, regions=('main_news',))
 Page.register_extensions('feincms.extensions.ct_tracker')
 
 
@@ -322,7 +316,7 @@ class ArticlePicture(models.Model):
             context={'widget': self})
 
 
-Page.create_content_type(ArticlePicture, regions=('main_news',))
+NewsPage.create_content_type(ArticlePicture, regions=('main_news',))
 
 
 class OrgSection(models.Model):

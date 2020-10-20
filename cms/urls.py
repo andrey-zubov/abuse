@@ -9,7 +9,8 @@ from .views import (
     create_event,
     get_answer,
     create_org,
-    create_feedback
+    create_feedback,
+    testnews
 )
 
 urlpatterns = [
@@ -23,5 +24,7 @@ urlpatterns = [
     path('create_event/', create_event, name='create_event'),
     path('get_answer/', get_answer, name='get_answer'),
     path('create_feedback', create_feedback, name='create_feedback'),
+
+    path('<slug>', testnews, name='testnews')
 
 ]
