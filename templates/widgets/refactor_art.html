@@ -84,7 +84,11 @@
               </div>
               <div class="side-menu__links">
                 {% for i in feincms_page.content.main %}
-                  <a class="link link--green" href="#{{ i.title }}"><p>{{ i.title }}</p></a>
+                  {% if i.link_title %}
+                    <a class="link link--green" href="#{{ i.title }}"><p>{{ i.alt_title }}</p></a>
+                  {% else %}
+                    <a class="link link--green" href="#{{ i.title }}"><p>{{ i.title }}</p></a>
+                  {% endif %}
                 {% endfor %}
                 {% for i in feincms_page.content.sections %}
                   {% if i.title %}

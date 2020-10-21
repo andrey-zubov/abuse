@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
 from django.conf import settings
@@ -8,7 +9,7 @@ import datetime
 
 from os.path import join
 
-from feincms.module.page.models import Page
+from feincms.module.page.models import Page, BasePage
 from feincms.contents import RichTextContent
 from feincms.module.medialibrary.contents import MediaFileContent
 from feincms.module.medialibrary.fields import MediaFileForeignKey, MediaFile
@@ -19,18 +20,42 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 import requests
 
-Page.register_extensions(
-    'feincms.extensions.datepublisher',
-    'feincms.extensions.translations'
-)  # Example set of extensions
 
-Page.register_templates({
+class NewsPage(BasePage):  # identical to Page class. Needed for several Page-like models.
+    class Meta:
+        ordering = ["tree_id", "lft"]
+        verbose_name = _("Новость")
+        verbose_name_plural = _("Новости")
+        app_label = "page"
+
+    def get_absolute_url(self):
+        return reverse('testnews', kwargs={'slug': self.slug})
+
+
+NewsPage.register_default_processors()
+
+
+NewsPage.register_templates({
     'title': _('Новость'),
     'path': 'widgets/news_widget.html',
     'regions': (
         ('main_news', _('Новость')),
     ),
 })
+
+NewsPage.register_extensions(
+    'feincms.extensions.datepublisher',
+    # 'feincms.extensions.translations'
+)
+
+NewsPage.create_content_type(RichTextContent, regions=('main_news',))
+NewsPage.register_extensions('feincms.extensions.ct_tracker')
+
+
+
+Page.register_extensions(
+    'feincms.extensions.datepublisher',
+)
 
 Page.register_templates({
     'title': _('Отдельная статья'),
@@ -43,8 +68,6 @@ Page.register_templates({
     ),
 })
 
-
-Page.create_content_type(RichTextContent, regions=('main_news',))
 Page.register_extensions('feincms.extensions.ct_tracker')
 
 
@@ -56,6 +79,12 @@ class StandartArticle(models.Model):
 
     title = models.CharField(
         verbose_name='Заголовок',
+        max_length=256
+    )
+    alt_title = models.CharField(
+        verbose_name='Альтернативное наименование в левом сайдбаре',
+        blank=True,
+        null=True,
         max_length=256
     )
     picture = MediaFileForeignKey(
@@ -78,7 +107,6 @@ class StandartArticle(models.Model):
     link = models.ManyToManyField(
         "cms.Link",
         verbose_name='Добавить ссылку',
-        null=True,
         blank=True
     )
     org_button = models.BooleanField(
@@ -104,9 +132,14 @@ class CalendarArticle(models.Model):
         verbose_name = 'Статья с календарем'
         verbose_name_plural = 'Стати с календарем'
 
-
     title = models.CharField(
         verbose_name='Заголовок',
+        max_length=256
+    )
+    alt_title = models.CharField(
+        verbose_name='Альтернативное наименование в левом сайдбаре',
+        blank=True,
+        null=True,
         max_length=256
     )
     text = models.TextField()
@@ -144,6 +177,12 @@ class ParticipantWidget(models.Model):
         verbose_name='заголовок',
         max_length=256
     )
+    alt_title = models.CharField(
+        verbose_name='Альтернативное наименование в левом сайдбаре',
+        blank=True,
+        null=True,
+        max_length=256
+    )
 
     def __str__(self):
         return str(self.title)
@@ -170,6 +209,12 @@ class EmploymentArticle(models.Model):
         verbose_name='заголовок',
         max_length=256
     )
+    alt_title = models.CharField(
+        verbose_name='Альтернативное наименование в левом сайдбаре',
+        blank=True,
+        null=True,
+        max_length=256
+    )
 
     text = models.TextField(
         verbose_name='Текст',
@@ -185,7 +230,6 @@ class EmploymentArticle(models.Model):
     link = models.ManyToManyField(
         "cms.Link",
         verbose_name='Добавить ссылку',
-        null=True,
         blank=True
     )
 
@@ -215,6 +259,12 @@ class AccordeonArticle(models.Model):
         null=True,
         blank=True
     )
+    alt_title = models.CharField(
+        verbose_name='Альтернативное наименование в левом сайдбаре',
+        blank=True,
+        null=True,
+        max_length=256
+    )
     text = models.TextField(
         null=True,
         blank=True,
@@ -223,7 +273,6 @@ class AccordeonArticle(models.Model):
     link = models.ManyToManyField(
         "cms.Link",
         verbose_name='Добавить ссылку',
-        null=True,
         blank=True
     )
 
@@ -264,7 +313,7 @@ class ArticlePicture(models.Model):
             context={'widget': self})
 
 
-Page.create_content_type(ArticlePicture, regions=('main_news',))
+NewsPage.create_content_type(ArticlePicture, regions=('main_news',))
 
 
 class OrgSection(models.Model):
@@ -841,7 +890,7 @@ class NewsImageExtension(Extension):
         )
 
 
-Page.register_extensions(NewsImageExtension)
+NewsPage.register_extensions(NewsImageExtension)
 
 
 class NewsSourceExtension(Extension):
@@ -863,21 +912,23 @@ class NewsSourceExtension(Extension):
         )
 
 
-Page.register_extensions(NewsSourceExtension)
+NewsPage.register_extensions(NewsSourceExtension)
 
 
 # опросник
-class QuizWidget(models.Model):
+class RigthSidebarInfo(models.Model):
     class Meta:
-        abstract = True
-        verbose_name = 'Опрос'
-        verbose_name_plural = 'Опросы'
+        verbose_name = 'Полезная информация в правом сайдбаре'
+        verbose_name_plural = 'Полезная информация в правом сайдбаре'
 
+    is_active = models.BooleanField(
+        default=True,
+    )
     title = models.CharField(
-        verbose_name='Заголовок блока',
+        verbose_name='Заголовок',
         max_length=256,
-        null=True,
-        blank=True
+        blank=True,
+        null=True
     )
     text = models.TextField(
         verbose_name='Текстовая информация',
@@ -885,13 +936,25 @@ class QuizWidget(models.Model):
         blank=True
     )
 
+    def __str__(self):
+        return self.title
+
+
+class QuizWidget(models.Model):
+    class Meta:
+        abstract = True
+        verbose_name = 'Опрос'
+        verbose_name_plural = 'Опросы'
+
     def render(self):
         quiz = Question.objects.filter(is_active=True)
+        info = RigthSidebarInfo.objects.filter(is_active=True)
         return render_to_string(
             'widgets/quiz_widget.html',
             context={
                 'widget': self,
-                'quiz': quiz
+                'quiz': quiz,
+                'info': info
             })
 
 

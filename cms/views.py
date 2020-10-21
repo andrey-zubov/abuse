@@ -6,6 +6,7 @@ from .utils import check_city
 
 from .models import (
     Page,
+    NewsPage,
     Organizations,
     City,
     ServicesType,
@@ -17,7 +18,8 @@ from .models import (
     FAQ,
     OrgTemplate,
     Feedback,
-    BackCall
+    BackCall,
+    RigthSidebarInfo
 )
 
 
@@ -65,6 +67,8 @@ def faq(request):
 def org_info(request, slug):
     org = Organizations.objects.get(slug=slug)
     all_quiz = Question.objects.filter(is_active=True)
+    info = RigthSidebarInfo.objects.filter(is_active=True)
+
     org_settings = OrgTemplate.objects.latest('id')
     down_cats = Page.objects.filter(test_category='down')
     up_cats = Page.objects.filter(test_category='up')
@@ -75,6 +79,7 @@ def org_info(request, slug):
         context={
             'org': org,
             'quiz': all_quiz,
+            'info': info,
             'org_settings': org_settings,
             'up_cats' : up_cats,
             'down_cats' : down_cats,
@@ -83,7 +88,7 @@ def org_info(request, slug):
 
 
 def news_view(request):
-    news = Page.objects.filter(template_key='widgets/news_widget.html')
+    news = NewsPage.objects.filter(template_key='widgets/news_widget.html')
     down_cats = Page.objects.filter(test_category='down')
     up_cats = Page.objects.filter(test_category='up')
 
@@ -185,5 +190,18 @@ def create_feedback(request):  # ajax
     return HttpResponse(1)
 
 
+def testnews(request, slug):
+    feincms_page = NewsPage.objects.get(slug=slug)
+    down_cats = Page.objects.filter(test_category='down')
+    up_cats = Page.objects.filter(test_category='up')
 
+    return render(
+        request,
+        template_name='widgets/newspage.html',
+        context={
+            'feincms_page': feincms_page,
+            'up_cats': up_cats,
+            'down_cats': down_cats,
+        }
+    )
 
