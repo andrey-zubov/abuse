@@ -158,13 +158,14 @@
           <div class="information-side">
             <div class="information-block">
               <div class="quiz">
-                <h1 class="information-block__title headline-1">Анкеты</h1>
-<!--                  <div class="information-block__text">-->
-<!--                    <p><strong>{{widget.title}}</strong></p>-->
-<!--                      {{widget.text|safe}}-->
-<!--                  </div>-->
+                <h1 class="information-block__title headline-1">Полезная информация</h1>
+                <div class="information-block__text">
+                  {% for i in info %}
+                    <p><strong>{{i.title}}</strong></p>
+                    {{i.text|safe}}
+                  {% endfor %}
+                </div>
                   <div class="quiz-item">
-                    <br>
                   {% for q in quiz %}
                   <form id="form_{{q.id}}" class="form_quiz" name="question_form" action="{% url 'get_answer' %}">
                     <input hidden name="answer_for" value="{{q.title}}">

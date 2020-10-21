@@ -20,7 +20,8 @@ from .models import (
     Feedback,
     BackCall,
     NewsPage,
-    Page
+    Page,
+    RigthSidebarInfo
 )
 from feincms.module.page.modeladmins import PageAdmin, PageAdminForm
 from feincms.admin import item_editor, tree_editor
@@ -56,6 +57,8 @@ class FAQinline(admin.StackedInline):
 class FAQAdmin(admin.ModelAdmin):
     inlines = [FAQinline]
 
+
+admin.site.register(RigthSidebarInfo)
 
 admin.site.register(Page, MyPageAdmin)
 admin.site.register(NewsPage, PageAdmin)
