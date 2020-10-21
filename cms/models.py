@@ -24,8 +24,8 @@ import requests
 class NewsPage(BasePage):  # identical to Page class. Needed for several Page-like models.
     class Meta:
         ordering = ["tree_id", "lft"]
-        verbose_name = _("newspage")
-        verbose_name_plural = _("newspages")
+        verbose_name = _("Новость")
+        verbose_name_plural = _("Новости")
         app_label = "page"
 
     def get_absolute_url(self):
@@ -890,7 +890,7 @@ class NewsImageExtension(Extension):
         )
 
 
-Page.register_extensions(NewsImageExtension)
+NewsPage.register_extensions(NewsImageExtension)
 
 
 class NewsSourceExtension(Extension):
@@ -912,7 +912,7 @@ class NewsSourceExtension(Extension):
         )
 
 
-Page.register_extensions(NewsSourceExtension)
+NewsPage.register_extensions(NewsSourceExtension)
 
 
 # опросник
