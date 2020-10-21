@@ -1,39 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=0"
-    />
-
-    <link
-      type="text/css"
-      href="/static/styles/index.min.css"
-      rel="stylesheet"
-      media="screen"
-    />
-
-    <script type="module" src="/static/scripts/index.js"></script>
-
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-       ym(67440172, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
-       });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/67440172" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-
-    <title>Партнерам - Pomogut.by</title>
-  </head>
-<body>
+{% extends "base.html" %}
+{% block my_content %}
 <header class="header header--secondary">
   <div class="container">
     <div class="row">
@@ -55,7 +21,6 @@
     </div>
   </div>
 </header>
-
 
 <section class="partners">
   <div class="container">
@@ -389,10 +354,6 @@
             {% endfor %}
           </div>
           <div class="footer__menu-item">
-<!--            <a class="link link&#45;&#45;white" href="/сareers/"-->
-<!--              ><p>Центры занятости</p></a-->
-<!--            >-->
-
             <a
               class="link link--white"
               href="/abuse/about/"
@@ -434,40 +395,45 @@
   $('document').ready(function () {
       $('#add_org_form').submit(function(fun){
           fun.preventDefault();
-          alert('test')
-          form_id = this.id;
-          $.ajax({
-            url: '{% url "create_org"%}',
-            data: $('#' + form_id).serialize(),
-            success: function(){
-                console.log('done');
-            }
-          });
+          if (confirm('Данные заполнены верно?')) {
+            form_id = this.id;
+            $.ajax({
+              url: '{% url "create_org"%}',
+              data: $('#' + form_id).serialize(),
+              success: function(){
+                  console.log('done');
+              }
+            });
+          }
       });
 
       $('#add_vacancy_form').submit(function(fun){
           fun.preventDefault();
-          form_id = this.id;
-          $.ajax({
-            url: '{% url "create_vacancy"%}',
-            data: $('#' + form_id).serialize(),
-            success: function(){
-                console.log('done');
-            }
-          });
+          if (confirm('Данные заполнены верно?')) {
+              form_id = this.id;
+              $.ajax({
+                  url: '{% url "create_vacancy"%}',
+                  data: $('#' + form_id).serialize(),
+                  success: function () {
+                      console.log('done');
+                  }
+              });
+          }
       });
 
       $('#add_event_form').submit(function(fun){
           fun.preventDefault();
-          form_id = this.id;
-          $.ajax({
-            url: '{% url "create_event"%}',
-            data: $('#' + form_id).serialize(),
-            success: function(){
-                console.log('done');
-            }
-          });
+          if (confirm('Данные заполнены верно?')) {
+              form_id = this.id;
+              $.ajax({
+                  url: '{% url "create_event"%}',
+                  data: $('#' + form_id).serialize(),
+                  success: function () {
+                      console.log('done');
+                  }
+              });
+          }
       });
   })
 </script>
-</html>
+{% endblock %}

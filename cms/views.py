@@ -53,17 +53,6 @@ def get_answer(request):  # handle quiz answer
     return HttpResponse(111)
 
 
-def faq(request):
-    faq = FAQ.objects.all()
-    questions = Question.objects.all().prefetch_related('choice_set')
-    return render(
-        request,
-        template_name='faq.html',
-        context={'faq': faq,
-                 'questions': questions}
-    )
-
-
 def org_info(request, slug):
     org = Organizations.objects.get(slug=slug)
     all_quiz = Question.objects.filter(is_active=True)
@@ -88,7 +77,7 @@ def org_info(request, slug):
 
 
 def news_view(request):
-    news = NewsPage.objects.filter(template_key='widgets/news_widget.html')
+    news = NewsPage.objects.filter(template_key='widgets/newspage.html')
     down_cats = Page.objects.filter(test_category='down')
     up_cats = Page.objects.filter(test_category='up')
 
@@ -190,7 +179,7 @@ def create_feedback(request):  # ajax
     return HttpResponse(1)
 
 
-def testnews(request, slug):
+def single_news(request, slug):
     feincms_page = NewsPage.objects.get(slug=slug)
     down_cats = Page.objects.filter(test_category='down')
     up_cats = Page.objects.filter(test_category='up')

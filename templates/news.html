@@ -1,125 +1,104 @@
+{% extends "base.html" %}
+{% block my_content %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=0"
-    />
+ <header class="header">
+<div class="container">
+  <div class="header__content">
+    <div class="header__content__nav">
+      <nav class="main-menu">
+        <ul class="main-menu__links">
+          <li>
+            <a class="link" href="{% url 'main_page' %}"
+            ><span>Главная</span></a
+            >
+          </li>
+          {% for category in up_cats %}
+          <li>
+            <a class="link" href="{{ category.get_absolute_url }}"
+            ><span>{{ category.title }}</span></a
+            >
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
 
-    <link
-      type="text/css"
-      href="/static/styles/index.min.css"
-      rel="stylesheet"
-      media="screen"
-    />
-
-    <script type="module" src="/static/scripts/index.js"></script>
-
-    <title>Pomogut</title>
-  </head>
-
-  <body>
-     <header class="header">
-  <div class="container">
-    <div class="header__content">
-      <div class="header__content__nav">
-        <nav class="main-menu">
-          <ul class="main-menu__links">
-            <li>
-              <a class="link" href="{% url 'main_page' %}"
-              ><span>Главная</span></a
-              >
-            </li>
-            {% for category in up_cats %}
-            <li>
-              <a class="link" href="{{ category.get_absolute_url }}"
-              ><span>{{ category.title }}</span></a
-              >
-            </li>
-            {% endfor %}
-          </ul>
-        </nav>
-
-        <nav class="main-menu">
-          <ul class="main-menu__navigation">
-            {% for category in down_cats %}
-            <li>
-              <a
-                class="link link--blue"
-                href="{{ category.get_absolute_url }}"
-              ><span>{{ category.title }}</span></a
-              >
-            </li>
-            {% endfor %}
-          </ul>
-        </nav>
-      </div>
+      <nav class="main-menu">
+        <ul class="main-menu__navigation">
+          {% for category in down_cats %}
+          <li>
+            <a
+              class="link link--blue"
+              href="{{ category.get_absolute_url }}"
+            ><span>{{ category.title }}</span></a
+            >
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
     </div>
-    <button class="header__button" type="button"><span></span></button>
   </div>
+  <button class="header__button" type="button"><span></span></button>
+</div>
 </header>
 
-    <section class="news">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="news__container">
-              <h1 class="news__title">НОВОСТИ</h1>
-              <div class="news__content">
-                {% for n in news %}
-                  <div class="news-item">
-                    <h3 class="news-item__title">
-                      {{ n.title }}
-                    </h3>
-                    <p class="news-item__data">{{ n.publication_date }}</p>
-                    {% if n.preview_img.file %}
-                      <div class="news-item__image aspect-ratio">
-                        <img src="{% get_media_prefix %}{{ n.preview_img.file }}" />
-                      </div>
-                    {% endif %}
-                    <p class="news-item__description">
-                      {{ n.content.main_news.0.text|safe|slice:":400" }}...
-                    </p>
-                    <a class="news-item__button link link--blue" href="{{ n.get_absolute_url }}"
-                      >Подробнее</a
-                    >
-                  </div>
-                {% endfor %}
-              </div>
+  <section class="news">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="news__container">
+            <h1 class="news__title">НОВОСТИ</h1>
+            <div class="news__content">
+              {% for n in news %}
+                <div class="news-item">
+                  <h3 class="news-item__title">
+                    {{ n.title }}
+                  </h3>
+                  <p class="news-item__data">{{ n.publication_date }}</p>
+                  {% if n.preview_img.file %}
+                    <div class="news-item__image aspect-ratio">
+                      <img src="{% get_media_prefix %}{{ n.preview_img.file }}" />
+                    </div>
+                  {% endif %}
+                  <p class="news-item__description">
+                    {{ n.content.main_news.0.text|safe|slice:":400" }}...
+                  </p>
+                  <a class="news-item__button link link--blue" href="{{ n.get_absolute_url }}"
+                    >Подробнее</a
+                  >
+                </div>
+              {% endfor %}
             </div>
           </div>
         </div>
       </div>
-      <footer class="footer footer--main">
-        <div class="container footer__container">
-          <a class="footer__phone" href="tel:+375173110000">+ 375 17 311 00 00</a>
-          <nav class="main-menu footer__menu">
-            <ul class="main-menu__links footer__menu__links">
-              <li>
-                <p>
-                  <a class="link" href="/about/"
-                    ><span>О проекте</span></a
-                  >
-                </p>
-              </li>
+    </div>
+    <footer class="footer footer--main">
+      <div class="container footer__container">
+        <a class="footer__phone" href="tel:+375173110000">+ 375 17 311 00 00</a>
+        <nav class="main-menu footer__menu">
+          <ul class="main-menu__links footer__menu__links">
+            <li>
+              <p>
+                <a class="link" href="/about/"
+                  ><span>О проекте</span></a
+                >
+              </p>
+            </li>
 
-              <li>
-                <p>
-                  <a class="link" href="{% url 'to-partners' %}"
-                    ><span>Стать партнером</span></a
-                  >
-                </p>
-              </li>
-            </ul>
-          </nav>
-          <a class="footer__logo" href="http://www.unodc.org/" target="_blank"
-            ><i class="icon-un"></i
-          ></a>
-        </div>
-      </footer>
+            <li>
+              <p>
+                <a class="link" href="{% url 'to-partners' %}"
+                  ><span>Стать партнером</span></a
+                >
+              </p>
+            </li>
+          </ul>
+        </nav>
+        <a class="footer__logo" href="http://www.unodc.org/" target="_blank"
+          ><i class="icon-un"></i
+        ></a>
+      </div>
+    </footer>
 
-    </section>
-  </body>
-</html>
+  </section>
+{% endblock %}

@@ -1,161 +1,161 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=0"
-    />
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--  <head>-->
+<!--    <meta charset="UTF-8" />-->
+<!--    <meta-->
+<!--      name="viewport"-->
+<!--      content="width=device-width, initial-scale=1.0, user-scalable=0"-->
+<!--    />-->
 
-    <!-- {% load compress %}-->
+<!--    &lt;!&ndash; {% load compress %}&ndash;&gt;-->
 
-    <!-- {% compress css %}-->
-    <!--        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">-->
-    <!--    {% endcompress %}-->
+<!--    &lt;!&ndash; {% compress css %}&ndash;&gt;-->
+<!--    &lt;!&ndash;        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">&ndash;&gt;-->
+<!--    &lt;!&ndash;    {% endcompress %}&ndash;&gt;-->
 
-    <link
-      type="text/css"
-      href="/static/styles/index.min.css"
-      rel="stylesheet"
-      media="screen"
-    />
+<!--    <link-->
+<!--      type="text/css"-->
+<!--      href="/static/styles/index.min.css"-->
+<!--      rel="stylesheet"-->
+<!--      media="screen"-->
+<!--    />-->
 
-    <script type="module" src="/static/scripts/index.js"></script>
+<!--    <script type="module" src="/static/scripts/index.js"></script>-->
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+<!--    &lt;!&ndash; Yandex.Metrika counter &ndash;&gt;-->
+<!--    <script type="text/javascript" >-->
+<!--       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};-->
+<!--       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})-->
+<!--       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");-->
 
-       ym(67440172, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
-       });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/67440172" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
+<!--       ym(67440172, "init", {-->
+<!--            clickmap:true,-->
+<!--            trackLinks:true,-->
+<!--            accurateTrackBounce:true-->
+<!--       });-->
+<!--    </script>-->
+<!--    <noscript><div><img src="https://mc.yandex.ru/watch/67440172" style="position:absolute; left:-9999px;" alt="" /></div></noscript>-->
+<!--    &lt;!&ndash; /Yandex.Metrika counter &ndash;&gt;-->
 
-    <title>Pomogut</title>
-  </head>
-<body>
+<!--    <title>Pomogut</title>-->
+<!--  </head>-->
+<!--<body>-->
 
-<header class="header header--secondary">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3">
-        <a href="{% url 'main_page' %}" class="header__logo">
-          <img src="/static/images/logo.png" />
-        </a>
-      </div>
-      <div class="col-lg-6">
-        <div class="header__title">
-          <h2 class="headline-2">{{feincms_page.title}}</h2>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <a class="header__phone" href="tel:+375173110000"
-          ><p>+ 375 17 311 00 00</p></a
-        >
-      </div>
-    </div>
-  </div>
-</header>
+<!--<header class="header header&#45;&#45;secondary">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="col-lg-3">-->
+<!--        <a href="{% url 'main_page' %}" class="header__logo">-->
+<!--          <img src="/static/images/logo.png" />-->
+<!--        </a>-->
+<!--      </div>-->
+<!--      <div class="col-lg-6">-->
+<!--        <div class="header__title">-->
+<!--          <h2 class="headline-2">{{feincms_page.title}}</h2>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-3">-->
+<!--        <a class="header__phone" href="tel:+375173110000"-->
+<!--          ><p>+ 375 17 311 00 00</p></a-->
+<!--        >-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</header>-->
 
 
-<section class="main">
-  <div class="container">
-    <div class="row">
-      {% block side_bar %}
-        <div class="col-lg-3">
-        </div>
-      {% endblock %}
-      {% block content %}
-        <div class="col-lg-6">
-          {% for content in feincms_page.content.main %}
-            {{ content.render }}
-          {% endfor %}
-        </div>
-      {% endblock %}
-    </div>
-  </div>
-</section>
+<!--<section class="main">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      {% block side_bar %}-->
+<!--        <div class="col-lg-3">-->
+<!--        </div>-->
+<!--      {% endblock %}-->
+<!--      {% block content %}-->
+<!--        <div class="col-lg-6">-->
+<!--          {% for content in feincms_page.content.main %}-->
+<!--            {{ content.render }}-->
+<!--          {% endfor %}-->
+<!--        </div>-->
+<!--      {% endblock %}-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
 
-<footer class="footer footer--secondary">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-9">
-        <div class="footer__menu">
-          <div class="footer__menu-item">
-            <a class="link link--white" href="#help"
-              ><p>Первая медицинская помощь</p></a
-            >
-            <a class="link link--white" href="/relapse/"><p>Срыв</p></a>
-            <a class="link link--white" href="/hiv-hepatitis/"
-              ><p>Вич/Гепатит</p></a
-            >
-            <a class="link link--white" href="http://pomogut.by/legal-info/"
-              ><p>Правовая информация</p></a
-            >
-          </div>
-          <div class="footer__menu-item">
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/i-am-codependent/"
-              ><p>Мой близкий в проблеме</p></a
-            >
-            <a class="link link--white" href="https://abuse.pomogut.by/org/"
-              ><p>Я употребляю</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/i-am-on-remission/"
-              ><p>Я на ремиссии</p></a
-            >
-          </div>
-          <div class="footer__menu-item">
-            <a class="link link--white" href="/сareers/"
-              ><p>Центры занятости</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/events/"
-              ><p>Мероприятия</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/about/"
-              ><p>О проекте</p></a
-            >
-            <a
-              class="link link--white"
-              href="http://pomogut.by/to-partners/"
-              ><p>Стать партнером</p></a
-            >
-            <a
-              class="link link--white"
-              href="http://pomogut.by/about/#contacts"
-              ><p>Написать нам</p></a
-            >
-          </div>
-        </div>
-      </div>
-      <div class="offset-lg-1 col-lg-2">
-        <div class="footer__logos">
-          <div class="logo-item">
-            <img src="/static/images/logo-belhard.png" />
-          </div>
-          <div class="logo-item">
-            <img src="/static/images/AIPSIN-logo.png" />
-          </div>
-          <div class="logo-item">
-            <img src="/static/images/logo-un.png" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
+<!--<footer class="footer footer&#45;&#45;secondary">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="col-lg-9">-->
+<!--        <div class="footer__menu">-->
+<!--          <div class="footer__menu-item">-->
+<!--            <a class="link link&#45;&#45;white" href="#help"-->
+<!--              ><p>Первая медицинская помощь</p></a-->
+<!--            >-->
+<!--            <a class="link link&#45;&#45;white" href="/relapse/"><p>Срыв</p></a>-->
+<!--            <a class="link link&#45;&#45;white" href="/hiv-hepatitis/"-->
+<!--              ><p>Вич/Гепатит</p></a-->
+<!--            >-->
+<!--            <a class="link link&#45;&#45;white" href="http://pomogut.by/legal-info/"-->
+<!--              ><p>Правовая информация</p></a-->
+<!--            >-->
+<!--          </div>-->
+<!--          <div class="footer__menu-item">-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="https://abuse.pomogut.by/i-am-codependent/"-->
+<!--              ><p>Мой близкий в проблеме</p></a-->
+<!--            >-->
+<!--            <a class="link link&#45;&#45;white" href="https://abuse.pomogut.by/org/"-->
+<!--              ><p>Я употребляю</p></a-->
+<!--            >-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="https://abuse.pomogut.by/i-am-on-remission/"-->
+<!--              ><p>Я на ремиссии</p></a-->
+<!--            >-->
+<!--          </div>-->
+<!--          <div class="footer__menu-item">-->
+<!--            <a class="link link&#45;&#45;white" href="/сareers/"-->
+<!--              ><p>Центры занятости</p></a-->
+<!--            >-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="https://abuse.pomogut.by/events/"-->
+<!--              ><p>Мероприятия</p></a-->
+<!--            >-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="https://abuse.pomogut.by/about/"-->
+<!--              ><p>О проекте</p></a-->
+<!--            >-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="http://pomogut.by/to-partners/"-->
+<!--              ><p>Стать партнером</p></a-->
+<!--            >-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="http://pomogut.by/about/#contacts"-->
+<!--              ><p>Написать нам</p></a-->
+<!--            >-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="offset-lg-1 col-lg-2">-->
+<!--        <div class="footer__logos">-->
+<!--          <div class="logo-item">-->
+<!--            <img src="/static/images/logo-belhard.png" />-->
+<!--          </div>-->
+<!--          <div class="logo-item">-->
+<!--            <img src="/static/images/AIPSIN-logo.png" />-->
+<!--          </div>-->
+<!--          <div class="logo-item">-->
+<!--            <img src="/static/images/logo-un.png" />-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</footer>-->
+<!--</body>-->
+<!--</html>-->

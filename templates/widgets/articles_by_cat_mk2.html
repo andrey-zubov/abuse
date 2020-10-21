@@ -1,420 +1,420 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=0"
-    />
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--  <head>-->
+<!--    <meta charset="UTF-8" />-->
+<!--    <meta-->
+<!--      name="viewport"-->
+<!--      content="width=device-width, initial-scale=1.0, user-scalable=0"-->
+<!--    />-->
 
-    <!-- {% load compress %}-->
+<!--    &lt;!&ndash; {% load compress %}&ndash;&gt;-->
 
-    <!-- {% compress css %}-->
-    <!--        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">-->
-    <!--    {% endcompress %}-->
+<!--    &lt;!&ndash; {% compress css %}&ndash;&gt;-->
+<!--    &lt;!&ndash;        <link type="text/x-scss" href="/static/styles/index.scss" rel="stylesheet" media="screen">&ndash;&gt;-->
+<!--    &lt;!&ndash;    {% endcompress %}&ndash;&gt;-->
 
-    <link
-      type="text/css"
-      href="/static/styles/index.min.css"
-      rel="stylesheet"
-      media="screen"
-    />
+<!--    <link-->
+<!--      type="text/css"-->
+<!--      href="/static/styles/index.min.css"-->
+<!--      rel="stylesheet"-->
+<!--      media="screen"-->
+<!--    />-->
 
-    <script type="module" src="/static/scripts/index.js"></script>
+<!--    <script type="module" src="/static/scripts/index.js"></script>-->
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+<!--    &lt;!&ndash; Yandex.Metrika counter &ndash;&gt;-->
+<!--    <script type="text/javascript" >-->
+<!--       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};-->
+<!--       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})-->
+<!--       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");-->
 
-       ym(67440172, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
-       });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/67440172" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
+<!--       ym(67440172, "init", {-->
+<!--            clickmap:true,-->
+<!--            trackLinks:true,-->
+<!--            accurateTrackBounce:true-->
+<!--       });-->
+<!--    </script>-->
+<!--    <noscript><div><img src="https://mc.yandex.ru/watch/67440172" style="position:absolute; left:-9999px;" alt="" /></div></noscript>-->
+<!--    &lt;!&ndash; /Yandex.Metrika counter &ndash;&gt;-->
 
-    <title>Pomogut</title>
-  </head>
-<body>
+<!--    <title>Pomogut</title>-->
+<!--  </head>-->
+<!--<body>-->
 
-<header class="header header--secondary">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3">
-        <a href="{% url 'main_page' %}" class="header__logo">
-          <img src="/static/images/logo.png" />
-        </a>
-      </div>
-      <div class="col-lg-6">
-        <div class="header__title">
-          <h2 class="headline-2">page title</h2>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <a class="header__phone" href="tel:+375173110000"
-          ><p>+ 375 17 311 00 00</p></a
-        >
-      </div>
-    </div>
-  </div>
-</header>
-
-
-<section class="main">
-  <div class="container">
-    <div class="row">
-      {% block side_bar %}
-        <div class="col-lg-3">
-          <div class="side-menu">
-            <div class="side-menu__content">
-              <div class="side-menu__links side-menu__links--main">
-                {% if show_help %}
-                  <a class="link link--medium-blue" href="{% url 'help_pdf' %}"
-                    ><p>Первая помощь</p></a
-                  >
-                {% endif %}
-                {% for link in  this_category.cross_link.all %}
-                  <a class="link link--medium-blue" href="{% url 'main_articles' slug=link.slug %}"
-                    ><p>{{link.title}}</p></a
-                  >
-                {% endfor %}
-              </div>
-              <div class="side-menu__links">
-               {% for article in pages %}
-                  <a class="link link--green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>
-                {% endfor %}
-                {% if employment_flag %}
-                  <a class="link link--green" href="#employment_widget"><p>Трудоустройство</p></a>
-                {% endif %}
-                {% if org_widget_flag %}
-                  <a class="link link--green" href="#local_orgs"><p>Организации</p></a>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endblock %}
+<!--<header class="header header&#45;&#45;secondary">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="col-lg-3">-->
+<!--        <a href="{% url 'main_page' %}" class="header__logo">-->
+<!--          <img src="/static/images/logo.png" />-->
+<!--        </a>-->
+<!--      </div>-->
+<!--      <div class="col-lg-6">-->
+<!--        <div class="header__title">-->
+<!--          <h2 class="headline-2">page title</h2>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-3">-->
+<!--        <a class="header__phone" href="tel:+375173110000"-->
+<!--          ><p>+ 375 17 311 00 00</p></a-->
+<!--        >-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</header>-->
 
 
-      {% block content %}
-        <div class="col-lg-6">
-          {% for article in pages %}
-          <a name="{{ article.id }}"></a>
-
-          <h1 class="article__title headline-1">{{ article.title }}</h1>
-          {% for i in article.content.main%}
-            {{i.render}}
-          {% endfor %}
-
-        {% endfor %}
-        </div>
-
-
-        <div class="col-lg-3">
-          <div class="information-side">
-            <div class="information-block">
-              <div class="quiz">
-                <div class="quiz-item">
-                {% for q in questions %}
-                  <form name="question_form" action="">
-                    <input hidden name="answer_for" value="{{q.title}}">
-                    <p class="quiz-item__title">
-                      {{q.title}}
-                    </p>
-                    <div class="quiz-item__content">
-                      {% for choice in q.get_choices %}
-                        <div class="quiz-item__radio">
-                          <p>
-                            <input
-                            type="radio"
-                            name="{{q.title}}"
-                            value="{{choice}}"
-                            id="{{choice.id}}"
-                            />
-                            <label for="{{choice.id}}">{{choice.title}}</label>
-                          </p>
-                        </div>
-                      {% endfor %}
-                      <button type="submit" class="btn quiz-item__button">
-                        Голосовать
-                      </button>
-                    </div>
-                    <button
-                      type="button"
-                      class="quiz-item__button quiz-item__button--transparent"
-                    >
-                      Показать результаты
-                    </button>
-                  </form>
-                {% endfor %}
-                </div>
-              </div>
-              <div class="quiz-item quiz-item--done">
-                <div class="quiz-item__content">
-                  <div class="quiz-item__result">
-                    <p class="quiz-item__result__title">
-                      Да, готов (72%, 129 голосов)
-                    </p>
-                    <div
-                      class="quiz-item__result__progress"
-                      style="width: 72%"
-                    ></div>
-                  </div>
-                  <div class="quiz-item__result">
-                    <p class="quiz-item__result__title">
-                      Зависит от условия (16%, 29 голосов)
-                    </p>
-                    <div
-                      class="quiz-item__result__progress"
-                      style="width: 16%"
-                    ></div>
-                  </div>
-                  <div class="quiz-item__result">
-                    <p class="quiz-item__result__title">
-                      Нет, не готов (9%, 16 голосов)
-                    </p>
-                    <div
-                      class="quiz-item__result__progress"
-                      style="width: 9%"
-                    ></div>
-                  </div>
-                  <div class="quiz-item__result">
-                    <p class="quiz-item__result__title">
-                      Зависит от других факторов (3%, 5 голосов)
-                    </p>
-                    <div
-                      class="quiz-item__result__progress"
-                      style="width: 3%"
-                    ></div>
-                  </div>
-                </div>
-                <div class="quiz-item__all">
-                  <p>Всего проголосовавших:<strong>129</strong></p>
-                </div>
-                <button
-                  type="button"
-                  class="quiz-item__button quiz-item__button--transparent"
-                >
-                  Голосовать
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endblock %}
-    </div>
-  </div>
-</section>
+<!--<section class="main">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      {% block side_bar %}-->
+<!--        <div class="col-lg-3">-->
+<!--          <div class="side-menu">-->
+<!--            <div class="side-menu__content">-->
+<!--              <div class="side-menu__links side-menu__links&#45;&#45;main">-->
+<!--                {% if show_help %}-->
+<!--                  <a class="link link&#45;&#45;medium-blue" href="{% url 'help_pdf' %}"-->
+<!--                    ><p>Первая помощь</p></a-->
+<!--                  >-->
+<!--                {% endif %}-->
+<!--                {% for link in  this_category.cross_link.all %}-->
+<!--                  <a class="link link&#45;&#45;medium-blue" href="{% url 'main_articles' slug=link.slug %}"-->
+<!--                    ><p>{{link.title}}</p></a-->
+<!--                  >-->
+<!--                {% endfor %}-->
+<!--              </div>-->
+<!--              <div class="side-menu__links">-->
+<!--               {% for article in pages %}-->
+<!--                  <a class="link link&#45;&#45;green" href="#{{ article.id }}"><p>{{ article.title }}</p></a>-->
+<!--                {% endfor %}-->
+<!--                {% if employment_flag %}-->
+<!--                  <a class="link link&#45;&#45;green" href="#employment_widget"><p>Трудоустройство</p></a>-->
+<!--                {% endif %}-->
+<!--                {% if org_widget_flag %}-->
+<!--                  <a class="link link&#45;&#45;green" href="#local_orgs"><p>Организации</p></a>-->
+<!--                {% endif %}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      {% endblock %}-->
 
 
-{% block organizations %}
-  {% if org_widget_flag %}
-    <section class="organizations">
-      <a name="local_orgs"></a>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 offset-lg-3">
-                <div class="article article-map">
-                  <h2 class="article__title headline-1">Организации</h2>
-                  <div class="article__description">
-                    <p>
-                      Мы собрали организации, которые готовы тебе помочь. Их список
-                      будет постоянно расширяться, чтобы ты всегда мог получить
-                      ближайшую к тебе помощь.
-                    </p>
-                    <p>
-                      (Организациям, оказывающим услуги лицам в проблеме наркотиков!
-                      Если вы не нашли свою организацию -
-                      <a href="#">отправьте заявку на ее добавление.</a>
-                      )
-                    </p>
-                  </div>
-                  <div class="article__select organizations__select">
-                    <div class="organizations__select__item">
-                      <p>Выберите вид деятельности</p>
-                      <select class="organizations__select__specifications">
-                        <option></option>
-                        {% for type in all_types %}
-                          <option value="{{type.title}}">{{type.title}}</option>
-                        {% endfor %}
-                      </select>
-                    </div>
-                    <div class="organizations__select__item">
-                      <p>Выберите город</p>
-                      <select class="organizations__select__cities">
-                        <option></option>
-                        {% for city in all_cites %}
-                          <option value="{{city.title}}">{{city.title}}</option>
-                        {% endfor %}
-                      </select>
-                    </div>
-                  </div>
-                  <div class="organizations__content">
-                    {% for org in orgs %}
-                      <div
-                      class="organization-item"
-                      data-city="{{org.city.title}}"
-                      data-spec="{% for type in org.get_services %}{{ type.org_type.title }}, {% endfor %}"
-                    >
-                      <div class="organization-item__information">
-                        <p class="organization-item__title">
-                          {{org.title}}
-                        </p>
-                        <div class="organization-item__adress">
-                          <div class="icon-wrapper">
-                            <i class="icon-map-marker"></i>
-                          </div>
-                          <p class="">{{org.adress}}</p>
-                        </div>
-                        <a class="organization-item__link" href="/abuse/organization/{{org.slug}}"></a>
-                      </div>
+<!--      {% block content %}-->
+<!--        <div class="col-lg-6">-->
+<!--          {% for article in pages %}-->
+<!--          <a name="{{ article.id }}"></a>-->
 
-                      <div class="organization-item__phone">
-                        <div class="icon-wrapper">
-                          <i class="icon-phone"></i>
-                        </div>
-                        <a class="link link--green" href="tel:+375172898833"
-                          ><p class="">
-                            {{org.tel1}}
-                          </p></a
-                        >
-                      </div>
-                    </div>
-                    {% endfor %}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="organizations__map"></div>
-        </section>
-      {% endif %}
-{% endblock %}
+<!--          <h1 class="article__title headline-1">{{ article.title }}</h1>-->
+<!--          {% for i in article.content.main%}-->
+<!--            {{i.render}}-->
+<!--          {% endfor %}-->
+
+<!--        {% endfor %}-->
+<!--        </div>-->
 
 
-{% block feedback %}
-  {% if feedback_section %}
-    <section class="feedback">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="feedback__item">
-              <h2 class="feedback__item__title headline-1">Заказать звонок</h2>
-              <div class="feedback__content">
-                <input
-                  class="feedback__content__input"
-                  type="text"
-                  placeholder="Ваше имя"
-                  required
-                />
-                <input
-                  class="feedback__content__input"
-                  type="text"
-                  placeholder="Ваш номер телефона"
-                  required
-                />
-                <button type="button" class="btn">Отправить</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 offset-lg-1">
-            <div class="feedback__item">
-              <h2 class="feedback__item__title headline-1">Напишите нам</h2>
-              <div class="feedback__content">
-                <textarea
-                  class="feedback__content__input"
-                  placeholder="Текст сообщения"
-                  required
-                ></textarea>
-                <button type="button" class="btn">Отправить</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  {% endif %}
-{% endblock %}
+<!--        <div class="col-lg-3">-->
+<!--          <div class="information-side">-->
+<!--            <div class="information-block">-->
+<!--              <div class="quiz">-->
+<!--                <div class="quiz-item">-->
+<!--                {% for q in questions %}-->
+<!--                  <form name="question_form" action="">-->
+<!--                    <input hidden name="answer_for" value="{{q.title}}">-->
+<!--                    <p class="quiz-item__title">-->
+<!--                      {{q.title}}-->
+<!--                    </p>-->
+<!--                    <div class="quiz-item__content">-->
+<!--                      {% for choice in q.get_choices %}-->
+<!--                        <div class="quiz-item__radio">-->
+<!--                          <p>-->
+<!--                            <input-->
+<!--                            type="radio"-->
+<!--                            name="{{q.title}}"-->
+<!--                            value="{{choice}}"-->
+<!--                            id="{{choice.id}}"-->
+<!--                            />-->
+<!--                            <label for="{{choice.id}}">{{choice.title}}</label>-->
+<!--                          </p>-->
+<!--                        </div>-->
+<!--                      {% endfor %}-->
+<!--                      <button type="submit" class="btn quiz-item__button">-->
+<!--                        Голосовать-->
+<!--                      </button>-->
+<!--                    </div>-->
+<!--                    <button-->
+<!--                      type="button"-->
+<!--                      class="quiz-item__button quiz-item__button&#45;&#45;transparent"-->
+<!--                    >-->
+<!--                      Показать результаты-->
+<!--                    </button>-->
+<!--                  </form>-->
+<!--                {% endfor %}-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="quiz-item quiz-item&#45;&#45;done">-->
+<!--                <div class="quiz-item__content">-->
+<!--                  <div class="quiz-item__result">-->
+<!--                    <p class="quiz-item__result__title">-->
+<!--                      Да, готов (72%, 129 голосов)-->
+<!--                    </p>-->
+<!--                    <div-->
+<!--                      class="quiz-item__result__progress"-->
+<!--                      style="width: 72%"-->
+<!--                    ></div>-->
+<!--                  </div>-->
+<!--                  <div class="quiz-item__result">-->
+<!--                    <p class="quiz-item__result__title">-->
+<!--                      Зависит от условия (16%, 29 голосов)-->
+<!--                    </p>-->
+<!--                    <div-->
+<!--                      class="quiz-item__result__progress"-->
+<!--                      style="width: 16%"-->
+<!--                    ></div>-->
+<!--                  </div>-->
+<!--                  <div class="quiz-item__result">-->
+<!--                    <p class="quiz-item__result__title">-->
+<!--                      Нет, не готов (9%, 16 голосов)-->
+<!--                    </p>-->
+<!--                    <div-->
+<!--                      class="quiz-item__result__progress"-->
+<!--                      style="width: 9%"-->
+<!--                    ></div>-->
+<!--                  </div>-->
+<!--                  <div class="quiz-item__result">-->
+<!--                    <p class="quiz-item__result__title">-->
+<!--                      Зависит от других факторов (3%, 5 голосов)-->
+<!--                    </p>-->
+<!--                    <div-->
+<!--                      class="quiz-item__result__progress"-->
+<!--                      style="width: 3%"-->
+<!--                    ></div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="quiz-item__all">-->
+<!--                  <p>Всего проголосовавших:<strong>129</strong></p>-->
+<!--                </div>-->
+<!--                <button-->
+<!--                  type="button"-->
+<!--                  class="quiz-item__button quiz-item__button&#45;&#45;transparent"-->
+<!--                >-->
+<!--                  Голосовать-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      {% endblock %}-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
 
 
-<footer class="footer footer--secondary">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-9">
-        <div class="footer__menu">
-          <div class="footer__menu-item">
-            <a class="link link--white" href="#help"
-              ><p>Первая медицинская помощь</p></a
-            >
-            <a class="link link--white" href="/relapse/"><p>Срыв</p></a>
-            <a class="link link--white" href="/hiv-hepatitis/"
-              ><p>Вич/Гепатит</p></a
-            >
-            <a class="link link--white" href="http://pomogut.by/legal-info/"
-              ><p>Правовая информация</p></a
-            >
-          </div>
-          <div class="footer__menu-item">
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/i-am-codependent/"
-              ><p>Мой близкий в проблеме</p></a
-            >
-            <a class="link link--white" href="https://abuse.pomogut.by/org/"
-              ><p>Я употребляю</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/i-am-on-remission/"
-              ><p>Я на ремиссии</p></a
-            >
-          </div>
-          <div class="footer__menu-item">
-            <a class="link link--white" href="/сareers/"
-              ><p>Центры занятости</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/events/"
-              ><p>Мероприятия</p></a
-            >
-            <a
-              class="link link--white"
-              href="https://abuse.pomogut.by/about/"
-              ><p>О проекте</p></a
-            >
-            <a
-              class="link link--white"
-              href="http://pomogut.by/to-partners/"
-              ><p>Стать партнером</p></a
-            >
-            <a
-              class="link link--white"
-              href="http://pomogut.by/about/#contacts"
-              ><p>Написать нам</p></a
-            >
-          </div>
-        </div>
-      </div>
-      <div class="offset-lg-1 col-lg-2">
-        <div class="footer__logos">
-          <div class="logo-item">
-            <img src="/static/images/logo-belhard.png" />
-          </div>
-          <div class="logo-item">
-            <img src="/static/images/AIPSIN-logo.png" />
-          </div>
-          <div class="logo-item">
-            <img src="/static/images/logo-un.png" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
+<!--{% block organizations %}-->
+<!--  {% if org_widget_flag %}-->
+<!--    <section class="organizations">-->
+<!--      <a name="local_orgs"></a>-->
+<!--          <div class="container">-->
+<!--            <div class="row">-->
+<!--              <div class="col-lg-6 offset-lg-3">-->
+<!--                <div class="article article-map">-->
+<!--                  <h2 class="article__title headline-1">Организации</h2>-->
+<!--                  <div class="article__description">-->
+<!--                    <p>-->
+<!--                      Мы собрали организации, которые готовы тебе помочь. Их список-->
+<!--                      будет постоянно расширяться, чтобы ты всегда мог получить-->
+<!--                      ближайшую к тебе помощь.-->
+<!--                    </p>-->
+<!--                    <p>-->
+<!--                      (Организациям, оказывающим услуги лицам в проблеме наркотиков!-->
+<!--                      Если вы не нашли свою организацию - -->
+<!--                      <a href="#">отправьте заявку на ее добавление.</a>-->
+<!--                      )-->
+<!--                    </p>-->
+<!--                  </div>-->
+<!--                  <div class="article__select organizations__select">-->
+<!--                    <div class="organizations__select__item">-->
+<!--                      <p>Выберите вид деятельности</p>-->
+<!--                      <select class="organizations__select__specifications">-->
+<!--                        <option></option>-->
+<!--                        {% for type in all_types %}-->
+<!--                          <option value="{{type.title}}">{{type.title}}</option>-->
+<!--                        {% endfor %}-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                    <div class="organizations__select__item">-->
+<!--                      <p>Выберите город</p>-->
+<!--                      <select class="organizations__select__cities">-->
+<!--                        <option></option>-->
+<!--                        {% for city in all_cites %}-->
+<!--                          <option value="{{city.title}}">{{city.title}}</option>-->
+<!--                        {% endfor %}-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="organizations__content">-->
+<!--                    {% for org in orgs %}-->
+<!--                      <div-->
+<!--                      class="organization-item"-->
+<!--                      data-city="{{org.city.title}}"-->
+<!--                      data-spec="{% for type in org.get_services %}{{ type.org_type.title }}, {% endfor %}"-->
+<!--                    >-->
+<!--                      <div class="organization-item__information">-->
+<!--                        <p class="organization-item__title">-->
+<!--                          {{org.title}}-->
+<!--                        </p>-->
+<!--                        <div class="organization-item__adress">-->
+<!--                          <div class="icon-wrapper">-->
+<!--                            <i class="icon-map-marker"></i>-->
+<!--                          </div>-->
+<!--                          <p class="">{{org.adress}}</p>-->
+<!--                        </div>-->
+<!--                        <a class="organization-item__link" href="/abuse/organization/{{org.slug}}"></a>-->
+<!--                      </div>-->
+
+<!--                      <div class="organization-item__phone">-->
+<!--                        <div class="icon-wrapper">-->
+<!--                          <i class="icon-phone"></i>-->
+<!--                        </div>-->
+<!--                        <a class="link link&#45;&#45;green" href="tel:+375172898833"-->
+<!--                          ><p class="">-->
+<!--                            {{org.tel1}}-->
+<!--                          </p></a-->
+<!--                        >-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                    {% endfor %}-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="organizations__map"></div>-->
+<!--        </section>-->
+<!--      {% endif %}-->
+<!--{% endblock %}-->
+
+
+<!--{% block feedback %}-->
+<!--  {% if feedback_section %}-->
+<!--    <section class="feedback">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-lg-4">-->
+<!--            <div class="feedback__item">-->
+<!--              <h2 class="feedback__item__title headline-1">Заказать звонок</h2>-->
+<!--              <div class="feedback__content">-->
+<!--                <input-->
+<!--                  class="feedback__content__input"-->
+<!--                  type="text"-->
+<!--                  placeholder="Ваше имя"-->
+<!--                  required-->
+<!--                />-->
+<!--                <input-->
+<!--                  class="feedback__content__input"-->
+<!--                  type="text"-->
+<!--                  placeholder="Ваш номер телефона"-->
+<!--                  required-->
+<!--                />-->
+<!--                <button type="button" class="btn">Отправить</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-lg-4 offset-lg-1">-->
+<!--            <div class="feedback__item">-->
+<!--              <h2 class="feedback__item__title headline-1">Напишите нам</h2>-->
+<!--              <div class="feedback__content">-->
+<!--                <textarea-->
+<!--                  class="feedback__content__input"-->
+<!--                  placeholder="Текст сообщения"-->
+<!--                  required-->
+<!--                ></textarea>-->
+<!--                <button type="button" class="btn">Отправить</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--  {% endif %}-->
+<!--{% endblock %}-->
+
+
+<!--<footer class="footer footer&#45;&#45;secondary">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="col-lg-9">-->
+<!--        <div class="footer__menu">-->
+<!--          <div class="footer__menu-item">-->
+<!--            <a class="link link&#45;&#45;white" href="#help"-->
+<!--              ><p>Первая медицинская помощь</p></a-->
+<!--            >-->
+<!--            <a class="link link&#45;&#45;white" href="/relapse/"><p>Срыв</p></a>-->
+<!--            <a class="link link&#45;&#45;white" href="/hiv-hepatitis/"-->
+<!--              ><p>Вич/Гепатит</p></a-->
+<!--            >-->
+<!--            <a class="link link&#45;&#45;white" href="http://pomogut.by/legal-info/"-->
+<!--              ><p>Правовая информация</p></a-->
+<!--            >-->
+<!--          </div>-->
+<!--          <div class="footer__menu-item">-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="https://abuse.pomogut.by/i-am-codependent/"-->
+<!--              ><p>Мой близкий в проблеме</p></a-->
+<!--            >-->
+<!--            <a class="link link&#45;&#45;white" href="https://abuse.pomogut.by/org/"-->
+<!--              ><p>Я употребляю</p></a-->
+<!--            >-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="https://abuse.pomogut.by/i-am-on-remission/"-->
+<!--              ><p>Я на ремиссии</p></a-->
+<!--            >-->
+<!--          </div>-->
+<!--          <div class="footer__menu-item">-->
+<!--            <a class="link link&#45;&#45;white" href="/сareers/"-->
+<!--              ><p>Центры занятости</p></a-->
+<!--            >-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="https://abuse.pomogut.by/events/"-->
+<!--              ><p>Мероприятия</p></a-->
+<!--            >-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="https://abuse.pomogut.by/about/"-->
+<!--              ><p>О проекте</p></a-->
+<!--            >-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="http://pomogut.by/to-partners/"-->
+<!--              ><p>Стать партнером</p></a-->
+<!--            >-->
+<!--            <a-->
+<!--              class="link link&#45;&#45;white"-->
+<!--              href="http://pomogut.by/about/#contacts"-->
+<!--              ><p>Написать нам</p></a-->
+<!--            >-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="offset-lg-1 col-lg-2">-->
+<!--        <div class="footer__logos">-->
+<!--          <div class="logo-item">-->
+<!--            <img src="/static/images/logo-belhard.png" />-->
+<!--          </div>-->
+<!--          <div class="logo-item">-->
+<!--            <img src="/static/images/AIPSIN-logo.png" />-->
+<!--          </div>-->
+<!--          <div class="logo-item">-->
+<!--            <img src="/static/images/logo-un.png" />-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</footer>-->
+<!--</body>-->
+<!--</html>-->

@@ -39,24 +39,7 @@
 
     <title>Pomogut</title>
   </head>
-
   <body>
-    {% block header_links %} {% endblock %}
-
-    <section class="main">
-      <div class="container">
-        <div class="row">
-          {% block side_bar %} {% endblock %}
-
-          {% block content %} {% endblock %}
-
-          {% block employment %} {% endblock %}
-
-          {% block organizations %} {% endblock %}
-
-          {% block footer %} {% endblock %}
-        </div>
-      </div>
-    </section>
+  {% block my_content %} {% endblock %}
   </body>
 </html>

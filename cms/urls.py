@@ -10,7 +10,7 @@ from .views import (
     get_answer,
     create_org,
     create_feedback,
-    testnews
+    single_news,
 )
 
 urlpatterns = [
@@ -25,6 +25,6 @@ urlpatterns = [
     path('get_answer/', get_answer, name='get_answer'),
     path('create_feedback', create_feedback, name='create_feedback'),
 
-    path('<slug>', testnews, name='testnews')
+    path('<slug>', single_news, name='single_news')
 
 ]

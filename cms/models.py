@@ -29,7 +29,7 @@ class NewsPage(BasePage):  # identical to Page class. Needed for several Page-li
         app_label = "page"
 
     def get_absolute_url(self):
-        return reverse('testnews', kwargs={'slug': self.slug})
+        return reverse('single_news', kwargs={'slug': self.slug})
 
 
 NewsPage.register_default_processors()
@@ -37,7 +37,7 @@ NewsPage.register_default_processors()
 
 NewsPage.register_templates({
     'title': _('Новость'),
-    'path': 'widgets/news_widget.html',
+    'path': 'widgets/newspage.html',
     'regions': (
         ('main_news', _('Новость')),
     ),
