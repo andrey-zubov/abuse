@@ -194,3 +194,9 @@ def single_news(request, slug):
         }
     )
 
+
+def admin_choice(request):
+    return render(
+        request,
+        template_name='admin-choicer/index.html'
+    )
