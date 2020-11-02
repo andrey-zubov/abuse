@@ -5,13 +5,13 @@ from django.conf.urls.static import static
 import cms
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('abuse/', include('cms.urls')),
+    path('admin-abuse/', admin.site.urls),
+    path('', include('cms.urls')),
     path('api/', include('api.urls')),
-    path('chooser/', cms.views.admin_choice),
+    path('admin/', cms.views.admin_choice),
 ]
 
 urlpatterns += [
-    path(r'abuse/', include('feincms.urls')),
+    path(r'', include('feincms.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

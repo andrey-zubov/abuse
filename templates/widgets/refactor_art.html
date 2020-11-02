@@ -36,7 +36,7 @@
                     >
                   {% endif %}
                   {% for link in feincms_page.cross_link.all %}
-                    <a class="link link--medium-blue" href="/{{link.slug}}"
+                    <a class="link link--medium-blue" href="{{link.get_absolute_url}}"
                       ><p>{{link.title}}</p></a
                     >
                   {% endfor %}
