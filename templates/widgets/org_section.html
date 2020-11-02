@@ -64,7 +64,7 @@
               data-spec="{% for type in org.get_services %}{{ type.org_type.title }}, {% endfor %}"
               data-region="{{org.city.area.region.title}}"
               data-district="{{org.city.area.title}}"
-              data-map-id="123"
+              data-map-id="{{org.id}}"
             >
               <div class="organization-item__information">
                 <p class="organization-item__title">
